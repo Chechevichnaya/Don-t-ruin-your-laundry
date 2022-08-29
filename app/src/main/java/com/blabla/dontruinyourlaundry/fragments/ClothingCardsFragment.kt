@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.core.content.getSystemService
 import androidx.fragment.app.Fragment
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterCards
