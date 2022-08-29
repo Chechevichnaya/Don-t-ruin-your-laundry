@@ -1,30 +1,19 @@
 package com.blabla.dontruinyourlaundry.fragments
 
-import android.app.Activity
-import android.content.Intent
-import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
-import androidx.activity.result.ActivityResultCallback
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
-import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
-import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterButton
-import com.blabla.dontruinyourlaundry.data.Cardinfo
 import com.blabla.dontruinyourlaundry.data.ListOfCards
 import com.blabla.dontruinyourlaundry.databinding.FragmentAddNewCardBinding
-import com.blabla.dontruinyourlaundry.databinding.FragmentKindsOfThingsForLaundryBinding
 
 
 class AddNewCardDialog : Fragment() {
