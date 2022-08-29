@@ -13,7 +13,6 @@ import com.blabla.dontruinyourlaundry.databinding.FragmentKindsOfThingsForLaundr
 import com.blabla.dontruinyourlaundry.entity.Category
 import com.blabla.dontruinyourlaundry.fragments.ClothingCardsFragment
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.fragment_kinds_of_things_for_laundry.*
 
 
 class KindsOfThingsForLaundry : Fragment() {
