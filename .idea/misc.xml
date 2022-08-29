@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.12083333333333333" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.18" />
+        <entry key="app/src/main/res/drawable/ic_baseline_close_24.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_baseline_emoji_people_24.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_baseline_navigate_before_24.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/ic_question.xml" value="0.2085" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.17962962962962964" />
+        <entry key="app/src/main/res/layout/card_item.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/cards.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/fragment_add_new_card.xml" value="0.32303370786516855" />
+        <entry key="app/src/main/res/layout/fragment_clothing_cards.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/fragment_how_to_use_app_dialog.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/fragment_kinds_of_things_for_laundry.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/fragment_simbol_guide.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/image_buttom_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/symbol_guide_card.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/symbol_guide_head_item.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/symbol_guide_item.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/symbol_guide_symbols_item.xml" value="0.23125" />
+        <entry key="app/src/main/res/layout/symbol_guide_symbols_recyclerview.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/menu/menu_add_card.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/menu/menu_in_action_bar.xml" value="0.25" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/menu/menu_symbol_guide.xml" value="0.23229166666666667" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

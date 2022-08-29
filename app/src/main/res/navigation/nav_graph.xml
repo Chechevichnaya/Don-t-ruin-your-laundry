@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/kindsOfThingsForLaundry">
+
+    <fragment
+        android:id="@+id/kindsOfThingsForLaundry"
+        android:name="com.blabla.dontruinyourlaundry.KindsOfThingsForLaundry"
+        android:label="@string/app_name"
+        tools:layout="@layout/fragment_kinds_of_things_for_laundry" >
+        <action
+            android:id="@+id/action_kindsOfThingsForLaundry_to_simbolGuide"
+            app:destination="@id/simbol_guide" />
+        <action
+            android:id="@+id/action_kindsOfThingsForLaundry_to_howToUseAppDialog"
+            app:destination="@id/help_with_app" />
+        <action
+            android:id="@+id/action_kindsOfThingsForLaundry_to_addNewCard"
+            app:destination="@id/addNewCard" />
+    </fragment>
+    <fragment
+        android:id="@+id/simbol_guide"
+        android:name="com.blabla.dontruinyourlaundry.fragments.SymbolGuide"
+        android:label="@string/symbol_guide"
+        tools:layout="@layout/fragment_simbol_guide" />
+    <dialog
+        android:id="@+id/help_with_app"
+        android:name="com.blabla.dontruinyourlaundry.dialogs.HowToUseAppDialog"
+        android:label="fragment_how_to_use_app_dialog"
+        tools:layout="@layout/fragment_how_to_use_app_dialog" />
+    <fragment
+        android:id="@+id/clothingCardsFragment"
+        android:name="com.blabla.dontruinyourlaundry.fragments.ClothingCardsFragment"
+        android:label="fragment_clothing_cards"
+        tools:layout="@layout/fragment_clothing_cards" />
+    <fragment
+        android:id="@+id/addNewCard"
+        android:name="com.blabla.dontruinyourlaundry.fragments.AddNewCardDialog"
+        android:label="fragment_add_new_card"
+        tools:layout="@layout/fragment_add_new_card" >
+        <action
+            android:id="@+id/action_addNewCard_to_clothingCardsFragment"
+            app:destination="@id/clothingCardsFragment" />
+    </fragment>
+</navigation>

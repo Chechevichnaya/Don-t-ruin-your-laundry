@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Don\'t ruin your laundry</string>
+    <string name="symbol_guide">Гид по символам</string>
+    <string name="change_the_user">Change the user</string>
+    <string name="help_with_app">Как пользоваться приложением</string>
+    <string name="helper_text">Вот так и вот так!</string>
+    <string name="ok_button">Все понятно</string>
+    <string name="select_type">Выбери вид вещи</string>
+    <string name="clothing">Одежда</string>
+    <string name="bed_sheets">Постельное белье</string>
+    <string name="kitchen_stuf">Вещи из кухни</string>
+    <string name="bath_stuf">Вещи из ванной</string>
+    <string name="the_rest">Остальное</string>
+    <string name="name_of_cloth">Название вещи</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_new_thing">Добавить новую вещь</string>
+    <string name="delite">Удалить</string>
+    <string name="safe">Сохранить</string>
+    <string name="washing">Стирка</string>
+    <string name="wash_hand">Стирать только руками при температуре воды до 40 °C. Не тереть, отжимать аккуратно, без перекручивания</string>
+    <string name="wash_normal">Машинная стирка, нормальный режим.</string>
+    <string name="wash_no">Стирка запрещена</string>
+    <string name="save">Сохранить</string>
+    <string name="delete_card">Удалить карточку</string>
+
+
+</resources>
