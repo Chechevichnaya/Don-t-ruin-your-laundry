@@ -15,6 +15,9 @@
         <entry key="app/src/main/res/layout/card_item.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/cards.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_add_new_card.xml" value="0.32303370786516855" />
+        <entry key="app/src/main/res/layout/fragment_add_symbol_to_card.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/fragment_add_symbold_to_card.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/fragment_add_symbols_to_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_clothing_cards.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_how_to_use_app_dialog.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_kinds_of_things_for_laundry.xml" value="0.22" />
@@ -25,6 +28,7 @@
         <entry key="app/src/main/res/layout/symbol_guide_item.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/symbol_guide_symbols_item.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/symbol_guide_symbols_recyclerview.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/menu/add_symbol.xml" value="0.23125" />
         <entry key="app/src/main/res/menu/menu_add_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/menu/menu_in_action_bar.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.23229166666666667" />

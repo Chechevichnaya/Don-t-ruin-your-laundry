@@ -34,8 +34,11 @@ class RecyclerViewAdapterButton(
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = data[position]
         holder.imageSymbol.setImageResource(item.pictureId)
-        holder.meaningSymbol.setText(item.meaningOfSymbol)
-       // holder.imageSymbol.setOnClickListener { holder.imageSymbol.findNavController().navigate() }
+        holder.meaningSymbol.text = item.meaningOfSymbol
+        holder.imageSymbol.setOnClickListener {
+            holder.imageSymbol.findNavController()
+                .navigate(R.id.action_addNewCard_to_addSymbolToCard)
+        }
     }
 
     override fun getItemCount() = data.size

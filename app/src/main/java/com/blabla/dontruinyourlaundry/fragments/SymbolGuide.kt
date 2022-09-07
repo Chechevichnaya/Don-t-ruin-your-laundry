@@ -13,6 +13,7 @@ import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSymbolGuide
 import com.blabla.dontruinyourlaundry.data.ListOfCards
 import com.blabla.dontruinyourlaundry.databinding.FragmentSimbolGuideBinding
+import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
 
 class SymbolGuide : Fragment() {
 
@@ -30,7 +31,7 @@ class SymbolGuide : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.toolbarSymbolGuide.title = "Гид по символам"
-        binding.toolbarSymbolGuide.setNavigationIcon(view.context.getDrawable(R.drawable.ic_arrow_back))
+        binding.toolbarSymbolGuide.navigationIcon = view.context.getDrawable(R.drawable.ic_arrow_back)
         binding.toolbarSymbolGuide.setNavigationOnClickListener {
             findNavController().popBackStack() }
         val menuHost: MenuHost = binding.toolbarSymbolGuide
@@ -49,6 +50,6 @@ class SymbolGuide : Fragment() {
         recyclerViewSymbolGuide.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
         recyclerViewSymbolGuide.adapter =
-            RecyclerViewAdapterSymbolGuide(listOfCardForSymbolGuide)
+            RecyclerViewAdapterSymbolGuide(listOfCardForSymbolGuide, TypeOfRecyclerView.SYMBOLGUIDEFRAGMENT)
     }
 }

@@ -23,6 +23,8 @@
     <string name="wash_no">Стирка запрещена</string>
     <string name="save">Сохранить</string>
     <string name="delete_card">Удалить карточку</string>
+    <string name="add">Добавить</string>
+    <string name="choose_photo">Выбрать фото</string>
 
 
 </resources>

@@ -1,7 +1,5 @@
 package com.blabla.dontruinyourlaundry.adapters
 
-import android.app.Activity
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +8,10 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.data.ListOfCards
 import com.blabla.dontruinyourlaundry.data.SymbolGuide
+import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
 
-class RecyclerViewAdapterSymbolGuide(private var data: List<SymbolGuide>) :
+class RecyclerViewAdapterSymbolGuide(var data: List<SymbolGuide>, val type: TypeOfRecyclerView) :
     RecyclerView.Adapter<RecyclerViewAdapterSymbolGuide.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -26,7 +24,6 @@ class RecyclerViewAdapterSymbolGuide(private var data: List<SymbolGuide>) :
     override fun getItemCount() = data.size
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        Log.d("RecyclerView", "onCreateViewHolder - parent")
         val adapterLayout =
             LayoutInflater.from(parent.context).inflate(R.layout.symbol_guide_card, parent, false)
         return ItemViewHolder(adapterLayout)
@@ -34,13 +31,12 @@ class RecyclerViewAdapterSymbolGuide(private var data: List<SymbolGuide>) :
 
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        Log.d("RecyclerView", "onBindViewHolder - parent")
         val item = data[position]
         holder.head.text = item.headName
         holder.recyclerViewSymbols.layoutManager =
             GridLayoutManager(holder.recyclerViewSymbols.context, 5, RecyclerView.VERTICAL, false)
         holder.recyclerViewSymbols.adapter =
-            RecyclerViewAdapterGridOfSymbols(item.symbolsByCategory)
+            RecyclerViewAdapterSymbolInGrid(item.symbolsByCategory, type)
         holder.recyclerViewSymbols.setHasFixedSize(true)
 
     }

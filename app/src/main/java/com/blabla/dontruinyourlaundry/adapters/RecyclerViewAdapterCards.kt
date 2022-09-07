@@ -3,22 +3,20 @@ package com.blabla.dontruinyourlaundry.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
-import androidx.recyclerview.widget.LinearLayoutManager
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.data.Cardinfo
-import com.blabla.dontruinyourlaundry.data.ListOfCards
+import com.blabla.dontruinyourlaundry.data.CardInfo
+import com.blabla.dontruinyourlaundry.entity.Category
 
 
-class RecyclerViewAdapterCards(private var data: List<Cardinfo>) :
+class RecyclerViewAdapterCards(private var data: List<CardInfo>) :
     RecyclerView.Adapter<RecyclerViewAdapterCards.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val nameClothText: EditText = view.findViewById(R.id.name_of_cloth)
+        var nameClothText: TextView = view.findViewById(R.id.item_title)
         val imageClothCards: ImageView = view.findViewById(R.id.item_image)
-        val recyclerView: RecyclerView = view.findViewById(R.id.image_button_recycler_view)
 
 
     }
@@ -31,13 +29,26 @@ class RecyclerViewAdapterCards(private var data: List<Cardinfo>) :
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = data[position]
-        val myDataButton = ListOfCards.loadListOfAddedSymbols()
-        holder.nameClothText.setText(item.name)
-        holder.imageClothCards.setImageResource(item.picture)
+        holder.nameClothText.text = item.name
+        val image = when (item.category) {
+            Category.CLOTH -> {
+                Category.CLOTH.imageResId
+            }
+            Category.BAD_SHEETS -> {
+                Category.BAD_SHEETS.imageResId
+            }
+            Category.BATH -> {
+                Category.BATH.imageResId
+            }
+            Category.KITCHEN -> {
+                Category.KITCHEN.imageResId
+            }
+            Category.REST -> {
+                Category.REST.imageResId
+            }
+        }
+        holder.imageClothCards.setImageResource(image)
 
-        holder.recyclerView.layoutManager =
-            LinearLayoutManager(holder.recyclerView.context, RecyclerView.VERTICAL, false)
-        holder.recyclerView.adapter = RecyclerViewAdapterButton(myDataButton)
 
     }
 

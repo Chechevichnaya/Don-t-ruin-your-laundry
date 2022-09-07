@@ -43,5 +43,14 @@
         <action
             android:id="@+id/action_addNewCard_to_clothingCardsFragment"
             app:destination="@id/clothingCardsFragment" />
+        <action
+            android:id="@+id/action_addNewCard_to_addSymbolToCard"
+            app:destination="@id/addSymbolToCard" />
     </fragment>
+    <fragment
+        android:id="@+id/addSymbolToCard"
+        android:name="com.blabla.dontruinyourlaundry.fragments.ChooseSymbolsToCard"
+        android:label="fragment_add_symbol_to_card"
+        tools:layout="@layout/fragment_add_symbol_to_card" />
+
 </navigation>
