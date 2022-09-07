@@ -54,7 +54,7 @@ class AddNewCardDialog : Fragment() {
 
 
         binding.toolbarAddCard.title = "Добавить новую вещь"
-        binding.toolbarAddCard.navigationIcon = view.context.getDrawable(R.drawable.ic_arrow_back)
+        binding.toolbarAddCard.navigationIcon = view.context.getDrawable(R.drawable.ic_baseline_close_24)
         binding.toolbarAddCard.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -70,10 +70,6 @@ class AddNewCardDialog : Fragment() {
                         sharedViewModel.setName(binding.nameOfCloth.text.toString())
                         sharedViewModel.cardAreHere(true)
                         findNavController().popBackStack()
-                        true
-                    }
-                    R.id.delete_button -> {
-
                         true
                     }
                     else -> false

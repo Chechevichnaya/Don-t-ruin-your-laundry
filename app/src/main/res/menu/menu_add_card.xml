@@ -7,12 +7,7 @@
         android:title="@string/save"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_save"/>
-    <item
-        android:id="@+id/delete_button"
-        android:title="@string/delete_card"
-        app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_delete"
-        />
+
 
 
 
