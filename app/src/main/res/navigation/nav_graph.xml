@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_addNewCard_to_addSymbolToCard"
             app:destination="@id/addSymbolToCard" />
+        <argument
+            android:name="currentCategory"
+            app:argType="com.blabla.dontruinyourlaundry.entity.Category" />
     </fragment>
     <fragment
         android:id="@+id/addSymbolToCard"

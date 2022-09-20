@@ -61,28 +61,15 @@ class KindsOfThingsForLaundry : Fragment() {
 
         //Round button
         binding.fab.setOnClickListener {
-            val currentCategory = when (binding.pager.currentItem) {
-                0 -> Category.CLOTH
-                1 -> Category.BAD_SHEETS
-                2 -> Category.BATH
-                3 -> Category.KITCHEN
-                4 -> Category.REST
-                else -> Category.CLOTH
-            }
            // sharedViewModel.setCategory(currentCategory)
             view.findNavController().navigate(R.id.action_kindsOfThingsForLaundry_to_addNewCard)
-
-
         }
 
         binding.pager.adapter = LandryPagerAdapter(this)
         TabLayoutMediator(binding.tabs, binding.pager) { tab, position ->
             tab.text = getString(Category.values()[position].nameId)
         }.attach()
-
-
     }
-
 }
 
 class LandryPagerAdapter(val fragment: Fragment) : FragmentStateAdapter(fragment) {
@@ -92,12 +79,11 @@ class LandryPagerAdapter(val fragment: Fragment) : FragmentStateAdapter(fragment
     override fun createFragment(position: Int): Fragment {
 
         val fragment = ClothingCardsFragment()
-
         fragment.arguments = Bundle().apply {
-//            putSerializable(
-//                ClothingCardsFragment.CATEGORY,
-//                Category.values()[position]
-//            )
+            putSerializable(
+                ClothingCardsFragment.CATEGORY_NAME,
+                Category.values()[position]
+            )
             putInt(
                 ClothingCardsFragment.CATEGORY,
                 Category.values()[position].imageResId)

@@ -12,6 +12,8 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
     }
+
 }
+
 rootProject.name = "Don't ruin your laundry"
 include ':app'

@@ -10,16 +10,16 @@ import com.blabla.dontruinyourlaundry.entity.Category
 
 class ClothingCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
 
-    private val _category = MutableLiveData<Category>()
-    val category: LiveData<Category> = _category
+//    private val _category = MutableLiveData<Category>()
+//    val category: LiveData<Category> = _category
 
-    fun checkTableIsEmpty(): Boolean {
-        val listOfCards = allCardsByCategory()?.value
+    fun checkTableIsEmpty(category: Category): Boolean {
+        val listOfCards = allCardsByCategory(category)?.value
         return listOfCards == null
     }
 
-    fun allCardsByCategory(): LiveData<List<Card>>? {
-         return _category.value?.let { cardsDao.getAllClothCardsByCategory(it) }
+    fun allCardsByCategory(category: Category): LiveData<List<Card>>? {
+         return  cardsDao.getAllClothCardsByCategory(category)
     }
 
 }

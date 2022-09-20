@@ -47,6 +47,7 @@ class ClothingCardsFragment : Fragment() {
 
     companion object {
         const val CATEGORY = "CATEGORY"
+        const val CATEGORY_NAME = "CATEGORY_NAME"
     }
 
     override fun onCreateView(
@@ -61,19 +62,22 @@ class ClothingCardsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        val categoryImage = requireArguments().getInt(CATEGORY)
-        if (viewModel.checkTableIsEmpty()) {
-            view.findViewById<ImageView>(R.id.image_type_of_cloth).setImageResource(categoryImage)
+        //get enum Category from Bundle
+        val category = (requireArguments().getSerializable(CATEGORY_NAME)) as Category
+        val image = category.imageResId
+        //check if table by certain category is empty
+        if (viewModel.checkTableIsEmpty(category)) {
+            //set full screen picture of cloth type
+            view.findViewById<ImageView>(R.id.image_type_of_cloth).setImageResource(image)
         } else {
-
             //set adapter for recyclerView
             val recyclerView = binding.recyclerViewAddedCards
             recyclerView.layoutManager =
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            val dataForAdapter = viewModel.allCardsByCategory()
-            // val addedCardAdapter = RecyclerViewAdapterCards(dataForAdapter)
-            // recyclerView.adapter = addedCardAdapter
+            //getting data(cards) for adapter and making it just List, not LiveData List
+            val dataForAdapter = viewModel.allCardsByCategory(category)?.value
+            val addedCardAdapter = dataForAdapter?.let { RecyclerViewAdapterCards(it) }
+            recyclerView.adapter = addedCardAdapter
 
         }
 
@@ -96,31 +100,9 @@ class ClothingCardsFragment : Fragment() {
 //                }
 
 
-//            } else {
-//
-//
-//
-//                //set adapter for recyclerView
-//                val recyclerView = binding.recyclerViewAddedCards
-//                recyclerView.layoutManager =
-//                    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-//                val dataForAdapter = sharedViewModel.allCardsByCategory()
-//                val addedCardAdapter = RecyclerViewAdapterCards(dataForAdapter)
-//                recyclerView.adapter = addedCardAdapter
-//
 //            }
 //        }
 
     }
 }
-//   recyclerView = binding.recyclerView
-//        recyclerView.layoutManager = LinearLayoutManager(requireContext())
-//        val busStopAdapter = BusStopAdapter({})
-//        // by passing in the stop name, filtered results are returned,
-//        // and tapping rows won't trigger navigation
-//        recyclerView.adapter = busStopAdapter
-//        lifecycle.coroutineScope.launch {
-//            viewModel.scheduleForStopName(stopName).collect() {
-//                busStopAdapter.submitList(it)
-//            }
-//        }
+
