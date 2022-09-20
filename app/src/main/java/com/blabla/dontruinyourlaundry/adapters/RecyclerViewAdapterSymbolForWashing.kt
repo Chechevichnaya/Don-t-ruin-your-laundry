@@ -1,6 +1,5 @@
 package com.blabla.dontruinyourlaundry.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,8 +10,8 @@ import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.data.SymbolGuide
 import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
 
-class RecyclerViewAdapterSymbolGuide(var data: List<SymbolGuide>, val type: TypeOfRecyclerView) :
-    RecyclerView.Adapter<RecyclerViewAdapterSymbolGuide.ItemViewHolder>() {
+class RecyclerViewAdapterSymbolForWashing(var data: List<SymbolGuide>, val type: TypeOfRecyclerView) :
+    RecyclerView.Adapter<RecyclerViewAdapterSymbolForWashing.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val head: TextView = view.findViewById(R.id.head_cloth)

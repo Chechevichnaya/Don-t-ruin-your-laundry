@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSymbolGuide
+import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSymbolForWashing
 import com.blabla.dontruinyourlaundry.data.ListOfCards
 import com.blabla.dontruinyourlaundry.databinding.FragmentSimbolGuideBinding
 import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
@@ -50,6 +50,6 @@ class SymbolGuide : Fragment() {
         recyclerViewSymbolGuide.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
         recyclerViewSymbolGuide.adapter =
-            RecyclerViewAdapterSymbolGuide(listOfCardForSymbolGuide, TypeOfRecyclerView.SYMBOLGUIDEFRAGMENT)
+            RecyclerViewAdapterSymbolForWashing(listOfCardForSymbolGuide, TypeOfRecyclerView.SYMBOLGUIDEFRAGMENT)
     }
 }

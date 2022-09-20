@@ -2,7 +2,6 @@ package com.blabla.dontruinyourlaundry.entity
 
 import android.os.Parcelable
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.data.CardInfo
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

@@ -1,9 +1,10 @@
 package com.blabla.dontruinyourlaundry.data
 
 import com.blabla.dontruinyourlaundry.R
+import com.blabla.dontruinyourlaundry.RoomStuff.Card
 
 object ListOfCards {
-    fun loadListOfCards(): MutableList<CardInfo> {
+    fun loadListOfCards(): MutableList<Card> {
         return mutableListOf()
     }
 

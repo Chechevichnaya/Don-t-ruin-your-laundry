@@ -5,13 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.data.CardInfo
+import com.blabla.dontruinyourlaundry.RoomStuff.Card
 import com.blabla.dontruinyourlaundry.entity.Category
 
 
-class RecyclerViewAdapterCards(private var data: List<CardInfo>) :
+class RecyclerViewAdapterCards(private var data: List<Card>) :
     RecyclerView.Adapter<RecyclerViewAdapterCards.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {

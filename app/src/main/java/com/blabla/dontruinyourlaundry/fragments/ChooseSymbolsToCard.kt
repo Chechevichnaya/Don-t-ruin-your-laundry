@@ -1,29 +1,26 @@
 package com.blabla.dontruinyourlaundry.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResult
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSymbolGuide
+import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSymbolForWashing
 import com.blabla.dontruinyourlaundry.data.AddedCardsViewModel
 import com.blabla.dontruinyourlaundry.data.ListOfCards
-import com.blabla.dontruinyourlaundry.data.SymbolForWashing
 import com.blabla.dontruinyourlaundry.databinding.FragmentAddSymbolToCardBinding
 import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
 
 class ChooseSymbolsToCard : Fragment() {
     private lateinit var binding: FragmentAddSymbolToCardBinding
-    private val sharedViewModel: AddedCardsViewModel by activityViewModels()
+    private val viewModel: AddedCardsViewModel by viewModels()
 
 
     override fun onCreateView(
@@ -46,7 +43,7 @@ class ChooseSymbolsToCard : Fragment() {
         val recyclerViewSymbolsInAddingCad = binding.recyclerAddSymbolsToCard
         recyclerViewSymbolsInAddingCad.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
-        val adapter = RecyclerViewAdapterSymbolGuide(
+        val adapter = RecyclerViewAdapterSymbolForWashing(
             listOfCardForSymbolGuide,
             TypeOfRecyclerView.ADDSYMBOLFRAGMENT
         )
@@ -66,7 +63,7 @@ class ChooseSymbolsToCard : Fragment() {
                             .filter { it.selected }.toMutableList()
 
 
-                        sharedViewModel.setListOfAddedSymbols(selectedItems)
+                        //viewModel.setListOfAddedSymbols(selectedItems)
 
 //                        val result = selectedItems
 //                        // Use the Kotlin extension in the fragment-ktx artifact
