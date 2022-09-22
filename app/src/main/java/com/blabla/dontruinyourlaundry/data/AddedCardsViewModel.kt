@@ -20,7 +20,12 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
 
     fun addSelectedSymbols(list: List<SymbolForWashing>) {
         val newList = _listOfSymbols.value.orEmpty().toMutableList()
-        newList.addAll(0, list)
+        //check if old list, that is shows on the screen, has duplicates in list of selected symbols
+        list.forEach {
+            if (!newList.contains(it)) {
+                newList.addAll(0, list)
+            }
+        }
         _listOfSymbols.value = newList
     }
 
