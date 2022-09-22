@@ -1,5 +1,9 @@
 package com.blabla.dontruinyourlaundry.data
 
-data class ListOfSymboldForDataBase(
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
+data class ListOfSymbolsForDataBase(
     val listOfSymbols: List<SymbolForWashing>
-)
+):Parcelable

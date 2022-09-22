@@ -13,3 +13,7 @@ data class SymbolForWashing(
     val meaningOfSymbol: String,
     var selected: Boolean = false
 ) : Parcelable
+
+
+@Parcelize
+class Symbols: ArrayList<SymbolForWashing>(), Parcelable

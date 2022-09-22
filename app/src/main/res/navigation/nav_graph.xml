@@ -49,6 +49,9 @@
         <argument
             android:name="currentCategory"
             app:argType="com.blabla.dontruinyourlaundry.entity.Category" />
+        <argument
+            android:name="symbols"
+            app:argType="com.blabla.dontruinyourlaundry.data.Symbols" />
     </fragment>
     <fragment
         android:id="@+id/addSymbolToCard"

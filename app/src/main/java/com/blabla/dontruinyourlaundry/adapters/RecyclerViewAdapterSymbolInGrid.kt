@@ -1,18 +1,14 @@
 package com.blabla.dontruinyourlaundry.adapters
 
 import android.app.AlertDialog
-import android.content.res.Resources
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.data.AddedCardsViewModel
 import com.blabla.dontruinyourlaundry.data.SymbolForWashing
 import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
-import androidx.fragment.app.activityViewModels
 
 class RecyclerViewAdapterSymbolInGrid(
     private var data: List<SymbolForWashing>,
@@ -45,7 +41,7 @@ class RecyclerViewAdapterSymbolInGrid(
         val symbolItem= data[position]
         holder.symbol.setImageResource(symbolItem.pictureId)
 
-        val listOfChoosedSymbols: MutableList<SymbolForWashing> = mutableListOf()
+        val listOfChosenSymbols: MutableList<SymbolForWashing> = mutableListOf()
 
         when (type) {
             TypeOfRecyclerView.SYMBOLGUIDEFRAGMENT -> holder.symbol.setOnClickListener {
@@ -60,13 +56,13 @@ class RecyclerViewAdapterSymbolInGrid(
                 holder.symbol.setOnClickListener {
                     if (symbolItem.selected) {
                         bgColor = R.color.lilac_200
-                        if (listOfChoosedSymbols.contains(symbolItem)) {
-                            listOfChoosedSymbols.remove(symbolItem)
+                        if (listOfChosenSymbols.contains(symbolItem)) {
+                            listOfChosenSymbols.remove(symbolItem)
                         }
                     } else {
                         bgColor = R.color.lilac_700
-                        if (!listOfChoosedSymbols.contains(symbolItem)){
-                            listOfChoosedSymbols.add(symbolItem)
+                        if (!listOfChosenSymbols.contains(symbolItem)){
+                            listOfChosenSymbols.add(symbolItem)
                         }
                     }
                     holder.symbol.setBackgroundColor(
@@ -74,8 +70,8 @@ class RecyclerViewAdapterSymbolInGrid(
                             bgColor
                         )
                     )
+                    //change status of symbol
                     symbolItem.selected = !symbolItem.selected
-
                 }
 
             }

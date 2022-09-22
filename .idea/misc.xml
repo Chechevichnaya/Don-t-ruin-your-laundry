@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/layout/fragment_kinds_of_things_for_laundry.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_simbol_guide.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/image_buttom_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/item_button_add_symbol_to_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/symbol_guide_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/symbol_guide_head_item.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/symbol_guide_item.xml" value="0.23229166666666667" />

@@ -1,28 +1,44 @@
 package com.blabla.dontruinyourlaundry.data
 
 import androidx.lifecycle.*
+import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.RoomStuff.Card
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsDao
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsDataBase
 import com.blabla.dontruinyourlaundry.entity.Category
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+import java.util.Collections.addAll
 
 class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
 
+    private val addSymbol = R.drawable.plus
+    private val _listOfSymbols =
+        MutableLiveData(mutableListOf(SymbolForWashing(addSymbol, "Добавить символы для стирки")))
+    val listOfSymbols: LiveData<MutableList<SymbolForWashing>> = _listOfSymbols
 
-    fun getAllCards():LiveData<List<Card>> = cardsDao.getAllCards()
-   // fun allCardsByCategory(): LiveData<List<Card>> = cardsDao.getAllClothCards(_category.value!!)
 
-    fun oneCard(name: String): LiveData<Card> = cardsDao.getOneCard(name)
-
-    fun addNewCard(){
-        viewModelScope.launch {
-           // val card = Card(_nameCloth.value!!, "", _listOfSymbols.value!!, _category.value!! )
-          //  cardsDao.insertInDataBase(card)
-        }
-
+    fun addSelectedSymbols(list: List<SymbolForWashing>) {
+        val newList = _listOfSymbols.value.orEmpty().toMutableList()
+        newList.addAll(0, list)
+        _listOfSymbols.value = newList
     }
+
+    fun deleteSelectedSymbols() {
+        val list = _listOfSymbols.value.orEmpty().toMutableList()
+        val end = list.size - 2
+        val start = 0
+        for (i in end downTo start) {
+            list.removeAt(i)
+        }
+    }
+
+//    fun addNewCard(card: Card) {
+//        viewModelScope.launch {
+//            cardsDao.insertInDataBase(card)
+//        }
+//
+//    }
 
 //
 //    private val _listOfCards: MutableLiveData<MutableList<Card>> = MutableLiveData()
@@ -41,10 +57,8 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
 //
 //    }
 //
-    fun setCategory(typeOfCategory: Category) {
-        _category.value = typeOfCategory
-    }
-//
+
+    //
 //    fun setName(nameOfCloth: String) {
 //        _nameCloth.value = nameOfCloth
 //    }
@@ -64,15 +78,9 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
     private val _nameCloth = MutableLiveData<String>()
     val nameCloth: LiveData<String> = _nameCloth
 
-    private val _listOfSymbols = MutableLiveData<MutableList<SymbolForWashing>>()
-    val listOfSymbols: LiveData<MutableList<SymbolForWashing>> = _listOfSymbols
 
     private val _category = MutableLiveData<Category>()
     val category: LiveData<Category> = _category
-
-
-
-
 
 
 //    var userList : MutableLiveData<List<User>> = MutableLiveData()
@@ -91,7 +99,7 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
 
 }
 
-class AddedCardsFactory(private val cardsDao: CardsDao):ViewModelProvider.Factory{
+class AddedCardsFactory(private val cardsDao: CardsDao) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AddedCardsViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")

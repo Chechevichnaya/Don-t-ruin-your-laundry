@@ -11,6 +11,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
+import com.blabla.dontruinyourlaundry.data.AddedCardsFactory
 import com.blabla.dontruinyourlaundry.data.AddedCardsViewModel
 import com.blabla.dontruinyourlaundry.databinding.FragmentKindsOfThingsForLaundryBinding
 import com.blabla.dontruinyourlaundry.entity.Category
@@ -20,10 +22,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class KindsOfThingsForLaundry : Fragment() {
 
-
     private lateinit var binding: FragmentKindsOfThingsForLaundryBinding
-  //  private val sharedViewModel: AddedCardsViewModel by activityViewModels()
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +60,7 @@ class KindsOfThingsForLaundry : Fragment() {
 
         //Round button
         binding.fab.setOnClickListener {
-           // sharedViewModel.setCategory(currentCategory)
+            // sharedViewModel.setCategory(currentCategory)
             view.findNavController().navigate(R.id.action_kindsOfThingsForLaundry_to_addNewCard)
         }
 
@@ -84,9 +83,9 @@ class LandryPagerAdapter(val fragment: Fragment) : FragmentStateAdapter(fragment
                 ClothingCardsFragment.CATEGORY_NAME,
                 Category.values()[position]
             )
-            putInt(
-                ClothingCardsFragment.CATEGORY,
-                Category.values()[position].imageResId)
+//            putInt(
+//                ClothingCardsFragment.CATEGORY,
+//                Category.values()[position].imageResId)
 
         }
         return fragment

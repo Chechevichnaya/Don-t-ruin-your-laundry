@@ -41,10 +41,6 @@ class ClothingCardsFragment : Fragment() {
         ClothingCardsFactory((activity?.application as CardsApplication).dataBase.cardsDao)
     }
 
-
-    private lateinit var nameOfCategory: Category
-
-
     companion object {
         const val CATEGORY = "CATEGORY"
         const val CATEGORY_NAME = "CATEGORY_NAME"

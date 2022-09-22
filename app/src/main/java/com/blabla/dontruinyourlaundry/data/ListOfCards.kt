@@ -11,7 +11,6 @@ object ListOfCards {
     fun loadListOfAddedSymbols(): MutableList<SymbolForWashing> {
         val addSymbol = R.drawable.plus
         return mutableListOf(SymbolForWashing(addSymbol, "Добавить символы для стирки"))
-
     }
 
 

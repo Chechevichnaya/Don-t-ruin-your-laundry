@@ -25,14 +25,15 @@ class RecyclerViewAdapterButton(
         viewType: Int
     ): ItemViewHolder {
         val adapterLayout =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_button_add_symbol_to_card, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_button_add_symbol_to_card, parent, false)
         return ItemViewHolder(adapterLayout)
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val context = holder.imageSymbol.context
         val item = data[position]
-        if (position != data.size){
+        if (position != data.size) {
             holder.imageSymbol.background.setTint(context.resources.getColor(R.color.lilac_200))
         }
         holder.imageSymbol.setImageResource(item.pictureId)
