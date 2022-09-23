@@ -37,7 +37,7 @@
         tools:layout="@layout/fragment_clothing_cards" />
     <fragment
         android:id="@+id/addNewCard"
-        android:name="com.blabla.dontruinyourlaundry.fragments.AddNewCardDialog"
+        android:name="com.blabla.dontruinyourlaundry.fragments.AddNewCardFragment"
         android:label="fragment_add_new_card"
         tools:layout="@layout/fragment_add_new_card" >
         <action

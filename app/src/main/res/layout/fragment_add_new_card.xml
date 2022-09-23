@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".fragments.AddNewCardDialog">
+    tools:context=".fragments.AddNewCardFragment">
 
     <data>
        <variable
@@ -42,7 +42,8 @@
             app:layout_constraintBottom_toTopOf="@id/added_symbols_recycler_view"
             app:layout_constraintEnd_toStartOf="@id/name_of_cloth"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_add_card">
+            app:layout_constraintTop_toBottomOf="@id/toolbar_add_card"
+            >
 
         </ImageView>
 

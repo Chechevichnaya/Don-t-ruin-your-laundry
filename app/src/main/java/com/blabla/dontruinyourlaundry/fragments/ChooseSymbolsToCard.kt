@@ -22,9 +22,10 @@ import com.blabla.dontruinyourlaundry.data.ListOfCards
 import com.blabla.dontruinyourlaundry.databinding.FragmentAddSymbolToCardBinding
 import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
 
-const val TAG = "ChooseSymbolsToCard"
+
 
 class ChooseSymbolsToCard : Fragment() {
+    private val TAG = this::class.java.simpleName
     private lateinit var binding: FragmentAddSymbolToCardBinding
     private val viewModel: ChooseSymbolsViewModel by viewModels()
 
@@ -70,7 +71,7 @@ class ChooseSymbolsToCard : Fragment() {
                     R.id.add_button -> {
                         val selectedItems = adapter.data.map { it.symbolsByCategory }.flatten()
                             .filter { it.selected }.toList()
-                        Log.d("test", selectedItems.toString())
+                        Log.d("test", "data that pass from chhoseSymbolsFragment ${selectedItems.toString()}")
                         viewModel.setSelectedSymbols(selectedItems)
 //                        setFragmentResult("requestKey", bundleOf("bundleKey" to selectedItems))
                         val navController = findNavController()

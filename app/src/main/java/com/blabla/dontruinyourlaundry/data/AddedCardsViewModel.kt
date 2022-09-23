@@ -1,5 +1,6 @@
 package com.blabla.dontruinyourlaundry.data
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.RoomStuff.Card
@@ -11,6 +12,11 @@ import kotlinx.coroutines.launch
 import java.util.Collections.addAll
 
 class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
+
+    override fun onCleared() {
+        super.onCleared()
+        Log.d("test", "ViewModel -  onCleared")
+    }
 
     private val addSymbol = R.drawable.plus
     private val _listOfSymbols =
@@ -30,12 +36,15 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
     }
 
     fun deleteSelectedSymbols() {
+        Log.d("test", "list before fun deleteSelectedSymbols() ${_listOfSymbols.value.toString()} ")
         val list = _listOfSymbols.value.orEmpty().toMutableList()
         val end = list.size - 2
         val start = 0
         for (i in end downTo start) {
             list.removeAt(i)
         }
+        _listOfSymbols.value = list
+        Log.d("test", "list after fun deleteSelectedSymbols() ${_listOfSymbols.value.toString()} ")
     }
 
 //    fun addNewCard(card: Card) {
