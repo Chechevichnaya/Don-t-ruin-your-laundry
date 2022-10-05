@@ -1,5 +1,6 @@
 package com.blabla.dontruinyourlaundry.fragments
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -8,6 +9,8 @@ import android.util.Log
 import android.view.*
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
+import androidx.core.net.toUri
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -15,31 +18,38 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blabla.dontruinyourlaundry.BuildConfig
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.RoomStuff.Card
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
 import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterButton
-import com.blabla.dontruinyourlaundry.data.AddedCardsFactory
-import com.blabla.dontruinyourlaundry.data.AddedCardsViewModel
-import com.blabla.dontruinyourlaundry.data.ListOfCards
-import com.blabla.dontruinyourlaundry.data.SymbolForWashing
+import com.blabla.dontruinyourlaundry.data.*
 import com.blabla.dontruinyourlaundry.databinding.FragmentAddNewCardBinding
+import com.bumptech.glide.Glide
 import com.google.android.gms.cast.framework.media.ImagePicker
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
 
 
 class AddNewCardFragment : Fragment() {
 
     private val TAG = this::class.java.simpleName
 
+    private var latestTmpUri: Uri? = null
+
 
     private lateinit var binding: FragmentAddNewCardBinding
     private val viewModel: AddedCardsViewModel by viewModels {
         AddedCardsFactory((activity?.application as CardsApplication).dataBase.cardsDao)
     }
-//val viewModel: MyViewModel by viewModels { MyViewModelFactory(getApplication(), "my awesome param") }
+
+    //val viewModel: MyViewModel by viewModels { MyViewModelFactory(getApplication(), "my awesome param") }
     private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri?>() {
         override fun createIntent(context: Context, input: Any?): Intent {
             TODO()
@@ -50,6 +60,21 @@ class AddNewCardFragment : Fragment() {
         }
 
     }
+
+
+//
+//    private fun getTmpFileUri(): Uri {
+//        val tmpFile =
+//            File.createTempFile("tmp_image_file", ".jpg", requireActivity().cacheDir).apply {
+//                createNewFile()
+//                deleteOnExit()
+//            }
+//        return FileProvider.getUriForFile(
+//            requireActivity().applicationContext,
+//            "${BuildConfig.APPLICATION_ID}.provider",
+//            tmpFile
+//        )
+//    }
 
 
     override fun onCreateView(
@@ -63,7 +88,10 @@ class AddNewCardFragment : Fragment() {
             "key"
         )?.observe(viewLifecycleOwner) {
             viewModel.addSelectedSymbols(it)
-            Log.d("test", "list of symbols in addnewcard: ${viewModel.listOfSymbols.value.toString()}")
+            Log.d(
+                "test",
+                "list of symbols in addnewcard: ${viewModel.listOfSymbols.value.toString()}"
+            )
         }
         binding = FragmentAddNewCardBinding.inflate(inflater, container, false)
         return binding.root
@@ -72,8 +100,6 @@ class AddNewCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("test", " onViewCreated()")
-
-
 
 
 //        setFragmentResultListener("requestKey") { requestKey, bundle ->
@@ -85,7 +111,6 @@ class AddNewCardFragment : Fragment() {
 //                viewModel.addSelectedSymbols(selectedSymbols)
 //                Log.d("test", viewModel.listOfSymbols.value.toString())
 //            }
-
 
 
         //set adapter for recyclerview with added symbols
@@ -107,7 +132,10 @@ class AddNewCardFragment : Fragment() {
         binding.toolbarAddCard.setNavigationOnClickListener {
             findNavController().popBackStack()
             //viewModel.deleteSelectedSymbols()
-            Log.d("test", "delete selected items. oldlist:${viewModel.listOfSymbols.value.toString()}")
+            Log.d(
+                "test",
+                "delete selected items. oldlist:${viewModel.listOfSymbols.value.toString()}"
+            )
         }
 
         //set menu item
@@ -137,41 +165,91 @@ class AddNewCardFragment : Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-
-        //getting photo from gallery
         val photo = binding.itemImage
-        val galleryImage = registerForActivityResult(
-            ActivityResultContracts.GetContent()
-        ) { photo.setImageURI(it) }
         photo.setOnClickListener {
-            binding.textOnImage.text = ""
-            galleryImage.launch("image/*")
+            AlertDialog.Builder(requireContext())
+                .setMessage(getString(R.string.ask_about_how_to_add_photo))
+                .setPositiveButton(getString(R.string.from_gallery)) { _, _ ->
+                    selectImageFromGallery()
+                }
+                .setNegativeButton(getString(R.string.from_camera)) { _, _ -> takeImageMY() }
+                .show()
         }
-        //    //Create a bitmap using the uri from your code
-        //     Bitmap bitmap = MediaStore.Images.Media.getBitmap(c.getContentResolver() , Uri.parse(paths));
-
+//        val galleryImage = registerForActivityResult(
+//            ActivityResultContracts.GetContent()
+//        ) { photo.setImageURI(it) }
+//        photo.setOnClickListener {
+//            binding.textOnImage.text = ""
+//            galleryImage.launch("image/*")
+//        }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("test", "onDestroy()")
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        Log.d("test", "onDestroy()")
+//    }
+//
+//    override fun onDetach() {
+//        super.onDetach()
+//        Log.d("test", " onDetach()")
+//    }
+//
+//    override fun onStop() {
+//        super.onStop()
+//        Log.d("test", " onStop()")
+//    }
+//
+//    override fun onPause() {
+//        super.onPause()
+//        Log.d("test", " onPause()")
+//    }
+
+
+    private val takeImageResultMY = registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
+        if (isSuccess) {
+            latestTmpUri?.let { uri ->
+                Log.d("text", "takeImageResultMY() ${uri.toString()}")
+
+                binding.textOnImage.text = ""
+                Glide.with(binding.itemImage.context)
+                    .load(uri)
+                    .centerCrop()
+                    .into(binding.itemImage)
+            }
+
+        }
     }
 
-    override fun onDetach() {
-        super.onDetach()
-        Log.d("test", " onDetach()")
+    private fun makeFileMY(): Uri{
+        val file = File.createTempFile("chosed_photo", ".jpg", requireActivity().filesDir )
+        return FileProvider.getUriForFile(
+            requireActivity().applicationContext,
+            "${BuildConfig.APPLICATION_ID}.provider",
+            file
+        )
     }
 
-    override fun onStop() {
-        super.onStop()
-        Log.d("test", " onStop()")
+    private fun takeImageMY() {
+        lifecycleScope.launchWhenStarted {
+            makeFileMY().let { uri ->
+                latestTmpUri = uri
+                Log.d("text", "takeImageMY() ${latestTmpUri.toString()}" )
+                takeImageResultMY.launch(uri)
+            }
+        }
     }
 
-    override fun onPause() {
-        super.onPause()
-        Log.d("test", " onPause()")
-    }
+    val selectImageFromGalleryResult =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            uri?.let { binding.itemImage.setImageURI(uri) }
+        }
+
+    private fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
+
+
 }
+
+
 
 
 

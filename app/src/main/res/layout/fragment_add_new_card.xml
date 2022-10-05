@@ -38,7 +38,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="@color/lilac_200"
-            android:scaleType="centerInside"
             app:layout_constraintBottom_toTopOf="@id/added_symbols_recycler_view"
             app:layout_constraintEnd_toStartOf="@id/name_of_cloth"
             app:layout_constraintStart_toStartOf="parent"

@@ -25,6 +25,9 @@
     <string name="delete_card">Удалить карточку</string>
     <string name="add">Добавить</string>
     <string name="choose_photo">Выбрать фото</string>
+    <string name="ask_about_how_to_add_photo">Откуда берем фото?</string>
+    <string name="from_gallery">Из галерии</string>
+    <string name="from_camera">С помощью камеры</string>
 
 
 </resources>
