@@ -1,14 +1,18 @@
 package com.blabla.dontruinyourlaundry.fragments
 
+import android.Manifest
 import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.core.view.MenuHost
@@ -26,11 +30,13 @@ import com.blabla.dontruinyourlaundry.BuildConfig
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.RoomStuff.Card
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
+import com.blabla.dontruinyourlaundry.activity.showSnackbar
 import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterButton
 import com.blabla.dontruinyourlaundry.data.*
 import com.blabla.dontruinyourlaundry.databinding.FragmentAddNewCardBinding
 import com.bumptech.glide.Glide
 import com.google.android.gms.cast.framework.media.ImagePicker
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -172,7 +178,9 @@ class AddNewCardFragment : Fragment() {
                 .setPositiveButton(getString(R.string.from_gallery)) { _, _ ->
                     selectImageFromGallery()
                 }
-                .setNegativeButton(getString(R.string.from_camera)) { _, _ -> takeImageMY() }
+                .setNegativeButton(getString(R.string.from_camera)) { _, _ ->
+                    askPermissions()
+                }
                 .show()
         }
 //        val galleryImage = registerForActivityResult(
@@ -183,6 +191,51 @@ class AddNewCardFragment : Fragment() {
 //            galleryImage.launch("image/*")
 //        }
     }
+
+    private fun askPermissions() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.CAMERA
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                takeImageMY()
+            }
+            ActivityCompat.shouldShowRequestPermissionRationale(
+                requireActivity(),
+                Manifest.permission.CAMERA
+            ) -> {
+                val builder = AlertDialog.Builder(requireContext())
+                builder.apply {
+                    setMessage("Приложению требуется доступ к камере, чтобы сделать фото")
+                    setPositiveButton("Ok") { _, _ ->
+                        requestCameraPermission.launch(
+                            Manifest.permission.CAMERA
+                        )
+                    }
+                    create()
+                    show()
+                }
+
+            }
+            else -> {
+                requestCameraPermission.launch(
+                    Manifest.permission.CAMERA
+                )
+            }
+        }
+    }
+
+    private val requestCameraPermission =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ) { isGranted: Boolean ->
+            if (isGranted) {
+                Log.i("Permission: ", "Granted")
+                takeImageMY()
+            } else {
+                Log.i("Permission: ", "Denied")
+            }
+        }
 
 //    override fun onDestroy() {
 //        super.onDestroy()
@@ -205,23 +258,24 @@ class AddNewCardFragment : Fragment() {
 //    }
 
 
-    private val takeImageResultMY = registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
-        if (isSuccess) {
-            latestTmpUri?.let { uri ->
-                Log.d("text", "takeImageResultMY() ${uri.toString()}")
+    private val takeImageResultMY =
+        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
+            if (isSuccess) {
+                latestTmpUri?.let { uri ->
+                    Log.d("text", "takeImageResultMY() ${uri.toString()}")
 
-                binding.textOnImage.text = ""
-                Glide.with(binding.itemImage.context)
-                    .load(uri)
-                    .centerCrop()
-                    .into(binding.itemImage)
+                    binding.textOnImage.text = ""
+                    Glide.with(binding.itemImage.context)
+                        .load(uri)
+                        .centerCrop()
+                        .into(binding.itemImage)
+                }
+
             }
-
         }
-    }
 
-    private fun makeFileMY(): Uri{
-        val file = File.createTempFile("chosed_photo", ".jpg", requireActivity().filesDir )
+    private fun makeFileMY(): Uri {
+        val file = File.createTempFile("chosed_photo", ".jpg", requireActivity().filesDir)
         return FileProvider.getUriForFile(
             requireActivity().applicationContext,
             "${BuildConfig.APPLICATION_ID}.provider",
@@ -233,7 +287,7 @@ class AddNewCardFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             makeFileMY().let { uri ->
                 latestTmpUri = uri
-                Log.d("text", "takeImageMY() ${latestTmpUri.toString()}" )
+                Log.d("text", "takeImageMY() ${latestTmpUri.toString()}")
                 takeImageResultMY.launch(uri)
             }
         }

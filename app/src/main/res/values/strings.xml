@@ -28,6 +28,9 @@
     <string name="ask_about_how_to_add_photo">Откуда берем фото?</string>
     <string name="from_gallery">Из галерии</string>
     <string name="from_camera">С помощью камеры</string>
+    <string name="permission_required">Camera access is required to display the camera preview.</string>
+    <string name="ok">OK</string>
+    <string name="permission_granted">Permission is granted. You can use the camera now.</string>
 
 
 </resources>

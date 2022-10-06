@@ -1,48 +1,95 @@
 package com.blabla.dontruinyourlaundry.activity
 
-import androidx.appcompat.app.AppCompatActivity
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import androidx.appcompat.widget.Toolbar
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupWithNavController
-import androidx.viewpager.widget.ViewPager
+import android.util.Log
+import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.blabla.dontruinyourlaundry.R
-import com.google.android.material.tabs.TabLayout
+import com.blabla.dontruinyourlaundry.databinding.ActivityMainBinding
+import com.google.android.datatransport.runtime.backends.BackendResponse.ok
+import com.google.android.material.snackbar.Snackbar
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var layout: View
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-//        val toolbar = findViewById<Toolbar>(R.id.my_toolbar)
-//       setSupportActionBar(toolbar)
-//
-//        //Navigation back in toolbar
-//        val navHostFragment =
-//            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-//        val navController = navHostFragment.navController
-//        val builder = AppBarConfiguration.Builder(navController.graph)
-//        val appBarConfiguration = builder.build()
-//        toolbar.setupWithNavController(navController, appBarConfiguration)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        layout = binding.mainLayout
+        setContentView(view)
     }
-//
-//    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//        return super.onCreateOptionsMenu(menu)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        val navController = findNavController(R.id.nav_host_fragment)
-//        return item.onNavDestinationSelected(navController) ||
-//                super.onOptionsItemSelected(item)
-//
-//    }
 
+    //    private val requestCameraPermission =
+//        registerForActivityResult(
+//            ActivityResultContracts.RequestPermission()
+//        ) { isGranted: Boolean ->
+//            if (isGranted) {
+//                Log.i("Permission: ", "Granted")
+//            } else {
+//                Log.i("Permission: ", "Denied")
+//            }
+//        }
+//
+//    fun onClickRequestPermission(view: View) {
+//        when {
+//            ContextCompat.checkSelfPermission(
+//                this,
+//                Manifest.permission.CAMERA
+//            ) == PackageManager.PERMISSION_GRANTED -> {
+//                layout.showSnackbar(
+//                    view,
+//                    getString(R.string.permission_granted),
+//                    Snackbar.LENGTH_INDEFINITE,
+//                    null
+//                ) {}
+//            }
+//
+//            ActivityCompat.shouldShowRequestPermissionRationale(
+//                this,
+//                Manifest.permission.CAMERA
+//            ) -> {
+//                layout.showSnackbar(
+//                    view,
+//                    getString(R.string.permission_required),
+//                    Snackbar.LENGTH_INDEFINITE,
+//                    getString(R.string.ok)
+//                ) {
+//                    requestPermissionLauncher.launch(
+//                        Manifest.permission.CAMERA
+//                    )
+//                }
+//            }
+//
+//            else -> {
+//                requestPermissionLauncher.launch(
+//                    Manifest.permission.CAMERA
+//                )
+//            }
+//        }
+//    }
+}
 
+fun View.showSnackbar(
+    view: View,
+    msg: String,
+    length: Int,
+    actionMessage: CharSequence?,
+    action: (View) -> Unit
+) {
+    val snackbar = Snackbar.make(view, msg, length)
+    if (actionMessage != null) {
+        snackbar.setAction(actionMessage) {
+            action(this)
+        }.show()
+    } else {
+        snackbar.show()
+    }
 }
