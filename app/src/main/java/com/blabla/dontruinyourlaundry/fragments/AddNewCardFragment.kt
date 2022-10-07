@@ -12,14 +12,13 @@ import android.view.*
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -28,18 +27,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.BuildConfig
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.RoomStuff.Card
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
-import com.blabla.dontruinyourlaundry.activity.showSnackbar
 import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterButton
-import com.blabla.dontruinyourlaundry.data.*
+import com.blabla.dontruinyourlaundry.data.AddedCardsFactory
+import com.blabla.dontruinyourlaundry.data.AddedCardsViewModel
+import com.blabla.dontruinyourlaundry.data.SymbolForWashing
 import com.blabla.dontruinyourlaundry.databinding.FragmentAddNewCardBinding
 import com.bumptech.glide.Glide
-import com.google.android.gms.cast.framework.media.ImagePicker
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import java.io.File
 
 
@@ -215,7 +210,6 @@ class AddNewCardFragment : Fragment() {
                     create()
                     show()
                 }
-
             }
             else -> {
                 requestCameraPermission.launch(
@@ -262,11 +256,13 @@ class AddNewCardFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
                 latestTmpUri?.let { uri ->
-                    Log.d("text", "takeImageResultMY() ${uri.toString()}")
+                    Log.d("text", "glide load $uri")
 
                     binding.textOnImage.text = ""
                     Glide.with(binding.itemImage.context)
                         .load(uri)
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
                         .centerCrop()
                         .into(binding.itemImage)
                 }
@@ -275,33 +271,60 @@ class AddNewCardFragment : Fragment() {
         }
 
     private fun makeFileMY(): Uri {
-        val file = File.createTempFile("chosed_photo", ".jpg", requireActivity().filesDir)
+       // val file = File.createTempFile("chosed_photo", ".jpg", requireActivity().filesDir)
+        val file1 = File(requireActivity().filesDir, "Palma.jpg")
+
+        //file1.createNewFile()
+//        context.openFileOutput("photoTemp", Context.MODE_PRIVATE).use { output ->
+//
+//        }
+
         return FileProvider.getUriForFile(
             requireActivity().applicationContext,
             "${BuildConfig.APPLICATION_ID}.provider",
-            file
-        )
+            file1)
     }
 
     private fun takeImageMY() {
         lifecycleScope.launchWhenStarted {
             makeFileMY().let { uri ->
                 latestTmpUri = uri
-                Log.d("text", "takeImageMY() ${latestTmpUri.toString()}")
-                takeImageResultMY.launch(uri)
+                Log.d("text", "new file uri $latestTmpUri")
+                takeImageResultMY.launch(latestTmpUri)
             }
         }
     }
 
-    val selectImageFromGalleryResult =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let { binding.itemImage.setImageURI(uri) }
+    //    val selectImageFromGalleryResult =
+//        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+//            uri?.let { binding.itemImage.setImageURI(uri) }
+//        }
+    private val selectImageFromGalleryResult =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uriGallery: Uri? ->
+            latestTmpUri?.let { uriFile ->
+                binding.textOnImage.text = ""
+                Glide.with(binding.itemImage.context)
+                    .load(uriGallery)
+                    .centerCrop()
+                    .into(binding.itemImage)
+
+            }
         }
 
-    private fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
-
-
+    //private fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
+    private fun selectImageFromGallery() {
+        lifecycleScope.launchWhenStarted {
+            makeFileMY().let { uri ->
+                latestTmpUri = uri
+                Log.d("test", "trying save picture from gallery in file")
+                selectImageFromGalleryResult.launch("image/*")
+            }
+        }
+    }
 }
+
+
+
 
 
 
