@@ -21,6 +21,7 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -101,6 +102,18 @@ class AddNewCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.d("test", " onViewCreated()")
+
+        val uriObserver = Observer<Uri> { newUri ->
+            binding.textOnImage.text = ""
+            Glide.with(binding.itemImage.context)
+                .load(newUri)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .centerCrop()
+                .into(binding.itemImage)
+            Log.d("text", "uri observer - $newUri")
+        }
+        viewModel.uri.observe(viewLifecycleOwner, uriObserver)
 
 
 //        setFragmentResultListener("requestKey") { requestKey, bundle ->
@@ -255,23 +268,24 @@ class AddNewCardFragment : Fragment() {
     private val takeImageResultMY =
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
-                latestTmpUri?.let { uri ->
-                    Log.d("text", "glide load $uri")
+                latestTmpUri?.let { uriFile ->
 
-                    binding.textOnImage.text = ""
-                    Glide.with(binding.itemImage.context)
-                        .load(uri)
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
-                        .centerCrop()
-                        .into(binding.itemImage)
+                    viewModel.updateUri(uriFile)
+                    Log.d("text", "uriUpdated ${viewModel.uri.value}")
+//                    binding.textOnImage.text = ""
+//                    Glide.with(binding.itemImage.context)
+//                        .load(uriFile)
+//                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+//                        .skipMemoryCache(true)
+//                        .centerCrop()
+//                        .into(binding.itemImage)
                 }
 
             }
         }
 
     private fun makeFileMY(): Uri {
-       // val file = File.createTempFile("chosed_photo", ".jpg", requireActivity().filesDir)
+        // val file = File.createTempFile("chosed_photo", ".jpg", requireActivity().filesDir)
         val file1 = File(requireActivity().filesDir, "Palma.jpg")
 
         //file1.createNewFile()
@@ -282,7 +296,8 @@ class AddNewCardFragment : Fragment() {
         return FileProvider.getUriForFile(
             requireActivity().applicationContext,
             "${BuildConfig.APPLICATION_ID}.provider",
-            file1)
+            file1
+        )
     }
 
     private fun takeImageMY() {

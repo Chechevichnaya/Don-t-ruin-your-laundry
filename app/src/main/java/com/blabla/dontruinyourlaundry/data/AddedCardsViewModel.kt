@@ -1,5 +1,6 @@
 package com.blabla.dontruinyourlaundry.data
 
+import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.*
 import com.blabla.dontruinyourlaundry.R
@@ -22,6 +23,13 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
     private val _listOfSymbols =
         MutableLiveData(mutableListOf(SymbolForWashing(addSymbol, "Добавить символы для стирки")))
     val listOfSymbols: LiveData<MutableList<SymbolForWashing>> = _listOfSymbols
+
+    private val _uri = MutableLiveData<Uri>()
+    val uri: LiveData<Uri> = _uri
+
+    fun updateUri (newUri:Uri){
+        _uri.value = newUri
+    }
 
 
     fun addSelectedSymbols(list: List<SymbolForWashing>) {
