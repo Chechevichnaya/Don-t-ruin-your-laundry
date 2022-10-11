@@ -13,6 +13,7 @@ import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.databinding.ActivityMainBinding
 import com.google.android.datatransport.runtime.backends.BackendResponse.ok
 import com.google.android.material.snackbar.Snackbar
+import java.io.File
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +26,9 @@ class MainActivity : AppCompatActivity() {
         val view = binding.root
         layout = binding.mainLayout
         setContentView(view)
+
+
+
     }
 
     //    private val requestCameraPermission =

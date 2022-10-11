@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.net.toFile
 import androidx.core.net.toUri
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -37,6 +38,11 @@ import com.blabla.dontruinyourlaundry.databinding.FragmentAddNewCardBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.io.IOException
+import java.nio.file.Files
+import java.nio.file.StandardCopyOption
 
 
 class AddNewCardFragment : Fragment() {
@@ -103,6 +109,14 @@ class AddNewCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d("test", " onViewCreated()")
 
+        val folderForImagesInDB = context?.getDir("images_for_DB", Context.MODE_PRIVATE)
+        if (!folderForImagesInDB?.exists()!!)
+        {
+            folderForImagesInDB.mkdirs()
+        }
+
+
+        //tracking updating uri to change photo in imageView
         val uriObserver = Observer<Uri> { newUri ->
             binding.textOnImage.text = ""
             Glide.with(binding.itemImage.context)
@@ -162,6 +176,7 @@ class AddNewCardFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.save_button -> {
+
                         val nameOfCloth = binding.nameOfCloth.text.toString()
 //                        val picture
 //                        val category
@@ -191,13 +206,6 @@ class AddNewCardFragment : Fragment() {
                 }
                 .show()
         }
-//        val galleryImage = registerForActivityResult(
-//            ActivityResultContracts.GetContent()
-//        ) { photo.setImageURI(it) }
-//        photo.setOnClickListener {
-//            binding.textOnImage.text = ""
-//            galleryImage.launch("image/*")
-//        }
     }
 
     private fun askPermissions() {
@@ -269,30 +277,18 @@ class AddNewCardFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess ->
             if (isSuccess) {
                 latestTmpUri?.let { uriFile ->
-
                     viewModel.updateUri(uriFile)
                     Log.d("text", "uriUpdated ${viewModel.uri.value}")
-//                    binding.textOnImage.text = ""
-//                    Glide.with(binding.itemImage.context)
-//                        .load(uriFile)
-//                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-//                        .skipMemoryCache(true)
-//                        .centerCrop()
-//                        .into(binding.itemImage)
                 }
 
             }
         }
 
     private fun makeFileMY(): Uri {
-        // val file = File.createTempFile("chosed_photo", ".jpg", requireActivity().filesDir)
         val file1 = File(requireActivity().filesDir, "Palma.jpg")
-
-        //file1.createNewFile()
-//        context.openFileOutput("photoTemp", Context.MODE_PRIVATE).use { output ->
-//
-//        }
-
+        if (!file1.exists()) {
+            file1.createNewFile()
+        }
         return FileProvider.getUriForFile(
             requireActivity().applicationContext,
             "${BuildConfig.APPLICATION_ID}.provider",
@@ -304,8 +300,9 @@ class AddNewCardFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             makeFileMY().let { uri ->
                 latestTmpUri = uri
-                Log.d("text", "new file uri $latestTmpUri")
+                // latestTmpUri - content uri
                 takeImageResultMY.launch(latestTmpUri)
+
             }
         }
     }
@@ -316,26 +313,76 @@ class AddNewCardFragment : Fragment() {
 //        }
     private val selectImageFromGalleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uriGallery: Uri? ->
-            latestTmpUri?.let { uriFile ->
-                binding.textOnImage.text = ""
-                Glide.with(binding.itemImage.context)
-                    .load(uriGallery)
-                    .centerCrop()
-                    .into(binding.itemImage)
+                val fileForImage = File(requireActivity().filesDir, "Palma.jpg")
+                if (!fileForImage.exists()) {
+                    fileForImage.createNewFile()
+                }
+                fileForImage.outputStream().use {stream ->
+                    requireActivity().contentResolver.openInputStream(uriGallery!!)?.copyTo(stream)
+                }
 
-            }
+
+
+
+
+
+//                val from = File(uriGallery?.path)
+//                val to = File(uriFile.path)
+//                Log.d("copy", "file-uriGallery-${from.exists()}")
+//                try {
+//                    copyFile(from, to)
+//                    Log.d("copy", "yes")
+//                } catch (ex: IOException) {
+//                    ex.printStackTrace()
+//                    Log.d("copy", "no")
+//                }
+
+                viewModel.updateUri(fileForImage.toUri())
+//                binding.textOnImage.text = ""
+//                Glide.with(binding.itemImage.context)
+//                    .load(uriGallery)
+//                    .centerCrop()
+//                    .into(binding.itemImage)
+
+//            }
         }
 
     //private fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
     private fun selectImageFromGallery() {
         lifecycleScope.launchWhenStarted {
-            makeFileMY().let { uri ->
-                latestTmpUri = uri
-                Log.d("test", "trying save picture from gallery in file")
-                selectImageFromGalleryResult.launch("image/*")
+//            makeFileMY().let { uri ->
+//                latestTmpUri = uri
+            Log.d("test", "trying save picture from gallery in file")
+
+            selectImageFromGalleryResult.launch("image/*")
+//            }
+        }
+    }
+
+    //    fun copyFile(src: File, dest: File) {
+//        FileInputStream(src).channel.use { sourceChannel ->
+//            FileOutputStream(dest).channel
+//                .use { destChannel ->
+//                    destChannel.transferFrom(
+//                        sourceChannel,
+//                        0,
+//                        sourceChannel.size()
+//                    )
+//                }
+//        }
+//    }
+    fun copyFile(src: File, dest: File) {
+        FileInputStream(src).use { fis ->
+            FileOutputStream(dest).use { os ->
+                val buffer = ByteArray(1024)
+                var len: Int
+                while (fis.read(buffer).also { len = it } != -1) {
+                    os.write(buffer, 0, len)
+                }
             }
         }
     }
+
 }
 
 
