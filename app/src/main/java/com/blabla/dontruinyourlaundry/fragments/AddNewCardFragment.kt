@@ -109,6 +109,7 @@ class AddNewCardFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.d("test", " onViewCreated()")
 
+        //creating a new folder, if it is not created yet, where the last chosen photo will be kept for DB
         val folderForImagesInDB = context?.getDir("images_for_DB", Context.MODE_PRIVATE)
         if (!folderForImagesInDB?.exists()!!)
         {
@@ -176,6 +177,20 @@ class AddNewCardFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.save_button -> {
+//                        val tmpFile = File.createTempFile("tmp_image_file", ".jpg", requireActivity().cacheDir).apply {
+//                            createNewFile()
+//                            deleteOnExit()
+//                        }
+
+                        //creating file in new folder with unique name
+                        val fileForImages = File.createTempFile("photoforDB", ".jpg", folderForImagesInDB).apply {
+                            createNewFile()
+                        }
+                        fileForImages.outputStream().use { stream ->
+                            requireActivity().contentResolver.openInputStream(viewModel.uri.value!!)?.copyTo(stream)
+                        }
+//                        fileForImage.outputStream().use {stream ->
+//                            requireActivity().contentResolver.openInputStream(uriGallery!!)?.copyTo(stream)
 
                         val nameOfCloth = binding.nameOfCloth.text.toString()
 //                        val picture
@@ -186,7 +201,6 @@ class AddNewCardFragment : Fragment() {
                         //viewModel.addNewCard(card)
 
                         findNavController().popBackStack()
-
                         true
                     }
                     else -> false
@@ -285,6 +299,7 @@ class AddNewCardFragment : Fragment() {
         }
 
     private fun makeFileMY(): Uri {
+        //creating file with name, that is not unique, so new file will be overwritten
         val file1 = File(requireActivity().filesDir, "Palma.jpg")
         if (!file1.exists()) {
             file1.createNewFile()
@@ -302,15 +317,11 @@ class AddNewCardFragment : Fragment() {
                 latestTmpUri = uri
                 // latestTmpUri - content uri
                 takeImageResultMY.launch(latestTmpUri)
-
             }
         }
     }
 
-    //    val selectImageFromGalleryResult =
-//        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-//            uri?.let { binding.itemImage.setImageURI(uri) }
-//        }
+
     private val selectImageFromGalleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uriGallery: Uri? ->
                 val fileForImage = File(requireActivity().filesDir, "Palma.jpg")
@@ -320,69 +331,14 @@ class AddNewCardFragment : Fragment() {
                 fileForImage.outputStream().use {stream ->
                     requireActivity().contentResolver.openInputStream(uriGallery!!)?.copyTo(stream)
                 }
-
-
-
-
-
-
-//                val from = File(uriGallery?.path)
-//                val to = File(uriFile.path)
-//                Log.d("copy", "file-uriGallery-${from.exists()}")
-//                try {
-//                    copyFile(from, to)
-//                    Log.d("copy", "yes")
-//                } catch (ex: IOException) {
-//                    ex.printStackTrace()
-//                    Log.d("copy", "no")
-//                }
-
                 viewModel.updateUri(fileForImage.toUri())
-//                binding.textOnImage.text = ""
-//                Glide.with(binding.itemImage.context)
-//                    .load(uriGallery)
-//                    .centerCrop()
-//                    .into(binding.itemImage)
-
-//            }
         }
 
-    //private fun selectImageFromGallery() = selectImageFromGalleryResult.launch("image/*")
     private fun selectImageFromGallery() {
         lifecycleScope.launchWhenStarted {
-//            makeFileMY().let { uri ->
-//                latestTmpUri = uri
-            Log.d("test", "trying save picture from gallery in file")
-
             selectImageFromGalleryResult.launch("image/*")
-//            }
         }
     }
-
-    //    fun copyFile(src: File, dest: File) {
-//        FileInputStream(src).channel.use { sourceChannel ->
-//            FileOutputStream(dest).channel
-//                .use { destChannel ->
-//                    destChannel.transferFrom(
-//                        sourceChannel,
-//                        0,
-//                        sourceChannel.size()
-//                    )
-//                }
-//        }
-//    }
-    fun copyFile(src: File, dest: File) {
-        FileInputStream(src).use { fis ->
-            FileOutputStream(dest).use { os ->
-                val buffer = ByteArray(1024)
-                var len: Int
-                while (fis.read(buffer).also { len = it } != -1) {
-                    os.write(buffer, 0, len)
-                }
-            }
-        }
-    }
-
 }
 
 
