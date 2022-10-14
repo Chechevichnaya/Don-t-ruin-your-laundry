@@ -12,10 +12,8 @@ import android.view.*
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
-import androidx.core.net.toFile
 import androidx.core.net.toUri
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -23,33 +21,37 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.BuildConfig
 import com.blabla.dontruinyourlaundry.R
+import com.blabla.dontruinyourlaundry.RoomStuff.Card
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
 import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterButton
 import com.blabla.dontruinyourlaundry.data.AddedCardsFactory
 import com.blabla.dontruinyourlaundry.data.AddedCardsViewModel
+import com.blabla.dontruinyourlaundry.data.ListOfSymbolsForDataBase
 import com.blabla.dontruinyourlaundry.data.SymbolForWashing
 import com.blabla.dontruinyourlaundry.databinding.FragmentAddNewCardBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import kotlinx.coroutines.launch
 import java.io.File
-import java.io.FileInputStream
-import java.io.FileOutputStream
-import java.io.IOException
-import java.nio.file.Files
-import java.nio.file.StandardCopyOption
 
 
 class AddNewCardFragment : Fragment() {
 
+    private val args: AddNewCardFragmentArgs by navArgs()
+
     private val TAG = this::class.java.simpleName
 
     private var latestTmpUri: Uri? = null
+    private  var imageUri: String? = null
 
 
     private lateinit var binding: FragmentAddNewCardBinding
@@ -111,8 +113,7 @@ class AddNewCardFragment : Fragment() {
 
         //creating a new folder, if it is not created yet, where the last chosen photo will be kept for DB
         val folderForImagesInDB = context?.getDir("images_for_DB", Context.MODE_PRIVATE)
-        if (!folderForImagesInDB?.exists()!!)
-        {
+        if (!folderForImagesInDB?.exists()!!) {
             folderForImagesInDB.mkdirs()
         }
 
@@ -147,9 +148,7 @@ class AddNewCardFragment : Fragment() {
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         //get list of added symbols. There is always at least one symbol (add symbol)
         viewModel.listOfSymbols.observe(viewLifecycleOwner) { symbols ->
-
             binding.addedSymbolsRecyclerView.adapter = RecyclerViewAdapterButton(symbols)
-
             Log.d("test", "dataForAdapter: $symbols")
         }
 
@@ -177,28 +176,38 @@ class AddNewCardFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.save_button -> {
-//                        val tmpFile = File.createTempFile("tmp_image_file", ".jpg", requireActivity().cacheDir).apply {
-//                            createNewFile()
-//                            deleteOnExit()
-//                        }
 
-                        //creating file in new folder with unique name
-                        val fileForImages = File.createTempFile("photoforDB", ".jpg", folderForImagesInDB).apply {
-                            createNewFile()
+                        if (viewModel.uri.value != null) {
+                            //creating file in new folder with unique name
+                            val fileForImages =
+                                File.createTempFile("photoforDB", ".jpg", folderForImagesInDB)
+                                    .apply {
+                                        createNewFile()
+                                    }
+                            fileForImages.outputStream().use { stream ->
+                                requireActivity().contentResolver.openInputStream(viewModel.uri.value!!)
+                                    ?.copyTo(stream)
+                            }
+                            imageUri = fileForImages.toUri().toString()
                         }
-                        fileForImages.outputStream().use { stream ->
-                            requireActivity().contentResolver.openInputStream(viewModel.uri.value!!)?.copyTo(stream)
-                        }
-//                        fileForImage.outputStream().use {stream ->
-//                            requireActivity().contentResolver.openInputStream(uriGallery!!)?.copyTo(stream)
-
+                        //collecting info for card
                         val nameOfCloth = binding.nameOfCloth.text.toString()
-//                        val picture
-//                        val category
-//                        val listOfSymbols
-//                        val card = Card(nameOfCloth, )
+                        val category = args.currentCategory
+                        val listOfSymbols = viewModel.listOfSymbols.value?.let { list ->
+                            ListOfSymbolsForDataBase(
+                                list.toList()
+                            )
+                        }
+                        val card = Card(
+                            id = 0,
+                            name = nameOfCloth,
+                            picture = imageUri,
+                            listOfSymbols = listOfSymbols!!,
+                            category = category
+                        )
+                        //adding info of card to database
+                        viewModel.addNewCard(card)
 
-                        //viewModel.addNewCard(card)
 
                         findNavController().popBackStack()
                         true
@@ -324,14 +333,14 @@ class AddNewCardFragment : Fragment() {
 
     private val selectImageFromGalleryResult =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uriGallery: Uri? ->
-                val fileForImage = File(requireActivity().filesDir, "Palma.jpg")
-                if (!fileForImage.exists()) {
-                    fileForImage.createNewFile()
-                }
-                fileForImage.outputStream().use {stream ->
-                    requireActivity().contentResolver.openInputStream(uriGallery!!)?.copyTo(stream)
-                }
-                viewModel.updateUri(fileForImage.toUri())
+            val fileForImage = File(requireActivity().filesDir, "Palma.jpg")
+            if (!fileForImage.exists()) {
+                fileForImage.createNewFile()
+            }
+            fileForImage.outputStream().use { stream ->
+                requireActivity().contentResolver.openInputStream(uriGallery!!)?.copyTo(stream)
+            }
+            viewModel.updateUri(fileForImage.toUri())
         }
 
     private fun selectImageFromGallery() {
