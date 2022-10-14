@@ -44,6 +44,8 @@ android {
     dataBinding {
         enabled true
     }
+
+    //to prevent some shit that happen when i create viewmodel factory
     kotlinOptions{
         freeCompilerArgs += [
                 "-Xjvm-default=all",
