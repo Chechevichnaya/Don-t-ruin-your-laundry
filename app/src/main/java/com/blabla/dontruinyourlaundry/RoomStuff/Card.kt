@@ -1,6 +1,7 @@
 package com.blabla.dontruinyourlaundry.RoomStuff
 
 import android.os.Parcelable
+import androidx.annotation.NonNull
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -12,9 +13,9 @@ import kotlinx.parcelize.Parcelize
 @Entity
 data class Card(
     @PrimaryKey (autoGenerate = true) val id: Long = 0L,
-    val name: String,
+    @NonNull val name: String,
     val picture: String?,
     @ColumnInfo(name = "list_of_symbols") val listOfSymbols: ListOfSymbolsForDataBase,
-    val category: Category
+    @NonNull val category: Category
 
 ): Parcelable
