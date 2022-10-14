@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_kindsOfThingsForLaundry_to_addNewCard"
             app:destination="@id/addNewCard" />
+        <action
+            android:id="@+id/action_kindsOfThingsForLaundry_to_cardDetailFragment"
+            app:destination="@id/cardDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/simbol_guide"
@@ -34,7 +37,9 @@
         android:id="@+id/clothingCardsFragment"
         android:name="com.blabla.dontruinyourlaundry.fragments.ClothingCardsFragment"
         android:label="fragment_clothing_cards"
-        tools:layout="@layout/fragment_clothing_cards" />
+        tools:layout="@layout/fragment_clothing_cards" >
+
+    </fragment>
     <fragment
         android:id="@+id/addNewCard"
         android:name="com.blabla.dontruinyourlaundry.fragments.AddNewCardFragment"
@@ -55,5 +60,17 @@
         android:name="com.blabla.dontruinyourlaundry.fragments.ChooseSymbolsToCard"
         android:label="fragment_add_symbol_to_card"
         tools:layout="@layout/fragment_add_symbol_to_card" />
+    <fragment
+        android:id="@+id/cardDetailFragment"
+        android:name="com.blabla.dontruinyourlaundry.fragments.CardDetailFragment"
+        android:label="fragment_card_detail"
+        tools:layout="@layout/fragment_card_detail" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_cardDetailFragment_to_addNewCard"
+            app:destination="@id/addNewCard" />
+    </fragment>
 
 </navigation>

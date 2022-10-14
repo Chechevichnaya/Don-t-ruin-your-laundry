@@ -59,7 +59,6 @@ class AddNewCardFragment : Fragment() {
         AddedCardsFactory((activity?.application as CardsApplication).dataBase.cardsDao)
     }
 
-    //val viewModel: MyViewModel by viewModels { MyViewModelFactory(getApplication(), "my awesome param") }
     private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri?>() {
         override fun createIntent(context: Context, input: Any?): Intent {
             TODO()
@@ -71,20 +70,6 @@ class AddNewCardFragment : Fragment() {
 
     }
 
-
-//
-//    private fun getTmpFileUri(): Uri {
-//        val tmpFile =
-//            File.createTempFile("tmp_image_file", ".jpg", requireActivity().cacheDir).apply {
-//                createNewFile()
-//                deleteOnExit()
-//            }
-//        return FileProvider.getUriForFile(
-//            requireActivity().applicationContext,
-//            "${BuildConfig.APPLICATION_ID}.provider",
-//            tmpFile
-//        )
-//    }
 
 
     override fun onCreateView(
@@ -98,10 +83,6 @@ class AddNewCardFragment : Fragment() {
             "key"
         )?.observe(viewLifecycleOwner) {
             viewModel.addSelectedSymbols(it)
-            Log.d(
-                "test",
-                "list of symbols in addnewcard: ${viewModel.listOfSymbols.value.toString()}"
-            )
         }
         binding = FragmentAddNewCardBinding.inflate(inflater, container, false)
         return binding.root
@@ -130,18 +111,6 @@ class AddNewCardFragment : Fragment() {
             Log.d("text", "uri observer - $newUri")
         }
         viewModel.uri.observe(viewLifecycleOwner, uriObserver)
-
-
-//        setFragmentResultListener("requestKey") { requestKey, bundle ->
-        // selectedSymbols - list of symbols that user chose
-//            val selectedSymbols = bundle.getParcelableArrayList<SymbolForWashing>("bundleKey")
-//                ?.toList()
-//    }
-//            if (selectedSymbols != null) {
-//                viewModel.addSelectedSymbols(selectedSymbols)
-//                Log.d("test", viewModel.listOfSymbols.value.toString())
-//            }
-
 
         //set adapter for recyclerview with added symbols
         binding.addedSymbolsRecyclerView.layoutManager =
@@ -176,7 +145,6 @@ class AddNewCardFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.save_button -> {
-
                         if (viewModel.uri.value != null) {
                             //creating file in new folder with unique name
                             val fileForImages =

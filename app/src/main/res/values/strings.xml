@@ -15,7 +15,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_new_thing">Добавить новую вещь</string>
-    <string name="delite">Удалить</string>
+    <string name="delete">Удалить</string>
     <string name="safe">Сохранить</string>
     <string name="washing">Стирка</string>
     <string name="wash_hand">Стирать только руками при температуре воды до 40 °C. Не тереть, отжимать аккуратно, без перекручивания</string>
@@ -31,6 +31,10 @@
     <string name="permission_required">Camera access is required to display the camera preview.</string>
     <string name="ok">OK</string>
     <string name="permission_granted">Permission is granted. You can use the camera now.</string>
+    <string name="delete_question">Вы уверены, что хотите полностью удалить карточку?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+
 
 
 </resources>

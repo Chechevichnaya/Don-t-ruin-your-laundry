@@ -16,13 +16,13 @@ class ClothingCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
         return listOfCards.value == null
     }
 
-    fun checkDBIsEmpty1(category: Category): Boolean {
-        var answer = true
-        viewModelScope.launch {
-            answer =  cardsDao.isEmpty(category)
-        }
-        return answer
-    }
+//    fun checkDBIsEmpty1(category: Category): Boolean {
+//        var answer = true
+//        viewModelScope.launch {
+//            answer =  cardsDao.isEmpty(category)
+//        }
+//        return answer
+//    }
 
 
     fun allCardsByCategory(category: Category): LiveData<List<Card>> {

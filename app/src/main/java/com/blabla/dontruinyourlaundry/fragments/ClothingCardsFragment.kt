@@ -1,31 +1,21 @@
 package com.blabla.dontruinyourlaundry.fragments
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.coroutineScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterCards
-import com.blabla.dontruinyourlaundry.data.AddedCardsViewModel
-import com.blabla.dontruinyourlaundry.RoomStuff.Card
+import com.blabla.dontruinyourlaundry.KindsOfThingsForLaundryDirections
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
 import com.blabla.dontruinyourlaundry.adapters.CardsListAdapter
-import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSymbolForWashing
 import com.blabla.dontruinyourlaundry.data.ClothingCardsFactory
 import com.blabla.dontruinyourlaundry.data.ClothingCardsViewModel
 import com.blabla.dontruinyourlaundry.databinding.FragmentClothingCardsBinding
 import com.blabla.dontruinyourlaundry.entity.Category
-import kotlinx.coroutines.launch
 
 class ClothingCardsFragment : Fragment() {
 
@@ -63,40 +53,25 @@ class ClothingCardsFragment : Fragment() {
         //get enum Category from Bundle
         val category = (requireArguments().getSerializable(CATEGORY_NAME)) as Category
         val image = category.imageResId
-        //check if table by certain category is empty
+
+
+        val adapter = CardsListAdapter { card ->
+            val action = KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToCardDetailFragment(card.id)
+
+            this.findNavController().navigate(action)
+
+
+        }
+        binding.recyclerViewAddedCards.layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.recyclerViewAddedCards.adapter = adapter
 
         viewModel.allCardsByCategory(category).observe(viewLifecycleOwner) { cards ->
-            Log.d("cardByCategory", "category - $category, DB is empty? ${cards.isEmpty()} ")
+            //check if table by certain category is empty
             if (cards.isEmpty()) {
                 //set full screen picture of cloth type
                 binding.imageTypeOfCloth.setImageResource(image)
-            } else {
-                val adapter = CardsListAdapter {
-
-                }
-                binding.recyclerViewAddedCards.layoutManager =
-                    LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-                binding.recyclerViewAddedCards.adapter = adapter
-                adapter.submitList(cards)
-//                viewModel.allCardsByCategory(category).observe(this.viewLifecycleOwner){
-//                    cards.let {
-//                        adapter.submitList(it)
-//            }
-//                }
-
-
-
-            }
-//                //set adapter for recyclerView
-//            val recyclerView = binding.recyclerViewAddedCards
-//            recyclerView.layoutManager =
-//                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-//            //getting data(cards) for adapter and making it just List, not LiveData List
-//            val dataForAdapter = viewModel.allCardsByCategory(category)?.value
-//            val addedCardAdapter = dataForAdapter?.let { RecyclerViewAdapterCards(it) }
-//            recyclerView.adapter = addedCardAdapter
-//            }
-
+            } else adapter.submitList(cards)
         }
 
 //        val answer = viewModel.checkDBIsEmpty(category)
@@ -138,6 +113,9 @@ class ClothingCardsFragment : Fragment() {
 //            }
 //        }
 
+
     }
 }
+
+
 
