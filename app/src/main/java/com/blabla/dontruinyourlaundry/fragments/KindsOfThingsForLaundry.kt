@@ -3,6 +3,7 @@ package com.blabla.dontruinyourlaundry
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import android.widget.EditText
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
@@ -60,8 +61,17 @@ class KindsOfThingsForLaundry : Fragment() {
 
         //Round button
         binding.fab.setOnClickListener {
-            // sharedViewModel.setCategory(currentCategory)
-            view.findNavController().navigate(R.id.action_kindsOfThingsForLaundry_to_addNewCard)
+            //getting category
+            val currentCategory = when (binding.pager.currentItem) {
+                0 -> Category.CLOTH
+                1 -> Category.BAD_SHEETS
+                2 -> Category.BATH
+                3 -> Category.KITCHEN
+                4 -> Category.REST
+                else -> Category.CLOTH
+            }
+            val action = KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToAddNewCard(currentCategory)
+            view.findNavController().navigate(action)
         }
 
         binding.pager.adapter = LandryPagerAdapter(this)

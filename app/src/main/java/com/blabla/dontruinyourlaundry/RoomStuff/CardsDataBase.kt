@@ -10,10 +10,6 @@ import androidx.room.TypeConverters
 @Database(entities = [Card::class], version = 1)
 abstract class CardsDataBase : RoomDatabase() {
     abstract val cardsDao: CardsDao
-    //val db = Room.databaseBuilder(
-    //            applicationContext,
-    //            AppDatabase::class.java, "database-name"
-    //        ).build()
 
     companion object{
         @Volatile
@@ -25,10 +21,8 @@ abstract class CardsDataBase : RoomDatabase() {
                     context,
                     CardsDataBase::class.java,
                     "card_database")
-//                    .createFromAsset("database/card_cloth_table.db")
                     .build()
                 INSTANCE = instance
-
                 instance
             }
         }

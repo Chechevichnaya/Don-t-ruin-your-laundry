@@ -55,12 +55,12 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
         Log.d("test", "list after fun deleteSelectedSymbols() ${_listOfSymbols.value.toString()} ")
     }
 
-//    fun addNewCard(card: Card) {
-//        viewModelScope.launch {
-//            cardsDao.insertInDataBase(card)
-//        }
-//
-//    }
+    fun addNewCard(card: Card) {
+        viewModelScope.launch {
+            cardsDao.insertInDataBase(card)
+        }
+
+    }
 
 //
 //    private val _listOfCards: MutableLiveData<MutableList<Card>> = MutableLiveData()

@@ -1,25 +1,38 @@
 package com.blabla.dontruinyourlaundry.data
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import android.util.Log
+import androidx.lifecycle.*
 import com.blabla.dontruinyourlaundry.RoomStuff.Card
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsDao
 import com.blabla.dontruinyourlaundry.entity.Category
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.launch
 
 class ClothingCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
 
-//    private val _category = MutableLiveData<Category>()
-//    val category: LiveData<Category> = _category
-
-    fun checkTableIsEmpty(category: Category): Boolean {
-        val listOfCards = allCardsByCategory(category)?.value
-        return listOfCards == null
+    fun checkDBIsEmpty(category: Category): Boolean {
+        val listOfCards = allCardsByCategory(category)
+        return listOfCards.value == null
     }
 
-    fun allCardsByCategory(category: Category): LiveData<List<Card>>? {
-         return  cardsDao.getAllClothCardsByCategory(category)
+    fun checkDBIsEmpty1(category: Category): Boolean {
+        var answer = true
+        viewModelScope.launch {
+            answer =  cardsDao.isEmpty(category)
+        }
+        return answer
+    }
+
+
+    fun allCardsByCategory(category: Category): LiveData<List<Card>> {
+        return cardsDao.getAllClothCardsByCategory(category).asLiveData()
+    }
+
+    fun testsome(value: String?) {
+        if (value == null) return
+
+        value.toList()
     }
 
 }

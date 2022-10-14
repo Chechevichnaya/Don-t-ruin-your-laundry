@@ -16,7 +16,7 @@ class RecyclerViewAdapterCards(private var data: List<Card>) :
     RecyclerView.Adapter<RecyclerViewAdapterCards.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        var nameClothText: TextView = view.findViewById(R.id.item_title)
+        var nameClothText: TextView = view.findViewById(R.id.item_name)
         val imageClothCards: ImageView = view.findViewById(R.id.item_image)
 
 
