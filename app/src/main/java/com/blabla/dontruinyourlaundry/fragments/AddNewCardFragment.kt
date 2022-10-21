@@ -42,6 +42,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import kotlinx.coroutines.launch
 import java.io.File
+import java.util.*
 
 
 class AddNewCardFragment : Fragment() {
@@ -51,7 +52,7 @@ class AddNewCardFragment : Fragment() {
     private val TAG = this::class.java.simpleName
 
     private var latestTmpUri: Uri? = null
-    private  var imageUri: String? = null
+    private var imageUri: String? = null
 
 
     private lateinit var binding: FragmentAddNewCardBinding
@@ -69,7 +70,6 @@ class AddNewCardFragment : Fragment() {
         }
 
     }
-
 
 
     override fun onCreateView(
@@ -128,11 +128,6 @@ class AddNewCardFragment : Fragment() {
         //go back on the first fragment without adding info in database
         binding.toolbarAddCard.setNavigationOnClickListener {
             findNavController().popBackStack()
-            //viewModel.deleteSelectedSymbols()
-            Log.d(
-                "test",
-                "delete selected items. oldlist:${viewModel.listOfSymbols.value.toString()}"
-            )
         }
 
         //set menu item
@@ -159,8 +154,11 @@ class AddNewCardFragment : Fragment() {
                             imageUri = fileForImages.toUri().toString()
                         }
                         //collecting info for card
-                        val nameOfCloth = binding.nameOfCloth.text.toString()
+                        val nameOfCloth =
+                            binding.nameOfCloth.text.toString().trim()
+                                .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
                         val category = args.currentCategory
+                        viewModel.deleteInListSymbolAdd()
                         val listOfSymbols = viewModel.listOfSymbols.value?.let { list ->
                             ListOfSymbolsForDataBase(
                                 list.toList()

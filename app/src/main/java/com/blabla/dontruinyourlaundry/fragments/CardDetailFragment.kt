@@ -2,6 +2,7 @@ package com.blabla.dontruinyourlaundry.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
@@ -12,9 +13,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.RoomStuff.Card
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
+import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterButton
 import com.blabla.dontruinyourlaundry.data.*
 import com.blabla.dontruinyourlaundry.databinding.FragmentCardDetailBinding
 import com.bumptech.glide.Glide
@@ -48,11 +52,20 @@ class CardDetailFragment : Fragment() {
         val id = navigationArgs.id
         viewModel.getCard(id).observe(this.viewLifecycleOwner) { selectedCard ->
             card = selectedCard
-            bind(card)}
+            bind(card)
+        }
 //        val card = viewModel.getCard(id).value
 //        if (card != null)
 //        bind(card)
 
+        //set upper menu
+        binding.toolbarCardDetail.title = "Подробнее о карточке"
+        binding.toolbarCardDetail.navigationIcon =
+            view.context.getDrawable(R.drawable.ic_arrow_back)
+        //go back on the first fragment without adding info in database
+        binding.toolbarCardDetail.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
 
 
         // set menu item
@@ -87,14 +100,26 @@ class CardDetailFragment : Fragment() {
         }
         binding.apply {
             nameOfCloth.text = card.name
+            binding.addedSymbolsRecyclerView.layoutManager =
+                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            val list = card.listOfSymbols.listOfSymbols
+            binding.addedSymbolsRecyclerView.adapter = RecyclerViewAdapterButton(list)
+
             //editItem.setOnClickListener { editItem() }
+            ////set adapter for recyclerview with added symbols
+            //        binding.addedSymbolsRecyclerView.layoutManager =
+            //            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+            //        //get list of added symbols. There is always at least one symbol (add symbol)
+            //        viewModel.listOfSymbols.observe(viewLifecycleOwner) { symbols ->
+            //            binding.addedSymbolsRecyclerView.adapter = RecyclerViewAdapterButton(symbols)
+            //            Log.d("test", "dataForAdapter: $symbols")
+            //        }
 
         }
     }
 
-    private fun showConfirmationDialog(){
+    private fun showConfirmationDialog() {
         AlertDialog.Builder(requireContext())
-            //.setTitle(getString(android.R.string.dialog_alert_title))
             .setMessage(getString(R.string.delete_question))
             .setCancelable(false)
             .setNegativeButton(getString(R.string.no)) { _, _ -> }

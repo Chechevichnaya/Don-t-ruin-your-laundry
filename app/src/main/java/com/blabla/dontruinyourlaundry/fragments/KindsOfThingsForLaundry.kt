@@ -54,6 +54,10 @@ class KindsOfThingsForLaundry : Fragment() {
                         findNavController().navigate(R.id.action_kindsOfThingsForLaundry_to_howToUseAppDialog)
                         true
                     }
+                    R.id.filter -> {
+                        findNavController().navigate(R.id.action_kindsOfThingsForLaundry_to_searchDialog)
+                        true
+                    }
                     else -> false
                 }
             }

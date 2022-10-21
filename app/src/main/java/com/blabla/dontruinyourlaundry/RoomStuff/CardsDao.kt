@@ -22,13 +22,14 @@ interface CardsDao {
 //    fun getAllCards(): LiveData<List<Card>>
 
     @Query("SELECT * FROM card WHERE category = :category ORDER BY name ASC")
-    fun getAllClothCardsByCategory(category: Category): Flow<List<Card>>
+    fun getCardsByCategory(category: Category): Flow<List<Card>>
+
+    @Query("SELECT * FROM card WHERE name = :name ORDER BY name ASC")
+    fun getCardsByName(name:String):Flow<List<Card>>
+
+    @Query("SELECT name FROM card")
+    fun getAllNames():Flow<List<String>>
 
     @Query("SELECT * FROM card WHERE id = :id")
     fun getOneCard(id: Long): Flow<Card>
-
-//    @Query("SELECT * FROM card LIMIT 1")
-//    fun getAnyRowInTable(): Card?
-
-
 }

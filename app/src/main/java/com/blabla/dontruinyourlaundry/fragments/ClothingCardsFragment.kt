@@ -21,14 +21,6 @@ class ClothingCardsFragment : Fragment() {
 
     private lateinit var binding: FragmentClothingCardsBinding
 
-    //    private val viewModel: ClothingCardsViewModel by lazy {
-//        ViewModelProvider(
-//            this,
-//            ClothingCardsFactory(
-//                (requireContext().applicationContext as CardsApplication).dataBase.cardsDao
-//            )
-//        ).get(ClothingCardsViewModel::class.java)
-//    }
     private val viewModel: ClothingCardsViewModel by viewModels {
         ClothingCardsFactory((activity?.application as CardsApplication).dataBase.cardsDao)
     }
@@ -57,9 +49,7 @@ class ClothingCardsFragment : Fragment() {
 
         val adapter = CardsListAdapter { card ->
             val action = KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToCardDetailFragment(card.id)
-
             this.findNavController().navigate(action)
-
 
         }
         binding.recyclerViewAddedCards.layoutManager =

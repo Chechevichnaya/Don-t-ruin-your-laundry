@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_kindsOfThingsForLaundry_to_cardDetailFragment"
             app:destination="@id/cardDetailFragment" />
+        <action
+            android:id="@+id/action_kindsOfThingsForLaundry_to_searchDialog"
+            app:destination="@id/searchDialog" />
     </fragment>
     <fragment
         android:id="@+id/simbol_guide"
@@ -72,5 +75,23 @@
             android:id="@+id/action_cardDetailFragment_to_addNewCard"
             app:destination="@id/addNewCard" />
     </fragment>
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.blabla.dontruinyourlaundry.fragments.SearchFragment"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_searchFragment_to_cardDetailFragment"
+            app:destination="@id/cardDetailFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/searchDialog"
+        android:name="com.blabla.dontruinyourlaundry.dialogs.SearchDialog"
+        android:label="fragment_search_dialog"
+        tools:layout="@layout/fragment_search_dialog" >
+        <action
+            android:id="@+id/action_searchDialog_to_searchFragment"
+            app:destination="@id/searchFragment" />
+    </dialog>
 
 </navigation>

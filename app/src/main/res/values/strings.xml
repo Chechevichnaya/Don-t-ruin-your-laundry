@@ -34,7 +34,7 @@
     <string name="delete_question">Вы уверены, что хотите полностью удалить карточку?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
-
+    <string name="search_by_name">Поиск по названию</string>
 
 
 </resources>

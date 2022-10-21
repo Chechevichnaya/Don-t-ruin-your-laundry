@@ -24,6 +24,13 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
         MutableLiveData(mutableListOf(SymbolForWashing(addSymbol, "Добавить символы для стирки")))
     val listOfSymbols: LiveData<MutableList<SymbolForWashing>> = _listOfSymbols
 
+    fun deleteInListSymbolAdd(){
+        if (listOfSymbols.value != null){
+            listOfSymbols.value!!.removeAt(listOfSymbols.value!!.size - 1)
+        }
+
+    }
+
     private val _uri = MutableLiveData<Uri>()
     val uri: LiveData<Uri> = _uri
 
@@ -43,17 +50,17 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
         _listOfSymbols.value = newList
     }
 
-    fun deleteSelectedSymbols() {
-        Log.d("test", "list before fun deleteSelectedSymbols() ${_listOfSymbols.value.toString()} ")
-        val list = _listOfSymbols.value.orEmpty().toMutableList()
-        val end = list.size - 2
-        val start = 0
-        for (i in end downTo start) {
-            list.removeAt(i)
-        }
-        _listOfSymbols.value = list
-        Log.d("test", "list after fun deleteSelectedSymbols() ${_listOfSymbols.value.toString()} ")
-    }
+//    fun deleteSelectedSymbols() {
+//        Log.d("test", "list before fun deleteSelectedSymbols() ${_listOfSymbols.value.toString()} ")
+//        val list = _listOfSymbols.value.orEmpty().toMutableList()
+//        val end = list.size - 2
+//        val start = 0
+//        for (i in end downTo start) {
+//            list.removeAt(i)
+//        }
+//        _listOfSymbols.value = list
+//        Log.d("test", "list after fun deleteSelectedSymbols() ${_listOfSymbols.value.toString()} ")
+//    }
 
     fun addNewCard(card: Card) {
         viewModelScope.launch {
@@ -97,8 +104,8 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
 //        _cardsExist.value = answer
 //    }
 //
-    private val _nameCloth = MutableLiveData<String>()
-    val nameCloth: LiveData<String> = _nameCloth
+//    private val _nameCloth = MutableLiveData<String>()
+//    val nameCloth: LiveData<String> = _nameCloth
 
 
     private val _category = MutableLiveData<Category>()

@@ -12,4 +12,12 @@
         android:title="@string/help_with_app"
         android:icon="@drawable/info"
         app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/filter"
+        android:title="Поиск"
+        android:icon="@drawable/ic_search"
+        app:showAsAction="ifRoom"
+    />
+
 </menu>
