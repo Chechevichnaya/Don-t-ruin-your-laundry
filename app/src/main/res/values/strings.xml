@@ -35,6 +35,9 @@
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="search_by_name">Поиск по названию</string>
+    <string name="LookFor">Искать</string>
+    <string name="cloth">Одежда</string>
+    <string name="category">Категории</string>
 
 
 </resources>

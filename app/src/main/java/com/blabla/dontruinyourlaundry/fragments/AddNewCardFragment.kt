@@ -186,11 +186,12 @@ class AddNewCardFragment : Fragment() {
         val photo = binding.itemImage
         photo.setOnClickListener {
             AlertDialog.Builder(requireContext())
-                .setMessage(getString(R.string.ask_about_how_to_add_photo))
+                .setTitle(getString(R.string.ask_about_how_to_add_photo))
+
                 .setPositiveButton(getString(R.string.from_gallery)) { _, _ ->
                     selectImageFromGallery()
                 }
-                .setNegativeButton(getString(R.string.from_camera)) { _, _ ->
+                .setNeutralButton(getString(R.string.from_camera)) { _, _ ->
                     askPermissions()
                 }
                 .show()

@@ -41,7 +41,7 @@ class RecyclerViewAdapterSymbolInGrid(
         val symbolItem= data[position]
         holder.symbol.setImageResource(symbolItem.pictureId)
 
-        val listOfChosenSymbols: MutableList<SymbolForWashing> = mutableListOf()
+//        val listOfChosenSymbols: MutableList<SymbolForWashing> = mutableListOf()
 
         when (type) {
             TypeOfRecyclerView.SYMBOLGUIDEFRAGMENT -> holder.symbol.setOnClickListener {
@@ -54,16 +54,16 @@ class RecyclerViewAdapterSymbolInGrid(
             TypeOfRecyclerView.ADDSYMBOLFRAGMENT -> {
                 var bgColor: Int
                 holder.symbol.setOnClickListener {
-                    if (symbolItem.selected) {
-                        bgColor = R.color.lilac_200
-                        if (listOfChosenSymbols.contains(symbolItem)) {
-                            listOfChosenSymbols.remove(symbolItem)
-                        }
+                    bgColor = if (symbolItem.selected) {
+                        R.color.lilac_200
+                //                        if (listOfChosenSymbols.contains(symbolItem)) {
+                //                            listOfChosenSymbols.remove(symbolItem)
+                //                        }
                     } else {
-                        bgColor = R.color.lilac_700
-                        if (!listOfChosenSymbols.contains(symbolItem)){
-                            listOfChosenSymbols.add(symbolItem)
-                        }
+                        R.color.lilac_700
+                //                        if (!listOfChosenSymbols.contains(symbolItem)){
+                //                            listOfChosenSymbols.add(symbolItem)
+                //                        }
                     }
                     holder.symbol.setBackgroundColor(
                         holder.symbol.context.resources.getColor(

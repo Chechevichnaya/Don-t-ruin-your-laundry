@@ -21,6 +21,9 @@ interface CardsDao {
 //    @Query("SELECT * FROM card")
 //    fun getAllCards(): LiveData<List<Card>>
 
+    @Query("SELECT * FROM card WHERE category IN (:categories) ORDER BY name ASC")
+    fun getCardsByCategories(categories: List<Category>): Flow<List<Card>>
+
     @Query("SELECT * FROM card WHERE category = :category ORDER BY name ASC")
     fun getCardsByCategory(category: Category): Flow<List<Card>>
 

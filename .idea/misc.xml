@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable/ic_baseline_navigate_before_24.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.2085" />
         <entry key="app/src/main/res/drawable/ic_question.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/round_button.xml" value="0.19" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/layout/array_adapter_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/card_item.xml" value="0.23229166666666667" />
@@ -24,9 +25,13 @@
         <entry key="app/src/main/res/layout/fragment_how_to_use_app_dialog.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_kinds_of_things_for_laundry.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/fragment_search_by_parameters.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/fragment_search_dialog.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_simbol_guide.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/image_buttom_item.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/inner_recycler_item_insearch_by_parameters.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/item_button_add_symbol_to_card.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/recycler_item_search_by_parameters.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/symbol_guide_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/symbol_guide_head_item.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/symbol_guide_item.xml" value="0.23229166666666667" />
@@ -38,6 +43,7 @@
         <entry key="app/src/main/res/menu/menu_card_detail.xml" value="0.23125" />
         <entry key="app/src/main/res/menu/menu_in_action_bar.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/menu/menu_search_by_parameters.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/menu/menu_symbol_guide.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/xml/provider_paths.xml" value="0.23229166666666667" />
       </map>

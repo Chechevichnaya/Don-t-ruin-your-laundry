@@ -25,7 +25,9 @@ class SearchDialog : DialogFragment() {
                         BY_NAME -> {
                             findNavController().navigate(R.id.action_searchDialog_to_searchFragment)
                         }
-                        BY_PARAMETERS -> {}
+                        BY_PARAMETERS -> {
+                            findNavController().navigate(R.id.action_searchDialog_to_searchByParametersFragment)
+                        }
                     }
                 }
             }

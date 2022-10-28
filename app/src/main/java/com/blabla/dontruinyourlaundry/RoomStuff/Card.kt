@@ -16,6 +16,7 @@ data class Card(
     @NonNull val name: String,
     val picture: String?,
     @ColumnInfo(name = "list_of_symbols") val listOfSymbols: ListOfSymbolsForDataBase,
+//    @ColumnInfo(name = "list_of_symbols") val listOfSymbols: List<SymbolsForGuide>,
     @NonNull val category: Category
 
 ): Parcelable

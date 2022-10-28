@@ -22,7 +22,7 @@ import com.blabla.dontruinyourlaundry.data.SearchFactory
 import com.blabla.dontruinyourlaundry.data.SearchViewModel
 import com.blabla.dontruinyourlaundry.databinding.FragmentSearchBinding
 
-class SearchFragment : Fragment() {
+class SearchByNameFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
 
@@ -54,7 +54,7 @@ class SearchFragment : Fragment() {
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         val adapter = CardsListAdapter { card ->
-            val action = SearchFragmentDirections.actionSearchFragmentToCardDetailFragment(card.id)
+            val action = SearchByNameFragmentDirections.actionSearchFragmentToCardDetailFragment(card.id)
             this.findNavController().navigate(action)
         }
 

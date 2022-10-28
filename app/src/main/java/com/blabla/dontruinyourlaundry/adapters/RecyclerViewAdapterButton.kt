@@ -1,5 +1,6 @@
 package com.blabla.dontruinyourlaundry.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -36,6 +37,7 @@ class RecyclerViewAdapterButton(
         if (position != data.size) {
             holder.imageSymbol.background.setTint(context.resources.getColor(R.color.lilac_200))
         }
+        Log.e("wtf", "item = ${item.meaningOfSymbol}")
         holder.imageSymbol.setImageResource(item.pictureId)
         holder.meaningSymbol.text = item.meaningOfSymbol
         holder.imageSymbol.setOnClickListener {

@@ -77,7 +77,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.blabla.dontruinyourlaundry.fragments.SearchFragment"
+        android:name="com.blabla.dontruinyourlaundry.fragments.SearchByNameFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
@@ -92,6 +92,14 @@
         <action
             android:id="@+id/action_searchDialog_to_searchFragment"
             app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_searchDialog_to_searchByParametersFragment"
+            app:destination="@id/searchByParametersFragment" />
     </dialog>
+    <fragment
+        android:id="@+id/searchByParametersFragment"
+        android:name="com.blabla.dontruinyourlaundry.fragments.SearchByParametersFragment"
+        android:label="fragment_search_by_parameters"
+        tools:layout="@layout/fragment_search_by_parameters" />
 
 </navigation>

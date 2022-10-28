@@ -103,6 +103,7 @@ class CardDetailFragment : Fragment() {
             binding.addedSymbolsRecyclerView.layoutManager =
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             val list = card.listOfSymbols.listOfSymbols
+
             binding.addedSymbolsRecyclerView.adapter = RecyclerViewAdapterButton(list)
 
             //editItem.setOnClickListener { editItem() }
