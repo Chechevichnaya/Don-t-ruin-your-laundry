@@ -1,4 +1,4 @@
-package com.blabla.dontruinyourlaundry.data
+package com.blabla.dontruinyourlaundry.entity
 
 import android.net.Uri
 

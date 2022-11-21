@@ -1,20 +1,14 @@
 package com.blabla.dontruinyourlaundry
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.EditText
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
-import com.blabla.dontruinyourlaundry.data.AddedCardsFactory
-import com.blabla.dontruinyourlaundry.data.AddedCardsViewModel
 import com.blabla.dontruinyourlaundry.databinding.FragmentKindsOfThingsForLaundryBinding
 import com.blabla.dontruinyourlaundry.entity.Category
 import com.blabla.dontruinyourlaundry.fragments.ClothingCardsFragment
@@ -74,7 +68,11 @@ class KindsOfThingsForLaundry : Fragment() {
                 4 -> Category.REST
                 else -> Category.CLOTH
             }
-            val action = KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToAddNewCard(currentCategory)
+            val action =
+                KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToAddNewCard(
+                    title = getString(R.string.add_card_fragment),
+                    currentCategory = currentCategory
+                )
             view.findNavController().navigate(action)
         }
 

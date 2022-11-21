@@ -18,8 +18,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
 import com.blabla.dontruinyourlaundry.adapters.CardsListAdapter
-import com.blabla.dontruinyourlaundry.data.SearchFactory
-import com.blabla.dontruinyourlaundry.data.SearchViewModel
+import com.blabla.dontruinyourlaundry.viewModels.SearchFactory
+import com.blabla.dontruinyourlaundry.viewModels.SearchViewModel
 import com.blabla.dontruinyourlaundry.databinding.FragmentSearchBinding
 
 class SearchByNameFragment : Fragment() {
@@ -41,9 +41,11 @@ class SearchByNameFragment : Fragment() {
     @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         //set upper menu
         binding.toolbarSearch.navigationIcon =
             view.context.getDrawable(R.drawable.ic_arrow_back)
+
         //go back on the first fragment without adding info in database
         binding.toolbarSearch.setNavigationOnClickListener {
             findNavController().popBackStack()

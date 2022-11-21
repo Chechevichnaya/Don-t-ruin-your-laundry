@@ -1,5 +1,7 @@
 package com.blabla.dontruinyourlaundry.data
 
+import com.blabla.dontruinyourlaundry.entity.ButtonsForSearching
+
 object DataForSearchByParameters {
 
     private fun getListForCategorySearch(): List<ButtonsForSearching> {
@@ -46,29 +48,29 @@ object DataForSearchByParameters {
     }
 
 
-    fun getData(): List<SearchByParametersCards> {
+    fun getData(): List<SearchByParametersCard> {
         return listOf(
-            SearchByParametersCards(
+            SearchByParametersCard(
                 title = "Категории",
                 listOfButton = getListForCategorySearch(),
                 selectionType = SelectionType.MULTI
             ),
-            SearchByParametersCards(
+            SearchByParametersCard(
                 title = "Стирка",
                 listOfButton = getListForLaundrySearch(),
                 selectionType = SelectionType.SINGLE
             ),
-            SearchByParametersCards(
+            SearchByParametersCard(
                 title = "Режим стирки",
                 listOfButton = getListForLaundryRegimeSearch(),
                 selectionType = SelectionType.MULTI
             ),
-            SearchByParametersCards(
+            SearchByParametersCard(
                 title = "Сушка в сушильной машине",
                 listOfButton = getListForDryingSearch(),
                 selectionType = SelectionType.SINGLE
             ),
-            SearchByParametersCards(
+            SearchByParametersCard(
                 title = "Глажка",
                 listOfButton = getListForIroningSearch(),
                 selectionType = SelectionType.SINGLE

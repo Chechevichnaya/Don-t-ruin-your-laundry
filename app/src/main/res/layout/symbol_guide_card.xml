@@ -22,7 +22,7 @@
     </TextView>
 
     <View
-        android:id="@+id/devider"
+        android:id="@+id/divider"
         android:layout_width="wrap_content"
         android:layout_height="1dp"
         android:background="@android:color/black"
@@ -38,7 +38,7 @@
         android:layout_height="match_parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/devider">
+        app:layout_constraintTop_toBottomOf="@+id/divider">
     </androidx.recyclerview.widget.RecyclerView>
 
 

@@ -38,6 +38,9 @@
     <string name="LookFor">Искать</string>
     <string name="cloth">Одежда</string>
     <string name="category">Категории</string>
+    <string name="edit_fragment">Редактировать карточку</string>
+    <string name="add_card_fragment">Добавить новую карточку</string>
+    <string name="add_more_symbols">Добавить символы для стирки</string>
 
 
 </resources>

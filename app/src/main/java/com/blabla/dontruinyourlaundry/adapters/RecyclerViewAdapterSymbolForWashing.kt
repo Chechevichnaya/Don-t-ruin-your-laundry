@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.data.SymbolGuide
+import com.blabla.dontruinyourlaundry.entity.SymbolGuide
 import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
 
 class RecyclerViewAdapterSymbolForWashing(var data: List<SymbolGuide>, val type: TypeOfRecyclerView) :
@@ -33,7 +33,10 @@ class RecyclerViewAdapterSymbolForWashing(var data: List<SymbolGuide>, val type:
         val item = data[position]
         holder.head.text = item.headName
         holder.recyclerViewSymbols.layoutManager =
-            GridLayoutManager(holder.recyclerViewSymbols.context, 5, RecyclerView.VERTICAL, false)
+            GridLayoutManager(holder.recyclerViewSymbols.context,
+                5,
+                RecyclerView.VERTICAL,
+                false)
         holder.recyclerViewSymbols.adapter =
             RecyclerViewAdapterSymbolInGrid(item.symbolsByCategory, type)
         holder.recyclerViewSymbols.setHasFixedSize(true)

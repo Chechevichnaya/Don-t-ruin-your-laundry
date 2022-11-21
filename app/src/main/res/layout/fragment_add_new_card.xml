@@ -7,7 +7,7 @@
     <data>
        <variable
            name="viewModel"
-           type="com.blabla.dontruinyourlaundry.data.AddedCardsViewModel" />
+           type="com.blabla.dontruinyourlaundry.viewModels.AddedCardsViewModel" />
 
     </data>
 
@@ -36,7 +36,6 @@
             android:layout_width="160dp"
             android:layout_height="160dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:background="@color/lilac_200"
             app:layout_constraintBottom_toTopOf="@id/added_symbols_recycler_view"
             app:layout_constraintEnd_toStartOf="@id/name_of_cloth"
@@ -73,18 +72,61 @@
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/added_symbols_recycler_view"
             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_margin="8dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/add_symbol_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/item_image"
-
             >
-
         </androidx.recyclerview.widget.RecyclerView>
+        <ImageButton
+            android:id="@+id/backround"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:backgroundTint="@color/lilac_500"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/added_symbols_recycler_view"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp">
+        </ImageButton>
+        <ImageView
+            android:id="@+id/add_symbol_button"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:backgroundTint="@color/lilac_500"
+            android:scaleType="centerInside"
+            android:src="@drawable/plus"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintStart_toStartOf="@id/backround"
+            app:layout_constraintBottom_toBottomOf="@id/backround"
+            app:layout_constraintTop_toTopOf="@id/backround"
+            app:layout_constraintEnd_toStartOf="@id/symbol_meaning">
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/symbol_meaning"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/add_symbol_button"
+            app:layout_constraintBottom_toBottomOf="@id/add_symbol_button"
+            app:layout_constraintTop_toTopOf="@id/add_symbol_button"
+            app:layout_constraintEnd_toEndOf="@id/backround"
+            android:text="@string/add_more_symbols">
+
+        </TextView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

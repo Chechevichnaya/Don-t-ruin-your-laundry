@@ -1,4 +1,4 @@
-package com.blabla.dontruinyourlaundry.data
+package com.blabla.dontruinyourlaundry.viewModels
 
 import androidx.lifecycle.*
 import com.blabla.dontruinyourlaundry.RoomStuff.Card

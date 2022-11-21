@@ -1,4 +1,4 @@
-package com.blabla.dontruinyourlaundry.data
+package com.blabla.dontruinyourlaundry.viewModels
 
 import androidx.lifecycle.*
 import com.blabla.dontruinyourlaundry.RoomStuff.Card
@@ -6,20 +6,6 @@ import com.blabla.dontruinyourlaundry.RoomStuff.CardsDao
 import com.blabla.dontruinyourlaundry.entity.Category
 
 class ClothingCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
-
-//    fun checkDBIsEmpty(category: Category): Boolean {
-//        val listOfCards = allCardsByCategory(category)
-//        return listOfCards.value == null
-//    }
-
-//    fun checkDBIsEmpty1(category: Category): Boolean {
-//        var answer = true
-//        viewModelScope.launch {
-//            answer =  cardsDao.isEmpty(category)
-//        }
-//        return answer
-//    }
-
 
     fun allCardsByCategory(category: Category): LiveData<List<Card>> {
         return cardsDao.getCardsByCategory(category).asLiveData()

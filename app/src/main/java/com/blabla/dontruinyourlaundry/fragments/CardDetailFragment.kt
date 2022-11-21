@@ -2,9 +2,7 @@ package com.blabla.dontruinyourlaundry.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.Fragment
 import androidx.core.net.toUri
 import androidx.core.view.MenuHost
@@ -18,12 +16,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.RoomStuff.Card
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
-import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterButton
+import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSymbolAndMeaning
 import com.blabla.dontruinyourlaundry.data.*
 import com.blabla.dontruinyourlaundry.databinding.FragmentCardDetailBinding
+import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
+import com.blabla.dontruinyourlaundry.viewModels.CardDetailFactory
+import com.blabla.dontruinyourlaundry.viewModels.CardDetailViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 
 
 class CardDetailFragment : Fragment() {
@@ -54,9 +54,7 @@ class CardDetailFragment : Fragment() {
             card = selectedCard
             bind(card)
         }
-//        val card = viewModel.getCard(id).value
-//        if (card != null)
-//        bind(card)
+
 
         //set upper menu
         binding.toolbarCardDetail.title = "Подробнее о карточке"
@@ -103,19 +101,9 @@ class CardDetailFragment : Fragment() {
             binding.addedSymbolsRecyclerView.layoutManager =
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             val list = card.listOfSymbols.listOfSymbols
-
-            binding.addedSymbolsRecyclerView.adapter = RecyclerViewAdapterButton(list)
-
-            //editItem.setOnClickListener { editItem() }
-            ////set adapter for recyclerview with added symbols
-            //        binding.addedSymbolsRecyclerView.layoutManager =
-            //            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            //        //get list of added symbols. There is always at least one symbol (add symbol)
-            //        viewModel.listOfSymbols.observe(viewLifecycleOwner) { symbols ->
-            //            binding.addedSymbolsRecyclerView.adapter = RecyclerViewAdapterButton(symbols)
-            //            Log.d("test", "dataForAdapter: $symbols")
-            //        }
-
+            binding.addedSymbolsRecyclerView.adapter =
+                RecyclerViewAdapterSymbolAndMeaning(list, TypeOfRecyclerView.CARDDETAILFRAGMENT)
+            editItem.setOnClickListener { editCard() }
         }
     }
 
@@ -134,17 +122,14 @@ class CardDetailFragment : Fragment() {
         viewModel.deleteCard(card)
         findNavController().popBackStack()
     }
+
+    private fun editCard() {
+        val action =
+            CardDetailFragmentDirections.actionCardDetailFragmentToAddNewCard(
+                title = getString(R.string.edit_fragment),
+                itemId = card.id
+            )
+        findNavController().navigate(action)
+    }
 }
 
-
-//private fun bind(item: Item) {
-//    binding.apply {
-//        itemName.text = item.itemName
-//        itemPrice.text = item.getFormattedPrice()
-//        itemCount.text = item.quantityInStock.toString()
-//        sellItem.isEnabled = viewModel.isStockAvailable(item)
-//        sellItem.setOnClickListener { viewModel.sellItem(item) }
-//        deleteItem.setOnClickListener { showConfirmationDialog() }
-//        editItem.setOnClickListener { editItem() }
-//    }
-//}

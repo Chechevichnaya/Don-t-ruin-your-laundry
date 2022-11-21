@@ -1,20 +1,13 @@
 package com.blabla.dontruinyourlaundry.adapters
 
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.data.ButtonsForSearching
-import com.blabla.dontruinyourlaundry.data.DataForSearchByParameters
+import com.blabla.dontruinyourlaundry.entity.ButtonsForSearching
 import com.blabla.dontruinyourlaundry.data.SelectionType
 import com.google.android.material.button.MaterialButton
-
-//class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
-//    ListAdapter<Card, CardsListAdapter.ItemViewHolder>(DiffCallback) {
-
 
 class InnerRecyclerViewAdapterSearchByParameters(
     private var data: List<ButtonsForSearching>,
@@ -64,30 +57,6 @@ class InnerRecyclerViewAdapterSearchByParameters(
         notifyDataSetChanged()
     }
 
-    private fun getListOfCurrentParameters(data: List<ButtonsForSearching>): List<String> {
-        val listLaundry = DataForSearchByParameters.getListForLaundrySearch().map { it.name }
-        val listDrying = DataForSearchByParameters.getListForDryingSearch().map { it.name }
-        val listIroning = DataForSearchByParameters.getListForIroningSearch().map { it.name }
-        val dataOnlyNames = data.map { it.name }
-        Log.d("search", "data only names = $dataOnlyNames")
-
-        //val selectedItems = adapter.data.map { it.symbolsByCategory }.flatten()
-        //
-        //                     .filter { it.selected }.toList()
-
-        return when (dataOnlyNames) {
-            listLaundry -> {
-                listLaundry
-            }
-            listDrying -> {
-                listDrying
-            }
-            listIroning -> {
-                listIroning
-            }
-            else -> emptyList()
-        }
-    }
 
     override fun getItemCount() = data.size
 

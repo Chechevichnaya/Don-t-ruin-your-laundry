@@ -14,9 +14,11 @@
         <entry key="app/src/main/res/drawable/round_button.xml" value="0.19" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.17962962962962964" />
         <entry key="app/src/main/res/layout/array_adapter_item.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/buttons_search_by_parameters.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/card_item.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/cards.xml" value="0.23229166666666667" />
-        <entry key="app/src/main/res/layout/fragment_add_new_card.xml" value="0.32303370786516855" />
+        <entry key="app/src/main/res/layout/first_layout.xml" value="0.23125" />
+        <entry key="app/src/main/res/layout/fragment_add_new_card.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_add_symbol_to_card.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_add_symbold_to_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_add_symbols_to_card.xml" value="0.23229166666666667" />
@@ -31,12 +33,16 @@
         <entry key="app/src/main/res/layout/image_buttom_item.xml" value="0.33" />
         <entry key="app/src/main/res/layout/inner_recycler_item_insearch_by_parameters.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/item_button_add_symbol_to_card.xml" value="0.23229166666666667" />
-        <entry key="app/src/main/res/layout/recycler_item_search_by_parameters.xml" value="0.23125" />
+        <entry key="app/src/main/res/layout/recycler_item_search_by_parameters.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/search_by_parameters_title.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/second_layout.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/symbol_guide_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/symbol_guide_head_item.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/symbol_guide_item.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/symbol_guide_symbols_item.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/symbol_guide_symbols_recyclerview.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/title_search_by_parameters.xml" value="0.23125" />
+        <entry key="app/src/main/res/layout/title_viewholder.xml" value="0.23125" />
         <entry key="app/src/main/res/menu/add_symbol.xml" value="0.23125" />
         <entry key="app/src/main/res/menu/menu_add_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/menu/menu_add_symbol.xml" value="0.23229166666666667" />

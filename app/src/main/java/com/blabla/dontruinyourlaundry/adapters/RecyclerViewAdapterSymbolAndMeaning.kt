@@ -1,6 +1,5 @@
 package com.blabla.dontruinyourlaundry.adapters
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +9,13 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.data.SymbolForWashing
+import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
 
-class RecyclerViewAdapterButton(
-    private var data: List<SymbolForWashing>
+class RecyclerViewAdapterSymbolAndMeaning(
+    private var data: List<SymbolForWashing>,
+    private var typeFrom: TypeOfRecyclerView
 ) :
-    RecyclerView.Adapter<RecyclerViewAdapterButton.ItemViewHolder>() {
+    RecyclerView.Adapter<RecyclerViewAdapterSymbolAndMeaning.ItemViewHolder>() {
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val imageSymbol: ImageButton = view.findViewById(R.id.item_button)
@@ -37,13 +38,18 @@ class RecyclerViewAdapterButton(
         if (position != data.size) {
             holder.imageSymbol.background.setTint(context.resources.getColor(R.color.lilac_200))
         }
-        Log.e("wtf", "item = ${item.meaningOfSymbol}")
         holder.imageSymbol.setImageResource(item.pictureId)
         holder.meaningSymbol.text = item.meaningOfSymbol
-        holder.imageSymbol.setOnClickListener {
-            holder.imageSymbol.findNavController()
-                .navigate(R.id.action_addNewCard_to_addSymbolToCard)
+        when (typeFrom) {
+            TypeOfRecyclerView.CARDDETAILFRAGMENT -> {holder.imageSymbol.isEnabled = false }
+            else -> {
+//                holder.imageSymbol.setOnClickListener {
+//                    holder.imageSymbol.findNavController()
+//                        .navigate(R.id.action_addNewCard_to_addSymbolToCard)
+//                }
+            }
         }
+
     }
 
     override fun getItemCount() = data.size

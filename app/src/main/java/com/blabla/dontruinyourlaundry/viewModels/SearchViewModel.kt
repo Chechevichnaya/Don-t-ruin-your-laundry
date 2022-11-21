@@ -1,4 +1,4 @@
-package com.blabla.dontruinyourlaundry.data
+package com.blabla.dontruinyourlaundry.viewModels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.asLiveData
 import com.blabla.dontruinyourlaundry.RoomStuff.Card
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsDao
-import com.blabla.dontruinyourlaundry.entity.Category
 
 class SearchViewModel(private val cardsDao: CardsDao): ViewModel() {
 

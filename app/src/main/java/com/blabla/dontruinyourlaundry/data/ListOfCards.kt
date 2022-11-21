@@ -2,13 +2,14 @@ package com.blabla.dontruinyourlaundry.data
 
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.RoomStuff.Card
+import com.blabla.dontruinyourlaundry.entity.SymbolGuide
 
 object ListOfCards {
     fun loadListOfCards(): MutableList<Card> {
         return mutableListOf()
     }
 
-    fun loadListOfAddedSymbols(): MutableList<SymbolForWashing> {
+    fun loadListWithOneLastSymbol(): MutableList<SymbolForWashing> {
         val addSymbol = R.drawable.plus
         return mutableListOf(SymbolForWashing(addSymbol, "Добавить символы для стирки"))
     }

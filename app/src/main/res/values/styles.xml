@@ -3,4 +3,13 @@
     <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/lilac_700</item>
     </style>
+
+    <style name="Widget.App.ButtonStyle" parent="Widget.MaterialComponents.Button">
+        <item name="materialThemeOverlay">@style/Lilac200Button</item>
+    </style>
+
+    <style name="Lilac200Button">
+        <item name="colorPrimary">@color/lilac_200</item>
+    </style>
 </resources>
+

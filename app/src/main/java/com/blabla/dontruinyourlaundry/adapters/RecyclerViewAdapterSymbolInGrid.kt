@@ -1,6 +1,7 @@
 package com.blabla.dontruinyourlaundry.adapters
 
 import android.app.AlertDialog
+import android.app.ProgressDialog.show
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,14 +42,25 @@ class RecyclerViewAdapterSymbolInGrid(
         val symbolItem= data[position]
         holder.symbol.setImageResource(symbolItem.pictureId)
 
-//        val listOfChosenSymbols: MutableList<SymbolForWashing> = mutableListOf()
-
         when (type) {
             TypeOfRecyclerView.SYMBOLGUIDEFRAGMENT -> holder.symbol.setOnClickListener {
-                AlertDialog.Builder(holder.symbol.context, R.style.AlertDialogTheme).apply {
+                val builder = AlertDialog.Builder(holder.symbol.context, R.style.AlertDialogTheme).apply {
                     setMessage(symbolItem.meaningOfSymbol)
                     setPositiveButton("Ok") { _, _ -> }
                     show()
+
+                    //dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(Color.BLUE)
+                    //val builder: AlertDialog.Builder = AlertDialog.Builder(this)
+                    //val dialog: AlertDialog = builder.setTitle("SomeText")
+                    //           .setMessage("SomeMessage")
+                    //           .setPositiveButton("OK") {
+                    //               dialog, which -> dialog.dismiss()
+                    //           }
+                    //           .setNegativeButton("Cancel") { dialog, which -> dialog.dismiss()
+                    //
+                    //           }
+                    //           .create()
+                    //dialog.show()
                 }
             }
             TypeOfRecyclerView.ADDSYMBOLFRAGMENT -> {
@@ -56,14 +68,9 @@ class RecyclerViewAdapterSymbolInGrid(
                 holder.symbol.setOnClickListener {
                     bgColor = if (symbolItem.selected) {
                         R.color.lilac_200
-                //                        if (listOfChosenSymbols.contains(symbolItem)) {
-                //                            listOfChosenSymbols.remove(symbolItem)
-                //                        }
                     } else {
                         R.color.lilac_700
-                //                        if (!listOfChosenSymbols.contains(symbolItem)){
-                //                            listOfChosenSymbols.add(symbolItem)
-                //                        }
+
                     }
                     holder.symbol.setBackgroundColor(
                         holder.symbol.context.resources.getColor(

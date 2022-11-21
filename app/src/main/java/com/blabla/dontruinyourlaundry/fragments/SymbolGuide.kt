@@ -34,6 +34,7 @@ class SymbolGuide : Fragment() {
         binding.toolbarSymbolGuide.navigationIcon = view.context.getDrawable(R.drawable.ic_arrow_back)
         binding.toolbarSymbolGuide.setNavigationOnClickListener {
             findNavController().popBackStack() }
+
         val menuHost: MenuHost = binding.toolbarSymbolGuide
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {

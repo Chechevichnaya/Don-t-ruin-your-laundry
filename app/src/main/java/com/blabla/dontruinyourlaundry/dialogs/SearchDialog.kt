@@ -34,6 +34,12 @@ class SearchDialog : DialogFragment() {
             .setNeutralButton("Отмена") { _, _ -> findNavController().popBackStack() }
         val dialog = builder.create()
         dialog.show()
+
+        //set color to buttons
+        val colorButton = resources.getColor(R.color.lilac_700)
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
+        dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(colorButton)
+
         return dialog
 
     }

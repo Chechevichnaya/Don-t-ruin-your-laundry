@@ -5,11 +5,28 @@
     android:id="@+id/nav_graph"
     app:startDestination="@id/kindsOfThingsForLaundry">
 
+    <dialog
+        android:id="@+id/help_with_app"
+        android:name="com.blabla.dontruinyourlaundry.dialogs.HowToUseAppDialog"
+        android:label="fragment_how_to_use_app_dialog"
+        tools:layout="@layout/fragment_how_to_use_app_dialog" />
+    <dialog
+        android:id="@+id/searchDialog"
+        android:name="com.blabla.dontruinyourlaundry.dialogs.SearchDialog"
+        android:label="fragment_search_dialog"
+        tools:layout="@layout/fragment_search_dialog">
+        <action
+            android:id="@+id/action_searchDialog_to_searchFragment"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_searchDialog_to_searchByParametersFragment"
+            app:destination="@id/searchByParametersFragment" />
+    </dialog>
     <fragment
         android:id="@+id/kindsOfThingsForLaundry"
         android:name="com.blabla.dontruinyourlaundry.KindsOfThingsForLaundry"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_kinds_of_things_for_laundry" >
+        tools:layout="@layout/fragment_kinds_of_things_for_laundry">
         <action
             android:id="@+id/action_kindsOfThingsForLaundry_to_simbolGuide"
             app:destination="@id/simbol_guide" />
@@ -31,23 +48,18 @@
         android:name="com.blabla.dontruinyourlaundry.fragments.SymbolGuide"
         android:label="@string/symbol_guide"
         tools:layout="@layout/fragment_simbol_guide" />
-    <dialog
-        android:id="@+id/help_with_app"
-        android:name="com.blabla.dontruinyourlaundry.dialogs.HowToUseAppDialog"
-        android:label="fragment_how_to_use_app_dialog"
-        tools:layout="@layout/fragment_how_to_use_app_dialog" />
     <fragment
         android:id="@+id/clothingCardsFragment"
         android:name="com.blabla.dontruinyourlaundry.fragments.ClothingCardsFragment"
         android:label="fragment_clothing_cards"
-        tools:layout="@layout/fragment_clothing_cards" >
+        tools:layout="@layout/fragment_clothing_cards">
 
     </fragment>
     <fragment
         android:id="@+id/addNewCard"
         android:name="com.blabla.dontruinyourlaundry.fragments.AddNewCardFragment"
-        android:label="fragment_add_new_card"
-        tools:layout="@layout/fragment_add_new_card" >
+        android:label="{title}"
+        tools:layout="@layout/fragment_add_new_card">
         <action
             android:id="@+id/action_addNewCard_to_clothingCardsFragment"
             app:destination="@id/clothingCardsFragment" />
@@ -55,8 +67,18 @@
             android:id="@+id/action_addNewCard_to_addSymbolToCard"
             app:destination="@id/addSymbolToCard" />
         <argument
+            android:name="title"
+            android:defaultValue="DEFAULT"
+            app:argType="string" />
+        <argument
+            android:name="item_id"
+            android:defaultValue="-1L"
+            app:argType="long" />
+        <argument
             android:name="currentCategory"
-            app:argType="com.blabla.dontruinyourlaundry.entity.Category" />
+            android:defaultValue="@null"
+            app:argType="com.blabla.dontruinyourlaundry.entity.Category"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/addSymbolToCard"
@@ -67,35 +89,23 @@
         android:id="@+id/cardDetailFragment"
         android:name="com.blabla.dontruinyourlaundry.fragments.CardDetailFragment"
         android:label="fragment_card_detail"
-        tools:layout="@layout/fragment_card_detail" >
-        <argument
-            android:name="id"
-            app:argType="long" />
+        tools:layout="@layout/fragment_card_detail">
         <action
             android:id="@+id/action_cardDetailFragment_to_addNewCard"
             app:destination="@id/addNewCard" />
+        <argument
+            android:name="id"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
         android:name="com.blabla.dontruinyourlaundry.fragments.SearchByNameFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" >
+        tools:layout="@layout/fragment_search">
         <action
             android:id="@+id/action_searchFragment_to_cardDetailFragment"
             app:destination="@id/cardDetailFragment" />
     </fragment>
-    <dialog
-        android:id="@+id/searchDialog"
-        android:name="com.blabla.dontruinyourlaundry.dialogs.SearchDialog"
-        android:label="fragment_search_dialog"
-        tools:layout="@layout/fragment_search_dialog" >
-        <action
-            android:id="@+id/action_searchDialog_to_searchFragment"
-            app:destination="@id/searchFragment" />
-        <action
-            android:id="@+id/action_searchDialog_to_searchByParametersFragment"
-            app:destination="@id/searchByParametersFragment" />
-    </dialog>
     <fragment
         android:id="@+id/searchByParametersFragment"
         android:name="com.blabla.dontruinyourlaundry.fragments.SearchByParametersFragment"

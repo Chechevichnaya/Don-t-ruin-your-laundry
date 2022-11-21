@@ -12,8 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.KindsOfThingsForLaundryDirections
 import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
 import com.blabla.dontruinyourlaundry.adapters.CardsListAdapter
-import com.blabla.dontruinyourlaundry.data.ClothingCardsFactory
-import com.blabla.dontruinyourlaundry.data.ClothingCardsViewModel
+import com.blabla.dontruinyourlaundry.viewModels.ClothingCardsFactory
+import com.blabla.dontruinyourlaundry.viewModels.ClothingCardsViewModel
 import com.blabla.dontruinyourlaundry.databinding.FragmentClothingCardsBinding
 import com.blabla.dontruinyourlaundry.entity.Category
 
@@ -50,8 +50,8 @@ class ClothingCardsFragment : Fragment() {
         val adapter = CardsListAdapter { card ->
             val action = KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToCardDetailFragment(card.id)
             this.findNavController().navigate(action)
-
         }
+
         binding.recyclerViewAddedCards.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.recyclerViewAddedCards.adapter = adapter
@@ -63,47 +63,6 @@ class ClothingCardsFragment : Fragment() {
                 binding.imageTypeOfCloth.setImageResource(image)
             } else adapter.submitList(cards)
         }
-
-//        val answer = viewModel.checkDBIsEmpty(category)
-//        if (viewModel.checkDBIsEmpty(category)) {
-//            //set full screen picture of cloth type
-//            view.findViewById<ImageView>(R.id.image_type_of_cloth).setImageResource(image)
-//            Log.d("cardByCategory", "category - $category, DB is empty? $answer ")
-//        } else {
-//            Log.d("cardByCategory", "category - $category, DB is empty? $answer ")
-////            //set adapter for recyclerView
-////            val recyclerView = binding.recyclerViewAddedCards
-////            recyclerView.layoutManager =
-////                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-////            //getting data(cards) for adapter and making it just List, not LiveData List
-////            val dataForAdapter = viewModel.allCardsByCategory(category)?.value
-////            val addedCardAdapter = dataForAdapter?.let { RecyclerViewAdapterCards(it) }
-////            recyclerView.adapter = addedCardAdapter
-//        }
-
-
-//        arguments?.takeIf { it.containsKey(CATEGORY) }?.apply {
-//            val category = requireArguments().getSerializable(CATEGORY)
-//            //check if there is no entries in table by certain category
-//            if (viewModel.checkTableIsEmpty()) {
-//
-//
-//                Category.valueOf(category).imageResId
-//                binding.imageTypeOfCloth.setImageResource(category)
-//
-//                category?.let { it: String ->
-//                    Category.valueOf(
-//                        it
-//                    ).imageResId
-//                }?.let {
-//                    binding.imageTypeOfCloth.setImageResource(it)
-//                }
-//
-//
-//            }
-//        }
-
-
     }
 }
 
