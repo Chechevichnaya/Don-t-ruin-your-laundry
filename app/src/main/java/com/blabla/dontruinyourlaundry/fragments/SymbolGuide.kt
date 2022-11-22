@@ -31,9 +31,11 @@ class SymbolGuide : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.toolbarSymbolGuide.title = "Гид по символам"
-        binding.toolbarSymbolGuide.navigationIcon = view.context.getDrawable(R.drawable.ic_arrow_back)
+        binding.toolbarSymbolGuide.navigationIcon =
+            view.context.getDrawable(R.drawable.ic_arrow_back)
         binding.toolbarSymbolGuide.setNavigationOnClickListener {
-            findNavController().popBackStack() }
+            findNavController().popBackStack()
+        }
 
         val menuHost: MenuHost = binding.toolbarSymbolGuide
         menuHost.addMenuProvider(object : MenuProvider {
@@ -46,11 +48,16 @@ class SymbolGuide : Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        val listOfCardForSymbolGuide = ListOfCards.loadListOfSymbolGuide()
+        val listOfCardForSymbolGuide = context?.let { ListOfCards.loadListOfSymbolGuide(it) }
         val recyclerViewSymbolGuide = binding.recyclerViewSymbolGuide
         recyclerViewSymbolGuide.layoutManager =
             LinearLayoutManager(view.context, RecyclerView.VERTICAL, false)
         recyclerViewSymbolGuide.adapter =
-            RecyclerViewAdapterSymbolForWashing(listOfCardForSymbolGuide, TypeOfRecyclerView.SYMBOLGUIDEFRAGMENT)
+            listOfCardForSymbolGuide?.let { list ->
+                RecyclerViewAdapterSymbolForWashing(
+                    list,
+                    TypeOfRecyclerView.SYMBOLGUIDEFRAGMENT
+                )
+            }
     }
 }

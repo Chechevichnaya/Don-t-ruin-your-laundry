@@ -5,11 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.lifecycle.LiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.RoomStuff.Card
-import com.blabla.dontruinyourlaundry.entity.Category
+import com.blabla.dontruinyourlaundry.roomStuff.Card
+import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 
 
 class RecyclerViewAdapterCards(private var data: List<Card>) :
@@ -31,24 +30,27 @@ class RecyclerViewAdapterCards(private var data: List<Card>) :
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = data[position]
         holder.nameClothText.text = item.name
-        val image = when (item.category) {
-            Category.CLOTH -> {
-                Category.CLOTH.imageResId
-            }
-            Category.BAD_SHEETS -> {
-                Category.BAD_SHEETS.imageResId
-            }
-            Category.BATH -> {
-                Category.BATH.imageResId
-            }
-            Category.KITCHEN -> {
-                Category.KITCHEN.imageResId
-            }
-            Category.REST -> {
-                Category.REST.imageResId
-            }
+        val image = CategoryEnum.values().find { it == item.category }?.getResIcon()
+//        val image = when (item.category) {
+//            CategoryDBO.CLOTH -> {
+//                CategoryDBO.CLOTH.getResIcon()
+//            }
+//            CategoryDBO.BAD_SHEETS -> {
+//                CategoryDBO.BAD_SHEETS.getResIcon()
+//            }
+//            CategoryDBO.BATH -> {
+//                CategoryDBO.BATH.getResIcon()
+//            }
+//            CategoryDBO.KITCHEN -> {
+//                CategoryDBO.KITCHEN.getResIcon()
+//            }
+//            CategoryDBO.REST -> {
+//                CategoryDBO.REST.getResIcon()
+//            }
+//        }
+        if (image != null) {
+            holder.imageClothCards.setImageResource(image)
         }
-        holder.imageClothCards.setImageResource(image)
 
 
     }

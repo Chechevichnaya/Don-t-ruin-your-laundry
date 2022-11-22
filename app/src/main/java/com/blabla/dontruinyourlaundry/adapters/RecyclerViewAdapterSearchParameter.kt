@@ -112,8 +112,6 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
                         nameTheSame
                     } else if (oldItem is SearchScreenItem.SearchParameter && newItem is SearchScreenItem.SearchParameter) {
                     val allArgumentsTheSame = newItem == oldItem
-//                        val allArgumentsTheSame =
-//                            newItem.name == oldItem.name && newItem.selected == oldItem.selected && newItem.titleName == oldItem.titleName
                         allArgumentsTheSame
                     } else false
                 Log.d("clicked", "content the same - $result")

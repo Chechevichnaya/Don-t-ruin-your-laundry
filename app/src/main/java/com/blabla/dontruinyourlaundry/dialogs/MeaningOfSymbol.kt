@@ -8,7 +8,7 @@ import com.blabla.dontruinyourlaundry.data.ListOfCards
 
 class MeaningOfSymbol: DialogFragment() {
 
-    val data = ListOfCards.loadListOfSymbolGuide()
+   // val data = context?.let { ListOfCards.loadListOfSymbolGuide(it) }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())

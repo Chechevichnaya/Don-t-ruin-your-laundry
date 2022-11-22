@@ -9,13 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blabla.dontruinyourlaundry.KindsOfThingsForLaundryDirections
-import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
 import com.blabla.dontruinyourlaundry.adapters.CardsListAdapter
-import com.blabla.dontruinyourlaundry.viewModels.ClothingCardsFactory
-import com.blabla.dontruinyourlaundry.viewModels.ClothingCardsViewModel
 import com.blabla.dontruinyourlaundry.databinding.FragmentClothingCardsBinding
 import com.blabla.dontruinyourlaundry.entity.Category
+import com.blabla.dontruinyourlaundry.entity.CategoryEnum
+import com.blabla.dontruinyourlaundry.roomStuff.CardsApplication
+import com.blabla.dontruinyourlaundry.viewModels.ClothingCardsFactory
+import com.blabla.dontruinyourlaundry.viewModels.ClothingCardsViewModel
 
 class ClothingCardsFragment : Fragment() {
 
@@ -43,8 +43,8 @@ class ClothingCardsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //get enum Category from Bundle
-        val category = (requireArguments().getSerializable(CATEGORY_NAME)) as Category
-        val image = category.imageResId
+        val category = (requireArguments().getSerializable(CATEGORY_NAME)) as CategoryEnum
+        val image = category.getResIcon()
 
 
         val adapter = CardsListAdapter { card ->

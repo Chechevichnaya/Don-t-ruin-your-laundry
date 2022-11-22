@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
+import com.blabla.dontruinyourlaundry.roomStuff.CardsApplication
 import com.blabla.dontruinyourlaundry.adapters.CardsListAdapter
 import com.blabla.dontruinyourlaundry.viewModels.SearchFactory
 import com.blabla.dontruinyourlaundry.viewModels.SearchViewModel

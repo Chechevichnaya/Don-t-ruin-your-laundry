@@ -31,7 +31,7 @@ class RecyclerViewAdapterSymbolForWashing(var data: List<SymbolGuide>, val type:
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val item = data[position]
-        holder.head.text = item.headName
+        holder.head.text = item.headName.nameId
         holder.recyclerViewSymbols.layoutManager =
             GridLayoutManager(holder.recyclerViewSymbols.context,
                 5,

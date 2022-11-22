@@ -1,4 +1,4 @@
-package com.blabla.dontruinyourlaundry
+package com.blabla.dontruinyourlaundry.fragments
 
 import android.os.Bundle
 import android.view.*
@@ -9,9 +9,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
+import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.databinding.FragmentKindsOfThingsForLaundryBinding
-import com.blabla.dontruinyourlaundry.entity.Category
-import com.blabla.dontruinyourlaundry.fragments.ClothingCardsFragment
+import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 import com.google.android.material.tabs.TabLayoutMediator
 
 
@@ -61,31 +61,32 @@ class KindsOfThingsForLaundry : Fragment() {
         binding.fab.setOnClickListener {
             //getting category
             val currentCategory = when (binding.pager.currentItem) {
-                0 -> Category.CLOTH
-                1 -> Category.BAD_SHEETS
-                2 -> Category.BATH
-                3 -> Category.KITCHEN
-                4 -> Category.REST
-                else -> Category.CLOTH
+                0 -> CategoryEnum.CLOTH
+                1 -> CategoryEnum.BAD_SHEETS
+                2 -> CategoryEnum.BATH
+                3 -> CategoryEnum.KITCHEN
+                4 -> CategoryEnum.REST
+                else -> CategoryEnum.CLOTH
             }
             val action =
                 KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToAddNewCard(
                     title = getString(R.string.add_card_fragment),
-                    currentCategory = currentCategory
+                    currentCategory = context?.let { context -> currentCategory.toCategory(context) }
                 )
             view.findNavController().navigate(action)
         }
 
         binding.pager.adapter = LandryPagerAdapter(this)
         TabLayoutMediator(binding.tabs, binding.pager) { tab, position ->
-            tab.text = getString(Category.values()[position].nameId)
+//            tab.text = getString(Category.values()[position].nameId)
+            tab.text = context?.let { CategoryEnum.values()[position].getName(it) }
         }.attach()
     }
 }
 
 class LandryPagerAdapter(val fragment: Fragment) : FragmentStateAdapter(fragment) {
 
-    override fun getItemCount(): Int = Category.values().size
+    override fun getItemCount(): Int = CategoryEnum.values().size
 
     override fun createFragment(position: Int): Fragment {
 
@@ -93,7 +94,7 @@ class LandryPagerAdapter(val fragment: Fragment) : FragmentStateAdapter(fragment
         fragment.arguments = Bundle().apply {
             putSerializable(
                 ClothingCardsFragment.CATEGORY_NAME,
-                Category.values()[position]
+                CategoryEnum.values()[position]
             )
 //            putInt(
 //                ClothingCardsFragment.CATEGORY,

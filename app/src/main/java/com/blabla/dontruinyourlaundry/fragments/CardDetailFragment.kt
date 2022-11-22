@@ -14,11 +14,12 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.RoomStuff.Card
-import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
+import com.blabla.dontruinyourlaundry.roomStuff.Card
+import com.blabla.dontruinyourlaundry.roomStuff.CardsApplication
 import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSymbolAndMeaning
 import com.blabla.dontruinyourlaundry.data.*
 import com.blabla.dontruinyourlaundry.databinding.FragmentCardDetailBinding
+import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
 import com.blabla.dontruinyourlaundry.viewModels.CardDetailFactory
 import com.blabla.dontruinyourlaundry.viewModels.CardDetailViewModel
@@ -87,7 +88,11 @@ class CardDetailFragment : Fragment() {
 
     private fun bind(card: Card) {
         if (card.picture == null) {
-            binding.itemImage.setImageResource(ImageByCategory().getImageByCategory(card.category))
+//            binding.itemImage.setImageResource(ImageByCategory().getImageByCategory(card.category))
+            val imageRes = CategoryEnum.values().find { it == card.category }?.getResIcon()
+            if (imageRes != null) {
+                binding.itemImage.setImageResource(imageRes)
+            }
         } else {
             Glide.with(binding.itemImage.context)
                 .load(card.picture.toUri())
@@ -101,8 +106,13 @@ class CardDetailFragment : Fragment() {
             binding.addedSymbolsRecyclerView.layoutManager =
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             val list = card.listOfSymbols.listOfSymbols
+            val listSymbolForWashing =
+                list.map { context?.let { item -> it.toSymbolForWashing(item) } }
             binding.addedSymbolsRecyclerView.adapter =
-                RecyclerViewAdapterSymbolAndMeaning(list, TypeOfRecyclerView.CARDDETAILFRAGMENT)
+                RecyclerViewAdapterSymbolAndMeaning(
+                    listSymbolForWashing as List<SymbolForWashing>,
+                    TypeOfRecyclerView.CARDDETAILFRAGMENT
+                )
             editItem.setOnClickListener { editCard() }
         }
     }

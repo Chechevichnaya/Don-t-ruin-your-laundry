@@ -1,4 +1,4 @@
-package com.blabla.dontruinyourlaundry.RoomStuff
+package com.blabla.dontruinyourlaundry.roomStuff
 
 import android.content.Context
 import androidx.room.Database

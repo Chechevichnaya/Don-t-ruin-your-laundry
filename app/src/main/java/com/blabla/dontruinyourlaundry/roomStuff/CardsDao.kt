@@ -1,9 +1,7 @@
-package com.blabla.dontruinyourlaundry.RoomStuff
+package com.blabla.dontruinyourlaundry.roomStuff
 
-import android.content.ClipData
 import androidx.room.*
-import com.blabla.dontruinyourlaundry.data.SymbolForWashing
-import com.blabla.dontruinyourlaundry.entity.Category
+import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -25,7 +23,7 @@ interface CardsDao {
 
 
     @Query("SELECT * FROM card WHERE category = :category ORDER BY name ASC")
-    fun getCardsByCategory(category: Category): Flow<List<Card>>
+    fun getCardsByCategory(category: CategoryEnum): Flow<List<Card>>
 
     @Query("SELECT * FROM card WHERE name = :name ORDER BY name ASC")
     fun getCardsByName(name:String):Flow<List<Card>>
@@ -37,7 +35,7 @@ interface CardsDao {
     fun getOneCard(id: Long): Flow<Card>
 
     @Query("SELECT * FROM card WHERE category IN (:categories) ORDER BY name ASC")
-    fun searchByParameterCategory(categories: List<Category>): Flow<List<Card>>
+    fun searchByParameterCategory(categories: List<CategoryEnum>): Flow<List<Card>>
 
 //    @Query("SELECT * FROM card WHERE list_of_symbols IN (:symbols) ORDER BY name ASC")
 //    fun searchByParameterSymbols(symbols: List<SymbolForWashing>): Flow <List<Card>>

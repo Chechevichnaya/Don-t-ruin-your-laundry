@@ -3,11 +3,12 @@ package com.blabla.dontruinyourlaundry.viewModels
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.*
-import com.blabla.dontruinyourlaundry.RoomStuff.Card
-import com.blabla.dontruinyourlaundry.RoomStuff.CardsDao
+import com.blabla.dontruinyourlaundry.roomStuff.Card
+import com.blabla.dontruinyourlaundry.roomStuff.CardsDao
 import com.blabla.dontruinyourlaundry.data.ListOfSymbolsForDataBase
 import com.blabla.dontruinyourlaundry.data.SymbolForWashing
 import com.blabla.dontruinyourlaundry.entity.Category
+import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 import kotlinx.coroutines.launch
 
 class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
@@ -21,12 +22,12 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
     private val _listOfSymbols = MutableLiveData<MutableList<SymbolForWashing>>()
     val listOfSymbols: LiveData<MutableList<SymbolForWashing>> = _listOfSymbols
 
-    fun deleteInListSymbolAdd() {
-        if (listOfSymbols.value != null) {
-            listOfSymbols.value!!.removeAt(listOfSymbols.value!!.size - 1)
-        }
-
-    }
+//    fun deleteInListSymbolAdd() {
+//        if (listOfSymbols.value != null) {
+//            listOfSymbols.value!!.removeAt(listOfSymbols.value!!.size - 1)
+//        }
+//
+//    }
 
     fun updateCard(card: Card) {
         viewModelScope.launch {
@@ -39,7 +40,7 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
         cardName: String,
         cardPicture: String,
         cardSymbols: ListOfSymbolsForDataBase,
-        cardCategory: Category
+        cardCategory: CategoryEnum
     ) {
         val updatedCard = Card(cardId, cardName, cardPicture, cardSymbols, cardCategory)
         updateCard(updatedCard)
@@ -64,6 +65,8 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
         }
         _listOfSymbols.value = newList
     }
+
+
 
 //    fun deleteSelectedSymbols() {
 //        Log.d("test", "list before fun deleteSelectedSymbols() ${_listOfSymbols.value.toString()} ")

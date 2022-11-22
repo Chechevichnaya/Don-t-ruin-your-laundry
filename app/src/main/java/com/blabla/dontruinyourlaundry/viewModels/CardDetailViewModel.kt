@@ -1,8 +1,8 @@
 package com.blabla.dontruinyourlaundry.viewModels
 
 import androidx.lifecycle.*
-import com.blabla.dontruinyourlaundry.RoomStuff.Card
-import com.blabla.dontruinyourlaundry.RoomStuff.CardsDao
+import com.blabla.dontruinyourlaundry.roomStuff.Card
+import com.blabla.dontruinyourlaundry.roomStuff.CardsDao
 import kotlinx.coroutines.launch
 
 class CardDetailViewModel(private val cardsDao: CardsDao) : ViewModel() {

@@ -16,6 +16,11 @@ class ChooseSymbolsViewModel: ViewModel() {
         _selectedSymbols.value = list
     }
 
+
+
+
+
+
     fun addAmount(){
         _amountOfSymbols.value = _amountOfSymbols.value?.plus(1)
     }

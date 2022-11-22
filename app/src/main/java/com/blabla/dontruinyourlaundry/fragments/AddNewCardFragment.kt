@@ -28,8 +28,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.BuildConfig
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.RoomStuff.Card
-import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
+import com.blabla.dontruinyourlaundry.roomStuff.Card
+import com.blabla.dontruinyourlaundry.roomStuff.CardsApplication
 import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSymbolAndMeaning
 import com.blabla.dontruinyourlaundry.data.*
 import com.blabla.dontruinyourlaundry.databinding.FragmentAddNewCardBinding
@@ -84,39 +84,35 @@ class AddNewCardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("test", " onViewCreated()")
-
-        binding.backround.setOnClickListener {
+        binding.addMoreSymbolButton.setOnClickListener {
             view.findNavController().navigate(R.id.action_addNewCard_to_addSymbolToCard)
         }
 
+        //get argument
         val cardId = args.itemId
         //check is it completely new card or editing existing card
         if (cardId > 0) {
             showCardInfo(cardId)
         }
-
         //creating a new folder, if it is not created yet, where the last chosen photo will be kept for DB
         val folderForImagesInDB = createNewFolderInFiles()
-
         //tracking updating uri to change photo in imageView
         observeUriToSetPhoto()
-
         observeListOfSymbols()
-
-        //set upper menu
-        setTitleInUpperMenu()
-
-
-
-        binding.toolbarAddCard.navigationIcon =
-            view.context.getDrawable(R.drawable.ic_baseline_close_24)
-        //go back on the first fragment without adding info in database
-        binding.toolbarAddCard.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
-
+        photoHandling()
+        setUpperMenu(view)
         //set menu item
+        menuItemsHandling(folderForImagesInDB, cardId)
+    }
+
+    private fun photoHandling() {
+        val photo = binding.itemImage
+        photo.setOnClickListener {
+            showDialog()
+        }
+    }
+
+    private fun menuItemsHandling(folderForImagesInDB: File?, cardId: Long) {
         val menuHost: MenuHost = binding.toolbarAddCard
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -131,39 +127,39 @@ class AddNewCardFragment : Fragment() {
                             updateItem(newCard)
                             true
                         } else {
-//                            val newCard = saveInfo(folderForImagesInDB)
-//                            if (viewModel.uri.value != null) {
-//                                //creating file in new folder with unique name
-//                                val fileForImages =
-//                                    File.createTempFile("photoforDB", ".jpg", folderForImagesInDB)
-//                                        .apply {
-//                                            createNewFile()
-//                                        }
-//                                fileForImages.outputStream().use { stream ->
-//                                    requireActivity().contentResolver.openInputStream(viewModel.uri.value!!)
-//                                        ?.copyTo(stream)
-//                                }
-//                                imageUri = fileForImages.toUri().toString()
-//                            }
-//                            //collecting info for card
-//                            val nameOfCloth =
-//                                binding.nameOfCloth.text.toString().trim()
-//                                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-//                            val category = args.currentCategory
-//                            viewModel.deleteInListSymbolAdd()
-//                            val listOfSymbols = viewModel.listOfSymbols.value?.let { list ->
-//                                ListOfSymbolsForDataBase(
-//                                    list.toList()
-//                                )
-//                            }
-//                            if (category != null) {
-//                                val card = Card(
-//                                    id = 0,
-//                                    name = nameOfCloth,
-//                                    picture = imageUri,
-//                                    listOfSymbols = listOfSymbols!!,
-//                                    category = category
-//                                )
+                            //                            val newCard = saveInfo(folderForImagesInDB)
+                            //                            if (viewModel.uri.value != null) {
+                            //                                //creating file in new folder with unique name
+                            //                                val fileForImages =
+                            //                                    File.createTempFile("photoforDB", ".jpg", folderForImagesInDB)
+                            //                                        .apply {
+                            //                                            createNewFile()
+                            //                                        }
+                            //                                fileForImages.outputStream().use { stream ->
+                            //                                    requireActivity().contentResolver.openInputStream(viewModel.uri.value!!)
+                            //                                        ?.copyTo(stream)
+                            //                                }
+                            //                                imageUri = fileForImages.toUri().toString()
+                            //                            }
+                            //                            //collecting info for card
+                            //                            val nameOfCloth =
+                            //                                binding.nameOfCloth.text.toString().trim()
+                            //                                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+                            //                            val category = args.currentCategory
+                            //                            viewModel.deleteInListSymbolAdd()
+                            //                            val listOfSymbols = viewModel.listOfSymbols.value?.let { list ->
+                            //                                ListOfSymbolsForDataBase(
+                            //                                    list.toList()
+                            //                                )
+                            //                            }
+                            //                            if (category != null) {
+                            //                                val card = Card(
+                            //                                    id = 0,
+                            //                                    name = nameOfCloth,
+                            //                                    picture = imageUri,
+                            //                                    listOfSymbols = listOfSymbols!!,
+                            //                                    category = category
+                            //                                )
 
                             //adding info of card to database
                             viewModel.addNewCard(newCard)
@@ -176,10 +172,19 @@ class AddNewCardFragment : Fragment() {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
 
-        val photo = binding.itemImage
-        photo.setOnClickListener {
-            showDialog()
+    private fun setUpperMenu(view: View) {
+        //set upper menu
+        setTitleInUpperMenu()
+
+
+
+        binding.toolbarAddCard.navigationIcon =
+            view.context.getDrawable(R.drawable.ic_baseline_close_24)
+        //go back on the first fragment without adding info in database
+        binding.toolbarAddCard.setNavigationOnClickListener {
+            findNavController().popBackStack()
         }
     }
 
@@ -187,7 +192,7 @@ class AddNewCardFragment : Fragment() {
         //set adapter for recyclerview with added symbols
         binding.addedSymbolsRecyclerView.layoutManager =
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        //get list of added symbols. There is always at least one symbol (add symbol)
+        //get list of added symbols
         viewModel.listOfSymbols.observe(viewLifecycleOwner) { symbols ->
             binding.addedSymbolsRecyclerView.adapter =
                 RecyclerViewAdapterSymbolAndMeaning(symbols, TypeOfRecyclerView.ADDSYMBOLFRAGMENT)
@@ -273,28 +278,32 @@ class AddNewCardFragment : Fragment() {
     }
 
     private fun fillCard(newCard: Card?): Card? {
-        var newCard1 = newCard
+        var newCard = newCard
         val nameOfCloth =
             binding.nameOfCloth.text.toString().trim()
                 .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-        val category = args.currentCategory
-        viewModel.deleteInListSymbolAdd()
+        val categoryFromArgs = args.currentCategory
+        //viewModel.deleteInListSymbolAdd()
+
         val listOfSymbols = viewModel.listOfSymbols.value?.let { list ->
-            ListOfSymbolsForDataBase(
-                list.toList()
-            )
+            val listDBO = list.map { item -> item.toSymbolForWashingDBO(context) }
+                ListOfSymbolsForDataBase(listDBO as List<SymbolForWashingDBO>)
         }
 
-        if (category != null) {
-            newCard1 = Card(
-                id = 0,
-                name = nameOfCloth,
-                picture = imageUri,
-                listOfSymbols = listOfSymbols!!,
-                category = category
-            )
+        if (categoryFromArgs != null) {
+            newCard = context?.let { context ->
+                categoryFromArgs.toCategoryDBO(context)?.let { category ->
+                    Card(
+                        id = 0,
+                        name = nameOfCloth,
+                        picture = imageUri,
+                        listOfSymbols = listOfSymbols!!,
+                        category = category
+                    )
+                }
+            }
         }
-        return newCard1
+        return newCard
     }
 
     private fun copyImageToFile(fileForImages: File) {
@@ -418,8 +427,14 @@ class AddNewCardFragment : Fragment() {
             addedSymbolsRecyclerView.layoutManager =
                 LinearLayoutManager(context, RecyclerView.VERTICAL, false)
             val list = card.listOfSymbols.listOfSymbols
+
+            val listSymbolForWashing = list.map { context?.let { item -> it.toSymbolForWashing(item) } }
+
             binding.addedSymbolsRecyclerView.adapter =
-                RecyclerViewAdapterSymbolAndMeaning(list, TypeOfRecyclerView.ADDSYMBOLFRAGMENT)
+                RecyclerViewAdapterSymbolAndMeaning(
+                    listSymbolForWashing as List<SymbolForWashing>,
+                    TypeOfRecyclerView.ADDSYMBOLFRAGMENT
+                )
         }
         if (card.picture != null) {
             binding.textOnImage.text = ""
@@ -432,11 +447,6 @@ class AddNewCardFragment : Fragment() {
         }
     }
 
-    private fun addLastSymbolToCardList(list: List<SymbolForWashing>): List<SymbolForWashing> {
-        val listNew = list.toMutableList()
-        listNew.addAll(ListOfCards.loadListWithOneLastSymbol())
-        return listNew
-    }
 
     //get list from ChooseSymbolsToCard
     private fun getListOfSymbolsAndAddToViewModel() {

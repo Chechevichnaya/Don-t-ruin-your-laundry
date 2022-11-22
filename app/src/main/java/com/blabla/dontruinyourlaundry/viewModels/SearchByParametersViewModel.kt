@@ -2,7 +2,7 @@ package com.blabla.dontruinyourlaundry.viewModels
 
 import android.util.Log
 import androidx.lifecycle.*
-import com.blabla.dontruinyourlaundry.RoomStuff.CardsDao
+import com.blabla.dontruinyourlaundry.roomStuff.CardsDao
 import com.blabla.dontruinyourlaundry.data.DataForSearchByParameters
 import com.blabla.dontruinyourlaundry.data.SearchByParametersCard
 import com.blabla.dontruinyourlaundry.data.SelectionType
@@ -43,7 +43,6 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
     }
 
     fun onItemClicked(clickedItem: SearchScreenItem.SearchParameter) {
-        Log.d("clicked", "old - ${_searchItems.value}")
         val parametersCard = DataForSearchByParameters.getData().find { card ->
             card.title == clickedItem.titleName
         } ?: return

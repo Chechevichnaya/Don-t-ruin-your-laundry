@@ -9,14 +9,9 @@ import androidx.core.view.MenuProvider
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.RoomStuff.CardsApplication
-import com.blabla.dontruinyourlaundry.adapters.FakeMultiholderAdapter
-import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSearchByParameters
+import com.blabla.dontruinyourlaundry.roomStuff.CardsApplication
 import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSearchParameter
-import com.blabla.dontruinyourlaundry.data.*
 import com.blabla.dontruinyourlaundry.databinding.FragmentSearchByParametersBinding
 import com.blabla.dontruinyourlaundry.viewModels.SearchByParametersFactory
 import com.blabla.dontruinyourlaundry.viewModels.SearchByParametersViewModel

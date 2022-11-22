@@ -1,11 +1,10 @@
 package com.blabla.dontruinyourlaundry.data
 
-import android.os.Parcel
+import android.content.Context
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
-import androidx.annotation.StringRes
 import com.blabla.dontruinyourlaundry.R
-import com.google.android.material.internal.ParcelableSparseArray
+import com.blabla.dontruinyourlaundry.entity.HeadNameSymbolGuide
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -13,167 +12,263 @@ data class SymbolForWashing(
     @DrawableRes val pictureId: Int,
     val meaningOfSymbol: String,
     var selected: Boolean = false
-) : Parcelable
+) : Parcelable {
+
+    fun toSymbolForWashingDBO(context: Context?): SymbolForWashingDBO? {
+        return SymbolForWashingDBO.values().find { enumItem ->
+            context?.let { enumItem.getDescription(it) } == meaningOfSymbol
+        }
+    }
+}
 
 
 @Parcelize
-class Symbols : ArrayList<SymbolForWashing>(), Parcelable
+enum class SymbolForWashingDBO : Parcelable {
+    WASH,
+    WASHNOTALLOWED,
+    WASHHAND,
+    WASHHAND30,
+    WASHHAND40,
+    WASH30,
+    WASH40,
+    WASH50,
+    WASH60,
+    WASH70,
+    WASH90,
+    WASH30CARE,
+    WASH30EXTRACARE,
+    WASH40CARE,
+    WASH40EXTRACARE,
+    WASH50CARE,
+    WASH60CARE,
+    WASH90CARE,
+    WASH30DOT,
+    WASH40DOT,
+    WASH50DOT,
+    WASH60DOT,
+    WASH70DOT,
+    WASH90DOT,
+    WASH30DOTCARE,
+    WASH30DOTEXTRACARE,
+    WASH40DOTCARE,
+    WASH40DOTEXTRACARE,
+    WASH50DOTCARE,
+    WASH60DOTCARE,
+    WASH90DOTCARE,
+    BLEACH,
+    BLEACHNONCHLORINE,
+    BLEACHNOTALLOWED,
+    DRY,
+    DRY40,
+    DRY60,
+    DRY80,
+    DRYNOHEAT,
+    DRY40CARE,
+    DRY40EXTRACARE,
+    DRY60CARE,
+    DRYLINE,
+    DRYSHADE,
+    DRYLINESHADE,
+    DRYDRIP,
+    DRYDRIPSHADE,
+    DRYFLAT,
+    DRYFLATSHADE,
+    DRYNOTALLOWED,
+    IRON,
+    IRON110,
+    IRON150,
+    IRON200,
+    IRONNOTALLOWED,
+    IRONSTEAMNOTALLOWED,
+    DRYCLEANA,
+    DRYCLEANP,
+    DRYCLEANP2,
+    DRYCLEANF,
+    DRYCLEANF2,
+    DRYCLEANW,
+    DRYCLEANW2,
+    DRYCLEANW3,
+    DRYCLEANSHORT,
+    DRYCLEANLOWHEAT,
+    DRYCLEANLOWMOISTURE,
+    DRYCLEANNOSTEAM,
+    DRYCLEANNOTALLOWED,
+    DRYCLEANWETNOTALLOWED,
+    WRINGING;
 
-enum class SymbolForWashingDBO(val text: String) {
-    WASH("Разрешена машинная стирка"),
-    WASHNOTALLOWED("Машинная и ручная стирка запрещены. Разрешена химчистка"),
-    WASHHAND("Ручная стирка при температуре воды до 40 °C. Не тереть, отжимать аккуратно, без перекручивания"),
-    WASHHAND30("Ручная стирка при температуре воды до 30 °C, не тереть, отжимать деликатно"),
-    WASHHAND40("Ручная стирка при температуре воды до 40 °C, не тереть, отжимать деликатно"),
-    WASH30("Ручная или машинная стирка при температуре воды не выше 30°C. Не подвергать сильному отжиму"),
-    WASH40("Ручная или машинная стирка при температуре воды не выше 40°C"),
-    WASH50("Ручная или машинная стирка при температуре воды не выше 50°C"),
-    WASH60("Ручная или машинная стирка при температуре воды не выше 60°"),
-    WASH70("Ручная или машинная стирка при температуре воды не выше 70°C"),
-    WASH90("Ручная или машинная стирка при температуре воды не выше 95°C"),
-    WASH30CARE("Деликатная ручная или машинная стирка при температуре воды до 30 °C, с использованием программ деликатной стирки (полоскание при низкой температуре и короткое время отжима)"),
-    WASH30EXTRACARE("Особо деликатная ручная или машинная стирка при температуре воды до 30°C. Не отжимать руками"),
-    WASH40CARE("Деликатная ручная или машинная стирка при температуре воды не выше 40°C"),
-    WASH40EXTRACARE("Особо деликатная стирка при температуре воды не выше 40°C"),
-    WASH50CARE("Деликатная ручная или машинная стирка при температуре до 50°C"),
-    WASH60CARE("Деликатная ручная или машинная стирка при температуре воды до 60 °C"),
-    WASH90CARE("Деликатная ручная или машинная стирка при температуре воды до 95 °C"),
-    WASH30DOT("Ручная или машинная стирка при температуре воды не выше 30°C. Не подвергать сильному отжиму"),
-    WASH40DOT("Ручная или машинная стирка при температуре воды не выше 40°C"),
-    WASH50DOT("Ручная или машинная стирка при температуре воды не выше 50°C"),
-    WASH60DOT("Ручная или машинная стирка при температуре воды не выше 60°C"),
-    WASH70DOT("Ручная или машинная стирка при температуре воды не выше 70°C"),
-    WASH90DOT("Ручная или машинная стирка при температуре воды не выше 95°C"),
-    WASH30DOTCARE("Деликатная ручная или машинная стирка при температуре воды до 30°C. Не подвергать сильной механической обработке, отжим ослабленный"),
-    WASH30DOTEXTRACARE("Особо деликатная стирка при температуре воды до 30°C. Не отжимать руками"),
-    WASH40DOTCARE("Деликатная ручная или машинная стирка при температуре воды до 40 °C"),
-    WASH40DOTEXTRACARE("Особо деликатная стирка при температуре воды до 40°C. Не отжимать руками"),
-    WASH50DOTCARE("Деликатная ручная или машинная стирка при начальной температуре воды не выше 50°C"),
-    WASH60DOTCARE("Деликатная ручная или машинная стирка при температуре воды не более 60°C"),
-    WASH90DOTCARE("Деликатная ручная или машинная стирка при температуре воды не выше 95°C"),
-
-    BLEACH("Отбеливание разрешено любыми окисляющими средствами"),
-    BLEACHNONCHLORINE("Отбеливание разрешено только кислородсодержащими отбеливателями, в составе которых отсутствует хлор"),
-    BLEACHNOTALLOWED("Отбеливание запрещено. Стиральные порошки не должны содержать хлор"),
-
-    DRY("Разрешено отжимать и сушить в стиральной машине или в сушилке"),
-    DRY40("Сушка и отжим при низкой температуре не выше 40°C"),
-    DRY60("Сушка и отжим при средней температуре не выше 60°C"),
-    DRY80("Сушка и отжим при высокой температуре не выше 80°C"),
-    DRYNOHEAT("Обычная барабанная сушка и отжим при нормальной температуре, без нагрева воздуха"),
-    DRY40CARE("Деликатная сушка и отжим в сушильном барабане при температуре не выше 40°C"),
-    DRY40EXTRACARE("Особо деликатная сушка и отжим в сушильном барабане при температуре не выше 40°C"),
-    DRY60CARE("Деликатная сушка и отжим при температуре не выше 60°C"),
-    DRYLINE("После отжима разрешена сушка в подвешенном(вертикальном) состоянии"),
-    DRYSHADE("Сушка в тени, вдали от прямых солнечных лучей"),
-    DRYLINESHADE("Сушка в подвешенном (вертикальном) состоянии в тени и вдали от прямых солнечных лучей"),
-    DRYDRIP("Сушка без отжима в подвешенном (вертикальном) состоянии"),
-    DRYDRIPSHADE("Сушка без отжима в подвешенном (вертикальном) состоянии в тени, вдали от прямых солнечных лучей"),
-    DRYFLAT("Сушка на горизонтальной поверхности в расправленном состоянии"),
-    DRYFLATSHADE("Сушка на горизонтальной поверхности в расправленном состоянии в тени"),
-    DRYNOTALLOWED("Запрещено отжимать и сушить в машинке"),
-
-    IRON("Для восстановления формы и внешнего вида изделия его разрешено гладить при любой температуре, с паром или без"),
-    IRON110("Разрешено гладить при максимальной температуре 110°C (соответствует символу в виде одной точки на терморегуляторе утюга), допустимо для синтетики, нейлона, акрила, полиэстера, полиамида, ацетата; использовать тканевую прокладку, не пользоваться паром"),
-    IRON150("Разрешено гладить при максимальной температуре 150°C (соответствует символу в виде двух точек на терморегуляторе утюга), допустимо для шерсти и смешанных волокон с полиэстером и вискозой; использовать влажную ткань"),
-    IRON200("Разрешено гладить при максимальной температуре 200°C (соответствует символу в виде трёх точек на терморегуляторе утюга), допустимо для льна и хлопка; можно слегка увлажнить изделие"),
-    IRONNOTALLOWED("Глажение с паром навредит одежде, рекомендовано регулярное глажение в указанном температурном режиме"),
-    IRONSTEAMNOTALLOWED("Изделие не должно подвергаться глажению, пропаривание и обработку паром не применять"),
-
-    DRYCLEANA("Сухая чистка с любым органическим растворителем"),
-    DRYCLEANP("Обычная сухая чистка с использованием тетрахлорэтилена и всех растворителей, перечисленных для символа «F»"),
-    DRYCLEANP2("Деликатная химчистка при ограниченном добавлении воды с осторожным применением растворителей, указанных для символа «P», а также контроле за механическим воздействием и температуре сушки, чистка-самообслуживание запрещена"),
-    DRYCLEANF("Обычная сухая чистка с использованием только углеводорода, бензина и трифтортрихорметана"),
-    DRYCLEANF2("Деликатная химчистка при ограниченном добавлении воды с осторожным применением растворителей, указанных для символа «F», а также контроле за механическим воздействием и температуре сушки, чистка-самообслуживание запрещена"),
-    DRYCLEANW("Обычный режим аквачистки и сушки в соответствии с IEC 456"),
-    DRYCLEANW2("Деликатный режим аквачистки с ограничениями по механическому режиму и режиму сушки с учётом особенностей изделия, относительная усадка — 50+5%"),
-    DRYCLEANW3("Очень деликатный режим аквачистки с ограничениями по механическому режиму и режиму сушки с учётом особенностей изделия, относительная усадка — 25+2,5%"),
-    DRYCLEANSHORT("Одежда может быть очищена в сокращенном цикле. Символ может использоваться в сочетании с буквой"),
-    DRYCLEANLOWHEAT("Одежда может быть очищена в умеренном температурном режиме. Символ может использоваться в сочетании с буквой"),
-    DRYCLEANLOWMOISTURE("При чистке допустима пониженная влажность. Символ может использоваться в сочетании с буквой"),
-    DRYCLEANNOSTEAM("Запрещено использовать пар на завершающей стадии чистки. Символ может использоваться в сочетании с буквой"),
-    DRYCLEANNOTALLOWED("Изделие не должно подвергаться химической чистке, удаление пятен растворителем запрещено"),
-    DRYCLEANWETNOTALLOWED("Мокрая чистка запрещена"),
-    WRINGING("Нельзя выкручивать изделие при отжиме");
-
-    fun toSymbolForWashing(): SymbolForWashing {
-        val resourceId = when (this) {
-            WASH -> R.drawable.wash
-            WASHNOTALLOWED -> R.drawable.wh_washing_not_allowed
-            WASHHAND -> R.drawable.wh_washing_hand
-            WASHHAND30 -> R.drawable.wh_washing_hand_30deg
-            WASHHAND40 -> R.drawable.wh_washing_hand_40deg
-            WASH30 -> R.drawable.wh_washing_30deg
-            WASH40 -> R.drawable.wh_washing_40deg
-            WASH50 -> R.drawable.wh_washing_50deg
-            WASH60 -> R.drawable.wh_washing_60deg
-            WASH70 -> R.drawable.wh_washing_70deg
-            WASH90 -> R.drawable.wh_washing_90deg
-            WASH30CARE -> R.drawable.wh_washing_30deg_permanent_press
-            WASH30EXTRACARE -> R.drawable.wh_washing_30deg_extra_care
-            WASH40CARE -> R.drawable.wh_washing_40deg_permanent_press
-            WASH40EXTRACARE -> R.drawable.wh_washing_40deg_extra_care
-            WASH50CARE -> R.drawable.wh_washing_50deg_permanent_press
-            WASH60CARE -> R.drawable.wh_washing_60deg_permanent_press
-            WASH90CARE -> R.drawable.wh_washing_95deg_permanent_press
-            WASH30DOT -> R.drawable.wh_washing_30deg_alt
-            WASH40DOT -> R.drawable.wh_washing_40deg_alt
-            WASH50DOT -> R.drawable.wh_washing_50deg_alt
-            WASH60DOT -> R.drawable.wh_washing_60deg_alt
-            WASH70DOT -> R.drawable.wh_washing_70deg_alt
-            WASH90DOT -> R.drawable.wh_washing_95deg_alt
-            WASH30DOTCARE -> R.drawable.wh_washing_30deg_permanent_press_alt
-            WASH30DOTEXTRACARE -> R.drawable.wh_washing_30deg_extra_care_alt
-            WASH40DOTCARE -> R.drawable.wh_washing_40deg_permanent_press_alt
-            WASH40DOTEXTRACARE -> R.drawable.wh_washing_40deg_extra_care_alt
-            WASH50DOTCARE -> R.drawable.wh_washing_50deg_permanent_press_alt
-            WASH60DOTCARE -> R.drawable.wh_washing_60deg_permanent_press_alt
-            WASH90DOTCARE -> R.drawable.wh_washing_95deg_permanent_press_alt
-            BLEACH -> R.drawable.wh_bleaching
-            BLEACHNONCHLORINE -> R.drawable.wh_bleaching_non_chlorine
-            BLEACHNOTALLOWED -> R.drawable.wh_bleaching_not_allowed
-            DRY -> R.drawable.wh_drying_tumble
-            DRY40 -> R.drawable.wh_drying_tumble_low_heat
-            DRY60 -> R.drawable.wh_drying_tumble_medium_heat
-            DRY80 -> R.drawable.wh_drying_tumble_high_heat
-            DRYNOHEAT -> R.drawable.wh_drying_tumble_no_heat
-            DRY40CARE -> R.drawable.wh_drying_tumble_low_heat_permanent_press
-            DRY40EXTRACARE -> R.drawable.wh_drying_tumble_low_heat_extra_care
-            DRY60CARE -> R.drawable.wh_drying_tumble_medium_heat_permanent_press
-            DRYLINE -> R.drawable.wh_drying_line_dry
-            DRYSHADE -> R.drawable.wh_drying_dry_shade
-            DRYLINESHADE -> R.drawable.wh_drying_line_dry_shade
-            DRYDRIP -> R.drawable.wh_drying_drip_dry
-            DRYDRIPSHADE -> R.drawable.wh_drying_drip_dry_shade
-            DRYFLAT -> R.drawable.wh_drying_flat_dry
-            DRYFLATSHADE -> R.drawable.wh_drying_flat_dry_shade
-            DRYNOTALLOWED -> R.drawable.wh_drying_tumble_not_allowed
-            IRON -> R.drawable.wh_ironing
-            IRON110 -> R.drawable.wh_ironing_low
-            IRON150 -> R.drawable.wh_ironing_medium
-            IRON200 -> R.drawable.wh_ironing_high
-            IRONNOTALLOWED -> R.drawable.wh_ironing_not_allowed
-            IRONSTEAMNOTALLOWED -> R.drawable.wh_ironing_steam_not_allowed
-            DRYCLEANA -> R.drawable.wh_drycleaning_a
-            DRYCLEANP -> R.drawable.wh_drycleaning_p
-            DRYCLEANP2 -> R.drawable.wh_drycleaning_p_2
-            DRYCLEANF -> R.drawable.wh_drycleaning_f
-            DRYCLEANF2 -> R.drawable.wh_drycleaning_f_2
-            DRYCLEANW -> R.drawable.wh_drycleaning_w
-            DRYCLEANW2 -> R.drawable.wh_drycleaning_w_2
-            DRYCLEANW3 -> R.drawable.wh_drycleaning_w_3
-            DRYCLEANSHORT -> R.drawable.wh_drycleaning_short_cycle
-            DRYCLEANLOWHEAT -> R.drawable.wh_drycleaning_low_heat
-            DRYCLEANLOWMOISTURE -> R.drawable.wh_drycleaning_reduced_moisture
-            DRYCLEANNOSTEAM -> R.drawable.wh_drycleaning_no_steam
-            DRYCLEANNOTALLOWED -> R.drawable.wh_washing_95deg_permanent_press_alt
-            DRYCLEANWETNOTALLOWED -> R.drawable.wh_drycleaning_wetclean_not_allowed
-            WRINGING -> R.drawable.wh_wringing_not_allowed
+    fun getDescription(context: Context): String {
+        return when (this) {
+            WASH -> context.getString(R.string.wash)
+            WASHNOTALLOWED -> context.getString(R.string.wash_not_allowed)
+            WASHHAND -> context.getString(R.string.wash_hand)
+            WASHHAND30 -> context.getString(R.string.wash_hand30)
+            WASHHAND40 -> context.getString(R.string.wash_hand40)
+            WASH30 -> context.getString(R.string.wash30)
+            WASH40 -> context.getString(R.string.wash40)
+            WASH50 -> context.getString(R.string.wash50)
+            WASH60 -> context.getString(R.string.wash60)
+            WASH70 -> context.getString(R.string.wash70)
+            WASH90 -> context.getString(R.string.wash90)
+            WASH30CARE -> context.getString(R.string.wash30_care)
+            WASH30EXTRACARE -> context.getString(R.string.wash30_extracare)
+            WASH40CARE -> context.getString(R.string.wash40_care)
+            WASH40EXTRACARE -> context.getString(R.string.wash40_extracare)
+            WASH50CARE -> context.getString(R.string.wash50_care)
+            WASH60CARE -> context.getString(R.string.wash60_care)
+            WASH90CARE -> context.getString(R.string.wash90_care)
+            WASH30DOT -> context.getString(R.string.wash30_dot)
+            WASH40DOT -> context.getString(R.string.wash40_dot)
+            WASH50DOT -> context.getString(R.string.wash50_dot)
+            WASH60DOT -> context.getString(R.string.wash60_dot)
+            WASH70DOT -> context.getString(R.string.wash70_dot)
+            WASH90DOT -> context.getString(R.string.wash90_dot)
+            WASH30DOTCARE -> context.getString(R.string.wash30_dotcare)
+            WASH30DOTEXTRACARE -> context.getString(R.string.wash30_dot_extracare)
+            WASH40DOTCARE -> context.getString(R.string.wash40_dotcare)
+            WASH40DOTEXTRACARE -> context.getString(R.string.wash40_dot_extracare)
+            WASH50DOTCARE -> context.getString(R.string.wash50_dotcare)
+            WASH60DOTCARE -> context.getString(R.string.wash60_dotcare)
+            WASH90DOTCARE -> context.getString(R.string.wash90_dotcare)
+            BLEACH -> context.getString(R.string.bleach)
+            BLEACHNONCHLORINE -> context.getString(R.string.bleach_non_chlor)
+            BLEACHNOTALLOWED -> context.getString(R.string.bleach_not_allowed)
+            DRY -> context.getString(R.string.dry)
+            DRY40 -> context.getString(R.string.dry40)
+            DRY60 -> context.getString(R.string.dry60)
+            DRY80 -> context.getString(R.string.dry80)
+            DRYNOHEAT -> context.getString(R.string.dry_no_heat)
+            DRY40CARE -> context.getString(R.string.dry40_care)
+            DRY40EXTRACARE -> context.getString(R.string.dry40_extracare)
+            DRY60CARE -> context.getString(R.string.dry60_care)
+            DRYLINE -> context.getString(R.string.dry_line)
+            DRYSHADE -> context.getString(R.string.dry_shade)
+            DRYLINESHADE -> context.getString(R.string.dry_line_shade)
+            DRYDRIP -> context.getString(R.string.dry_drip)
+            DRYDRIPSHADE -> context.getString(R.string.dry_drip_shade)
+            DRYFLAT -> context.getString(R.string.dry_flat)
+            DRYFLATSHADE -> context.getString(R.string.dry_flat_shade)
+            DRYNOTALLOWED -> context.getString(R.string.dry_not_alloder)
+            IRON -> context.getString(R.string.iron)
+            IRON110 -> context.getString(R.string.iron110)
+            IRON150 -> context.getString(R.string.iron150)
+            IRON200 -> context.getString(R.string.iron200)
+            IRONNOTALLOWED -> context.getString(R.string.iron_not_allowed)
+            IRONSTEAMNOTALLOWED -> context.getString(R.string.iron_steam_not_allowed)
+            DRYCLEANA -> context.getString(R.string.dry_cleana)
+            DRYCLEANP -> context.getString(R.string.dry_cleanp)
+            DRYCLEANP2 -> context.getString(R.string.dry_cleanp2)
+            DRYCLEANF -> context.getString(R.string.dry_cleanf)
+            DRYCLEANF2 -> context.getString(R.string.dry_cleanf2)
+            DRYCLEANW -> context.getString(R.string.dry_cleanw)
+            DRYCLEANW2 -> context.getString(R.string.dry_cleanw2)
+            DRYCLEANW3 -> context.getString(R.string.dry_cleanw3)
+            DRYCLEANSHORT -> context.getString(R.string.dry_clean_short)
+            DRYCLEANLOWHEAT -> context.getString(R.string.dry_clean_lowheat)
+            DRYCLEANLOWMOISTURE -> context.getString(R.string.dry_clean_low_water)
+            DRYCLEANNOSTEAM -> context.getString(R.string.dry_clean_no_steam)
+            DRYCLEANNOTALLOWED -> context.getString(R.string.dry_clean_not_allowed)
+            DRYCLEANWETNOTALLOWED -> context.getString(R.string.dry_clean_wet_not_allowed)
+            WRINGING -> context.getString(R.string.wringing)
         }
-        return SymbolForWashing(
-            pictureId = resourceId,
-            meaningOfSymbol = this.text
-        )
+    }
+
+    fun getResIdIcon(): Int = when (this) {
+        WASH -> R.drawable.wash
+        WASHNOTALLOWED -> R.drawable.wh_washing_not_allowed
+        WASHHAND -> R.drawable.wh_washing_hand
+        WASHHAND30 -> R.drawable.wh_washing_hand_30deg
+        WASHHAND40 -> R.drawable.wh_washing_hand_40deg
+        WASH30 -> R.drawable.wh_washing_30deg
+        WASH40 -> R.drawable.wh_washing_40deg
+        WASH50 -> R.drawable.wh_washing_50deg
+        WASH60 -> R.drawable.wh_washing_60deg
+        WASH70 -> R.drawable.wh_washing_70deg
+        WASH90 -> R.drawable.wh_washing_90deg
+        WASH30CARE -> R.drawable.wh_washing_30deg_permanent_press
+        WASH30EXTRACARE -> R.drawable.wh_washing_30deg_extra_care
+        WASH40CARE -> R.drawable.wh_washing_40deg_permanent_press
+        WASH40EXTRACARE -> R.drawable.wh_washing_40deg_extra_care
+        WASH50CARE -> R.drawable.wh_washing_50deg_permanent_press
+        WASH60CARE -> R.drawable.wh_washing_60deg_permanent_press
+        WASH90CARE -> R.drawable.wh_washing_95deg_permanent_press
+        WASH30DOT -> R.drawable.wh_washing_30deg_alt
+        WASH40DOT -> R.drawable.wh_washing_40deg_alt
+        WASH50DOT -> R.drawable.wh_washing_50deg_alt
+        WASH60DOT -> R.drawable.wh_washing_60deg_alt
+        WASH70DOT -> R.drawable.wh_washing_70deg_alt
+        WASH90DOT -> R.drawable.wh_washing_95deg_alt
+        WASH30DOTCARE -> R.drawable.wh_washing_30deg_permanent_press_alt
+        WASH30DOTEXTRACARE -> R.drawable.wh_washing_30deg_extra_care_alt
+        WASH40DOTCARE -> R.drawable.wh_washing_40deg_permanent_press_alt
+        WASH40DOTEXTRACARE -> R.drawable.wh_washing_40deg_extra_care_alt
+        WASH50DOTCARE -> R.drawable.wh_washing_50deg_permanent_press_alt
+        WASH60DOTCARE -> R.drawable.wh_washing_60deg_permanent_press_alt
+        WASH90DOTCARE -> R.drawable.wh_washing_95deg_permanent_press_alt
+        BLEACH -> R.drawable.wh_bleaching
+        BLEACHNONCHLORINE -> R.drawable.wh_bleaching_non_chlorine
+        BLEACHNOTALLOWED -> R.drawable.wh_bleaching_not_allowed
+        DRY -> R.drawable.wh_drying_tumble
+        DRY40 -> R.drawable.wh_drying_tumble_low_heat
+        DRY60 -> R.drawable.wh_drying_tumble_medium_heat
+        DRY80 -> R.drawable.wh_drying_tumble_high_heat
+        DRYNOHEAT -> R.drawable.wh_drying_tumble_no_heat
+        DRY40CARE -> R.drawable.wh_drying_tumble_low_heat_permanent_press
+        DRY40EXTRACARE -> R.drawable.wh_drying_tumble_low_heat_extra_care
+        DRY60CARE -> R.drawable.wh_drying_tumble_medium_heat_permanent_press
+        DRYLINE -> R.drawable.wh_drying_line_dry
+        DRYSHADE -> R.drawable.wh_drying_dry_shade
+        DRYLINESHADE -> R.drawable.wh_drying_line_dry_shade
+        DRYDRIP -> R.drawable.wh_drying_drip_dry
+        DRYDRIPSHADE -> R.drawable.wh_drying_drip_dry_shade
+        DRYFLAT -> R.drawable.wh_drying_flat_dry
+        DRYFLATSHADE -> R.drawable.wh_drying_flat_dry_shade
+        DRYNOTALLOWED -> R.drawable.wh_drying_tumble_not_allowed
+        IRON -> R.drawable.wh_ironing
+        IRON110 -> R.drawable.wh_ironing_low
+        IRON150 -> R.drawable.wh_ironing_medium
+        IRON200 -> R.drawable.wh_ironing_high
+        IRONNOTALLOWED -> R.drawable.wh_ironing_not_allowed
+        IRONSTEAMNOTALLOWED -> R.drawable.wh_ironing_steam_not_allowed
+        DRYCLEANA -> R.drawable.wh_drycleaning_a
+        DRYCLEANP -> R.drawable.wh_drycleaning_p
+        DRYCLEANP2 -> R.drawable.wh_drycleaning_p_2
+        DRYCLEANF -> R.drawable.wh_drycleaning_f
+        DRYCLEANF2 -> R.drawable.wh_drycleaning_f_2
+        DRYCLEANW -> R.drawable.wh_drycleaning_w
+        DRYCLEANW2 -> R.drawable.wh_drycleaning_w_2
+        DRYCLEANW3 -> R.drawable.wh_drycleaning_w_3
+        DRYCLEANSHORT -> R.drawable.wh_drycleaning_short_cycle
+        DRYCLEANLOWHEAT -> R.drawable.wh_drycleaning_low_heat
+        DRYCLEANLOWMOISTURE -> R.drawable.wh_drycleaning_reduced_moisture
+        DRYCLEANNOSTEAM -> R.drawable.wh_drycleaning_no_steam
+        DRYCLEANNOTALLOWED -> R.drawable.wh_washing_95deg_permanent_press_alt
+        DRYCLEANWETNOTALLOWED -> R.drawable.wh_drycleaning_wetclean_not_allowed
+        WRINGING -> R.drawable.wh_wringing_not_allowed
+    }
+
+    fun getTitle(): HeadNameSymbolGuide {
+        return when (this) {
+            WASH, WASHNOTALLOWED, WASHHAND, WASHHAND30, WASHHAND40, WASH30, WASH40, WASH50, WASH60,
+            WASH70, WASH90, WASH30CARE, WASH30EXTRACARE, WASH40CARE, WASH40EXTRACARE, WASH50CARE,
+            WASH60CARE, WASH90CARE, WASH30DOT, WASH40DOT, WASH50DOT, WASH60DOT, WASH70DOT,
+            WASH90DOT, WASH30DOTCARE, WASH30DOTEXTRACARE, WASH40DOTCARE, WASH40DOTEXTRACARE,
+            WASH50DOTCARE, WASH60DOTCARE, WASH90DOTCARE -> HeadNameSymbolGuide.WASHING
+            BLEACH, BLEACHNONCHLORINE, BLEACHNOTALLOWED -> HeadNameSymbolGuide.BLEACHING
+            DRY, DRY40, DRY60, DRY80, DRYNOHEAT, DRY40CARE, DRY40EXTRACARE, DRY60CARE, DRYLINE,
+            DRYSHADE, DRYLINESHADE, DRYDRIP, DRYDRIPSHADE, DRYFLAT, DRYFLATSHADE,
+            DRYNOTALLOWED -> HeadNameSymbolGuide.DRYING
+            IRON, IRON110, IRON150, IRON200, IRONNOTALLOWED,
+            IRONSTEAMNOTALLOWED -> HeadNameSymbolGuide.IRONING
+            DRYCLEANA, DRYCLEANP, DRYCLEANP2, DRYCLEANF, DRYCLEANF2, DRYCLEANW, DRYCLEANW2,
+            DRYCLEANW3, DRYCLEANSHORT, DRYCLEANLOWHEAT, DRYCLEANLOWMOISTURE, DRYCLEANNOSTEAM,
+            DRYCLEANNOTALLOWED, DRYCLEANWETNOTALLOWED -> HeadNameSymbolGuide.DRYCLEANING
+            WRINGING -> HeadNameSymbolGuide.WRINGLING
+        }
+    }
+
+    fun toSymbolForWashing(context: Context): SymbolForWashing {
+        return SymbolForWashing(getResIdIcon(), getDescription(context))
+
     }
 }
 

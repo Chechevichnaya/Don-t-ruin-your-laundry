@@ -5,5 +5,5 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class ListOfSymbolsForDataBase(
-    val listOfSymbols: List<SymbolForWashing>
+val listOfSymbols: List<SymbolForWashingDBO>
 ):Parcelable

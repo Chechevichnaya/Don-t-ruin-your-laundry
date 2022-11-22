@@ -1,22 +1,16 @@
 package com.blabla.dontruinyourlaundry.viewModels
 
 import androidx.lifecycle.*
-import com.blabla.dontruinyourlaundry.RoomStuff.Card
-import com.blabla.dontruinyourlaundry.RoomStuff.CardsDao
+import com.blabla.dontruinyourlaundry.roomStuff.Card
+import com.blabla.dontruinyourlaundry.roomStuff.CardsDao
 import com.blabla.dontruinyourlaundry.entity.Category
+import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 
 class ClothingCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
 
-    fun allCardsByCategory(category: Category): LiveData<List<Card>> {
+    fun allCardsByCategory(category: CategoryEnum): LiveData<List<Card>> {
         return cardsDao.getCardsByCategory(category).asLiveData()
     }
-//
-//    fun testsome(value: String?) {
-//        if (value == null) return
-//
-//        value.toList()
-//    }
-
 }
 
 class ClothingCardsFactory(private val cardsDao: CardsDao) : ViewModelProvider.Factory {

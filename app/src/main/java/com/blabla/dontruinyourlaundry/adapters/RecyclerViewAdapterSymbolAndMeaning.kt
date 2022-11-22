@@ -33,11 +33,11 @@ class RecyclerViewAdapterSymbolAndMeaning(
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        val context = holder.imageSymbol.context
+       // val context = holder.imageSymbol.context
         val item = data[position]
-        if (position != data.size) {
-            holder.imageSymbol.background.setTint(context.resources.getColor(R.color.lilac_200))
-        }
+//        if (position != data.size) {
+//            holder.imageSymbol.background.setTint(context.resources.getColor(R.color.lilac_200))
+//        }
         holder.imageSymbol.setImageResource(item.pictureId)
         holder.meaningSymbol.text = item.meaningOfSymbol
         when (typeFrom) {

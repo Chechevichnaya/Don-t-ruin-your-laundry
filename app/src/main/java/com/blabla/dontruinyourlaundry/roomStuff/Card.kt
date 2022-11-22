@@ -1,4 +1,4 @@
-package com.blabla.dontruinyourlaundry.RoomStuff
+package com.blabla.dontruinyourlaundry.roomStuff
 
 import android.os.Parcelable
 import androidx.annotation.NonNull
@@ -6,7 +6,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.blabla.dontruinyourlaundry.data.ListOfSymbolsForDataBase
-import com.blabla.dontruinyourlaundry.entity.Category
+import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
@@ -17,6 +17,6 @@ data class Card(
     val picture: String?,
     @ColumnInfo(name = "list_of_symbols") val listOfSymbols: ListOfSymbolsForDataBase,
 //    @ColumnInfo(name = "list_of_symbols") val listOfSymbols: List<SymbolsForGuide>,
-    @NonNull val category: Category
+    @NonNull val category: CategoryEnum
 
 ): Parcelable

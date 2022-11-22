@@ -1,15 +1,14 @@
 package com.blabla.dontruinyourlaundry.adapters
 
-import android.content.ClipData
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.blabla.dontruinyourlaundry.RoomStuff.Card
+import com.blabla.dontruinyourlaundry.roomStuff.Card
 import com.blabla.dontruinyourlaundry.databinding.CardItemBinding
-import com.blabla.dontruinyourlaundry.entity.Category
+import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 
@@ -21,20 +20,20 @@ class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
 
         fun bind(card: Card) {
             val imageCategory = when (card.category) {
-                Category.CLOTH -> {
-                    Category.CLOTH.imageResId
+                CategoryEnum.CLOTH -> {
+                    CategoryEnum.CLOTH.getResIcon()
                 }
-                Category.BAD_SHEETS -> {
-                    Category.BAD_SHEETS.imageResId
+                CategoryEnum.BAD_SHEETS -> {
+                    CategoryEnum.BAD_SHEETS.getResIcon()
                 }
-                Category.BATH -> {
-                    Category.BATH.imageResId
+                CategoryEnum.BATH -> {
+                    CategoryEnum.BATH.getResIcon()
                 }
-                Category.KITCHEN -> {
-                    Category.KITCHEN.imageResId
+                CategoryEnum.KITCHEN -> {
+                    CategoryEnum.KITCHEN.getResIcon()
                 }
-                Category.REST -> {
-                    Category.REST.imageResId
+                CategoryEnum.REST -> {
+                    CategoryEnum.REST.getResIcon()
                 }
             }
             binding.itemName.text = card.name
