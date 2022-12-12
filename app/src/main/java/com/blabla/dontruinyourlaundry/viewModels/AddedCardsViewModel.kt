@@ -30,7 +30,6 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
     val card: LiveData<Card?> = _card
 
     private val _cardId = MutableLiveData<Long>()
-    val cardId: LiveData<Long> = _cardId
 
     private val _category = MutableLiveData<Category>()
     val category: LiveData<Category> = _category

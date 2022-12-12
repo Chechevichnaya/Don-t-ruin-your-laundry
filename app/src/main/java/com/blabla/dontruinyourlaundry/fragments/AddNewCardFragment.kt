@@ -137,7 +137,10 @@ class AddNewCardFragment : Fragment() {
                     R.id.save_button -> {
                         if (dataForCardCorrect()) {
                             if (viewModel.card.value != null) {
-                                Log.d("CHECK", "list after click add - ${viewModel.listOfSymbols.value}")
+                                Log.d(
+                                    "CHECK",
+                                    "list after click add - ${viewModel.listOfSymbols.value}"
+                                )
                                 saveCardChanges(folderForImagesInDB)
                                 findNavController().popBackStack(
                                     R.id.kindsOfThingsForLaundry,
@@ -226,7 +229,9 @@ class AddNewCardFragment : Fragment() {
 
     private fun observeUriToSetPhoto() {
         val uriObserver = Observer<Uri> { newUri ->
-            binding.textOnImage.text = ""
+            if (viewModel.uri.value != null) {
+                binding.textOnImage.text = ""
+            }
             Glide.with(binding.itemImage.context)
                 .load(newUri)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -442,7 +447,7 @@ class AddNewCardFragment : Fragment() {
         val navController = findNavController()
         navController.currentBackStackEntry?.savedStateHandle?.getLiveData<List<SymbolGuide.SymbolForWashing>>(
             "key"
-        )?.observe(viewLifecycleOwner) {it ->
+        )?.observe(viewLifecycleOwner) { it ->
             Log.d("CHECK", "it - $it")
             viewModel.addSelectedSymbols(it)
         }
