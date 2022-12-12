@@ -58,7 +58,7 @@ class SearchByParametersFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.add_button -> {
-                        getResultCards()
+
                         true
                     }
                     else -> false
@@ -76,12 +76,8 @@ class SearchByParametersFragment : Fragment() {
         recyclerView.adapter = adapter
         viewModel.searchItems.observe(viewLifecycleOwner) { items ->
             adapter.submitList(items)
-            Log.d("clicked", "observe $items")
         }
 
     }
 
-    private fun getResultCards() {
-        TODO("Not yet implemented")
-    }
 }

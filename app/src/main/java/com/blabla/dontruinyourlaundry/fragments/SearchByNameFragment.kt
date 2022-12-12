@@ -56,7 +56,8 @@ class SearchByNameFragment : Fragment() {
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
 
         val adapter = CardsListAdapter { card ->
-            val action = SearchByNameFragmentDirections.actionSearchFragmentToCardDetailFragment(card.id)
+            val action =
+                SearchByNameFragmentDirections.actionSearchFragmentToCardDetailFragment(card.id)
             this.findNavController().navigate(action)
         }
 
@@ -70,15 +71,6 @@ class SearchByNameFragment : Fragment() {
                 performSearch(adapter)
             }
         }
-
-
-//        // Get the array of languages
-//        val languages = resources.getStringArray(R.array.Languages)
-//        // Create adapter and add in AutoCompleteTextView
-//        val adapter = ArrayAdapter(this,
-//            android.R.layout.simple_list_item_1, languages)
-//        autotextView.setAdapter(adapter)
-
 
         binding.whatToSearch.setOnEditorActionListener { v, actionId, event ->
             when (actionId) {

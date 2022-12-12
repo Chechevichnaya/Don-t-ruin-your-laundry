@@ -7,7 +7,7 @@
 
     <dialog
         android:id="@+id/help_with_app"
-        android:name="com.blabla.dontruinyourlaundry.dialogs.HowToUseAppDialog"
+        android:name="com.blabla.dontruinyourlaundry.dialogs.NOTUSEDHowToUseAppDialog"
         android:label="fragment_how_to_use_app_dialog"
         tools:layout="@layout/fragment_how_to_use_app_dialog" />
     <dialog
@@ -45,7 +45,7 @@
     </fragment>
     <fragment
         android:id="@+id/simbol_guide"
-        android:name="com.blabla.dontruinyourlaundry.fragments.SymbolGuide"
+        android:name="com.blabla.dontruinyourlaundry.fragments.SymbolGuideFragment"
         android:label="@string/symbol_guide"
         tools:layout="@layout/fragment_simbol_guide" />
     <fragment
@@ -79,12 +79,19 @@
             android:defaultValue="@null"
             app:argType="com.blabla.dontruinyourlaundry.entity.Category"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_addNewCard_to_kindsOfThingsForLaundry"
+            app:destination="@id/kindsOfThingsForLaundry" />
     </fragment>
     <fragment
         android:id="@+id/addSymbolToCard"
         android:name="com.blabla.dontruinyourlaundry.fragments.ChooseSymbolsToCard"
         android:label="fragment_add_symbol_to_card"
-        tools:layout="@layout/fragment_add_symbol_to_card" />
+        tools:layout="@layout/fragment_add_symbol_to_card" >
+        <argument
+            android:name="selectedItems"
+            app:argType="com.blabla.dontruinyourlaundry.data.ListOfSymbols" />
+    </fragment>
     <fragment
         android:id="@+id/cardDetailFragment"
         android:name="com.blabla.dontruinyourlaundry.fragments.CardDetailFragment"

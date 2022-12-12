@@ -102,7 +102,7 @@
             android:layout_marginStart="8dp"
             android:backgroundTint="@color/lilac_500"
             android:scaleType="centerInside"
-            android:src="@drawable/plus"
+            android:src="@drawable/ic_add"
             android:layout_marginBottom="16dp"
             app:layout_constraintStart_toStartOf="@id/add_more_symbol_button"
             app:layout_constraintBottom_toBottomOf="@id/add_more_symbol_button"

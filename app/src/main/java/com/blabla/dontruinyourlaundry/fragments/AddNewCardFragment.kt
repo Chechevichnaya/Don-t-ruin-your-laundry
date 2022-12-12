@@ -6,9 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -24,20 +22,23 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.BuildConfig
 import com.blabla.dontruinyourlaundry.R
+import com.blabla.dontruinyourlaundry.adapters.MULTIRecyclerViewAdapterSymbolAndMeaning
+import com.blabla.dontruinyourlaundry.data.ListOfSymbols
+import com.blabla.dontruinyourlaundry.data.ListOfSymbolsForDataBase
+import com.blabla.dontruinyourlaundry.data.SymbolForWashingDBO
+import com.blabla.dontruinyourlaundry.databinding.FragmentAddNewCardBinding
+import com.blabla.dontruinyourlaundry.entity.SymbolGuide
+import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
 import com.blabla.dontruinyourlaundry.roomStuff.Card
 import com.blabla.dontruinyourlaundry.roomStuff.CardsApplication
-import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSymbolAndMeaning
-import com.blabla.dontruinyourlaundry.data.*
-import com.blabla.dontruinyourlaundry.databinding.FragmentAddNewCardBinding
-import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
-import com.blabla.dontruinyourlaundry.viewModels.AddedCardsFactory
 import com.blabla.dontruinyourlaundry.viewModels.AddedCardsViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import java.io.File
 import java.util.*
 
@@ -51,68 +52,80 @@ class AddNewCardFragment : Fragment() {
     private var latestTmpUri: Uri? = null
     private var imageUri: String? = null
 
-//    lateinit var card: Card
-//    private var newCard: Card? = null
-
-
     private lateinit var binding: FragmentAddNewCardBinding
     private val viewModel: AddedCardsViewModel by viewModels {
-        AddedCardsFactory((activity?.application as CardsApplication).dataBase.cardsDao)
+        AddedCardsViewModel.AddedCardsFactory(
+            (activity?.application as CardsApplication)
+                .dataBase.cardsDao
+        )
     }
-
-//    private val cropActivityResultContract = object : ActivityResultContract<Any?, Uri?>() {
-//        override fun createIntent(context: Context, input: Any?): Intent {
-//            TODO()
-//        }
-//
-//        override fun parseResult(resultCode: Int, intent: Intent?): Uri? {
-//            TODO("Not yet implemented")
-//        }
-//
-//    }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("test", " onCreateView()")
-        getListOfSymbolsAndAddToViewModel()
         binding = FragmentAddNewCardBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.addMoreSymbolButton.setOnClickListener {
-            view.findNavController().navigate(R.id.action_addNewCard_to_addSymbolToCard)
+
+        viewModel.addCardId(args.itemId)
+        viewModel.cardId.observe(viewLifecycleOwner) {
+            viewModel.addCardToViewModel(requireContext())
         }
 
-        //get argument
-        val cardId = args.itemId
-        //check is it completely new card or editing existing card
-        if (cardId > 0) {
-            showCardInfo(cardId)
-        }
+        clickOnAddMoreSymbols(view)
+        setUpperMenu(view)
+        getListOfSymbolsFromChosingFragmentAndAddToViewModel()
+
         //creating a new folder, if it is not created yet, where the last chosen photo will be kept for DB
         val folderForImagesInDB = createNewFolderInFiles()
-        //tracking updating uri to change photo in imageView
-        observeUriToSetPhoto()
-        observeListOfSymbols()
-        photoHandling()
-        setUpperMenu(view)
+
+        clickOnPhoto()
+
+        observeCardInfo()
+
         //set menu item
-        menuItemsHandling(folderForImagesInDB, cardId)
+        menuItemSave(folderForImagesInDB)
     }
 
-    private fun photoHandling() {
+    override fun onPause() {
+        super.onPause()
+        viewModel.setName(getNameOfCloth())
+    }
+
+    private fun observeCardInfo() {
+        observeUriToSetPhoto()
+        observeListOfSymbols()
+        observeName()
+    }
+
+    private fun observeName() {
+        viewModel.nameOfCloth.observe(viewLifecycleOwner) { name ->
+            binding.nameOfCloth.setText(name)
+        }
+    }
+
+    private fun clickOnAddMoreSymbols(view: View) {
+        binding.addMoreSymbolButton.setOnClickListener {
+            val listOfSelectedSymbols = ListOfSymbols(viewModel.listOfSymbols.value.orEmpty())
+            val action = AddNewCardFragmentDirections.actionAddNewCardToAddSymbolToCard(
+                selectedItems = listOfSelectedSymbols
+            )
+            view.findNavController().navigate(action)
+        }
+    }
+
+    private fun clickOnPhoto() {
         val photo = binding.itemImage
         photo.setOnClickListener {
             showDialog()
         }
     }
 
-    private fun menuItemsHandling(folderForImagesInDB: File?, cardId: Long) {
+    private fun menuItemSave(folderForImagesInDB: File?) {
         val menuHost: MenuHost = binding.toolbarAddCard
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -122,51 +135,22 @@ class AddNewCardFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.save_button -> {
-                        val newCard = saveInfo(folderForImagesInDB)
-                        if (cardId > 0) {
-                            updateItem(newCard)
-                            true
-                        } else {
-                            //                            val newCard = saveInfo(folderForImagesInDB)
-                            //                            if (viewModel.uri.value != null) {
-                            //                                //creating file in new folder with unique name
-                            //                                val fileForImages =
-                            //                                    File.createTempFile("photoforDB", ".jpg", folderForImagesInDB)
-                            //                                        .apply {
-                            //                                            createNewFile()
-                            //                                        }
-                            //                                fileForImages.outputStream().use { stream ->
-                            //                                    requireActivity().contentResolver.openInputStream(viewModel.uri.value!!)
-                            //                                        ?.copyTo(stream)
-                            //                                }
-                            //                                imageUri = fileForImages.toUri().toString()
-                            //                            }
-                            //                            //collecting info for card
-                            //                            val nameOfCloth =
-                            //                                binding.nameOfCloth.text.toString().trim()
-                            //                                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-                            //                            val category = args.currentCategory
-                            //                            viewModel.deleteInListSymbolAdd()
-                            //                            val listOfSymbols = viewModel.listOfSymbols.value?.let { list ->
-                            //                                ListOfSymbolsForDataBase(
-                            //                                    list.toList()
-                            //                                )
-                            //                            }
-                            //                            if (category != null) {
-                            //                                val card = Card(
-                            //                                    id = 0,
-                            //                                    name = nameOfCloth,
-                            //                                    picture = imageUri,
-                            //                                    listOfSymbols = listOfSymbols!!,
-                            //                                    category = category
-                            //                                )
+                        if (dataForCardCorrect()) {
+                            if (viewModel.card.value != null) {
+                                saveCardChanges(folderForImagesInDB)
+                                findNavController().popBackStack(
+                                    R.id.kindsOfThingsForLaundry,
+                                    false
+                                )
+                                true
+                            } else {
+                                val card = saveInfoInCard(folderForImagesInDB)
+                                viewModel.addNewCard(card)
+                                findNavController().popBackStack()
+                                true
+                            }
+                        } else false
 
-                            //adding info of card to database
-                            viewModel.addNewCard(newCard)
-
-                            findNavController().popBackStack()
-                            true
-                        }
                     }
                     else -> false
                 }
@@ -174,28 +158,43 @@ class AddNewCardFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
+    private fun saveCardChanges(file: File?) {
+        if (viewModel.uri.value != null) {
+            copyImageToFileForDB(file)
+        }
+
+        viewModel.saveCardChanges(
+            name = getNameOfCloth(),
+            picture = imageUri,
+            listOfSymbols = getListOfSymbolFroDB()!!,
+        )
+    }
+
+
     private fun setUpperMenu(view: View) {
         //set upper menu
         setTitleInUpperMenu()
-
-
 
         binding.toolbarAddCard.navigationIcon =
             view.context.getDrawable(R.drawable.ic_baseline_close_24)
         //go back on the first fragment without adding info in database
         binding.toolbarAddCard.setNavigationOnClickListener {
-            findNavController().popBackStack()
+            findNavController().navigate(R.id.action_addNewCard_to_kindsOfThingsForLaundry)
         }
     }
 
     private fun observeListOfSymbols() {
-        //set adapter for recyclerview with added symbols
-        binding.addedSymbolsRecyclerView.layoutManager =
-            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        //get list of added symbols
-        viewModel.listOfSymbols.observe(viewLifecycleOwner) { symbols ->
-            binding.addedSymbolsRecyclerView.adapter =
-                RecyclerViewAdapterSymbolAndMeaning(symbols, TypeOfRecyclerView.ADDSYMBOLFRAGMENT)
+        val recyclerView = binding.addedSymbolsRecyclerView
+        val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning({ clickedItem ->
+            viewModel.showDialog(
+                clickedItem,
+                requireContext()
+            )
+        }, TypeOfRecyclerView.ADD_SYMBOL_FRAGMENT)
+        recyclerView.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
+        recyclerView.adapter = adapter
+        viewModel.listOfSymbols.observe(viewLifecycleOwner) { items ->
+            adapter.submitList(items)
         }
     }
 
@@ -243,68 +242,86 @@ class AddNewCardFragment : Fragment() {
         return folderForImagesInDB
     }
 
-    private fun showCardInfo(cardId: Long) {
-        var card: Card
-        viewModel.getCard(cardId).observe(viewLifecycleOwner) { selectedCard ->
-            card = selectedCard
-            bind(card)
-        }
-    }
-
-    private fun updateItem(card: Card?) {
-        card?.let { viewModel.updateCard(card) }
-        val action = AddNewCardFragmentDirections.actionAddNewCardToClothingCardsFragment()
-        findNavController().navigate(action)
-    }
-
-    private fun saveInfo(file: File?): Card? {
+    private fun saveInfoInCard(file: File?): Card? {
         if (viewModel.uri.value != null) {
-
-            //creating file in new folder with unique name
-            val fileForImages =
-                createFileWithUniqueName(file)
-
-            //copy Image to File
-            fileForImages?.let {
-                copyImageToFile(it)
-                imageUri = fileForImages.toUri().toString()
-            }
+            copyImageToFileForDB(file)
         }
-
         var newCard: Card? = null
-        //collecting info for card
-        newCard = fillCard(newCard)
+        newCard = collectInfoForCard(newCard)
         return newCard
+
+
     }
 
-    private fun fillCard(newCard: Card?): Card? {
-        var newCard = newCard
-        val nameOfCloth =
-            binding.nameOfCloth.text.toString().trim()
-                .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
-        val categoryFromArgs = args.currentCategory
-        //viewModel.deleteInListSymbolAdd()
+    private fun copyImageToFileForDB(file: File?) {
+        //creating file in new folder with unique name
+        val fileForImages =
+            createFileWithUniqueName(file)
 
-        val listOfSymbols = viewModel.listOfSymbols.value?.let { list ->
-            val listDBO = list.map { item -> item.toSymbolForWashingDBO(context) }
-                ListOfSymbolsForDataBase(listDBO as List<SymbolForWashingDBO>)
+        //copy Image to File
+        fileForImages?.let {
+            copyImageToFile(it)
+            imageUri = fileForImages.toUri().toString()
         }
+    }
 
-        if (categoryFromArgs != null) {
-            newCard = context?.let { context ->
-                categoryFromArgs.toCategoryDBO(context)?.let { category ->
+    private fun dataForCardCorrect(): Boolean {
+        var message = ""
+
+        if (getNameOfCloth().isEmpty() && getListOfSymbolFroDB()?.listOfSymbols.isNullOrEmpty()) {
+            message = "Заполни поле \"Название вещи\" и добавь нужные символы для ухода за вещами"
+        } else if (getNameOfCloth().isEmpty()) {
+            message = "Заполни поле \"Название вещи\""
+        } else if (getListOfSymbolFroDB() == null) {
+            message = "Добавь нужные символы для ухода за вещами"
+        }
+        return if (message != "") {
+            val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+            val dialog: AlertDialog = builder.setMessage(message)
+                .setPositiveButton("Ok") { _, _ -> }
+                .create()
+            dialog.show()
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
+            false
+        } else true
+
+    }
+
+
+    private fun collectInfoForCard(newCard: Card?): Card? {
+        var newCard = newCard
+        viewModel.setName(getNameOfCloth())
+        args.currentCategory?.let { viewModel.setCategory(it) }
+        val categoryForDB = viewModel.category.value!!.toCategoryDBO(requireContext())
+        newCard =
+            categoryForDB?.let { category ->
+                viewModel.nameOfCloth.value?.let { name ->
                     Card(
                         id = 0,
-                        name = nameOfCloth,
+                        name = name,
                         picture = imageUri,
-                        listOfSymbols = listOfSymbols!!,
+                        listOfSymbols = getListOfSymbolFroDB()!!,
                         category = category
                     )
                 }
             }
-        }
         return newCard
     }
+
+    private fun getListOfSymbolFroDB(): ListOfSymbolsForDataBase? {
+        val listOfSymbols = viewModel.listOfSymbols.value?.let { list ->
+            val listDBO = list.map { item -> item.toSymbolForWashingDBO(context) }
+            ListOfSymbolsForDataBase(listDBO as List<SymbolForWashingDBO>)
+        }
+        return listOfSymbols
+    }
+
+    private fun getNameOfCloth(): String {
+        return binding.nameOfCloth.text.toString().trim()
+            .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
+    }
+
 
     private fun copyImageToFile(fileForImages: File) {
         fileForImages.outputStream().use { stream ->
@@ -360,10 +377,7 @@ class AddNewCardFragment : Fragment() {
             ActivityResultContracts.RequestPermission()
         ) { isGranted: Boolean ->
             if (isGranted) {
-                Log.i("Permission: ", "Granted")
                 takeImageMY()
-            } else {
-                Log.i("Permission: ", "Denied")
             }
         }
 
@@ -372,7 +386,6 @@ class AddNewCardFragment : Fragment() {
             if (isSuccess) {
                 latestTmpUri?.let { uriFile ->
                     viewModel.updateUri(uriFile)
-                    Log.d("text", "uriUpdated ${viewModel.uri.value}")
                 }
 
             }
@@ -421,37 +434,11 @@ class AddNewCardFragment : Fragment() {
         }
     }
 
-    private fun bind(card: Card) {
-        binding.apply {
-            nameOfCloth.setText(card.name, TextView.BufferType.SPANNABLE)
-            addedSymbolsRecyclerView.layoutManager =
-                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            val list = card.listOfSymbols.listOfSymbols
-
-            val listSymbolForWashing = list.map { context?.let { item -> it.toSymbolForWashing(item) } }
-
-            binding.addedSymbolsRecyclerView.adapter =
-                RecyclerViewAdapterSymbolAndMeaning(
-                    listSymbolForWashing as List<SymbolForWashing>,
-                    TypeOfRecyclerView.ADDSYMBOLFRAGMENT
-                )
-        }
-        if (card.picture != null) {
-            binding.textOnImage.text = ""
-            Glide.with(binding.itemImage.context)
-                .load(card.picture.toUri())
-                .centerCrop()
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
-                .skipMemoryCache(true)
-                .into(binding.itemImage)
-        }
-    }
-
 
     //get list from ChooseSymbolsToCard
-    private fun getListOfSymbolsAndAddToViewModel() {
+    private fun getListOfSymbolsFromChosingFragmentAndAddToViewModel() {
         val navController = findNavController()
-        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<List<SymbolForWashing>>(
+        navController.currentBackStackEntry?.savedStateHandle?.getLiveData<List<SymbolGuide.SymbolForWashing>>(
             "key"
         )?.observe(viewLifecycleOwner) {
             viewModel.addSelectedSymbols(it)

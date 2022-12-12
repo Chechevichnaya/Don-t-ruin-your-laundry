@@ -15,20 +15,4 @@ class Converters {
     }
 }
 
-//class TspDeserializer : JsonDeserializer<TspEnum> {
-//    override fun deserialize(json: JsonElement, typeOfT: Type?, context: JsonDeserializationContext?): TspEnum {
-//        val stringValue = json.asString
-//        for (enum in TspEnum.values()) {
-//            if (enum.provider == stringValue) {
-//                return enum
-//            }
-//        }
-//        throw IllegalArgumentException("Unknown tsp $stringValue!")
-//    }
-//}
-//val gson = GsonBuilder()
-//    .registerTypeAdapter(TspEnum::class.java, TspDeserializer())
-//    .create()
 
-//val user = gson.fromJson(json, User::class.java)
-//println(user) // prints User(tsp=AY_BEE_CEE, userId=lkajsdlk-199191-lkjdflakj)

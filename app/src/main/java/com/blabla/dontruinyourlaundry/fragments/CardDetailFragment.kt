@@ -11,13 +11,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
+import com.blabla.dontruinyourlaundry.adapters.MULTIRecyclerViewAdapterSymbolAndMeaning
 import com.blabla.dontruinyourlaundry.roomStuff.Card
 import com.blabla.dontruinyourlaundry.roomStuff.CardsApplication
-import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSymbolAndMeaning
-import com.blabla.dontruinyourlaundry.data.*
 import com.blabla.dontruinyourlaundry.databinding.FragmentCardDetailBinding
 import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 import com.blabla.dontruinyourlaundry.entity.TypeOfRecyclerView
@@ -25,6 +22,9 @@ import com.blabla.dontruinyourlaundry.viewModels.CardDetailFactory
 import com.blabla.dontruinyourlaundry.viewModels.CardDetailViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 
 
 class CardDetailFragment : Fragment() {
@@ -42,7 +42,7 @@ class CardDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCardDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -52,6 +52,7 @@ class CardDetailFragment : Fragment() {
 
         val id = navigationArgs.id
         viewModel.getCard(id).observe(this.viewLifecycleOwner) { selectedCard ->
+            viewModel.addInfoToViewModel(selectedCard, requireContext())
             card = selectedCard
             bind(card)
         }
@@ -86,9 +87,10 @@ class CardDetailFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun bind(card: Card) {
+
+
+    private fun bind(card:Card) {
         if (card.picture == null) {
-//            binding.itemImage.setImageResource(ImageByCategory().getImageByCategory(card.category))
             val imageRes = CategoryEnum.values().find { it == card.category }?.getResIcon()
             if (imageRes != null) {
                 binding.itemImage.setImageResource(imageRes)
@@ -103,16 +105,18 @@ class CardDetailFragment : Fragment() {
         }
         binding.apply {
             nameOfCloth.text = card.name
-            binding.addedSymbolsRecyclerView.layoutManager =
-                LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-            val list = card.listOfSymbols.listOfSymbols
-            val listSymbolForWashing =
-                list.map { context?.let { item -> it.toSymbolForWashing(item) } }
-            binding.addedSymbolsRecyclerView.adapter =
-                RecyclerViewAdapterSymbolAndMeaning(
-                    listSymbolForWashing as List<SymbolForWashing>,
-                    TypeOfRecyclerView.CARDDETAILFRAGMENT
-                )
+            val recyclerView = binding.addedSymbolsRecyclerView
+            val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning(
+                {},
+                TypeOfRecyclerView.CARD_DETAIL_FRAGMENT
+            )
+            recyclerView.layoutManager =
+                FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
+            recyclerView.adapter = adapter
+            viewModel.addInfoToViewModel(card, requireContext())
+            viewModel.listOfSymbols.observe(viewLifecycleOwner)
+            { items -> adapter.submitList(items) }
+
             editItem.setOnClickListener { editCard() }
         }
     }

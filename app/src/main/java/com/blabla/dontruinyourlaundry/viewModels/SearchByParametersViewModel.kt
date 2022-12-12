@@ -1,22 +1,16 @@
 package com.blabla.dontruinyourlaundry.viewModels
 
-import android.util.Log
-import androidx.lifecycle.*
-import com.blabla.dontruinyourlaundry.roomStuff.CardsDao
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.blabla.dontruinyourlaundry.data.DataForSearchByParameters
 import com.blabla.dontruinyourlaundry.data.SearchByParametersCard
 import com.blabla.dontruinyourlaundry.data.SelectionType
 import com.blabla.dontruinyourlaundry.entity.SearchScreenItem
+import com.blabla.dontruinyourlaundry.roomStuff.CardsDao
 
 class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() {
-
-//    fun getCardsByCategory(categories: List<Category>): LiveData<List<Card>> {
-//        return cardsDao.searchByParameterCategory(categories).asLiveData()
-//    }
-
-//    fun getCardsBySymbols(symbols: List<SymbolForWashing>):LiveData<List<Card>>{
-//        return cardsDao.searchByParameterSymbols(symbols).asLiveData()
-//    }
 
     private val _searchItems = MutableLiveData(
         getFullListOfSearchItems(DataForSearchByParameters.getData())
@@ -53,34 +47,12 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
 
         _searchItems.value = when (parametersCard.selectionType) {
             SelectionType.SINGLE -> {
-                Log.d("clicked", "type single")
                 singleType(flatListMutable, clickedItem)
             }
             SelectionType.MULTI -> {
-                Log.d("clicked", "type multi")
                 multiType(flatListMutable, clickedItem)
             }
         }
-        Log.d("clicked", "new - ${_searchItems.value}")
-
-//        when (parametersCard.selectionType) {
-//            SelectionType.SINGLE -> {
-//                flatListMutable.forEach { itemInList ->
-//                    if (itemInList is SearchScreenItem.SearchParameter && itemInList.titleName == clickedItem.titleName) {
-//                        if (clickedItem.selected) itemInList.selected = false
-//                        else itemInList.selected = itemInList == clickedItem
-//                    }
-//                }
-//            }
-//            SelectionType.MULTI -> {
-//                flatListMutable.forEach { itemInList ->
-//                    if (itemInList is SearchScreenItem.SearchParameter && itemInList.titleName == clickedItem.titleName) {
-//                        itemInList.selected = !itemInList.selected
-//                    }
-//                }
-//            }
-//        }
-//        _searchItems.value = flatListMutable
     }
 
 

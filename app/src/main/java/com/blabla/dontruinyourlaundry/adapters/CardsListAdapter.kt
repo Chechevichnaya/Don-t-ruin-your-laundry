@@ -47,7 +47,6 @@ class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
                     .skipMemoryCache(true)
                     .into(binding.itemImage)
             }
-
         }
     }
 

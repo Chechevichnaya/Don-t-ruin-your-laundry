@@ -21,8 +21,6 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
     ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        Log.d("clicked", "onCreateViewHolder")
-
         return if (viewType == TITLE) TitleViewHolder(
             SearchByParametersTitleBinding.inflate(
                 LayoutInflater.from(
@@ -40,7 +38,6 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        Log.d("clicked", "onBindViewHolder")
         val item = getItem(position)
         when (holder) {
             is TitleViewHolder -> {
@@ -79,7 +76,6 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
             } else {
                 R.color.lilac_200
             }
-            Log.d("clicked", "color - $bgColor")
             val context = binding.buttonInSearchByParameters.context
             binding.buttonInSearchByParameters.apply {
                 setBackgroundColor(context.resources.getColor(bgColor))
@@ -107,14 +103,12 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
                 oldItem: SearchScreenItem,
                 newItem: SearchScreenItem
             ): Boolean {
-                val result = if (oldItem is SearchScreenItem.Title && newItem is SearchScreenItem.Title) {
-                        val nameTheSame = newItem == oldItem
-                        nameTheSame
+                val result =
+                    if (oldItem is SearchScreenItem.Title && newItem is SearchScreenItem.Title) {
+                        newItem == oldItem
                     } else if (oldItem is SearchScreenItem.SearchParameter && newItem is SearchScreenItem.SearchParameter) {
-                    val allArgumentsTheSame = newItem == oldItem
-                        allArgumentsTheSame
+                        newItem == oldItem
                     } else false
-                Log.d("clicked", "content the same - $result")
                 return result
             }
 
@@ -127,6 +121,4 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
             }
         }
     }
-
-
 }

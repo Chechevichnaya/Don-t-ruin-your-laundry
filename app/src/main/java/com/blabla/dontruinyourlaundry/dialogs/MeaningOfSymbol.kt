@@ -7,9 +7,6 @@ import androidx.fragment.app.DialogFragment
 import com.blabla.dontruinyourlaundry.data.ListOfCards
 
 class MeaningOfSymbol: DialogFragment() {
-
-   // val data = context?.let { ListOfCards.loadListOfSymbolGuide(it) }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog =
         AlertDialog.Builder(requireContext())
             .setMessage(getString(com.blabla.dontruinyourlaundry.R.string.helper_text))

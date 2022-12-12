@@ -7,11 +7,11 @@
         android:title="@string/symbol_guide"
         app:showAsAction="never" />
 
-    <item
-        android:id="@+id/help_with_app"
-        android:title="@string/help_with_app"
-        android:icon="@drawable/info"
-        app:showAsAction="ifRoom" />
+<!--    <item-->
+<!--        android:id="@+id/help_with_app"-->
+<!--        android:title="@string/help_with_app"-->
+<!--        android:icon="@drawable/info"-->
+<!--        app:showAsAction="ifRoom" />-->
 
     <item
         android:id="@+id/filter"

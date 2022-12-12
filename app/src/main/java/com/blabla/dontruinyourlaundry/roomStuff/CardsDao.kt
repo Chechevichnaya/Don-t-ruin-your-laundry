@@ -15,13 +15,6 @@ interface CardsDao {
     @Delete
     suspend fun deleteCard(card: Card)
 
-//    @Query("SELECT(SELECT COUNT(*) FROM card WHERE category = :category ) == 0")
-//    suspend fun isEmpty(category: Category): Boolean
-
-//    @Query("SELECT * FROM card")
-//    fun getAllCards(): LiveData<List<Card>>
-
-
     @Query("SELECT * FROM card WHERE category = :category ORDER BY name ASC")
     fun getCardsByCategory(category: CategoryEnum): Flow<List<Card>>
 

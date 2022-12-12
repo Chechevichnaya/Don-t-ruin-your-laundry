@@ -7,20 +7,21 @@
     android:layout_height="wrap_content"
     android:paddingBottom="8dp">
 
-    <ImageButton
-        android:id="@+id/item_button"
+    <ImageView
+        android:id="@+id/icon_button"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:backgroundTint="@color/lilac_500"
+        android:backgroundTint="@color/lilac_200"
         android:scaleType="centerInside"
         android:src="@drawable/plus"
+        android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintEnd_toStartOf="@id/symbol_meaning_in_card">
 
-    </ImageButton>
+    </ImageView>
 
     <TextView
         android:id="@+id/symbol_meaning_in_card"
@@ -31,14 +32,13 @@
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
         android:textColor="@color/black"
         android:textSize="16sp"
-        app:layout_constraintStart_toEndOf="@id/item_button"
+        app:layout_constraintStart_toEndOf="@id/icon_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Добавить символы для стирки. И еще что то!">
+
+        tools:text="Добавить">
 
     </TextView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-

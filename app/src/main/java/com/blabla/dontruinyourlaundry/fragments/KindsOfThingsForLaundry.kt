@@ -44,10 +44,6 @@ class KindsOfThingsForLaundry : Fragment() {
                         findNavController().navigate(R.id.action_kindsOfThingsForLaundry_to_simbolGuide)
                         true
                     }
-                    R.id.help_with_app -> {
-                        findNavController().navigate(R.id.action_kindsOfThingsForLaundry_to_howToUseAppDialog)
-                        true
-                    }
                     R.id.filter -> {
                         findNavController().navigate(R.id.action_kindsOfThingsForLaundry_to_searchDialog)
                         true
@@ -59,28 +55,35 @@ class KindsOfThingsForLaundry : Fragment() {
 
         //Round button
         binding.fab.setOnClickListener {
-            //getting category
-            val currentCategory = when (binding.pager.currentItem) {
-                0 -> CategoryEnum.CLOTH
-                1 -> CategoryEnum.BAD_SHEETS
-                2 -> CategoryEnum.BATH
-                3 -> CategoryEnum.KITCHEN
-                4 -> CategoryEnum.REST
-                else -> CategoryEnum.CLOTH
-            }
-            val action =
-                KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToAddNewCard(
-                    title = getString(R.string.add_card_fragment),
-                    currentCategory = context?.let { context -> currentCategory.toCategory(context) }
-                )
-            view.findNavController().navigate(action)
+            goToAddNewCardFragment(view)
         }
 
         binding.pager.adapter = LandryPagerAdapter(this)
         TabLayoutMediator(binding.tabs, binding.pager) { tab, position ->
-//            tab.text = getString(Category.values()[position].nameId)
-            tab.text = context?.let { CategoryEnum.values()[position].getName(it) }
+            tab.text = context?.let {context -> CategoryEnum.values()[position].getName(context) }
         }.attach()
+    }
+
+    private fun goToAddNewCardFragment(view: View) {
+        val currentCategory = getCurrentCategory()
+        val action =
+            KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToAddNewCard(
+                title = getString(R.string.add_card_fragment),
+                currentCategory = context?.let { context -> currentCategory.toCategory(context) }
+            )
+        view.findNavController().navigate(action)
+    }
+
+    private fun getCurrentCategory(): CategoryEnum {
+        val currentCategory = when (binding.pager.currentItem) {
+            0 -> CategoryEnum.CLOTH
+            1 -> CategoryEnum.BAD_SHEETS
+            2 -> CategoryEnum.BATH
+            3 -> CategoryEnum.KITCHEN
+            4 -> CategoryEnum.REST
+            else -> CategoryEnum.CLOTH
+        }
+        return currentCategory
     }
 }
 
@@ -93,13 +96,11 @@ class LandryPagerAdapter(val fragment: Fragment) : FragmentStateAdapter(fragment
         val fragment = ClothingCardsFragment()
         fragment.arguments = Bundle().apply {
             putSerializable(
+                //key
                 ClothingCardsFragment.CATEGORY_NAME,
+                //value
                 CategoryEnum.values()[position]
             )
-//            putInt(
-//                ClothingCardsFragment.CATEGORY,
-//                Category.values()[position].imageResId)
-
         }
         return fragment
     }

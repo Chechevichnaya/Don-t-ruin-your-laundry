@@ -112,6 +112,7 @@
     <string name="dry_clean_not_allowed">Изделие не должно подвергаться химической чистке, удаление пятен растворителем запрещено</string>
     <string name="dry_clean_wet_not_allowed">Мокрая чистка запрещена</string>
     <string name="wringing">Нельзя выкручивать изделие при отжиме</string>
+    <string name="delete_symbol">Удалить символ?</string>
 
 
 </resources>

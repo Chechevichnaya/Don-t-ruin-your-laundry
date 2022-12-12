@@ -1,14 +1,32 @@
 package com.blabla.dontruinyourlaundry.entity
 
-import com.blabla.dontruinyourlaundry.data.SymbolForWashing
+import android.content.Context
+import android.os.Parcelable
+import androidx.annotation.DrawableRes
 
-data class SymbolGuide(
-    val headName: HeadNameSymbolGuide,
-    val symbolsByCategory: List<SymbolForWashing>
-) {
+import com.blabla.dontruinyourlaundry.data.SymbolForWashingDBO
+import kotlinx.parcelize.Parcelize
+
+sealed class SymbolGuide{
+
+    data class HeadName(val nameId: HeadNameSymbolGuide):SymbolGuide()
+
+    @Parcelize
+    data class SymbolForWashing(
+        @DrawableRes val pictureId: Int,
+        val meaningOfSymbol: String,
+        var selected: Boolean = false
+    ) : Parcelable, SymbolGuide() {
+
+        fun toSymbolForWashingDBO(context: Context?): SymbolForWashingDBO? {
+            return SymbolForWashingDBO.values().find { enumItem ->
+                context?.let { enumItem.getDescription(it) } == meaningOfSymbol
+            }
+        }
+    }
 }
 
-enum class HeadNameSymbolGuide(val nameId: String) {
+enum class HeadNameSymbolGuide(val head: String) {
     WASHING("Стирка"),
     BLEACHING("Отбеливание"),
     DRYING("Сушка"),

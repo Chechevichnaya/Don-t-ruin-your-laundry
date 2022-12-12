@@ -26,7 +26,6 @@ class ClothingCardsFragment : Fragment() {
     }
 
     companion object {
-        const val CATEGORY = "CATEGORY"
         const val CATEGORY_NAME = "CATEGORY_NAME"
     }
 
@@ -48,7 +47,8 @@ class ClothingCardsFragment : Fragment() {
 
 
         val adapter = CardsListAdapter { card ->
-            val action = KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToCardDetailFragment(card.id)
+            val action =
+                KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToCardDetailFragment(card.id)
             this.findNavController().navigate(action)
         }
 

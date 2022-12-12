@@ -2,25 +2,15 @@ package com.blabla.dontruinyourlaundry.data
 
 import android.content.Context
 import android.os.Parcelable
-import androidx.annotation.DrawableRes
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.entity.HeadNameSymbolGuide
+import com.blabla.dontruinyourlaundry.entity.SymbolGuide
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class SymbolForWashing(
-    @DrawableRes val pictureId: Int,
-    val meaningOfSymbol: String,
-    var selected: Boolean = false
-) : Parcelable {
+data class ListOfSymbols(val list: List<SymbolGuide.SymbolForWashing>) : Parcelable {
 
-    fun toSymbolForWashingDBO(context: Context?): SymbolForWashingDBO? {
-        return SymbolForWashingDBO.values().find { enumItem ->
-            context?.let { enumItem.getDescription(it) } == meaningOfSymbol
-        }
-    }
 }
-
 
 @Parcelize
 enum class SymbolForWashingDBO : Parcelable {
@@ -266,8 +256,8 @@ enum class SymbolForWashingDBO : Parcelable {
         }
     }
 
-    fun toSymbolForWashing(context: Context): SymbolForWashing {
-        return SymbolForWashing(getResIdIcon(), getDescription(context))
+    fun toSymbolForWashing(context: Context): SymbolGuide.SymbolForWashing {
+        return SymbolGuide.SymbolForWashing(getResIdIcon(), getDescription(context))
 
     }
 }

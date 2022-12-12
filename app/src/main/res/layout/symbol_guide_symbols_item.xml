@@ -7,7 +7,7 @@
 
     <ImageButton
         android:id="@+id/symbol_in_guide"
-        android:layout_width="match_parent"
+        android:layout_width="70dp"
         android:layout_height="0dp"
         android:padding="8dp"
         app:layout_constraintDimensionRatio="1:1"
