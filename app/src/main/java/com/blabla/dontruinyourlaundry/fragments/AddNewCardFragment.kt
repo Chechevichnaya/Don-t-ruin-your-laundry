@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -80,7 +81,8 @@ class AddNewCardFragment : Fragment() {
         setUpperMenu(view)
         getListOfSymbolsFromChosingFragmentAndAddToViewModel()
 
-        //creating a new folder, if it is not created yet, where the last chosen photo will be kept for DB
+        //creating a new folder, if it is not created yet,
+        // where the last chosen photo will be kept for DB
         val folderForImagesInDB = createNewFolderInFiles()
 
         clickOnPhoto()
@@ -267,12 +269,11 @@ class AddNewCardFragment : Fragment() {
 
     private fun dataForCardCorrect(): Boolean {
         var message = ""
-
         if (getNameOfCloth().isEmpty() && getListOfSymbolFroDB()?.listOfSymbols.isNullOrEmpty()) {
             message = "Заполни поле \"Название вещи\" и добавь нужные символы для ухода за вещами"
         } else if (getNameOfCloth().isEmpty()) {
             message = "Заполни поле \"Название вещи\""
-        } else if (getListOfSymbolFroDB() == null) {
+        } else if (getListOfSymbolFroDB()?.listOfSymbols.isNullOrEmpty()) {
             message = "Добавь нужные символы для ухода за вещами"
         }
         return if (message != "") {
