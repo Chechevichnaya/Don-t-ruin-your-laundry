@@ -72,10 +72,12 @@ class AddNewCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.addCardId(args.itemId)
-        viewModel.cardId.observe(viewLifecycleOwner) {
-            viewModel.addCardToViewModel(requireContext())
-        }
+        Log.d("CHECK", "cardID = ${viewModel.cardId.value}")
+        viewModel.addCardId(args.itemId, requireContext())
+//        viewModel.cardId.observe(viewLifecycleOwner) {
+//            viewModel.addCardToViewModel(requireContext())
+//            Log.d("CHECK", "after cardid observe ${viewModel.listOfSymbols.value}")
+//        }
 
         clickOnAddMoreSymbols(view)
         setUpperMenu(view)
@@ -139,6 +141,7 @@ class AddNewCardFragment : Fragment() {
                     R.id.save_button -> {
                         if (dataForCardCorrect()) {
                             if (viewModel.card.value != null) {
+                                Log.d("CHECK", "list after click add - ${viewModel.listOfSymbols.value}")
                                 saveCardChanges(folderForImagesInDB)
                                 findNavController().popBackStack(
                                     R.id.kindsOfThingsForLaundry,
@@ -186,6 +189,7 @@ class AddNewCardFragment : Fragment() {
     }
 
     private fun observeListOfSymbols() {
+
         val recyclerView = binding.addedSymbolsRecyclerView
         val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning({ clickedItem ->
             viewModel.showDialog(
@@ -195,7 +199,9 @@ class AddNewCardFragment : Fragment() {
         }, TypeOfRecyclerView.ADD_SYMBOL_FRAGMENT)
         recyclerView.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
         recyclerView.adapter = adapter
+
         viewModel.listOfSymbols.observe(viewLifecycleOwner) { items ->
+            Log.d("CHECK", "viewModel.listOfSymbols in observeListOfSymbols()- ${viewModel.listOfSymbols.value}")
             adapter.submitList(items)
         }
     }
@@ -441,7 +447,8 @@ class AddNewCardFragment : Fragment() {
         val navController = findNavController()
         navController.currentBackStackEntry?.savedStateHandle?.getLiveData<List<SymbolGuide.SymbolForWashing>>(
             "key"
-        )?.observe(viewLifecycleOwner) {
+        )?.observe(viewLifecycleOwner) {it ->
+            Log.d("CHECK", "it - $it")
             viewModel.addSelectedSymbols(it)
         }
     }
