@@ -7,9 +7,9 @@ import androidx.annotation.DrawableRes
 import com.blabla.dontruinyourlaundry.data.SymbolForWashingDBO
 import kotlinx.parcelize.Parcelize
 
-sealed class SymbolGuide{
+sealed class SymbolGuide {
 
-    data class HeadName(val nameId: HeadNameSymbolGuide):SymbolGuide()
+    data class HeadName(val nameId: HeadNameSymbolGuide) : SymbolGuide()
 
     @Parcelize
     data class SymbolForWashing(
@@ -17,6 +17,7 @@ sealed class SymbolGuide{
         val meaningOfSymbol: String,
         var selected: Boolean = false
     ) : Parcelable, SymbolGuide() {
+
 
         fun toSymbolForWashingDBO(context: Context?): SymbolForWashingDBO? {
             return SymbolForWashingDBO.values().find { enumItem ->
