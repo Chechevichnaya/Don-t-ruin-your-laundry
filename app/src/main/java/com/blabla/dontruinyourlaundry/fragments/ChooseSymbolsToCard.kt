@@ -40,6 +40,7 @@ class ChooseSymbolsToCard : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpperMenu()
         val selectedItems = args.selectedItems.list
+        Log.d("CHECK", "ChooseSymbolsToCard - selected = $selectedItems")
 
 
         attachAdapterToRecyclerView(selectedItems)

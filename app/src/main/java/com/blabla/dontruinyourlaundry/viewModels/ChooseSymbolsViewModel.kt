@@ -14,13 +14,19 @@ class ChooseSymbolsViewModel : ViewModel() {
     val itemsInSymbolGuide: LiveData<List<SymbolGuide>> = _itemsInSymbolGuide
 
     fun setSelectedSymbols(symbols: List<SymbolGuide.SymbolForWashing>) {
+        Log.d("CHECK", "BEFORE _itemsInSymbolGuide.value = ${ _itemsInSymbolGuide.value}")
         val list = _itemsInSymbolGuide.value.orEmpty()
         _itemsInSymbolGuide.value = list.map { item ->
             if (item is SymbolGuide.SymbolForWashing && symbols.contains(item)) {
+                Log.d("CHECK", "INSIDE YES")
                 item.copy(selected = true)
+
             }
-            else item
+            else
+                Log.d("CHECK", "INSIDE NO")
+                item
         }
+        Log.d("CHECK", "AFTER _itemsInSymbolGuide.value = ${ _itemsInSymbolGuide.value}")
     }
 
 

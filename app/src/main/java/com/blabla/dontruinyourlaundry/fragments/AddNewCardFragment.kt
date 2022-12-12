@@ -72,12 +72,7 @@ class AddNewCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        Log.d("CHECK", "cardID = ${viewModel.cardId.value}")
-        viewModel.addCardId(args.itemId, requireContext())
-//        viewModel.cardId.observe(viewLifecycleOwner) {
-//            viewModel.addCardToViewModel(requireContext())
-//            Log.d("CHECK", "after cardid observe ${viewModel.listOfSymbols.value}")
-//        }
+        viewModel.addCardForEditing(args.itemId, requireContext())
 
         clickOnAddMoreSymbols(view)
         setUpperMenu(view)
@@ -118,6 +113,7 @@ class AddNewCardFragment : Fragment() {
             val action = AddNewCardFragmentDirections.actionAddNewCardToAddSymbolToCard(
                 selectedItems = listOfSelectedSymbols
             )
+            Log.d("CHECK", "clickOnAddMoreSymbols selected $listOfSelectedSymbols")
             view.findNavController().navigate(action)
         }
     }
@@ -201,7 +197,6 @@ class AddNewCardFragment : Fragment() {
         recyclerView.adapter = adapter
 
         viewModel.listOfSymbols.observe(viewLifecycleOwner) { items ->
-            Log.d("CHECK", "viewModel.listOfSymbols in observeListOfSymbols()- ${viewModel.listOfSymbols.value}")
             adapter.submitList(items)
         }
     }

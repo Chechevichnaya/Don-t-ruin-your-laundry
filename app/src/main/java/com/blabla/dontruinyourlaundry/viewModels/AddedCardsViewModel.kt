@@ -38,7 +38,7 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
     private val _uri = MutableLiveData<Uri>()
     val uri: LiveData<Uri> = _uri
 
-    fun addCardId(cardId: Long, context: Context) {
+    fun addCardForEditing(cardId: Long, context: Context) {
         if (cardId > 0 && _cardId.value == null) {
             _cardId.value = cardId
             addCardToViewModel(context)
@@ -94,11 +94,6 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
         _listOfSymbols.value = list
     }
 
-    fun addSymbolsFromOldCardToViewModel(card: Card, context: Context) {
-        val list = card.listOfSymbols.listOfSymbols.toMutableList()
-        _listOfSymbols.value = list.map { it.toSymbolForWashing(context) }
-    }
-
     fun updateUri(newUri: Uri) {
         _uri.value = newUri
     }
@@ -107,7 +102,6 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
     fun addSelectedSymbols(list: List<SymbolGuide.SymbolForWashing>) {
         Log.d("CHECK", "newSymbols - $list")
         val listInViewModel = _listOfSymbols.value.orEmpty().toMutableList()
-//        listInViewModel.addAll(list)
         _listOfSymbols.value = list
         Log.d("CHECK", " New _listOfSymbols.value = ${_listOfSymbols.value}")
     }
