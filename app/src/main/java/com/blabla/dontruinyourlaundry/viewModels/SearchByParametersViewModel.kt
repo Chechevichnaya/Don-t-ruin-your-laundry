@@ -1,5 +1,6 @@
 package com.blabla.dontruinyourlaundry.viewModels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,6 +9,7 @@ import com.blabla.dontruinyourlaundry.data.DataForSearchByParameters
 import com.blabla.dontruinyourlaundry.data.SearchByParametersCard
 import com.blabla.dontruinyourlaundry.data.SelectionType
 import com.blabla.dontruinyourlaundry.entity.SearchScreenItem
+import com.blabla.dontruinyourlaundry.entity.SymbolGuide
 import com.blabla.dontruinyourlaundry.roomStuff.CardsDao
 
 class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() {
@@ -16,6 +18,10 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
         getFullListOfSearchItems(DataForSearchByParameters.getData())
     )
     val searchItems: LiveData<List<SearchScreenItem>> = _searchItems
+
+    private val _selectedItems = MutableLiveData<List<SearchScreenItem>>()
+    val selectedItems: LiveData<List<SearchScreenItem>> = _selectedItems
+
 
     private fun getFullListOfSearchItems(input: List<SearchByParametersCard>): List<SearchScreenItem> {
         val result = mutableListOf<SearchScreenItem>()
@@ -75,15 +81,28 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
         flatList: MutableList<SearchScreenItem>,
         clickedItem: SearchScreenItem.SearchParameter
     ): List<SearchScreenItem> {
-         return flatList.map { itemInList ->
+        return flatList.map { itemInList ->
             if (itemInList is SearchScreenItem.SearchParameter && itemInList == clickedItem) {
                 itemInList.copy(selected = !itemInList.selected)
-            }
-             else itemInList
+            } else itemInList
         }
 
 
     }
+
+    fun processSelectedItems() {
+        getSelectedItems()
+    }
+
+    private fun getSelectedItems() {
+        val selectedItems  = _searchItems.value.orEmpty().toMutableList()
+            .filter { it is SearchScreenItem.SearchParameter && it.selected }
+        _selectedItems.value = selectedItems
+        Log.d("SEARCH", "_selectedItems.value = ${_selectedItems.value}")
+
+    }
+
+
 }
 
 class SearchByParametersFactory(private val cardsDao: CardsDao) : ViewModelProvider.Factory {

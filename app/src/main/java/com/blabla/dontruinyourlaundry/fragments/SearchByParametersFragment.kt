@@ -58,6 +58,7 @@ class SearchByParametersFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.add_button -> {
+                       viewModel.processSelectedItems()
 
                         true
                     }
