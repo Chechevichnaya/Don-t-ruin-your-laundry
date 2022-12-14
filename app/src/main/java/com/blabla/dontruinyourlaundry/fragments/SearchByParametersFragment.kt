@@ -6,10 +6,14 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
+import com.blabla.dontruinyourlaundry.adapters.CardsListAdapter
 import com.blabla.dontruinyourlaundry.roomStuff.CardsApplication
 import com.blabla.dontruinyourlaundry.adapters.RecyclerViewAdapterSearchParameter
 import com.blabla.dontruinyourlaundry.databinding.FragmentSearchByParametersBinding
@@ -58,8 +62,8 @@ class SearchByParametersFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.add_button -> {
-                       viewModel.processSelectedItems()
-
+                        val cards = viewModel.getListOfCards()
+                        setAdapterToCards()
                         true
                     }
                     else -> false
@@ -76,9 +80,38 @@ class SearchByParametersFragment : Fragment() {
             FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
         recyclerView.adapter = adapter
         viewModel.searchItems.observe(viewLifecycleOwner) { items ->
+            binding.textParameters.isVisible = false
             adapter.submitList(items)
         }
 
+    }
+
+    fun setAdapterToCards() {
+        val adapter = CardsListAdapter { card ->
+            val action =
+                SearchByParametersFragmentDirections.actionSearchByParametersFragmentToCardDetailFragment(
+                    card.id
+                )
+            this.findNavController().navigate(action)
+        }
+        binding.recyclerSearchByParameters.layoutManager =
+            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.recyclerSearchByParameters.adapter = adapter
+        viewModel.getListOfCards().observe(viewLifecycleOwner) { cards ->
+            adapter.submitList(cards)
+        }
+        //
+        //        binding.recyclerViewAddedCards.layoutManager =
+        //            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        //        binding.recyclerViewAddedCards.adapter = adapter
+        //
+        //        viewModel.allCardsByCategory(category).observe(viewLifecycleOwner) { cards ->
+        //            //check if table by certain category is empty
+        //            if (cards.isEmpty()) {
+        //                //set full screen picture of cloth type
+        //                binding.imageTypeOfCloth.setImageResource(image)
+        //            } else adapter.submitList(cards)
+        //        }
     }
 
 }

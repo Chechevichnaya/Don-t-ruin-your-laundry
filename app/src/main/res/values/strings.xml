@@ -18,7 +18,7 @@
     <string name="delete">Удалить</string>
     <string name="safe">Сохранить</string>
     <string name="washing">Стирка</string>
-<!--<string name="wash_hand">Стирать только руками при температуре воды до 40 °C. Не тереть, отжимать аккуратно, без перекручивания</string>-->
+    <!--<string name="wash_hand">Стирать только руками при температуре воды до 40 °C. Не тереть, отжимать аккуратно, без перекручивания</string>-->
     <string name="wash_normal">Машинная стирка, нормальный режим.</string>
     <string name="wash_no">Стирка запрещена</string>
     <string name="save">Сохранить</string>

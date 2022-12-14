@@ -1,16 +1,17 @@
 package com.blabla.dontruinyourlaundry.viewModels
 
+import android.content.Context
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.*
 import com.blabla.dontruinyourlaundry.data.DataForSearchByParameters
 import com.blabla.dontruinyourlaundry.data.SearchByParametersCard
 import com.blabla.dontruinyourlaundry.data.SelectionType
+import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 import com.blabla.dontruinyourlaundry.entity.SearchScreenItem
 import com.blabla.dontruinyourlaundry.entity.SymbolGuide
+import com.blabla.dontruinyourlaundry.roomStuff.Card
 import com.blabla.dontruinyourlaundry.roomStuff.CardsDao
+import kotlinx.coroutines.launch
 
 class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() {
 
@@ -21,6 +22,9 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
 
     private val _selectedItems = MutableLiveData<List<SearchScreenItem>>()
     val selectedItems: LiveData<List<SearchScreenItem>> = _selectedItems
+
+    private val _listOfCategories = MutableLiveData<List<CategoryEnum>>()
+    val listOfCategories: LiveData<List<CategoryEnum>> = _listOfCategories
 
 
     private fun getFullListOfSearchItems(input: List<SearchByParametersCard>): List<SearchScreenItem> {
@@ -90,12 +94,33 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
 
     }
 
-    fun processSelectedItems() {
+    private fun processSelectedItems() {
         getSelectedItems()
+        getListOfCategories()
+    }
+
+    fun getListOfCards(): LiveData<List<Card>> {
+        processSelectedItems()
+        val listOfCategories = _listOfCategories.value.orEmpty()
+        val flow = cardsDao.searchByParameterCategory(listOfCategories)
+        return flow.asLiveData()
+    }
+
+
+    private fun getListOfCategories() {
+        val selectedItems = _selectedItems.value.orEmpty()
+        val listOfCategories = _listOfCategories.value.orEmpty().toMutableList()
+//        val allItems = _searchItems.value.orEmpty()
+        selectedItems.forEach { selectedItem ->
+            if (selectedItem is SearchScreenItem.SearchParameter) {
+                listOfCategories.add(selectedItem.getCategory())
+            }
+        }
+        _listOfCategories.value = listOfCategories
     }
 
     private fun getSelectedItems() {
-        val selectedItems  = _searchItems.value.orEmpty().toMutableList()
+        val selectedItems = _searchItems.value.orEmpty().toMutableList()
             .filter { it is SearchScreenItem.SearchParameter && it.selected }
         _selectedItems.value = selectedItems
         Log.d("SEARCH", "_selectedItems.value = ${_selectedItems.value}")
