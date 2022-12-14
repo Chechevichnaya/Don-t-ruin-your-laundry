@@ -119,8 +119,20 @@
         android:label="fragment_search_by_parameters"
         tools:layout="@layout/fragment_search_by_parameters" >
         <action
-            android:id="@+id/action_searchByParametersFragment_to_cardDetailFragment"
+            android:id="@+id/action_searchByParametersFragment_to_searchByParametersResultFragment"
+            app:destination="@id/searchByParametersResultFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchByParametersResultFragment"
+        android:name="com.blabla.dontruinyourlaundry.fragments.SearchByParametersResultFragment"
+        android:label="fragment_search_by_parameters_result"
+        tools:layout="@layout/fragment_search_by_parameters_result" >
+        <action
+            android:id="@+id/action_searchByParametersResultFragment_to_cardDetailFragment"
             app:destination="@id/cardDetailFragment" />
+        <argument
+            android:name="listOfCategories"
+            app:argType="com.blabla.dontruinyourlaundry.entity.Category[]" />
     </fragment>
 
 </navigation>

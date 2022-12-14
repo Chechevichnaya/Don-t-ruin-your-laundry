@@ -1,5 +1,6 @@
 package com.blabla.dontruinyourlaundry.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.*
@@ -42,15 +43,7 @@ class SearchByParametersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //set upper menu
-        binding.toolbarSearch.title = "Поиск по параметрам"
-        binding.toolbarSearch.navigationIcon =
-            view.context.getDrawable(R.drawable.ic_arrow_back)
-
-        //go back on the first fragment without adding info in database
-        binding.toolbarSearch.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
+        setToolBar(view)
 
         //set menu item
         val menuHost: MenuHost = binding.toolbarSearch
@@ -62,8 +55,12 @@ class SearchByParametersFragment : Fragment() {
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.add_button -> {
-                        val cards = viewModel.getListOfCards()
-                        setAdapterToCards()
+                        if (viewModel.itemsSelected()) {
+                            viewModel.processSelectedItems()
+                            navigateToSearchByParametersResultFragment()
+                        } else {
+                            showDialogNothingSelected()
+                        }
                         true
                     }
                     else -> false
@@ -80,38 +77,40 @@ class SearchByParametersFragment : Fragment() {
             FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
         recyclerView.adapter = adapter
         viewModel.searchItems.observe(viewLifecycleOwner) { items ->
-            binding.textParameters.isVisible = false
             adapter.submitList(items)
         }
 
+
     }
 
-    fun setAdapterToCards() {
-        val adapter = CardsListAdapter { card ->
-            val action =
-                SearchByParametersFragmentDirections.actionSearchByParametersFragmentToCardDetailFragment(
-                    card.id
-                )
-            this.findNavController().navigate(action)
-        }
-        binding.recyclerSearchByParameters.layoutManager =
-            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        binding.recyclerSearchByParameters.adapter = adapter
-        viewModel.getListOfCards().observe(viewLifecycleOwner) { cards ->
-            adapter.submitList(cards)
-        }
-        //
-        //        binding.recyclerViewAddedCards.layoutManager =
-        //            LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        //        binding.recyclerViewAddedCards.adapter = adapter
-        //
-        //        viewModel.allCardsByCategory(category).observe(viewLifecycleOwner) { cards ->
-        //            //check if table by certain category is empty
-        //            if (cards.isEmpty()) {
-        //                //set full screen picture of cloth type
-        //                binding.imageTypeOfCloth.setImageResource(image)
-        //            } else adapter.submitList(cards)
-        //        }
+    private fun navigateToSearchByParametersResultFragment() {
+        val listOfCategories = viewModel.listOfCategories.value.orEmpty()
+            .map { it.toCategory(requireContext()) }.toTypedArray()
+        val action =
+            SearchByParametersFragmentDirections.actionSearchByParametersFragmentToSearchByParametersResultFragment(
+                listOfCategories
+            )
+        findNavController().navigate(action)
     }
 
+    private fun setToolBar(view: View) {
+        binding.toolbarSearch.title = "Поиск по параметрам"
+        binding.toolbarSearch.navigationIcon =
+            view.context.getDrawable(R.drawable.ic_arrow_back)
+
+        binding.toolbarSearch.setNavigationOnClickListener {
+            findNavController().popBackStack()
+        }
+    }
+
+
+    private fun showDialogNothingSelected() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+        val dialog: AlertDialog = builder.setMessage("Параметры для поиска не выбраны!")
+            .setPositiveButton("Ok") { _, _ -> }
+            .create()
+        dialog.show()
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+            .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
+    }
 }

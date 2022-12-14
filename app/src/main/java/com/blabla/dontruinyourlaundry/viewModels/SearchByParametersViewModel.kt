@@ -1,17 +1,16 @@
 package com.blabla.dontruinyourlaundry.viewModels
 
-import android.content.Context
 import android.util.Log
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import com.blabla.dontruinyourlaundry.data.DataForSearchByParameters
 import com.blabla.dontruinyourlaundry.data.SearchByParametersCard
 import com.blabla.dontruinyourlaundry.data.SelectionType
 import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 import com.blabla.dontruinyourlaundry.entity.SearchScreenItem
-import com.blabla.dontruinyourlaundry.entity.SymbolGuide
-import com.blabla.dontruinyourlaundry.roomStuff.Card
 import com.blabla.dontruinyourlaundry.roomStuff.CardsDao
-import kotlinx.coroutines.launch
 
 class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() {
 
@@ -21,7 +20,6 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
     val searchItems: LiveData<List<SearchScreenItem>> = _searchItems
 
     private val _selectedItems = MutableLiveData<List<SearchScreenItem>>()
-    val selectedItems: LiveData<List<SearchScreenItem>> = _selectedItems
 
     private val _listOfCategories = MutableLiveData<List<CategoryEnum>>()
     val listOfCategories: LiveData<List<CategoryEnum>> = _listOfCategories
@@ -94,18 +92,10 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
 
     }
 
-    private fun processSelectedItems() {
+    fun processSelectedItems() {
         getSelectedItems()
         getListOfCategories()
     }
-
-    fun getListOfCards(): LiveData<List<Card>> {
-        processSelectedItems()
-        val listOfCategories = _listOfCategories.value.orEmpty()
-        val flow = cardsDao.searchByParameterCategory(listOfCategories)
-        return flow.asLiveData()
-    }
-
 
     private fun getListOfCategories() {
         val selectedItems = _selectedItems.value.orEmpty()
@@ -125,6 +115,12 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
         _selectedItems.value = selectedItems
         Log.d("SEARCH", "_selectedItems.value = ${_selectedItems.value}")
 
+    }
+
+    fun itemsSelected():Boolean{
+        val selectedItems = _searchItems.value.orEmpty().toMutableList()
+            .filter { it is SearchScreenItem.SearchParameter && it.selected }
+        return selectedItems.isNotEmpty()
     }
 
 

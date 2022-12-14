@@ -28,6 +28,7 @@
         <entry key="app/src/main/res/layout/fragment_kinds_of_things_for_laundry.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_search_by_parameters.xml" value="0.21822916666666667" />
+        <entry key="app/src/main/res/layout/fragment_search_by_parameters_result.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_search_dialog.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_simbol_guide.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/image_buttom_item.xml" value="0.33" />
