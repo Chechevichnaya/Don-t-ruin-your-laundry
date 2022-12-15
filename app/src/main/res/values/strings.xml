@@ -32,6 +32,7 @@
     <string name="ok">OK</string>
     <string name="permission_granted">Permission is granted. You can use the camera now.</string>
     <string name="delete_question">Вы уверены, что хотите полностью удалить карточку?</string>
+    <string name="delete_symbol">Удалить символ?</string>
     <string name="yes">Да</string>
     <string name="no">Нет</string>
     <string name="search_by_name">Поиск по названию</string>
@@ -113,7 +114,9 @@
     <string name="dry_clean_wet_not_allowed">Мокрая чистка запрещена</string>
     <string name="wringing">Нельзя выкручивать изделие при отжиме</string>
     <string name="allowed">Разрешена</string>
+    <string name="allowed1">Разрешено</string>
     <string name="not_allowed">Запрещена</string>
+    <string name="not_allowed1">Запрещено</string>
     <string name="only_hand">Только ручная</string>
     <string name="thirty">30</string>
     <string name="fourty">40</string>
@@ -121,6 +124,15 @@
     <string name="sixty">60</string>
     <string name="seventy">70</string>
     <string name="nintyfive">95</string>
+    <string name="washing_machine_allowed">Стирка в стиральной машине</string>
+    <string name="title_washing">Стирка</string>
+    <string name="title_drying">Сушка в сушильной машине</string>
+    <string name="title_wash_mode">Режим стирки</string>
+    <string name="title_category">Категории</string>
+    <string name="title_ironing">Глажка</string>
+    <string name="title_bleaching">Отбеливание</string>
+    <string name="title_drycleaning">Сухая чистка</string>
+
 
 
 

@@ -44,7 +44,10 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
                 holder.binding.divider.isVisible = position != 0
                 holder.bind(item as SearchScreenItem.Title)
             }
-            is ParametersViewHolder -> holder.bind(item as SearchScreenItem.SearchParameter)
+            is ParametersViewHolder -> {
+                holder.binding.divider.isVisible = position == itemCount - 1
+                holder.bind(item as SearchScreenItem.SearchParameter)
+            }
         }
 
     }
@@ -61,7 +64,7 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
 
         fun bind(title: SearchScreenItem.Title) {
             binding.titleInSearchByParameters.apply {
-                text = title.name
+                text = title.name.getTitleName(context)
                 isEnabled = false
             }
         }
@@ -76,10 +79,10 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
             } else {
                 R.color.lilac_200
             }
-            val context = binding.buttonInSearchByParameters.context
+//            val context = binding.buttonInSearchByParameters.context
             binding.buttonInSearchByParameters.apply {
                 setBackgroundColor(context.resources.getColor(bgColor))
-                text = parameter.name
+                text = parameter.name.getName(context)
                 setOnClickListener { clickListener(parameter) }
             }
         }

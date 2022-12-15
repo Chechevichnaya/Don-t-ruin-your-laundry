@@ -19,6 +19,16 @@
         app:cornerRadius="24dp"
         tools:text="@string/cloth" />
 
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="16dp"
+        android:alpha="0.2"
+        android:background="@android:color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_in_search_by_parameters">
+    </View>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 
-<!--//android:background="@drawable/round_button"-->

@@ -5,19 +5,38 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.blabla.dontruinyourlaundry.data.DataForSearchByParameters
-import com.blabla.dontruinyourlaundry.data.SearchByParametersCard
 import com.blabla.dontruinyourlaundry.data.SelectionType
 import com.blabla.dontruinyourlaundry.entity.CategoryEnum
 import com.blabla.dontruinyourlaundry.entity.SearchScreenItem
+import com.blabla.dontruinyourlaundry.entity.TitleEnum
 import com.blabla.dontruinyourlaundry.roomStuff.CardsDao
 
 class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() {
 
-    private val _searchItems = MutableLiveData(
-        getFullListOfSearchItems(DataForSearchByParameters.getData())
-    )
+    //    private val _searchItems = MutableLiveData(
+//        getFullListOfSearchItems(DataForSearchByParameters.getData())
+//    )
+//    private val _searchItems = MutableLiveData(
+//        SearchScreenItem.SearchParameter.
+//    )
+    private val _searchItems = MutableLiveData(getSearchItems())
     val searchItems: LiveData<List<SearchScreenItem>> = _searchItems
+
+    private fun getSearchItems(): List<SearchScreenItem> {
+        val listSearchItems = mutableListOf<SearchScreenItem>()
+        TitleEnum.values().forEach { titleEnum ->
+            listSearchItems.add(SearchScreenItem.Title(titleEnum))
+            titleEnum.getParameters()
+                .forEach { parameterEnum ->
+                    listSearchItems.add(
+                        SearchScreenItem.SearchParameter(
+                            parameterEnum
+                        )
+                    )
+                }
+        }
+        return listSearchItems
+    }
 
     private val _selectedItems = MutableLiveData<List<SearchScreenItem>>()
 
@@ -25,51 +44,68 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
     val listOfCategories: LiveData<List<CategoryEnum>> = _listOfCategories
 
 
-    private fun getFullListOfSearchItems(input: List<SearchByParametersCard>): List<SearchScreenItem> {
-        val result = mutableListOf<SearchScreenItem>()
-
-        input.forEach { parametersCard ->
-            result.add(
-                SearchScreenItem.Title(parametersCard.title)
-            )
-            parametersCard.listOfButton.forEach { button ->
-                result.add(
-                    SearchScreenItem.SearchParameter(
-                        name = button.name,
-                        titleName = parametersCard.title
-                    )
-                )
-            }
-        }
-        return result
-    }
+//    private fun getFullListOfSearchItems(input: List<SearchByParametersCard>): List<SearchScreenItem> {
+//        val result = mutableListOf<SearchScreenItem>()
+//
+//        input.forEach { parametersCard ->
+//            result.add(
+//                SearchScreenItem.Title(parametersCard.title)
+//            )
+//            parametersCard.listOfButton.forEach { button ->
+//                result.add(
+//                    SearchScreenItem.SearchParameter(
+//                        name = button.name,
+//                        titleName = parametersCard.title
+//                    )
+//                )
+//            }
+//        }
+//        return result
+//    }
 
     fun onItemClicked(clickedItem: SearchScreenItem.SearchParameter) {
-        val parametersCard = DataForSearchByParameters.getData().find { card ->
-            card.title == clickedItem.titleName
-        } ?: return
+//        val parametersCard = DataForSearchByParameters.getData().find { card ->
+//            card.title == clickedItem.titleName
+//        } ?: return
 
-
-        val flatList = _searchItems.value ?: return
-        val flatListMutable = flatList.toMutableList()
-
-        _searchItems.value = when (parametersCard.selectionType) {
+        val titleOfClickedItem = getTitle(clickedItem)
+        val listOfSearchItems = _searchItems.value.orEmpty().toMutableList()
+        _searchItems.value = when (titleOfClickedItem.getSelectionType()) {
             SelectionType.SINGLE -> {
-                singleType(flatListMutable, clickedItem)
+                singleType(listOfSearchItems, clickedItem)
             }
             SelectionType.MULTI -> {
-                multiType(flatListMutable, clickedItem)
+                multiType(listOfSearchItems, clickedItem)
             }
         }
+
+//        val flatList = _searchItems.value ?: return
+//        val flatListMutable = flatList.toMutableList()
+
+//        _searchItems.value = when (parametersCard.selectionType) {
+//            SelectionType.SINGLE -> {
+//                singleType(flatListMutable, clickedItem)
+//            }
+//            SelectionType.MULTI -> {
+//                multiType(flatListMutable, clickedItem)
+//            }
+//        }
+    }
+
+    private fun getTitle(item: SearchScreenItem.SearchParameter): TitleEnum {
+        return TitleEnum.values()
+            .first { titleEnum -> titleEnum.getParameters().contains(item.name) }
     }
 
 
     private fun singleType(
-        flatList: MutableList<SearchScreenItem>,
+        listAllItems: MutableList<SearchScreenItem>,
         clickedItem: SearchScreenItem.SearchParameter
     ): List<SearchScreenItem> {
-        return flatList.map { itemInList ->
-            if (itemInList is SearchScreenItem.SearchParameter && itemInList.titleName == clickedItem.titleName) {
+        return listAllItems.map { itemInList ->
+            if (itemInList is SearchScreenItem.SearchParameter &&
+                getTitle(itemInList) == getTitle(clickedItem)
+            ) {
                 if (clickedItem.selected) {
                     itemInList.copy(selected = false)
                 } else {
@@ -80,10 +116,10 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
     }
 
     private fun multiType(
-        flatList: MutableList<SearchScreenItem>,
+        listAllItems: MutableList<SearchScreenItem>,
         clickedItem: SearchScreenItem.SearchParameter
     ): List<SearchScreenItem> {
-        return flatList.map { itemInList ->
+        return listAllItems.map { itemInList ->
             if (itemInList is SearchScreenItem.SearchParameter && itemInList == clickedItem) {
                 itemInList.copy(selected = !itemInList.selected)
             } else itemInList
@@ -117,7 +153,7 @@ class SearchByParametersViewModel(private val cardsDao: CardsDao) : ViewModel() 
 
     }
 
-    fun itemsSelected():Boolean{
+    fun itemsSelected(): Boolean {
         val selectedItems = _searchItems.value.orEmpty().toMutableList()
             .filter { it is SearchScreenItem.SearchParameter && it.selected }
         return selectedItems.isNotEmpty()

@@ -48,6 +48,7 @@ enum class SymbolForWashingDBO : Parcelable {
     BLEACH,
     BLEACHNONCHLORINE,
     BLEACHNOTALLOWED,
+
     DRY,
     DRY40,
     DRY60,
@@ -64,6 +65,7 @@ enum class SymbolForWashingDBO : Parcelable {
     DRYFLAT,
     DRYFLATSHADE,
     DRYNOTALLOWED,
+
     IRON,
     IRON110,
     IRON150,
