@@ -6,13 +6,8 @@
     app:startDestination="@id/kindsOfThingsForLaundry">
 
     <dialog
-        android:id="@+id/help_with_app"
-        android:name="com.blabla.dontruinyourlaundry.dialogs.NOTUSEDHowToUseAppDialog"
-        android:label="fragment_how_to_use_app_dialog"
-        tools:layout="@layout/fragment_how_to_use_app_dialog" />
-    <dialog
         android:id="@+id/searchDialog"
-        android:name="com.blabla.dontruinyourlaundry.dialogs.SearchDialog"
+        android:name="com.blabla.dontruinyourlaundry.presentation.dialogs.SearchDialog"
         android:label="fragment_search_dialog"
         tools:layout="@layout/fragment_search_dialog">
         <action
@@ -24,15 +19,12 @@
     </dialog>
     <fragment
         android:id="@+id/kindsOfThingsForLaundry"
-        android:name="com.blabla.dontruinyourlaundry.fragments.KindsOfThingsForLaundry"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.KindsOfThingsForLaundry"
         android:label="@string/app_name"
         tools:layout="@layout/fragment_kinds_of_things_for_laundry">
         <action
             android:id="@+id/action_kindsOfThingsForLaundry_to_simbolGuide"
             app:destination="@id/simbol_guide" />
-        <action
-            android:id="@+id/action_kindsOfThingsForLaundry_to_howToUseAppDialog"
-            app:destination="@id/help_with_app" />
         <action
             android:id="@+id/action_kindsOfThingsForLaundry_to_addNewCard"
             app:destination="@id/addNewCard" />
@@ -45,19 +37,19 @@
     </fragment>
     <fragment
         android:id="@+id/simbol_guide"
-        android:name="com.blabla.dontruinyourlaundry.fragments.SymbolGuideFragment"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.SymbolGuideFragment"
         android:label="@string/symbol_guide"
         tools:layout="@layout/fragment_simbol_guide" />
     <fragment
         android:id="@+id/clothingCardsFragment"
-        android:name="com.blabla.dontruinyourlaundry.fragments.ClothingCardsFragment"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.ClothingCardsFragment"
         android:label="fragment_clothing_cards"
         tools:layout="@layout/fragment_clothing_cards">
 
     </fragment>
     <fragment
         android:id="@+id/addNewCard"
-        android:name="com.blabla.dontruinyourlaundry.fragments.AddNewCardFragment"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.AddNewCardFragment"
         android:label="{title}"
         tools:layout="@layout/fragment_add_new_card">
         <action
@@ -77,7 +69,7 @@
         <argument
             android:name="currentCategory"
             android:defaultValue="@null"
-            app:argType="com.blabla.dontruinyourlaundry.entity.Category"
+            app:argType="com.blabla.dontruinyourlaundry.domain.entity.Category"
             app:nullable="true" />
         <action
             android:id="@+id/action_addNewCard_to_kindsOfThingsForLaundry"
@@ -85,16 +77,16 @@
     </fragment>
     <fragment
         android:id="@+id/addSymbolToCard"
-        android:name="com.blabla.dontruinyourlaundry.fragments.ChooseSymbolsToCard"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.ChooseSymbolsToCard"
         android:label="fragment_add_symbol_to_card"
         tools:layout="@layout/fragment_add_symbol_to_card" >
         <argument
             android:name="selectedItems"
-            app:argType="com.blabla.dontruinyourlaundry.data.ListOfSymbols" />
+            app:argType="com.blabla.dontruinyourlaundry.domain.entity.ListOfSymbols" />
     </fragment>
     <fragment
         android:id="@+id/cardDetailFragment"
-        android:name="com.blabla.dontruinyourlaundry.fragments.CardDetailFragment"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.CardDetailFragment"
         android:label="fragment_card_detail"
         tools:layout="@layout/fragment_card_detail">
         <action
@@ -106,7 +98,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.blabla.dontruinyourlaundry.fragments.SearchByNameFragment"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.SearchByNameFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search">
         <action
@@ -115,7 +107,7 @@
     </fragment>
     <fragment
         android:id="@+id/searchByParametersFragment"
-        android:name="com.blabla.dontruinyourlaundry.fragments.SearchByParametersFragment"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.SearchByParametersFragment"
         android:label="fragment_search_by_parameters"
         tools:layout="@layout/fragment_search_by_parameters" >
         <action
@@ -124,15 +116,15 @@
     </fragment>
     <fragment
         android:id="@+id/searchByParametersResultFragment"
-        android:name="com.blabla.dontruinyourlaundry.fragments.SearchByParametersResultFragment"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.SearchByParametersResultFragment"
         android:label="fragment_search_by_parameters_result"
         tools:layout="@layout/fragment_search_by_parameters_result" >
         <action
             android:id="@+id/action_searchByParametersResultFragment_to_cardDetailFragment"
             app:destination="@id/cardDetailFragment" />
         <argument
-            android:name="listOfCategories"
-            app:argType="com.blabla.dontruinyourlaundry.entity.Category[]" />
+            android:name="listOfParameters"
+            app:argType="com.blabla.dontruinyourlaundry.domain.entity.SearchParameterEnum[]" />
     </fragment>
 
 </navigation>

@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    tools:context=".fragments.SymbolGuideFragment">
+    tools:context=".presentation.fragments.SymbolGuideFragment">
 
     <androidx.appcompat.widget.Toolbar
         app:layout_constraintStart_toStartOf="parent"

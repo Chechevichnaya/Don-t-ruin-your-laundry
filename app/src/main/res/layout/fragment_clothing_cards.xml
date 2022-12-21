@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.ClothingCardsFragment">
+    tools:context=".presentation.fragments.ClothingCardsFragment">
 
     <ImageView
         android:id="@+id/image_type_of_cloth"
