@@ -5,14 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.presentation.adapters.CardsListAdapter
 import com.blabla.dontruinyourlaundry.databinding.FragmentClothingCardsBinding
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
-import com.blabla.dontruinyourlaundry.data.AppApplication
 //import com.blabla.dontruinyourlaundry.presentation.viewModels.ClothingCardsFactory
 import com.blabla.dontruinyourlaundry.presentation.viewModels.ClothingCardsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel

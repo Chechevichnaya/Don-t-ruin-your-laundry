@@ -6,12 +6,14 @@ import androidx.lifecycle.asLiveData
 import com.blabla.dontruinyourlaundry.data.dataBase.Card
 import com.blabla.dontruinyourlaundry.data.dataBase.CardsDao
 
-class SearchViewModel(private val cardsDao: CardsDao): ViewModel() {
+class SearchByNameViewModel(private val cardsDao: CardsDao): ViewModel() {
 
+    //REPO
     fun getCardsByName(name:String):LiveData<List<Card>>{
         return cardsDao.getCardsByName(name).asLiveData()
     }
 
+    //REPO
     fun getAllNames():LiveData<List<String>>{
         return cardsDao.getAllNames().asLiveData()
     }

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import com.blabla.dontruinyourlaundry.data.Converters
+import com.blabla.dontruinyourlaundry.domain.Converters
 
 @TypeConverters(value = [Converters::class])
 @Database(entities = [Card::class], version = 1)

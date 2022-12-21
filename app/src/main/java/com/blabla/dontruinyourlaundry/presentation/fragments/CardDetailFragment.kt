@@ -51,7 +51,7 @@ private val viewModel: CardDetailViewModel by viewModel()
         super.onViewCreated(view, savedInstanceState)
 
         val id = navigationArgs.id
-        viewModel.getCard(id).observe(this.viewLifecycleOwner) { selectedCard ->
+        viewModel.getCardById(id).observe(this.viewLifecycleOwner) { selectedCard ->
             viewModel.addInfoToViewModel(selectedCard, requireContext())
             card = selectedCard
             bind(card)

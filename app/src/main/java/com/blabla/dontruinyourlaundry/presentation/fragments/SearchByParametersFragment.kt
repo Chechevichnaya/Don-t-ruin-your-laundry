@@ -6,11 +6,9 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.data.AppApplication
 import com.blabla.dontruinyourlaundry.presentation.adapters.RecyclerViewAdapterSearchParameter
 import com.blabla.dontruinyourlaundry.databinding.FragmentSearchByParametersBinding
 //import com.blabla.dontruinyourlaundry.presentation.viewModels.SearchByParametersFactory

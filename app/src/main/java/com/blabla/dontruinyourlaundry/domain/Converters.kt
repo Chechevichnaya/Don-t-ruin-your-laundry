@@ -1,4 +1,4 @@
-package com.blabla.dontruinyourlaundry.data
+package com.blabla.dontruinyourlaundry.domain
 
 import androidx.room.TypeConverter
 import com.blabla.dontruinyourlaundry.domain.entity.ListOfSymbolsForDataBase

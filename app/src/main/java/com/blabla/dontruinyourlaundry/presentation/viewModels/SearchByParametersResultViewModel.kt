@@ -66,14 +66,5 @@ class SearchByParametersResultViewModel(private val cardsDao: CardsDao) : ViewMo
         _listOfCardsResult.value = list
     }
 
-//    class SearchByParametersResultFactory(private val cardsDao: CardsDao) :
-//        ViewModelProvider.Factory {
-//        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//            if (modelClass.isAssignableFrom(SearchByParametersResultViewModel::class.java)) {
-//                @Suppress("UNCHECKED_CAST")
-//                return SearchByParametersResultViewModel(cardsDao) as T
-//            }
-//            throw IllegalArgumentException("Unknown ViewModel class")
-//        }
-//    }
+
 }

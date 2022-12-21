@@ -11,15 +11,13 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.data.AppApplication
 import com.blabla.dontruinyourlaundry.presentation.adapters.CardsListAdapter
 //import com.blabla.dontruinyourlaundry.presentation.viewModels.SearchFactory
-import com.blabla.dontruinyourlaundry.presentation.viewModels.SearchViewModel
+import com.blabla.dontruinyourlaundry.presentation.viewModels.SearchByNameViewModel
 import com.blabla.dontruinyourlaundry.databinding.FragmentSearchBinding
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -30,7 +28,7 @@ class SearchByNameFragment : Fragment() {
 //    private val viewModel: SearchViewModel by viewModels {
 //        SearchFactory((activity?.application as AppApplication).dataBase.cardsDao)
 //    }
-private val viewModel: SearchViewModel by viewModel()
+private val viewModel: SearchByNameViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

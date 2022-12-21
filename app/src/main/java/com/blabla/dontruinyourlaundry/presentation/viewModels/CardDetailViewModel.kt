@@ -2,13 +2,14 @@ package com.blabla.dontruinyourlaundry.presentation.viewModels
 
 import android.content.Context
 import androidx.lifecycle.*
+import com.blabla.dontruinyourlaundry.data.Repository
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
 import com.blabla.dontruinyourlaundry.data.dataBase.Card
 import com.blabla.dontruinyourlaundry.data.dataBase.CardsDao
 import kotlinx.coroutines.launch
 
-class CardDetailViewModel(private val cardsDao: CardsDao) : ViewModel() {
+class CardDetailViewModel(private val repo: Repository) : ViewModel() {
 
     private val _listOfSymbols = MutableLiveData<List<SymbolGuide.SymbolForWashing>>()
     val listOfSymbols: LiveData<List<SymbolGuide.SymbolForWashing>> = _listOfSymbols
@@ -25,10 +26,9 @@ class CardDetailViewModel(private val cardsDao: CardsDao) : ViewModel() {
     private val _card = MutableLiveData<Card>()
     val card: LiveData<Card> = _card
 
-
     fun deleteCard(card: Card) {
         viewModelScope.launch {
-            cardsDao.deleteCard(card)
+            repo.deleteCard(card)
         }
     }
 
@@ -38,22 +38,10 @@ class CardDetailViewModel(private val cardsDao: CardsDao) : ViewModel() {
             list.map { item ->
                 item.toSymbolForWashing(context)
             }
-
     }
 
-    fun getCard(id: Long): LiveData<Card> {
-        return cardsDao.getOneCard(id).asLiveData()
+    fun getCardById(id: Long): LiveData<Card> {
+        return repo.getCardById(id).asLiveData()
     }
-
-
 }
 
-//class CardDetailFactory(private val cardsDao: CardsDao) : ViewModelProvider.Factory {
-//    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//        if (modelClass.isAssignableFrom(CardDetailViewModel::class.java)) {
-//            @Suppress("UNCHECKED_CAST")
-//            return CardDetailViewModel(cardsDao) as T
-//        }
-//        throw IllegalArgumentException("Unknown ViewModel class")
-//    }
-//}

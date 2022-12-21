@@ -113,6 +113,7 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
         getCardId()
     }
 
+    //REPO
     private fun addNewCard(card: Card?) {
         viewModelScope.launch {
             if (card != null) {
@@ -152,24 +153,16 @@ class AddedCardsViewModel(private val cardsDao: CardsDao) : ViewModel() {
             listOfSymbols = listOfSymbols,
             category = oldCard.category
         )
+        updateCard(card)
+    }
+
+    //REPO
+    private fun updateCard(card: Card) {
         viewModelScope.launch {
             cardsDao.update(card)
         }
     }
 
-
-//    class AddedCardsFactory(
-//        private val cardsDao: CardsDao
-//    ) : ViewModelProvider.Factory {
-//        override fun <T : ViewModel> create(modelClass: Class<T>): T {
-//            if (modelClass.isAssignableFrom(AddedCardsViewModel::class.java)) {
-//                @Suppress("UNCHECKED_CAST")
-//                return AddedCardsViewModel(cardsDao) as T
-//            }
-//            throw IllegalArgumentException("Unknown ViewModel class")
-//        }
-//
-//    }
 }
 
 
