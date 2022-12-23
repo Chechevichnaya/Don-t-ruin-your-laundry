@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -25,13 +26,11 @@ import com.blabla.dontruinyourlaundry.BuildConfig
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.presentation.adapters.MULTIRecyclerViewAdapterSymbolAndMeaning
 import com.blabla.dontruinyourlaundry.domain.entity.ListOfSymbols
-import com.blabla.dontruinyourlaundry.domain.entity.ListOfSymbolsForDataBase
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolForWashingDBO
 import com.blabla.dontruinyourlaundry.databinding.FragmentAddNewCardBinding
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
 import com.blabla.dontruinyourlaundry.domain.entity.TypeOfRecyclerView
-import com.blabla.dontruinyourlaundry.data.dataBase.Card
-import com.blabla.dontruinyourlaundry.presentation.viewModels.AddedCardsViewModel
+import com.blabla.dontruinyourlaundry.presentation.viewModels.AddDataToCardViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.google.android.flexbox.FlexDirection
@@ -42,9 +41,9 @@ import java.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
-class AddNewCardFragment : Fragment() {
+class AddDataToCardFragment : Fragment() {
 
-    private val args: AddNewCardFragmentArgs by navArgs()
+    private val args: AddDataToCardFragmentArgs by navArgs()
 
     //private val TAG = this::class.java.simpleName
 
@@ -52,14 +51,8 @@ class AddNewCardFragment : Fragment() {
     private var imageUri: String? = null
 
     private lateinit var binding: FragmentAddNewCardBinding
-//    private val viewModel: AddedCardsViewModel by viewModels {
-//        AddedCardsViewModel.AddedCardsFactory(
-//            (activity?.application as AppApplication)
-//                .dataBase.cardsDao
-//        )
-//    }
 
-    private val viewModel: AddedCardsViewModel by viewModel()
+    private val viewModel: AddDataToCardViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -72,9 +65,10 @@ class AddNewCardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.addCardForEditing(args.itemId, requireContext())
+        args.currentCategory?.let { viewModel.setCategory(it) }
 
         clickOnAddMoreSymbols(view)
-        setUpperMenu(view)
+        setToolBar(view)
         getListOfSymbolsFromChosingFragmentAndAddToViewModel()
 
         //creating a new folder, if it is not created yet,
@@ -100,6 +94,10 @@ class AddNewCardFragment : Fragment() {
         observeName()
     }
 
+    fun addInfoToDataBase(){
+
+    }
+
     private fun observeName() {
         viewModel.nameOfCloth.observe(viewLifecycleOwner) { name ->
             binding.nameOfCloth.setText(name)
@@ -109,7 +107,7 @@ class AddNewCardFragment : Fragment() {
     private fun clickOnAddMoreSymbols(view: View) {
         binding.addMoreSymbolButton.setOnClickListener {
             val listOfSelectedSymbols = ListOfSymbols(viewModel.listOfSymbols.value.orEmpty())
-            val action = AddNewCardFragmentDirections.actionAddNewCardToAddSymbolToCard(
+            val action = AddDataToCardFragmentDirections.actionAddNewCardToAddSymbolToCard(
                 selectedItems = listOfSelectedSymbols
             )
             view.findNavController().navigate(action)
@@ -135,7 +133,6 @@ class AddNewCardFragment : Fragment() {
                     R.id.save_button -> {
                         if (dataForCardCorrect()) {
                             if (viewModel.card.value != null) {
-
                                 saveCardChanges(folderForImagesInDB)
                                 findNavController().popBackStack(
                                     R.id.kindsOfThingsForLaundry,
@@ -143,10 +140,9 @@ class AddNewCardFragment : Fragment() {
                                 )
                                 true
                             } else {
-                                val card = saveInfoInCard(folderForImagesInDB)
-                                viewModel.addDataToDataBase(card)
-
-                                findNavController().popBackStack()
+                                Log.d("CHECK", "I am inside!")
+                                addInfoToDataBase(folderForImagesInDB)
+//                                findNavController().popBackStack()
                                 true
                             }
                         } else false
@@ -158,6 +154,14 @@ class AddNewCardFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
+    private fun addInfoToDataBase(file: File?) {
+        Log.d("CHECK", "I am more than inside")
+        if (viewModel.uri.value != null) {
+            copyImageToFileForDB(file)
+        }
+        viewModel.addInfoToDataBase(getNameOfCloth(), imageUri, getListOfSymbolForDB()!! as List<SymbolForWashingDBO> )
+    }
+
     private fun saveCardChanges(file: File?) {
         if (viewModel.uri.value != null) {
             copyImageToFileForDB(file)
@@ -166,15 +170,13 @@ class AddNewCardFragment : Fragment() {
         viewModel.saveCardChanges(
             name = getNameOfCloth(),
             picture = imageUri,
-            listOfSymbols = getListOfSymbolFroDB()!!,
+            symbols = getListOfSymbolForDB()!! as List<SymbolForWashingDBO>
         )
     }
 
 
-    private fun setUpperMenu(view: View) {
-        //set upper menu
-        setTitleInUpperMenu()
-
+    private fun setToolBar(view: View) {
+        setTitleInToolBar()
         binding.toolbarAddCard.navigationIcon =
             view.context.getDrawable(R.drawable.ic_baseline_close_24)
         //go back on the first fragment without adding info in database
@@ -184,7 +186,6 @@ class AddNewCardFragment : Fragment() {
     }
 
     private fun observeListOfSymbols() {
-
         val recyclerView = binding.addedSymbolsRecyclerView
         val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning({ clickedItem ->
             viewModel.showDialog(
@@ -213,7 +214,7 @@ class AddNewCardFragment : Fragment() {
             .show()
     }
 
-    private fun setTitleInUpperMenu() {
+    private fun setTitleInToolBar() {
         val edit = getString(R.string.edit_fragment)
         val add = getString(R.string.add_card_fragment)
         binding.toolbarAddCard.title = when (args.title) {
@@ -246,16 +247,18 @@ class AddNewCardFragment : Fragment() {
         return folderForImagesInDB
     }
 
-    private fun saveInfoInCard(file: File?): Card? {
-        if (viewModel.uri.value != null) {
-            copyImageToFileForDB(file)
-        }
-        var newCard: Card? = null
-        newCard = collectInfoForCard(newCard)
-        return newCard
-
-
-    }
+//    private fun saveInfoInCard(file: File?): Card? {
+//        if (viewModel.uri.value != null) {
+//            copyImageToFileForDB(file)
+//        }
+//        viewModel.createNewCard(
+//            getNameOfCloth(), imageUri
+//        )
+//
+//        var newCard: Card? = null
+//        newCard = collectInfoForCard(newCard)
+//        return newCard
+//    }
 
     private fun copyImageToFileForDB(file: File?) {
         //creating file in new folder with unique name
@@ -271,11 +274,15 @@ class AddNewCardFragment : Fragment() {
 
     private fun dataForCardCorrect(): Boolean {
         var message = ""
-        if (getNameOfCloth().isEmpty() && getListOfSymbolFroDB()?.listOfSymbols.isNullOrEmpty()) {
+        val checkIfNameEmpty = getNameOfCloth().isEmpty()
+        val checkIfSymbolsEmpty = viewModel.listOfSymbols.value.isNullOrEmpty()
+        if (checkIfNameEmpty && checkIfSymbolsEmpty)
+//            getListOfSymbolFroDB()?.listOfSymbols.isNullOrEmpty())
+        {
             message = "Заполни поле \"Название вещи\" и добавь нужные символы для ухода за вещами"
-        } else if (getNameOfCloth().isEmpty()) {
+        } else if (checkIfNameEmpty) {
             message = "Заполни поле \"Название вещи\""
-        } else if (getListOfSymbolFroDB()?.listOfSymbols.isNullOrEmpty()) {
+        } else if (checkIfSymbolsEmpty) {
             message = "Добавь нужные символы для ухода за вещами"
         }
         return if (message != "") {
@@ -292,33 +299,30 @@ class AddNewCardFragment : Fragment() {
     }
 
 
-    private fun collectInfoForCard(newCard: Card?): Card? {
-        var newCard = newCard
-        viewModel.setName(getNameOfCloth())
-        args.currentCategory?.let { viewModel.setCategory(it) }
-        val categoryForDB = viewModel.category.value!!.toCategoryDBO(requireContext())
-        newCard =
-            categoryForDB?.let { category ->
-                viewModel.nameOfCloth.value?.let { name ->
-                    Card(
-                        cardId = 0,
-                        name = name,
-                        picture = imageUri,
-                        listOfSymbols = getListOfSymbolFroDB()!!,
-                        category = category
-                    )
-                }
-            }
-        return newCard
-    }
+//    private fun collectInfoForCard(newCard: Card?): Card? {
+//        var newCard = newCard
+//        viewModel.setName(getNameOfCloth())
+//        args.currentCategory?.let { viewModel.setCategory(it) }
+//        val categoryForDB = viewModel.category.value!!.toCategoryDBO(requireContext())
+//        newCard =
+//            categoryForDB?.let { category ->
+//                viewModel.nameOfCloth.value?.let { name ->
+//                    Card(
+//                        cardId = 0,
+//                        name = name,
+//                        picture = imageUri,
+//                        listOfSymbols = getListOfSymbolForDB()!!,
+//                        category = category
+//                    )
+//                }
+//            }
+//        return newCard
+//    }
 
-    private fun getListOfSymbolFroDB(): ListOfSymbolsForDataBase? {
+    private fun getListOfSymbolForDB(): List<SymbolForWashingDBO?>? {
         val listOfSymbols = viewModel.listOfSymbols.value?.let { list ->
             val listDBO = list.map { item -> item.toSymbolForWashingDBO(context) }
-            ListOfSymbolsForDataBase(listDBO as List<SymbolForWashingDBO>)
-        }
-        if (listOfSymbols != null) {
-            viewModel.addSymbolsDBO(listOfSymbols.listOfSymbols)
+            listDBO
         }
         return listOfSymbols
     }
@@ -414,8 +418,6 @@ class AddNewCardFragment : Fragment() {
         lifecycleScope.launchWhenStarted {
             makeFileMY().let { uri ->
                 latestTmpUri = uri
-
-                // latestTmpUri - content uri
                 takeImageResultMY.launch(latestTmpUri)
             }
         }
@@ -441,7 +443,6 @@ class AddNewCardFragment : Fragment() {
     }
 
 
-    //get list from ChooseSymbolsToCard
     private fun getListOfSymbolsFromChosingFragmentAndAddToViewModel() {
         val navController = findNavController()
         navController.currentBackStackEntry?.savedStateHandle?.getLiveData<List<SymbolGuide.SymbolForWashing>>(

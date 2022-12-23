@@ -6,25 +6,25 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.domain.entity.ListOfCards
+import com.blabla.dontruinyourlaundry.data.Repository
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
 
-class SymbolGuideViewModel() : ViewModel() {
+class SymbolGuideViewModel(private val repo: Repository) :
+    ViewModel() {
 
-    private val _selectedSymbols = MutableLiveData<List<SymbolGuide>>()
-    val selectedSymbols: LiveData<List<SymbolGuide>> = _selectedSymbols
+    private val _symbolsInGuide = MutableLiveData(repo.getSymbolGuideList())
+    val symbolsInGuide: LiveData<List<SymbolGuide>> = _symbolsInGuide
 
-    fun giveContextToViewModel(context: Context) {
-        _selectedSymbols.value = ListOfCards.loadListOfSymbolGuide(context)
-    }
-
-    fun onClicked(item: SymbolGuide.SymbolForWashing, context: Context) {
+    fun onClicked(clickedItem: SymbolGuide.SymbolForWashing, context: Context) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-        val dialog: AlertDialog = builder.setMessage(item.meaningOfSymbol)
-            .setPositiveButton("Ok") { _, _ -> }
+        val dialog: AlertDialog = builder.setTitle(context.getString(R.string.symbol))
+            .setMessage(clickedItem.meaningOfSymbol)
+            .setPositiveButton("Ok") { _, _ ->  }
+            .setIcon(clickedItem.pictureId)
             .create()
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             .setTextColor(context.resources.getColor(R.color.lilac_700))
     }
+
 }

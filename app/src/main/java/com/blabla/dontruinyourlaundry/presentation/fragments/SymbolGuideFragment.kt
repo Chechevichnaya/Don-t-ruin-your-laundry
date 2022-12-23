@@ -5,7 +5,6 @@ import android.view.*
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.blabla.dontruinyourlaundry.R
@@ -20,7 +19,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class SymbolGuideFragment : Fragment() {
 
     private lateinit var binding: FragmentSimbolGuideBinding
-//    private val viewModel: SymbolGuideViewModel by viewModels()
+
     private val viewModel: SymbolGuideViewModel by viewModel()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,14 +37,13 @@ class SymbolGuideFragment : Fragment() {
 
     private fun attachAdapterToRecyclerView() {
         val recyclerViewSymbolGuide = binding.recyclerViewSymbolGuide
-        viewModel.giveContextToViewModel(requireContext())
         val adapter = MULTURecyclerViewAdapterAllSymbols { clickedItem ->
             viewModel.onClicked(clickedItem, requireContext())
         }
         recyclerViewSymbolGuide.layoutManager =
             FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
         recyclerViewSymbolGuide.adapter = adapter
-        viewModel.selectedSymbols.observe(viewLifecycleOwner) { items ->
+        viewModel.symbolsInGuide.observe(viewLifecycleOwner) { items ->
             adapter.submitList(items)
         }
     }
