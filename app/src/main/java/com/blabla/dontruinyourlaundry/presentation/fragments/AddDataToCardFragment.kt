@@ -40,6 +40,8 @@ import java.io.File
 import java.util.*
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
+const val FROM_GALLERY = 0
+const val WITH_CAMERA = 1
 
 class AddDataToCardFragment : Fragment() {
 
@@ -202,17 +204,35 @@ class AddDataToCardFragment : Fragment() {
     }
 
     private fun showDialog() {
-        AlertDialog.Builder(requireContext())
-            .setTitle(getString(R.string.ask_about_how_to_add_photo))
+        val array = arrayOf("Из галереи", "С помощью камеры")
+        var checkedItem = -1
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setTitle(getString(R.string.ask_about_how_to_add_photo))
+            .setSingleChoiceItems(array, checkedItem)
+            { _, which -> checkedItem = which }
+            .setPositiveButton("Ok") { _, _ ->
+                if (checkedItem != -1) {
+                    when (checkedItem) {
+                        FROM_GALLERY -> {
+                            selectImageFromGallery()
+                        }
+                        WITH_CAMERA -> {
+                            askPermissions()
+                        }
+                    }
+                }
+            }
 
-            .setPositiveButton(getString(R.string.from_gallery)) { _, _ ->
-                selectImageFromGallery()
-            }
-            .setNeutralButton(getString(R.string.from_camera)) { _, _ ->
-                askPermissions()
-            }
-            .show()
+            .setNeutralButton("Отмена") { _, _ -> }
+        val dialog = builder.create()
+        dialog.show()
+
+        val colorButton = resources.getColor(R.color.lilac_700)
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
+        dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(colorButton)
     }
+
+
 
     private fun setTitleInToolBar() {
         val edit = getString(R.string.edit_fragment)
