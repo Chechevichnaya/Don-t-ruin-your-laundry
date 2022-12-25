@@ -24,6 +24,7 @@ sealed class SymbolGuide {
             }
         }
     }
+    data class ButtonAddNewSymbol(@DrawableRes val icon: Int,  val text: String): SymbolGuide()
 }
 
 enum class HeadNameSymbolGuide(val head: String) {

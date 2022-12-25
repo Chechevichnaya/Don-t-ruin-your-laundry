@@ -2,14 +2,16 @@ package com.blabla.dontruinyourlaundry.presentation.viewModels
 
 import android.content.Context
 import androidx.lifecycle.*
-import com.blabla.dontruinyourlaundry.data.Repository
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
 import com.blabla.dontruinyourlaundry.data.dataBase.Card
-import com.blabla.dontruinyourlaundry.data.dataBase.CardsDao
+import com.blabla.dontruinyourlaundry.domain.useCases.ShowCardDetailUseCase
 import kotlinx.coroutines.launch
 
-class CardDetailViewModel(private val repo: Repository) : ViewModel() {
+class CardDetailViewModel(
+    private val cardDetailUC: ShowCardDetailUseCase,
+    private val context: Context
+) : ViewModel() {
 
     private val _listOfSymbols = MutableLiveData<List<SymbolGuide.SymbolForWashing>>()
     val listOfSymbols: LiveData<List<SymbolGuide.SymbolForWashing>> = _listOfSymbols
@@ -28,20 +30,27 @@ class CardDetailViewModel(private val repo: Repository) : ViewModel() {
 
     fun deleteCard(card: Card) {
         viewModelScope.launch {
-            repo.deleteCard(card)
+            cardDetailUC.deleteCard(card)
         }
     }
 
-    fun addInfoToViewModel(card: Card, context: Context) {
-        val list = card.listOfSymbols.listOfSymbols
-        _listOfSymbols.value =
-            list.map { item ->
-                item.toSymbolForWashing(context)
+    fun addListOfSymbolsToViewModel(card: Card) {
+//        val list = card.listOfSymbols.listOfSymbols
+//        _listOfSymbols.value =
+//            list.map { item ->
+//                item.toSymbolForWashing(context)
+//            }
+        var listSymbols = _listOfSymbols.value.orEmpty()
+        viewModelScope.launch {
+            cardDetailUC.getSymbolsByCardId(card.cardId).collect {
+                listSymbols = it.map { symbol -> symbol.toSymbolForWashing(context) }
             }
+        }
+        _listOfSymbols.value = listSymbols
     }
 
     fun getCardById(id: Long): LiveData<Card> {
-        return repo.getCardById(id).asLiveData()
+        return cardDetailUC.getCardById(id).asLiveData()
     }
 }
 

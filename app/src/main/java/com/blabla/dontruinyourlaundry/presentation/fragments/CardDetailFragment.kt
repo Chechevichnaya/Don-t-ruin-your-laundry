@@ -16,7 +16,6 @@ import com.blabla.dontruinyourlaundry.data.dataBase.Card
 import com.blabla.dontruinyourlaundry.databinding.FragmentCardDetailBinding
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
 import com.blabla.dontruinyourlaundry.domain.entity.TypeOfRecyclerView
-//import com.blabla.dontruinyourlaundry.presentation.viewModels.CardDetailFactory
 import com.blabla.dontruinyourlaundry.presentation.viewModels.CardDetailViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
@@ -52,7 +51,7 @@ private val viewModel: CardDetailViewModel by viewModel()
 
         val id = navigationArgs.id
         viewModel.getCardById(id).observe(this.viewLifecycleOwner) { selectedCard ->
-            viewModel.addInfoToViewModel(selectedCard, requireContext())
+            viewModel.addListOfSymbolsToViewModel(selectedCard)
             card = selectedCard
             bind(card)
         }
@@ -107,13 +106,13 @@ private val viewModel: CardDetailViewModel by viewModel()
             nameOfCloth.text = card.name
             val recyclerView = binding.addedSymbolsRecyclerView
             val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning(
-                {},
+                {},{},
                 TypeOfRecyclerView.CARD_DETAIL_FRAGMENT
             )
             recyclerView.layoutManager =
                 FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
             recyclerView.adapter = adapter
-            viewModel.addInfoToViewModel(card, requireContext())
+            viewModel.addListOfSymbolsToViewModel(card)
             viewModel.listOfSymbols.observe(viewLifecycleOwner)
             { items -> adapter.submitList(items) }
 

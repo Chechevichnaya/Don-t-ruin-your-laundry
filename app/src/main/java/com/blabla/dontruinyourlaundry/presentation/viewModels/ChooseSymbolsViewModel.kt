@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
-import com.blabla.dontruinyourlaundry.domain.useCases.ChooseSymbolsToCardUC
+import com.blabla.dontruinyourlaundry.domain.useCases.ChooseSymbolsToCardUseCase
 
-class ChooseSymbolsViewModel(private val chooseSymbolsToCardUC: ChooseSymbolsToCardUC) :
+class ChooseSymbolsViewModel(private val chooseSymbolsToCardUC: ChooseSymbolsToCardUseCase) :
     ViewModel() {
 
     private val _itemsInSymbolGuide = MutableLiveData<List<SymbolGuide>>()

@@ -17,7 +17,8 @@ class SymbolGuideViewModel(private val repo: Repository) :
 
     fun onClicked(clickedItem: SymbolGuide.SymbolForWashing, context: Context) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-        val dialog: AlertDialog = builder.setTitle(context.getString(R.string.symbol))
+        val dialog: AlertDialog = builder
+            .setTitle(context.getString(R.string.symbol))
             .setMessage(clickedItem.meaningOfSymbol)
             .setPositiveButton("Ok") { _, _ ->  }
             .setIcon(clickedItem.pictureId)

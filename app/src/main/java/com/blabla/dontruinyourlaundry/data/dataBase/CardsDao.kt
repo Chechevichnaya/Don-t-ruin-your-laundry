@@ -19,8 +19,8 @@ interface CardsDao {
     @Query("SELECT * FROM card WHERE category = :category ORDER BY name ASC")
     fun getCardsByCategory(category: CategoryEnum): Flow<List<Card>>
 
-    @Query("SELECT * FROM card ORDER BY cardId DESC LIMIT 1")
-    fun getLastAddedCard():Flow<Card>
+    @Query("SELECT cardId FROM card WHERE cardId = (SELECT MAX(cardId) FROM card)")
+    fun getIdOfLastAddedCard():Flow<Long>
 
     @Query("SELECT * FROM card WHERE name = :name ORDER BY name ASC")
     fun getCardsByName(name: String): Flow<List<Card>>
@@ -36,8 +36,8 @@ interface CardsDao {
         categories: List<CategoryEnum>,
     ): Flow<List<Card>>
 
-    @Query("SELECT * FROM card WHERE list_of_symbols IN (:symbols) ORDER BY name ASC")
-    fun searchByParameterSymbols(symbols: List<SymbolForWashingDBO>): Flow<List<Card>>
+//    @Query("SELECT * FROM card WHERE list_of_symbols IN (:symbols) ORDER BY name ASC")
+//    fun searchByParameterSymbols(symbols: List<SymbolForWashingDBO>): Flow<List<Card>>
 
     @Update
     suspend fun update(card: Card)

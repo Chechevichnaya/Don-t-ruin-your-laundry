@@ -8,10 +8,11 @@ import androidx.room.TypeConverters
 import com.blabla.dontruinyourlaundry.domain.Converters
 
 @TypeConverters(value = [Converters::class])
-@Database(entities = [Card::class], version = 1)
+@Database(entities = [Card::class, CardsAndSymbols::class], version = 1)
 abstract class CardsDataBase : RoomDatabase() {
 
     abstract val cardsDao: CardsDao
+    abstract val cardsAndSymbolsDao: CardsAndSymbolsDao
 
     companion object{
         @Volatile

@@ -19,7 +19,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.blabla.dontruinyourlaundry.BuildConfig
@@ -69,7 +68,7 @@ class AddDataToCardFragment : Fragment() {
         viewModel.addCardForEditing(args.itemId, requireContext())
         args.currentCategory?.let { viewModel.setCategory(it) }
 
-        clickOnAddMoreSymbols(view)
+//        clickOnAddMoreSymbols(view)
         setToolBar(view)
         getListOfSymbolsFromChosingFragmentAndAddToViewModel()
 
@@ -96,9 +95,6 @@ class AddDataToCardFragment : Fragment() {
         observeName()
     }
 
-    fun addInfoToDataBase(){
-
-    }
 
     private fun observeName() {
         viewModel.nameOfCloth.observe(viewLifecycleOwner) { name ->
@@ -106,14 +102,14 @@ class AddDataToCardFragment : Fragment() {
         }
     }
 
-    private fun clickOnAddMoreSymbols(view: View) {
-        binding.addMoreSymbolButton.setOnClickListener {
-            val listOfSelectedSymbols = ListOfSymbols(viewModel.listOfSymbols.value.orEmpty())
-            val action = AddDataToCardFragmentDirections.actionAddNewCardToAddSymbolToCard(
-                selectedItems = listOfSelectedSymbols
-            )
-            view.findNavController().navigate(action)
-        }
+    private fun clickOnAddMoreSymbols() {
+        Log.d("MOLOKO", "i am inside clickOnAddMoreSymbols()")
+        val listOfSelectedSymbols =
+            ListOfSymbols(viewModel.getListSymbolForWashing())
+        val action = AddDataToCardFragmentDirections.actionAddNewCardToAddSymbolToCard(
+            selectedItems = listOfSelectedSymbols
+        )
+        findNavController().navigate(action)
     }
 
     private fun clickOnPhoto() {
@@ -143,8 +139,10 @@ class AddDataToCardFragment : Fragment() {
                                 true
                             } else {
                                 Log.d("CHECK", "I am inside!")
-                                addInfoToDataBase(folderForImagesInDB)
-//                                findNavController().popBackStack()
+                                addInfoToDataBase(
+                                    folderForImagesInDB
+                                ) { findNavController().popBackStack() }
+
                                 true
                             }
                         } else false
@@ -156,12 +154,17 @@ class AddDataToCardFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun addInfoToDataBase(file: File?) {
+    private fun addInfoToDataBase(file: File?, doOnComplete: () -> Unit) {
         Log.d("CHECK", "I am more than inside")
         if (viewModel.uri.value != null) {
             copyImageToFileForDB(file)
         }
-        viewModel.addInfoToDataBase(getNameOfCloth(), imageUri, getListOfSymbolForDB()!! as List<SymbolForWashingDBO> )
+        viewModel.addInfoToDataBase(
+            getNameOfCloth(),
+            imageUri,
+            getListOfSymbolForDB()!! as List<SymbolForWashingDBO>,
+            doOnComplete
+        )
     }
 
     private fun saveCardChanges(file: File?) {
@@ -194,19 +197,23 @@ class AddDataToCardFragment : Fragment() {
                 clickedItem,
                 requireContext()
             )
+        }, {
+            Log.d("MOLOKO", "i am inside val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning")
+            clickOnAddMoreSymbols()
+
         }, TypeOfRecyclerView.ADD_SYMBOL_FRAGMENT)
         recyclerView.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
         recyclerView.adapter = adapter
-
+        viewModel.addItemAddNewSymbol()
         viewModel.listOfSymbols.observe(viewLifecycleOwner) { items ->
-            adapter.submitList(items)
+            adapter.submitList(viewModel.checkIfThereIsItemAddNewSymbol(items))
         }
     }
 
     private fun showDialog() {
         val array = arrayOf("Из галереи", "С помощью камеры")
         var checkedItem = -1
-        val builder = AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
         builder.setTitle(getString(R.string.ask_about_how_to_add_photo))
             .setSingleChoiceItems(array, checkedItem)
             { _, which -> checkedItem = which }
@@ -231,7 +238,6 @@ class AddDataToCardFragment : Fragment() {
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
         dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(colorButton)
     }
-
 
 
     private fun setTitleInToolBar() {
@@ -318,29 +324,8 @@ class AddDataToCardFragment : Fragment() {
 
     }
 
-
-//    private fun collectInfoForCard(newCard: Card?): Card? {
-//        var newCard = newCard
-//        viewModel.setName(getNameOfCloth())
-//        args.currentCategory?.let { viewModel.setCategory(it) }
-//        val categoryForDB = viewModel.category.value!!.toCategoryDBO(requireContext())
-//        newCard =
-//            categoryForDB?.let { category ->
-//                viewModel.nameOfCloth.value?.let { name ->
-//                    Card(
-//                        cardId = 0,
-//                        name = name,
-//                        picture = imageUri,
-//                        listOfSymbols = getListOfSymbolForDB()!!,
-//                        category = category
-//                    )
-//                }
-//            }
-//        return newCard
-//    }
-
     private fun getListOfSymbolForDB(): List<SymbolForWashingDBO?>? {
-        val listOfSymbols = viewModel.listOfSymbols.value?.let { list ->
+        val listOfSymbols = viewModel.getListSymbolForWashing().let { list ->
             val listDBO = list.map { item -> item.toSymbolForWashingDBO(context) }
             listDBO
         }

@@ -8,7 +8,7 @@ import kotlinx.parcelize.Parcelize
 
 sealed class SearchScreenItem {
 
-    data class Title(val name: TitleEnum) : SearchScreenItem()
+    data class Title(val name: TitleSearchByParameterEnum) : SearchScreenItem()
 
     data class SearchParameter(
         val name: SearchParameterEnum,
@@ -31,7 +31,7 @@ sealed class SearchScreenItem {
 
 }
 
-enum class TitleEnum {
+enum class TitleSearchByParameterEnum {
     CATEGORY,
     WASHING,
     WASHING_MODE,

@@ -75,6 +75,7 @@ class MULTURecyclerViewAdapterAllSymbols(val clickListener: (SymbolGuide.SymbolF
         return when (getItem(position)) {
             is SymbolGuide.HeadName -> HEAD
             is SymbolGuide.SymbolForWashing -> SYMBOL_FOR_WASHING
+            else -> 0
         }
     }
 

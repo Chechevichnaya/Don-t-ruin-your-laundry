@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/addNewCard"
-        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.AddNewCardFragment"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.AddDataToCardFragment"
         android:label="{title}"
         tools:layout="@layout/fragment_add_new_card">
         <action

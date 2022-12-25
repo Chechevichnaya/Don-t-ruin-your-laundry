@@ -3,7 +3,7 @@ package com.blabla.dontruinyourlaundry.domain.useCases
 import com.blabla.dontruinyourlaundry.data.Repository
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
 
-class ChooseSymbolsToCardUC(private val repo: Repository) {
+class ChooseSymbolsToCardUseCase(private val repo: Repository) {
 
     fun setSelectedSymbols(symbols: List<SymbolGuide.SymbolForWashing>): List<SymbolGuide> {
 

@@ -50,7 +50,7 @@ private val viewModel: SearchByParametersViewModel by viewModel()
             override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
                 return when (menuItem.itemId) {
                     R.id.add_button -> {
-                        if (viewModel.itemsSelected()) {
+                        if (viewModel.checkIfItemsSelected()) {
                             viewModel.processSelectedItems()
                             navigateToSearchByParametersResultFragment()
                         } else {

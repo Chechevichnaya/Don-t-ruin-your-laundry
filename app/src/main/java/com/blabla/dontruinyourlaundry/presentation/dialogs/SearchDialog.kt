@@ -15,7 +15,7 @@ class SearchDialog : DialogFragment() {
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val array = arrayOf("По названию", "По параметрам")
         var checkedItem = -1
-        val builder = AlertDialog.Builder(requireContext())
+        val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
         builder.setTitle("Поиск вещицы")
             .setSingleChoiceItems(array, checkedItem)
             { _, which -> checkedItem = which }
