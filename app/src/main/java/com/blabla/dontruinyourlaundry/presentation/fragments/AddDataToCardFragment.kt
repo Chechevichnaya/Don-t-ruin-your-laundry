@@ -139,11 +139,9 @@ class AddDataToCardFragment : Fragment() {
                                 }
                                 true
                             } else {
-                                Log.d("CHECK", "I am inside!")
-                                addInfoToDataBase(
-                                    folderForImagesInDB
-                                ) { findNavController().popBackStack() }
-
+                                addInfoOfNewCardToDataBase(folderForImagesInDB) {
+                                    findNavController().popBackStack()
+                                }
                                 true
                             }
                         } else false
@@ -155,12 +153,11 @@ class AddDataToCardFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun addInfoToDataBase(file: File?, doOnComplete: () -> Unit) {
-        Log.d("CHECK", "I am more than inside")
+    private fun addInfoOfNewCardToDataBase(file: File?, doOnComplete: () -> Unit) {
         if (viewModel.uri.value != null) {
             copyImageToFileForDB(file)
         }
-        viewModel.addInfoToDataBase(
+        viewModel.addInfoOfNewCardToDataBase(
             getNameOfCloth(),
             imageUri,
             getListOfSymbolForDB()!! as List<SymbolForWashingDBO>,
@@ -173,7 +170,6 @@ class AddDataToCardFragment : Fragment() {
             copyImageToFileForDB(file)
         }
         Log.d("SYMBOLI", "symbols = getListOfSymbolForDB() ${getListOfSymbolForDB()}")
-
         viewModel.saveCardChanges(
             name = getNameOfCloth(),
             picture = imageUri,
@@ -201,7 +197,6 @@ class AddDataToCardFragment : Fragment() {
                 requireContext()
             )
         }, {
-            Log.d("MOLOKO", "i am inside val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning")
             clickOnAddMoreSymbols()
 
         }, TypeOfRecyclerView.ADD_SYMBOL_FRAGMENT)
@@ -209,7 +204,8 @@ class AddDataToCardFragment : Fragment() {
         recyclerView.adapter = adapter
         viewModel.addItemAddNewSymbol()
         viewModel.listOfSymbols.observe(viewLifecycleOwner) { items ->
-            adapter.submitList(viewModel.checkIfThereIsItemAddNewSymbol(items))
+            val list = viewModel.checkIfThereIsItemAddNewSymbol(items)
+            adapter.submitList(list)
         }
     }
 

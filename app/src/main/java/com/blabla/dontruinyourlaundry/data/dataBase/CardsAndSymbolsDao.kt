@@ -17,10 +17,12 @@ interface CardsAndSymbolsDao {
     fun getListOfSymbolsByCardId(cardId: Long): Flow<List<SymbolForWashingDBO>>
 
     @Query("SELECT * FROM cardsandsymbols WHERE cardId = :cardId")
-    fun getPairByCardId(cardId: Long):List<CardsAndSymbols>
+    suspend fun getPairByCardId(cardId: Long):List<CardsAndSymbols>
 
     @Delete
-    fun deleteCardAndSymbols(pair: List<CardsAndSymbols>)
+     suspend fun deleteCardAndSymbols(pair: List<CardsAndSymbols>)
+
+
 
 
 }

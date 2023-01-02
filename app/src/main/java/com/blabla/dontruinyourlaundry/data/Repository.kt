@@ -57,14 +57,15 @@ class Repository(
         return cardsAndSymbolsDao.getListOfSymbolsByCardId(cardId)
     }
 
-    suspend fun deleteCardAndSymbol(pairs: List<CardsAndSymbols>) =
+     suspend fun deleteCardAndSymbol(pairs: List<CardsAndSymbols>) =
         cardsAndSymbolsDao.deleteCardAndSymbols(pairs)
 
-    suspend fun getPairByCardId(cardId: Long): List<CardsAndSymbols> {
+      suspend fun getPairByCardId(cardId: Long): List<CardsAndSymbols> {
         return cardsAndSymbolsDao.getPairByCardId(cardId)
     }
 
     suspend fun deleteListOfCardsAndSymbols(list: List<CardsAndSymbols>) =
         cardsAndSymbolsDao.deleteCardAndSymbols(list)
+
 
 }
