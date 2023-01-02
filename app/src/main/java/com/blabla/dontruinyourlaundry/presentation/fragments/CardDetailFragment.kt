@@ -122,8 +122,6 @@ class CardDetailFragment : Fragment() {
             .setNegativeButton(getString(R.string.no)) { _, _ -> }
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 viewModel.deleteInfo((card.cardId)) { findNavController().popBackStack() }
-
-
             }
             .create()
         dialog.show()

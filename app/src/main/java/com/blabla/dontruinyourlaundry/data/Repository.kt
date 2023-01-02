@@ -24,7 +24,7 @@ class Repository(
         cardsDao.getCardsByCategory(category)
 
 
-    fun getCardById(id: Long): Flow<Card> = cardsDao.getOneCard(id)
+     fun getCardByIdFlow(id: Long): Flow<Card> = cardsDao.getOneCardFlow(id)
 
 
     fun getCardsByName(name: String): Flow<List<Card>> =
@@ -66,6 +66,8 @@ class Repository(
 
     suspend fun deleteListOfCardsAndSymbols(list: List<CardsAndSymbols>) =
         cardsAndSymbolsDao.deleteCardAndSymbols(list)
+
+     suspend fun getCardById(id: Long): Card = cardsDao.getOneCard(id)
 
 
 }

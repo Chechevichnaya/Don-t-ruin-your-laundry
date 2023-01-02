@@ -29,7 +29,10 @@ interface CardsDao {
     fun getAllNames(): Flow<List<String>>
 
     @Query("SELECT * FROM card WHERE cardId = :id")
-    fun getOneCard(id: Long): Flow<Card>
+      fun getOneCardFlow(id: Long): Flow<Card>
+
+    @Query("SELECT * FROM card WHERE cardId = :id")
+    suspend fun getOneCard(id: Long): Card
 
     @Query("SELECT * FROM card WHERE category IN (:categories) ORDER BY name ASC")
     fun searchByParameterCategory(
@@ -41,4 +44,6 @@ interface CardsDao {
 
     @Update
     suspend fun update(card: Card)
+
+
 }

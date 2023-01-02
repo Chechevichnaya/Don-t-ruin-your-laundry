@@ -30,11 +30,11 @@ class CardDetailViewModel(
     private val _card = MutableLiveData<Card>()
     val card: LiveData<Card> = _card
 
-    fun deleteCard(card: Card) {
-        viewModelScope.launch {
-            cardDetailUC.deleteCard(card)
-        }
-    }
+//     fun deleteCard(card: Card) {
+//        viewModelScope.launch {
+//            cardDetailUC.deleteCard(card)
+//        }
+//    }
 
     fun addListOfSymbolsToViewModel(card: Card) {
         viewModelScope.launch {
@@ -47,8 +47,8 @@ class CardDetailViewModel(
 
     }
 
-    fun getCardById(id: Long): LiveData<Card> {
-        return cardDetailUC.getCardById(id).asLiveData()
+     fun getCardById(id: Long): LiveData<Card> {
+        return cardDetailUC.getCardByIdFlow(id).asLiveData()
     }
 
     fun deleteCardAndSymbol(cardId: Long) {
@@ -60,7 +60,8 @@ class CardDetailViewModel(
 
     fun deleteInfo(cardId: Long, doOnComplete: () -> Unit) {
         viewModelScope.launch {
-            cardDetailUC.deleteCardAndSymbol(cardId)
+            cardDetailUC.deleteAllInfo(cardId)
+//            cardDetailUC.deleteCardAndSymbol(cardId)
             doOnComplete.invoke()
         }
 
