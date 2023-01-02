@@ -21,11 +21,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchByParametersFragment : Fragment() {
     lateinit var binding: FragmentSearchByParametersBinding
-//    private val viewModel: SearchByParametersViewModel by viewModels {
-//        SearchByParametersFactory((activity?.application as AppApplication).dataBase.cardsDao)
-//    }
-private val viewModel: SearchByParametersViewModel by viewModel()
-
+    private val viewModel: SearchByParametersViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,8 +75,6 @@ private val viewModel: SearchByParametersViewModel by viewModel()
     }
 
     private fun navigateToSearchByParametersResultFragment() {
-//        val listOfCategories = viewModel.listOfCategories.value.orEmpty()
-//            .map { it.toCategory(requireContext()) }.toTypedArray()
         val listOfParameters = viewModel.listOfSearchParametersEnum.value.orEmpty().toTypedArray()
         val action =
             SearchByParametersFragmentDirections.actionSearchByParametersFragmentToSearchByParametersResultFragment(

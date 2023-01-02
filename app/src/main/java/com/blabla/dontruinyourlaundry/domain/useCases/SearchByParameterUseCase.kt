@@ -1,5 +1,6 @@
 package com.blabla.dontruinyourlaundry.domain.useCases
 
+import android.util.Log
 import com.blabla.dontruinyourlaundry.data.Repository
 import com.blabla.dontruinyourlaundry.domain.entity.SearchParameterEnum
 import com.blabla.dontruinyourlaundry.domain.entity.SearchScreenItem
@@ -34,14 +35,15 @@ class SearchByParameterUseCase(private val repo: Repository) {
         return listSearchItems
     }
 
-    fun onItemClicked(clickedItem: SearchScreenItem.SearchParameter): List<SearchScreenItem> {
+    fun onItemClicked(clickedItem: SearchScreenItem.SearchParameter, listOfSearchItems: List<SearchScreenItem>): List<SearchScreenItem> {
         val titleOfClickedItem = getTitle(clickedItem)
-        val listOfSearchItems = getSearchItems()
         return when (titleOfClickedItem.getSelectionType()) {
             SelectionType.SINGLE -> {
+                Log.d("PARAM", "i am single")
                 singleType(listOfSearchItems, clickedItem)
             }
             SelectionType.MULTI -> {
+                Log.d("PARAM", "i am multi")
                 multiType(listOfSearchItems, clickedItem)
             }
         }
@@ -70,6 +72,7 @@ class SearchByParameterUseCase(private val repo: Repository) {
     ): List<SearchScreenItem> {
         return listAllItems.map { itemInList ->
             if (itemInList is SearchScreenItem.SearchParameter && itemInList == clickedItem) {
+                Log.d("PARAM", "i am inside multi condition")
                 itemInList.copy(selected = !itemInList.selected)
             } else itemInList
         }

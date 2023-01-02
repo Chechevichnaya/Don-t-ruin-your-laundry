@@ -1,5 +1,6 @@
 package com.blabla.dontruinyourlaundry.presentation.viewModels
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -47,7 +48,8 @@ class SearchByParametersViewModel(private val searchByParameterUC: SearchByParam
 //    }
 
     fun onItemClicked(clickedItem: SearchScreenItem.SearchParameter) {
-        _searchItems.value = searchByParameterUC.onItemClicked(clickedItem)
+        _searchItems.value = searchByParameterUC.onItemClicked(clickedItem, _searchItems.value.orEmpty())
+        Log.d("PARAM", "searchItems $_searchItems.value")
     }
 
     fun processSelectedItems() {
