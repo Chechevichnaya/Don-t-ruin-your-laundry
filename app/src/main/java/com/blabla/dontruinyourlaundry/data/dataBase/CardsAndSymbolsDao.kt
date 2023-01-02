@@ -1,9 +1,6 @@
 package com.blabla.dontruinyourlaundry.data.dataBase
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolForWashingDBO
 import kotlinx.coroutines.flow.Flow
 
@@ -18,4 +15,12 @@ interface CardsAndSymbolsDao {
 
     @Query("SELECT symbol FROM cardsandsymbols WHERE cardId = :cardId")
     fun getListOfSymbolsByCardId(cardId: Long): Flow<List<SymbolForWashingDBO>>
+
+    @Query("SELECT * FROM cardsandsymbols WHERE cardId = :cardId")
+    fun getPairByCardId(cardId: Long):List<CardsAndSymbols>
+
+    @Delete
+    fun deleteCardAndSymbols(pair: List<CardsAndSymbols>)
+
+
 }

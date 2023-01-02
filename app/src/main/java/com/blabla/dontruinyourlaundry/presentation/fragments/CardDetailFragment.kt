@@ -33,10 +33,7 @@ class CardDetailFragment : Fragment() {
 
     private val navigationArgs: CardDetailFragmentArgs by navArgs()
 
-//    private val viewModel: CardDetailViewModel by viewModels {
-//        CardDetailFactory((activity?.application as AppApplication).dataBase.cardsDao)
-//    }
-private val viewModel: CardDetailViewModel by viewModel()
+    private val viewModel: CardDetailViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,9 +45,7 @@ private val viewModel: CardDetailViewModel by viewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val id = navigationArgs.id
-        viewModel.getCardById(id).observe(this.viewLifecycleOwner) { selectedCard ->
+        viewModel.getCardById(navigationArgs.id).observe(this.viewLifecycleOwner) { selectedCard ->
             viewModel.addListOfSymbolsToViewModel(selectedCard)
             card = selectedCard
             bind(card)
@@ -87,7 +82,6 @@ private val viewModel: CardDetailViewModel by viewModel()
     }
 
 
-
     private fun bind(card: Card) {
         if (card.picture == null) {
             val imageRes = CategoryEnum.values().find { it == card.category }?.getResIcon()
@@ -106,7 +100,7 @@ private val viewModel: CardDetailViewModel by viewModel()
             nameOfCloth.text = card.name
             val recyclerView = binding.addedSymbolsRecyclerView
             val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning(
-                {},{},
+                {}, {},
                 TypeOfRecyclerView.CARD_DETAIL_FRAGMENT
             )
             recyclerView.layoutManager =
@@ -121,20 +115,24 @@ private val viewModel: CardDetailViewModel by viewModel()
     }
 
     private fun showConfirmationDialog() {
-        AlertDialog.Builder(requireContext())
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        val dialog: AlertDialog = builder
             .setMessage(getString(R.string.delete_question))
             .setCancelable(false)
             .setNegativeButton(getString(R.string.no)) { _, _ -> }
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
-                deleteCard()
+                viewModel.deleteInfo((card.cardId)) { findNavController().popBackStack() }
+
+
             }
-            .show()
+            .create()
+        dialog.show()
+        val colorButton = resources.getColor(R.color.lilac_700)
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(colorButton)
     }
 
-    private fun deleteCard() {
-        viewModel.deleteCard(card)
-        findNavController().popBackStack()
-    }
+
 
     private fun editCard() {
         val action =

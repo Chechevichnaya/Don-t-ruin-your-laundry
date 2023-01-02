@@ -20,7 +20,7 @@ interface CardsDao {
     fun getCardsByCategory(category: CategoryEnum): Flow<List<Card>>
 
     @Query("SELECT cardId FROM card WHERE cardId = (SELECT MAX(cardId) FROM card)")
-    fun getIdOfLastAddedCard():Flow<Long>
+    suspend fun getIdOfLastAddedCard(): Long
 
     @Query("SELECT * FROM card WHERE name = :name ORDER BY name ASC")
     fun getCardsByName(name: String): Flow<List<Card>>

@@ -22,13 +22,3 @@ class AskingAboutAddingPhoto: DialogFragment() {
     }
 
 }
-
-//  val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-//        val dialog: AlertDialog = builder.setTitle(context.getString(R.string.symbol))
-//            .setMessage(clickedItem.meaningOfSymbol)
-//            .setPositiveButton("Ok") { _, _ ->  }
-//            .setIcon(clickedItem.pictureId)
-//            .create()
-//        dialog.show()
-//        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-//            .setTextColor(context.resources.getColor(R.color.lilac_700))

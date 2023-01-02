@@ -13,7 +13,7 @@ class CreateNewCardUseCase(private val repo: Repository) {
         }
     }
 
-    fun getLastCardId(): Flow<Long> {
+    suspend fun getLastCardId(): Long {
          return repo.getIdOfLastAddedCard()
     }
 

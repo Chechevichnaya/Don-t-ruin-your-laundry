@@ -1,11 +1,13 @@
 package com.blabla.dontruinyourlaundry.presentation.viewModels
 
 import android.content.Context
+import android.util.Log
 import androidx.lifecycle.*
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
 import com.blabla.dontruinyourlaundry.data.dataBase.Card
 import com.blabla.dontruinyourlaundry.domain.useCases.ShowCardDetailUseCase
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class CardDetailViewModel(
@@ -35,22 +37,34 @@ class CardDetailViewModel(
     }
 
     fun addListOfSymbolsToViewModel(card: Card) {
-//        val list = card.listOfSymbols.listOfSymbols
-//        _listOfSymbols.value =
-//            list.map { item ->
-//                item.toSymbolForWashing(context)
-//            }
-        var listSymbols = _listOfSymbols.value.orEmpty()
         viewModelScope.launch {
-            cardDetailUC.getSymbolsByCardId(card.cardId).collect {
-                listSymbols = it.map { symbol -> symbol.toSymbolForWashing(context) }
-            }
+            val list = cardDetailUC.getSymbolsByCardId(card.cardId).first()
+            Log.d("SYMBOLS", "symbols in fun addListOfSymbolsToViewModel $list")
+            _listOfSymbols.value = list.map { symbol -> symbol.toSymbolForWashing(context) }
+            Log.d("SYMBOLS", "_listOfSymbols.value ${_listOfSymbols.value}")
+
         }
-        _listOfSymbols.value = listSymbols
+
     }
 
     fun getCardById(id: Long): LiveData<Card> {
         return cardDetailUC.getCardById(id).asLiveData()
+    }
+
+    fun deleteCardAndSymbol(cardId: Long) {
+        viewModelScope.launch {
+            cardDetailUC.getPairByCardId(cardId)
+            cardDetailUC.deleteCardAndSymbol(cardId)
+        }
+    }
+
+    fun deleteInfo(cardId: Long, doOnComplete: () -> Unit) {
+        viewModelScope.launch {
+            cardDetailUC.deleteCardAndSymbol(cardId)
+            doOnComplete.invoke()
+        }
+
+
     }
 }
 

@@ -28,4 +28,10 @@ class ChangeOldCardUseCase(private val repo: Repository) {
         return repo.getSymbolsByCardId(cardId)
 
     }
+
+    suspend fun deleteOldSymbols(cardId: Long) {
+        val list = repo.getPairByCardId(cardId)
+        repo.deleteListOfCardsAndSymbols(list)
+
+    }
 }

@@ -19,10 +19,7 @@ class ClothingCardsFragment : Fragment() {
 
     private lateinit var binding: FragmentClothingCardsBinding
 
-//    private val viewModel: ClothingCardsViewModel by viewModels {
-//        ClothingCardsFactory((activity?.application as AppApplication).dataBase.cardsDao)
-//    }
-private val viewModel: ClothingCardsViewModel by viewModel()
+    private val viewModel: ClothingCardsViewModel by viewModel()
 
     companion object {
         const val CATEGORY_NAME = "CATEGORY_NAME"
@@ -47,7 +44,9 @@ private val viewModel: ClothingCardsViewModel by viewModel()
 
         val adapter = CardsListAdapter { card ->
             val action =
-                KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToCardDetailFragment(card.cardId)
+                KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToCardDetailFragment(
+                    card.cardId
+                )
             this.findNavController().navigate(action)
         }
 

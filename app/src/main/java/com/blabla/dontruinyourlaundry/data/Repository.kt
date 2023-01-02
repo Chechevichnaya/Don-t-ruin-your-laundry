@@ -33,7 +33,7 @@ class Repository(
 
     fun getAllNames(): Flow<List<String>> = cardsDao.getAllNames()
 
-    fun getIdOfLastAddedCard(): Flow<Long> = cardsDao.getIdOfLastAddedCard()
+    suspend fun getIdOfLastAddedCard(): Long = cardsDao.getIdOfLastAddedCard()
 
     suspend fun addPairCardSymbols(pair: CardsAndSymbols) {
         cardsAndSymbolsDao.insertInDataBase(pair)
@@ -56,5 +56,15 @@ class Repository(
     fun getSymbolsByCardId(cardId: Long): Flow<List<SymbolForWashingDBO>> {
         return cardsAndSymbolsDao.getListOfSymbolsByCardId(cardId)
     }
+
+    suspend fun deleteCardAndSymbol(pairs: List<CardsAndSymbols>) =
+        cardsAndSymbolsDao.deleteCardAndSymbols(pairs)
+
+    suspend fun getPairByCardId(cardId: Long): List<CardsAndSymbols> {
+        return cardsAndSymbolsDao.getPairByCardId(cardId)
+    }
+
+    suspend fun deleteListOfCardsAndSymbols(list: List<CardsAndSymbols>) =
+        cardsAndSymbolsDao.deleteCardAndSymbols(list)
 
 }

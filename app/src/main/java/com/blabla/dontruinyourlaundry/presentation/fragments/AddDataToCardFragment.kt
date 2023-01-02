@@ -131,11 +131,12 @@ class AddDataToCardFragment : Fragment() {
                     R.id.save_button -> {
                         if (dataForCardCorrect()) {
                             if (viewModel.card.value != null) {
-                                saveCardChanges(folderForImagesInDB)
-                                findNavController().popBackStack(
-                                    R.id.kindsOfThingsForLaundry,
-                                    false
-                                )
+                                saveCardChanges(folderForImagesInDB) {
+                                    findNavController().popBackStack(
+                                        R.id.kindsOfThingsForLaundry,
+                                        false
+                                    )
+                                }
                                 true
                             } else {
                                 Log.d("CHECK", "I am inside!")
@@ -167,15 +168,17 @@ class AddDataToCardFragment : Fragment() {
         )
     }
 
-    private fun saveCardChanges(file: File?) {
+    private fun saveCardChanges(file: File?, doOnComplete: () -> Unit) {
         if (viewModel.uri.value != null) {
             copyImageToFileForDB(file)
         }
+        Log.d("SYMBOLI", "symbols = getListOfSymbolForDB() ${getListOfSymbolForDB()}")
 
         viewModel.saveCardChanges(
             name = getNameOfCloth(),
             picture = imageUri,
-            symbols = getListOfSymbolForDB()!! as List<SymbolForWashingDBO>
+            symbols = getListOfSymbolForDB()!! as List<SymbolForWashingDBO>,
+            doOnComplete
         )
     }
 
@@ -301,10 +304,8 @@ class AddDataToCardFragment : Fragment() {
     private fun dataForCardCorrect(): Boolean {
         var message = ""
         val checkIfNameEmpty = getNameOfCloth().isEmpty()
-        val checkIfSymbolsEmpty = viewModel.listOfSymbols.value.isNullOrEmpty()
-        if (checkIfNameEmpty && checkIfSymbolsEmpty)
-//            getListOfSymbolFroDB()?.listOfSymbols.isNullOrEmpty())
-        {
+        val checkIfSymbolsEmpty = viewModel.removeSymbolsAddNewSymbols().isEmpty()
+        if (checkIfNameEmpty && checkIfSymbolsEmpty) {
             message = "Заполни поле \"Название вещи\" и добавь нужные символы для ухода за вещами"
         } else if (checkIfNameEmpty) {
             message = "Заполни поле \"Название вещи\""

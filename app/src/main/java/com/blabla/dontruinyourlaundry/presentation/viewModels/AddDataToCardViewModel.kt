@@ -27,6 +27,11 @@ class AddDataToCardViewModel(
 
     private var listOfSymbolsDBO = listOf<SymbolForWashingDBO>()
 
+    private val symbolsAddNewSymbols = SymbolGuide.ButtonAddNewSymbol(
+        R.drawable.ic_add,
+        "Добавить новые символы"
+    )
+
 
     private val _listOfSymbols = MutableLiveData<List<SymbolGuide>>()
     val listOfSymbols: LiveData<List<SymbolGuide>> = _listOfSymbols
@@ -62,17 +67,21 @@ class AddDataToCardViewModel(
     }
 
     fun checkIfThereIsItemAddNewSymbol(items: List<SymbolGuide>): List<SymbolGuide> {
-         return if ((items.last() is SymbolGuide.ButtonAddNewSymbol).not()) {
+        return if ((items.last() is SymbolGuide.ButtonAddNewSymbol).not()) {
             val itemsList = items.toMutableList()
-                itemsList.add(
-                SymbolGuide.ButtonAddNewSymbol(
-                    R.drawable.ic_add,
-                    "Добавить новые символы"
-                )
+            itemsList.add(
+                symbolsAddNewSymbols
             )
-             itemsList
+            itemsList
+        } else items
+    }
+
+    fun removeSymbolsAddNewSymbols(): List<SymbolGuide> {
+        val list = _listOfSymbols.value.orEmpty().toMutableList()
+        if (list.contains(symbolsAddNewSymbols)) {
+            list.remove(symbolsAddNewSymbols)
         }
-        else items
+        return list
     }
 
     fun addItemAddNewSymbol() {
@@ -99,11 +108,10 @@ class AddDataToCardViewModel(
         listSymbols: List<SymbolForWashingDBO>,
         doOnComplete: () -> Unit
     ) {
-        createCard(nameOfCloth, imageUri)
+        createNewCard(nameOfCloth, imageUri)
         viewModelScope.launch {
             addNewCardUC.addNewCard(_card.value)
-            Log.d("CHECK", "I am inside addNewCard ($card)")
-            val cardId = addNewCardUC.getLastCardId().first()
+            val cardId = addNewCardUC.getLastCardId()
             listSymbols.forEach { symbol ->
                 addNewCardUC.addPairCardAndSymbol(
                     CardsAndSymbols(
@@ -114,8 +122,6 @@ class AddDataToCardViewModel(
                 )
             }
             doOnComplete.invoke()
-            Log.d("CHECK", "I am VSEEEE")
-
         }
         //viewModel.addCardToDataBase(getNameOfCloth(), imageUri)
         //        viewModel.addPairCardAndSymbolToDB(getListOfSymbolForDB()!! as List<SymbolForWashingDBO>)
@@ -125,7 +131,7 @@ class AddDataToCardViewModel(
     fun addPairCardAndSymbolToDB(listSymbols: List<SymbolForWashingDBO>) {
         Log.d("CHECK", "I am inside addPair")
         viewModelScope.launch {
-            val cardId = addNewCardUC.getLastCardId().first()
+            val cardId = addNewCardUC.getLastCardId()
             listSymbols.forEach { symbol ->
                 addNewCardUC.addPairCardAndSymbol(
                     CardsAndSymbols(
@@ -145,11 +151,9 @@ class AddDataToCardViewModel(
     private fun addCardToViewModel(context: Context) {
         val id = _cardId.value ?: return
         viewModelScope.launch {
-            updateCardUC.getCard(id)
-                .collect { card ->
-                    _card.value = card
-                    addCardInfoToViewModel(card, context)
-                }
+            _card.value = updateCardUC.getCard(id)
+                .first()
+            addCardInfoToViewModel(context)
         }
     }
 
@@ -175,16 +179,14 @@ class AddDataToCardViewModel(
 //    }
 
 
-    private fun addCardInfoToViewModel(card: Card, context: Context) {
+    private fun addCardInfoToViewModel(context: Context) {
+        val card = _card.value ?: return
         _nameOfCloth.value = card.name
         _uri.value = card.picture?.toUri()
-        var listSymbols = _listOfSymbols.value.orEmpty()
         viewModelScope.launch {
-            updateCardUC.getSymbolsByCardId(card.cardId).collect {
-                listSymbols = it.map { symbol -> symbol.toSymbolForWashing(context) }
-            }
+            _listOfSymbols.value = updateCardUC.getSymbolsByCardId(card.cardId).first()
+                .map { symbol -> symbol.toSymbolForWashing(context) }
         }
-        _listOfSymbols.value = listSymbols
     }
 
     fun showDialog(symbol: SymbolGuide.SymbolForWashing, context: Context) {
@@ -219,9 +221,6 @@ class AddDataToCardViewModel(
 
     fun createCard(name: String, uri: String?) {
         createNewCard(name, uri)
-        val card = _card.value
-
-        //addNewCard(card)
     }
 
     private fun addNewCard(card: Card?) {
@@ -234,7 +233,8 @@ class AddDataToCardViewModel(
     fun saveCardChanges(
         name: String,
         picture: String?,
-        symbols: List<SymbolForWashingDBO>
+        symbols: List<SymbolForWashingDBO>,
+        doOnComplete: () -> Unit
     ) {
         val oldCard = _card.value ?: return
         val card = Card(
@@ -243,15 +243,30 @@ class AddDataToCardViewModel(
             picture = picture,
             category = oldCard.category
         )
-        updateCard(card)
-        updateCardAndSymbol(symbols)
+        viewModelScope.launch {
+            updateCardUC.updateCard(card)
+            val cardId = addNewCardUC.getLastCardId()
+            updateCardUC.deleteOldSymbols(cardId)
+
+            symbols.forEach { symbol ->
+                Log.d("SIMBOLI", "symbol for updating $symbol")
+                updateCardUC.updateCardAndSymbol(
+                    CardsAndSymbols(
+                        0,
+                        cardId,
+                        symbol
+                    )
+                )
+            }
+            doOnComplete.invoke()
+        }
     }
 
     private fun updateCardAndSymbol(symbols: List<SymbolForWashingDBO>) {
-        val cardId = addNewCardUC.getLastCardId().asLiveData().value
-        if (cardId != null) {
+        viewModelScope.launch {
+            val cardId = addNewCardUC.getLastCardId()
             symbols.forEach { symbol ->
-                useCoorutineToupdateCardAndSymbol(
+                updateCardUC.updateCardAndSymbol(
                     CardsAndSymbols(
                         0,
                         cardId,
@@ -260,8 +275,6 @@ class AddDataToCardViewModel(
                 )
             }
         }
-
-
     }
 
     private fun useCoorutineToupdateCardAndSymbol(pair: CardsAndSymbols) {
