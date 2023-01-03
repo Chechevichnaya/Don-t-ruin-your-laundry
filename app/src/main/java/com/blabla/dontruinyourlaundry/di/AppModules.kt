@@ -20,7 +20,7 @@ val viewModelModule = module {
     viewModel { ClothingCardsViewModel(get()) }
     viewModel { SearchByNameViewModel(get()) }
     viewModel { SearchByParametersViewModel(get()) }
-    viewModel { SearchByParametersResultViewModel(get()) }
+    viewModel { SearchByParametersResultViewModel(get(), get()) }
     viewModel { SymbolGuideViewModel(get()) }
 }
 

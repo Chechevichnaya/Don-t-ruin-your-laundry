@@ -18,7 +18,6 @@ class SearchByParametersViewModel(private val searchByParameterUC: SearchByParam
     private val _selectedItems = MutableLiveData<List<SearchScreenItem>>()
 
     private val _listOfCategories = MutableLiveData<List<CategoryEnum>>()
-    val listOfCategories: LiveData<List<CategoryEnum>> = _listOfCategories
 
     private val _listOfSearchParametersEnum = MutableLiveData<List<SearchParameterEnum>>()
     val listOfSearchParametersEnum: LiveData<List<SearchParameterEnum>> =
@@ -28,46 +27,16 @@ class SearchByParametersViewModel(private val searchByParameterUC: SearchByParam
         val selectedItems = _selectedItems.value.orEmpty()
         _listOfSearchParametersEnum.value = searchByParameterUC.getSelectedItemsNames(selectedItems)
     }
-//    private fun getFullListOfSearchItems(input: List<SearchByParametersCard>): List<SearchScreenItem> {
-//        val result = mutableListOf<SearchScreenItem>()
-//
-//        input.forEach { parametersCard ->
-//            result.add(
-//                SearchScreenItem.Title(parametersCard.title)
-//            )
-//            parametersCard.listOfButton.forEach { button ->
-//                result.add(
-//                    SearchScreenItem.SearchParameter(
-//                        name = button.name,
-//                        titleName = parametersCard.title
-//                    )
-//                )
-//            }
-//        }
-//        return result
-//    }
 
     fun onItemClicked(clickedItem: SearchScreenItem.SearchParameter) {
         _searchItems.value = searchByParameterUC.onItemClicked(clickedItem, _searchItems.value.orEmpty())
-        Log.d("PARAM", "searchItems $_searchItems.value")
     }
 
     fun processSelectedItems() {
         getSelectedItemsNames()
-//        getListOfCategories()
     }
 
-//    private fun getListOfCategories() {
-//        val selectedItems = _selectedItems.value.orEmpty()
-//        val listOfCategories = _listOfCategories.value.orEmpty().toMutableList()
-////        val allItems = _searchItems.value.orEmpty()
-//        selectedItems.forEach { selectedItem ->
-//            if (selectedItem is SearchScreenItem.SearchParameter) {
-//                listOfCategories.add(selectedItem.getCategory())
-//            }
-//        }
-//        _listOfCategories.value = listOfCategories
-//    }
+
 
     private fun getSelectedItems() {
         _selectedItems.value =
@@ -77,7 +46,6 @@ class SearchByParametersViewModel(private val searchByParameterUC: SearchByParam
     fun checkIfItemsSelected(): Boolean {
         getSelectedItems()
         return _selectedItems.value?.isNotEmpty() ?: return false
-
     }
 
 

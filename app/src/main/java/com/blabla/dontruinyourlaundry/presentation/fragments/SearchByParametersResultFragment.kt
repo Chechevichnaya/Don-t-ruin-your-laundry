@@ -12,7 +12,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.presentation.adapters.CardsListAdapter
 import com.blabla.dontruinyourlaundry.databinding.FragmentSearchByParametersResultBinding
+import com.blabla.dontruinyourlaundry.presentation.adapters.RecyclerViewAdapterSearchParameter
 import com.blabla.dontruinyourlaundry.presentation.viewModels.SearchByParametersResultViewModel
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexWrap
+import com.google.android.flexbox.FlexboxLayoutManager
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class SearchByParametersResultFragment : Fragment() {
@@ -36,6 +40,19 @@ class SearchByParametersResultFragment : Fragment() {
 
         viewModel.setListOfSelectedParameters(args.listOfParameters.toMutableList())
         setAdapterToCards()
+        setRecyclerViewTextParameters()
+
+    }
+
+    private fun setRecyclerViewTextParameters() {
+        val recyclerView = binding.textParameters
+        val adapter = RecyclerViewAdapterSearchParameter {}
+        recyclerView.layoutManager =
+            FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
+        recyclerView.adapter = adapter
+        viewModel.getListSearchItemsWithSelectedItems().observe(viewLifecycleOwner) { items ->
+            adapter.submitList(items)
+        }
 
     }
 
@@ -51,7 +68,6 @@ class SearchByParametersResultFragment : Fragment() {
             LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.recyclerSearchByParameters.adapter = adapter
         viewModel.getListOfCards().observe(viewLifecycleOwner) { cards ->
-//            viewModel.setListCardResult(cards)
             adapter.submitList(cards)
         }
     }
@@ -60,6 +76,7 @@ class SearchByParametersResultFragment : Fragment() {
         binding.toolbarSearch.title = "Поиск по параметрам"
         binding.toolbarSearch.navigationIcon =
             view.context.getDrawable(R.drawable.ic_arrow_back)
+
 
 
         binding.toolbarSearch.setNavigationOnClickListener {

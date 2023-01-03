@@ -13,21 +13,7 @@ sealed class SearchScreenItem {
     data class SearchParameter(
         val name: SearchParameterEnum,
         val selected: Boolean = false
-//        val titleName: TitleEnum
-    ) : SearchScreenItem() {
-
-//        fun getCategory(): CategoryEnum {
-//            return when (this.name) {
-//                SearchParameterEnum.CLOTH -> CategoryEnum.CLOTH
-//                SearchParameterEnum.BED_SHEET -> CategoryEnum.BAD_SHEETS
-//                SearchParameterEnum.KITCHEN -> CategoryEnum.KITCHEN
-//                SearchParameterEnum.BATH -> CategoryEnum.BATH
-//                else -> CategoryEnum.REST
-//            }
-//        }
-
-
-    }
+    ) : SearchScreenItem()
 
 }
 
@@ -53,9 +39,9 @@ enum class TitleSearchByParameterEnum {
     }
 
     fun getSelectionType(): SelectionType {
-        return when(this){
+        return when (this) {
             CATEGORY -> SelectionType.MULTI
-            WASHING ->  SelectionType.SINGLE
+            WASHING -> SelectionType.SINGLE
             WASHING_MODE -> SelectionType.MULTI
             DRYING -> SelectionType.SINGLE
             IRONING -> SelectionType.SINGLE
@@ -137,15 +123,36 @@ enum class SearchParameterEnum : Parcelable {
     DRYCLEAN_NOT_ALLOWED;
 
     fun getCategory(): CategoryEnum? {
-            return when (this) {
-                CLOTH -> CategoryEnum.CLOTH
-                BED_SHEET -> CategoryEnum.BAD_SHEETS
-                KITCHEN -> CategoryEnum.KITCHEN
-                BATH -> CategoryEnum.BATH
-                REST -> CategoryEnum.REST
-                else -> null
-            }
+        return when (this) {
+            CLOTH -> CategoryEnum.CLOTH
+            BED_SHEET -> CategoryEnum.BAD_SHEETS
+            KITCHEN -> CategoryEnum.KITCHEN
+            BATH -> CategoryEnum.BATH
+            REST -> CategoryEnum.REST
+            else -> null
         }
+    }
+
+    fun getTitle(): SearchScreenItem.Title {
+        return when (this) {
+            CLOTH, BED_SHEET, BATH, KITCHEN, REST -> SearchScreenItem.Title(
+                TitleSearchByParameterEnum.CATEGORY
+            )
+            WASH_ALLOWED, WASH_NOT_ALLOWED, WASH_HAND -> SearchScreenItem.Title(
+                TitleSearchByParameterEnum.WASHING
+            )
+            LAUNDRY_30, LAUNDRY_40, LAUNDRY_50, LAUNDRY_60, LAUNDRY_70, LAUNDRY_95 -> SearchScreenItem.Title(
+                TitleSearchByParameterEnum.WASHING_MODE
+            )
+            DRY_ALLOWED, DRY_NOT_ALLOWED -> SearchScreenItem.Title(TitleSearchByParameterEnum.DRYING)
+            IRON_ALLOWED,
+            IRON_NOT_ALLOWED -> SearchScreenItem.Title(TitleSearchByParameterEnum.IRONING)
+            BLEACH_ALLOWED,
+            BLEACH_NOT_ALLOWED -> SearchScreenItem.Title(TitleSearchByParameterEnum.BLEACHING)
+            DRYCLEAN_ALLOWED,
+            DRYCLEAN_NOT_ALLOWED -> SearchScreenItem.Title(TitleSearchByParameterEnum.DRYCLEANING)
+        }
+    }
 
     fun getName(context: Context): String {
         return when (this) {

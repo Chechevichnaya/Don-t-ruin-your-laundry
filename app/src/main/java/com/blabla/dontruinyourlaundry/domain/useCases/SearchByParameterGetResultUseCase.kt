@@ -3,9 +3,7 @@ package com.blabla.dontruinyourlaundry.domain.useCases
 import android.util.Log
 import com.blabla.dontruinyourlaundry.data.Repository
 import com.blabla.dontruinyourlaundry.data.dataBase.Card
-import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
-import com.blabla.dontruinyourlaundry.domain.entity.SearchParameterEnum
-import com.blabla.dontruinyourlaundry.domain.entity.SymbolForWashingDBO
+import com.blabla.dontruinyourlaundry.domain.entity.*
 
 class SearchByParameterGetResultUseCase(private val repo: Repository) {
 
@@ -31,5 +29,21 @@ class SearchByParameterGetResultUseCase(private val repo: Repository) {
 
     private suspend fun getCardsSearchBySymbols(listOfAttachedSymbols: MutableList<SymbolForWashingDBO>): List<Card> {
         return repo.getCardsSearchBySymbols(listOfAttachedSymbols)
+    }
+
+    fun getSearchItems(): List<SearchScreenItem> {
+        val listSearchItems = mutableListOf<SearchScreenItem>()
+        TitleSearchByParameterEnum.values().forEach { titleEnum ->
+            listSearchItems.add(SearchScreenItem.Title(titleEnum))
+            titleEnum.getParameters()
+                .forEach { parameterEnum ->
+                    listSearchItems.add(
+                        SearchScreenItem.SearchParameter(
+                            parameterEnum
+                        )
+                    )
+                }
+        }
+        return listSearchItems
     }
 }
