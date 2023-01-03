@@ -51,8 +51,6 @@ class Repository(
 
     suspend fun deleteCard(card: Card) = cardsDao.deleteCard(card)
 
-    suspend fun updateCardAndSymbol(pair: CardsAndSymbols) = cardsAndSymbolsDao.update(pair)
-
     fun getSymbolsByCardId(cardId: Long): Flow<List<SymbolForWashingDBO>> {
         return cardsAndSymbolsDao.getListOfSymbolsByCardId(cardId)
     }
@@ -68,6 +66,19 @@ class Repository(
         cardsAndSymbolsDao.deleteCardAndSymbols(list)
 
      suspend fun getCardById(id: Long): Card = cardsDao.getOneCard(id)
+
+    suspend fun getCardsSearchByParameters(listSymbols: List<SymbolForWashingDBO>, listCategory:List<CategoryEnum>){
+
+    }
+
+     suspend fun getCardsSearchByPaCategory(listOfCategory: MutableList<CategoryEnum>): List<Card> {
+        return cardsDao.searchByParameterCategory(listOfCategory)
+    }
+
+     suspend fun getCardsSearchBySymbols(listOfAttachedSymbols: MutableList<SymbolForWashingDBO>): List<Card> {
+        val cardId =  cardsAndSymbolsDao.getCardIdBySymbols(listOfAttachedSymbols)
+        return cardsDao.getCardsByCardsId(cardId)
+    }
 
 
 }

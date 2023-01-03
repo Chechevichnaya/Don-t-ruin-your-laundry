@@ -22,7 +22,7 @@ data class Card(
 @Entity
 data class CardsAndSymbols(
     @PrimaryKey(autoGenerate = true) val pairId:Long = 0L,
-    @NonNull val cardId: Long,
+    @NonNull val cardAndSymbolId: Long,
     @NonNull val symbol: SymbolForWashingDBO
 )
 

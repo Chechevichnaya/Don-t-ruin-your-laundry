@@ -35,15 +35,15 @@ interface CardsDao {
     suspend fun getOneCard(id: Long): Card
 
     @Query("SELECT * FROM card WHERE category IN (:categories) ORDER BY name ASC")
-    fun searchByParameterCategory(
+     suspend fun searchByParameterCategory(
         categories: List<CategoryEnum>,
-    ): Flow<List<Card>>
-
-//    @Query("SELECT * FROM card WHERE list_of_symbols IN (:symbols) ORDER BY name ASC")
-//    fun searchByParameterSymbols(symbols: List<SymbolForWashingDBO>): Flow<List<Card>>
+    ): List<Card>
 
     @Update
     suspend fun update(card: Card)
+
+    @Query("SELECT * FROM card WHERE cardId IN (:cardId) ORDER BY name ASC")
+     suspend fun getCardsByCardsId(cardId: List<Long>): List<Card>
 
 
 }

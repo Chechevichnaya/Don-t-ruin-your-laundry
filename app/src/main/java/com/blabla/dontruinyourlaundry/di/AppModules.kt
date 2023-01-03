@@ -35,5 +35,6 @@ val useCasesModule = module {
     factory { SearchByParameterUseCase(get()) }
     factory { ChangeOldCardUseCase(get()) }
     factory { CreateNewCardUseCase(get()) }
+    factory { SearchByParameterGetResultUseCase(get()) }
 }
 
