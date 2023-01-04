@@ -124,7 +124,7 @@
     <string name="sixty">60</string>
     <string name="seventy">70</string>
     <string name="nintyfive">95</string>
-    <string name="washing_machine_allowed">Стирка в стиральной машине</string>
+    <string name="washing_machine_allowed">Разрешена в стиральной машине</string>
     <string name="title_washing">Стирка</string>
     <string name="title_drying">Сушка в сушильной машине</string>
     <string name="title_wash_mode">Режим стирки</string>
