@@ -39,8 +39,8 @@
     <string name="LookFor">Искать</string>
     <string name="cloth">Одежда</string>
     <string name="category">Категории</string>
-    <string name="edit_fragment">Редактировать карточку</string>
-    <string name="add_card_fragment">Добавить новую карточку</string>
+    <string name="edit_fragment">Редактирование карточки</string>
+    <string name="add_card_fragment">Добавление новой карточки</string>
     <string name="add_more_symbols">Добавить символы для стирки</string>
     <string name="wash">Разрешена машинная стирка</string>
     <string name="wash_not_allowed">Машинная и ручная стирка запрещены. Разрешена химчистка</string>

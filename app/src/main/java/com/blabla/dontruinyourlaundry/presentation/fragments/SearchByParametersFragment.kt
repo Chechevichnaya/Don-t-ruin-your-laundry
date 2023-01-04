@@ -84,7 +84,7 @@ class SearchByParametersFragment : Fragment() {
     }
 
     private fun setToolBar(view: View) {
-        binding.toolbarSearch.title = "Результат поиска"
+        binding.toolbarSearch.title = "Поиск по параметрам"
         binding.toolbarSearch.navigationIcon =
             view.context.getDrawable(R.drawable.ic_arrow_back)
 

@@ -86,20 +86,8 @@ class SearchByParametersResultFragment : Fragment() {
 //    }
 
     private fun showDialog() {
-        // val dialog = AlertDialog.Builder(this)
-        //    val view = layoutInflater.inflate(R.layout.d_manage_people, null)
-        //    dialog.setView(view)
-        //
-        //    view.manage_people_title.text = "Manage People"
-        //
-        //    val adapter = ManagePeopleAdapter(result)
-        //    view.people_list.adapter = adapter
-        //    view.people_list.layoutManager = LinearLayoutManager(this)
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-//        val dialog = AlertDialog.Builder(requireContext())
         val view = layoutInflater.inflate(R.layout.search_by_parameter_dialog, null)
-//        val dialog: AlertDialog.Builder = builder.setView(view)
-//        dialog.setView(view)
         val adapter = RecyclerViewAdapterSearchParameter {}
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view_dialog)
         recyclerView.adapter = adapter
@@ -107,22 +95,10 @@ class SearchByParametersResultFragment : Fragment() {
         viewModel.getListSearchItemsWithSelectedItems().observe(viewLifecycleOwner) { items ->
             adapter.submitList(items)
         }
-//        dialog
-//            .setTitle("Условия поиска")
         val dialog: AlertDialog = builder.setView(view)
             .setPositiveButton("Ok") { _, _ ->  }
             .create()
         dialog.show()
-
-//        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-//            .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
-
-//        val dialog: AlertDialog = builder
-//            .setTitle("Условия поиска")
-//            .setView(R.layout.search_by_parameter_dialog)
-//            .setPositiveButton("Ok") { _, _ ->  }
-//            .create()
-//        dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
     }
@@ -144,7 +120,7 @@ class SearchByParametersResultFragment : Fragment() {
     }
 
     private fun setToolBar(view: View) {
-        binding.toolbarSearch.title = "Поиск по параметрам"
+        binding.toolbarSearch.title = "Результат поиска"
         binding.toolbarSearch.navigationIcon =
             view.context.getDrawable(R.drawable.ic_arrow_back)
 
