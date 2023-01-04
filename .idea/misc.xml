@@ -22,6 +22,7 @@
         <entry key="app/src/main/res/layout/fragment_add_symbol_to_card.xml" value="0.18" />
         <entry key="app/src/main/res/layout/fragment_add_symbold_to_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_add_symbols_to_card.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_card_detail.xml" value="0.21822916666666667" />
         <entry key="app/src/main/res/layout/fragment_clothing_cards.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/fragment_how_to_use_app_dialog.xml" value="0.23229166666666667" />
@@ -39,6 +40,8 @@
         <entry key="app/src/main/res/layout/recycler_view_symbol_meaning.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/recycler_view_symbol_meaning_display_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/recycler_view_symbol_meaning_old_card.xml" value="0.23125" />
+        <entry key="app/src/main/res/layout/search_by_parameter_condition_dialog.xml" value="0.23125" />
+        <entry key="app/src/main/res/layout/search_by_parameter_dialog.xml" value="0.22" />
         <entry key="app/src/main/res/layout/search_by_parameters_title.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/second_layout.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/symbol_guide_card.xml" value="0.23229166666666667" />
@@ -55,6 +58,7 @@
         <entry key="app/src/main/res/menu/menu_card_detail.xml" value="0.23125" />
         <entry key="app/src/main/res/menu/menu_in_action_bar.xml" value="0.25" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.23229166666666667" />
+        <entry key="app/src/main/res/menu/menu_search_by_parameter_result.xml" value="0.23125" />
         <entry key="app/src/main/res/menu/menu_search_by_parameters.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/menu/menu_symbol_guide.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/xml/provider_paths.xml" value="0.23229166666666667" />

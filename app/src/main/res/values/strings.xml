@@ -133,8 +133,8 @@
     <string name="title_bleaching">Отбеливание</string>
     <string name="title_drycleaning">Сухая чистка</string>
     <string name="symbol">Символ</string>
-
-
+    <string name="conditions">Условия поиска</string>
+    <string name="condition_of_searching">Условия поиска</string>
 
 
 </resources>

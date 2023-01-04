@@ -125,6 +125,13 @@
         <argument
             android:name="listOfParameters"
             app:argType="com.blabla.dontruinyourlaundry.domain.entity.SearchParameterEnum[]" />
+        <action
+            android:id="@+id/action_searchByParametersResultFragment_to_knowAboutConditionOfSearching"
+            app:destination="@id/knowAboutConditionOfSearching" />
     </fragment>
+    <dialog
+        android:id="@+id/knowAboutConditionOfSearching"
+        android:name="com.blabla.dontruinyourlaundry.presentation.dialogs.KnowAboutConditionOfSearching"
+        android:label="KnowAboutConditionOfSearching" />
 
 </navigation>

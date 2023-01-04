@@ -1,10 +1,13 @@
 package com.blabla.dontruinyourlaundry.presentation.fragments
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,20 +43,86 @@ class SearchByParametersResultFragment : Fragment() {
 
         viewModel.setListOfSelectedParameters(args.listOfParameters.toMutableList())
         setAdapterToCards()
-        setRecyclerViewTextParameters()
+        //setRecyclerViewTextParameters()
+        setMenuItem()
+
 
     }
 
-    private fun setRecyclerViewTextParameters() {
-        val recyclerView = binding.textParameters
+    private fun setMenuItem() {
+        //set menu item
+        val menuHost: MenuHost = binding.toolbarSearch
+        menuHost.addMenuProvider(object : MenuProvider {
+            override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+                menuInflater.inflate(R.menu.menu_search_by_parameter_result, menu)
+            }
+
+            override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+                return when (menuItem.itemId) {
+                    R.id.condition -> {
+                        showDialog()
+//                        findNavController()
+//                            .navigate(R.id.action_searchByParametersResultFragment_to_knowAboutConditionOfSearching)
+                        true
+                    }
+                    else -> false
+                }
+            }
+
+
+        }, viewLifecycleOwner, Lifecycle.State.RESUMED)
+    }
+
+//    private fun setRecyclerViewTextParameters() {
+//        val recyclerView =
+//        val adapter = RecyclerViewAdapterSearchParameter {}
+//        recyclerView.layoutManager =
+//            FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
+//        recyclerView.adapter = adapter
+//        viewModel.getListSearchItemsWithSelectedItems().observe(viewLifecycleOwner) { items ->
+//            adapter.submitList(items)
+//        }
+//
+//    }
+
+    private fun showDialog() {
+        // val dialog = AlertDialog.Builder(this)
+        //    val view = layoutInflater.inflate(R.layout.d_manage_people, null)
+        //    dialog.setView(view)
+        //
+        //    view.manage_people_title.text = "Manage People"
+        //
+        //    val adapter = ManagePeopleAdapter(result)
+        //    view.people_list.adapter = adapter
+        //    view.people_list.layoutManager = LinearLayoutManager(this)
+//        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        val dialog = AlertDialog.Builder(requireContext())
+        val view = layoutInflater.inflate(R.layout.search_by_parameter_dialog, null)
+        dialog.setView(view)
         val adapter = RecyclerViewAdapterSearchParameter {}
-        recyclerView.layoutManager =
-            FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view_dialog)
         recyclerView.adapter = adapter
+        recyclerView.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
         viewModel.getListSearchItemsWithSelectedItems().observe(viewLifecycleOwner) { items ->
             adapter.submitList(items)
         }
+        dialog
+//            .setTitle("Условия поиска")
+            .setPositiveButton("Ok") { _, _ ->  }
+            .create()
+        dialog.show()
 
+//        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+//            .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
+
+//        val dialog: AlertDialog = builder
+//            .setTitle("Условия поиска")
+//            .setView(R.layout.search_by_parameter_dialog)
+//            .setPositiveButton("Ok") { _, _ ->  }
+//            .create()
+//        dialog.show()
+//        dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+//            .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
     }
 
     private fun setAdapterToCards() {

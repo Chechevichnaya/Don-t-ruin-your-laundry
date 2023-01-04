@@ -3,15 +3,23 @@ package com.blabla.dontruinyourlaundry.presentation.dialogs
 import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.blabla.dontruinyourlaundry.R
+import com.blabla.dontruinyourlaundry.presentation.adapters.RecyclerViewAdapterSearchParameter
 
-class AskingAboutAddingPhoto: DialogFragment() {
+class KnowAboutConditionOfSearching: DialogFragment() {
+
+
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val myView = LayoutInflater.from(context).inflate(R.layout.search_by_parameter_dialog, null)
+
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-        val dialog: AlertDialog = builder.setMessage(getString(com.blabla.dontruinyourlaundry.R.string.ask_about_how_to_add_photo))
-            .setPositiveButton(getString(com.blabla.dontruinyourlaundry.R.string.from_gallery)) { _, _ -> }
-            .setNegativeButton(getString(com.blabla.dontruinyourlaundry.R.string.from_camera)) { _, _ -> }
+        val dialog: AlertDialog = builder.setTitle("Условия поиска")
+            .setView(myView)
+            .setPositiveButton(getString(R.string.ok_button)) {_, _ ->}
             .create()
         dialog.show()
         val colorButton = resources.getColor(R.color.lilac_700)

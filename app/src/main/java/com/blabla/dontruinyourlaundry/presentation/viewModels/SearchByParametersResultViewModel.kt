@@ -48,26 +48,20 @@ class SearchByParametersResultViewModel(
         val searchItems = _searchItems.value.orEmpty().toMutableList()
         val selectedItems = _listOfSelectedParameters.value.orEmpty().toMutableList()
         val listOfTitles = selectedItems.map { it.getTitle() }
-        Log.d("FINISH", "listOfNames $listOfTitles")
-        searchItems.forEach {
-            if (it is SearchScreenItem.Title) {
-                Log.d("FINISH", "it = ${it.name.getTitleName(context)}")
-            }
-        }
-
 
         val listForRecyclerView = searchItems.filter {
             (it is SearchScreenItem.SearchParameter && selectedItems.contains(
                 it.name
             )) || (it is SearchScreenItem.Title && listOfTitles.contains(it))
         }
-        _listOfSearchItemsOnlyWithSelectedItems.value = listForRecyclerView.map { item ->
-            if (item is SearchScreenItem.SearchParameter) {
-                item.copy(selected = true)
-            } else {
-                item
-            }
-        }
+        _listOfSearchItemsOnlyWithSelectedItems.value = listForRecyclerView
+//            listForRecyclerView.map { item ->
+//            if (item is SearchScreenItem.SearchParameter) {
+//                item.copy(selected = true)
+//            } else {
+//                item
+//            }
+//        }
         return _listOfSearchItemsOnlyWithSelectedItems
 
 
