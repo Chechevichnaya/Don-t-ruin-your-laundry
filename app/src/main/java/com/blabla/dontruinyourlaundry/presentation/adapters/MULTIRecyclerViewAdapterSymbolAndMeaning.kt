@@ -54,11 +54,9 @@ class MULTIRecyclerViewAdapterSymbolAndMeaning(
         @SuppressLint("ResourceAsColor")
         fun bind(button: SymbolGuide.ButtonAddNewSymbol) {
             binding.apply {
-                Log.d("MOLOKO", "i am inside bind AddNewSymbolViewHolder")
                 addSymbolButton.setImageResource(button.icon)
                 symbolMeaning.text = button.text
                 addSymbolLayout.setOnClickListener {
-                    Log.d("MOLOKO", "i am inside setOnClickListener")
                     clickedItemAddNewSymbol() }
             }
         }
@@ -87,7 +85,6 @@ class MULTIRecyclerViewAdapterSymbolAndMeaning(
                 false
             )
         )
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {

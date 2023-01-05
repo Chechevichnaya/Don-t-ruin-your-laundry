@@ -37,6 +37,7 @@
         <entry key="app/src/main/res/layout/inner_recycler_item_insearch_by_parameters.xml" value="0.23125" />
         <entry key="app/src/main/res/layout/item_button_add_symbol_to_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/recycler_item_search_by_parameters.xml" value="0.18" />
+        <entry key="app/src/main/res/layout/recycler_view_add_new_card_item_add_symbol.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/recycler_view_symbol_meaning.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/recycler_view_symbol_meaning_display_card.xml" value="0.23229166666666667" />
         <entry key="app/src/main/res/layout/recycler_view_symbol_meaning_old_card.xml" value="0.23125" />

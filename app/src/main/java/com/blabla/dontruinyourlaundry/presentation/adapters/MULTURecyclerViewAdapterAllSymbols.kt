@@ -81,9 +81,10 @@ class MULTURecyclerViewAdapterAllSymbols(val clickListener: (SymbolGuide.SymbolF
 
     inner class HeadNameViewHolder(val binding: SymbolGuideHeadnameBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        val context = binding.headCloth.context
         fun bind(head: SymbolGuide.HeadName) {
             binding.apply {
-                headCloth.text = head.nameId.head
+                headCloth.text = head.nameId.getTitleName(context)
             }
         }
     }

@@ -103,7 +103,6 @@ class AddDataToCardFragment : Fragment() {
     }
 
     private fun clickOnAddMoreSymbols() {
-        Log.d("MOLOKO", "i am inside clickOnAddMoreSymbols()")
         val listOfSelectedSymbols =
             ListOfSymbols(viewModel.getListSymbolForWashing())
         val action = AddDataToCardFragmentDirections.actionAddNewCardToAddSymbolToCard(
@@ -169,7 +168,6 @@ class AddDataToCardFragment : Fragment() {
         if (viewModel.uri.value != null) {
             copyImageToFileForDB(file)
         }
-        Log.d("SYMBOLI", "symbols = getListOfSymbolForDB() ${getListOfSymbolForDB()}")
         viewModel.saveCardChanges(
             name = getNameOfCloth(),
             picture = imageUri,
@@ -210,13 +208,13 @@ class AddDataToCardFragment : Fragment() {
     }
 
     private fun showDialog() {
-        val array = arrayOf("Из галереи", "С помощью камеры")
+        val array = arrayOf(requireContext().getString(R.string.from_gallery), requireContext().getString(R.string.from_camera))
         var checkedItem = -1
         val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
         builder.setTitle(getString(R.string.ask_about_how_to_add_photo))
             .setSingleChoiceItems(array, checkedItem)
             { _, which -> checkedItem = which }
-            .setPositiveButton("Ok") { _, _ ->
+            .setPositiveButton(requireContext().getString(R.string.ok_button)) { _, _ ->
                 if (checkedItem != -1) {
                     when (checkedItem) {
                         FROM_GALLERY -> {
@@ -229,7 +227,7 @@ class AddDataToCardFragment : Fragment() {
                 }
             }
 
-            .setNeutralButton("Отмена") { _, _ -> }
+            .setNeutralButton(requireContext().getString(R.string.cancel)) { _, _ -> }
         val dialog = builder.create()
         dialog.show()
 
@@ -272,19 +270,6 @@ class AddDataToCardFragment : Fragment() {
         return folderForImagesInDB
     }
 
-//    private fun saveInfoInCard(file: File?): Card? {
-//        if (viewModel.uri.value != null) {
-//            copyImageToFileForDB(file)
-//        }
-//        viewModel.createNewCard(
-//            getNameOfCloth(), imageUri
-//        )
-//
-//        var newCard: Card? = null
-//        newCard = collectInfoForCard(newCard)
-//        return newCard
-//    }
-
     private fun copyImageToFileForDB(file: File?) {
         //creating file in new folder with unique name
         val fileForImages =
@@ -302,16 +287,16 @@ class AddDataToCardFragment : Fragment() {
         val checkIfNameEmpty = getNameOfCloth().isEmpty()
         val checkIfSymbolsEmpty = viewModel.removeSymbolsAddNewSymbols().isEmpty()
         if (checkIfNameEmpty && checkIfSymbolsEmpty) {
-            message = "Заполни поле \"Название вещи\" и добавь нужные символы для ухода за вещами"
+            message = requireContext().getString(R.string.fill_name_and_symbols)
         } else if (checkIfNameEmpty) {
-            message = "Заполни поле \"Название вещи\""
+            message = requireContext().getString(R.string.fill_name)
         } else if (checkIfSymbolsEmpty) {
-            message = "Добавь нужные символы для ухода за вещами"
+            message = requireContext().getString(R.string.fill_symbols)
         }
         return if (message != "") {
             val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
             val dialog: AlertDialog = builder.setMessage(message)
-                .setPositiveButton("Ok") { _, _ -> }
+                .setPositiveButton(requireContext().getString(R.string.ok_button)) { _, _ -> }
                 .create()
             dialog.show()
             dialog.getButton(AlertDialog.BUTTON_POSITIVE)
@@ -366,8 +351,8 @@ class AddDataToCardFragment : Fragment() {
             ) -> {
                 val builder = AlertDialog.Builder(requireContext())
                 builder.apply {
-                    setMessage("Приложению требуется доступ к камере, чтобы сделать фото")
-                    setPositiveButton("Ok") { _, _ ->
+                    setMessage(requireContext().getString(R.string.need_acces_to_camera))
+                    setPositiveButton(requireContext().getString(R.string.ok_button)) { _, _ ->
                         requestCameraPermission.launch(
                             Manifest.permission.CAMERA
                         )

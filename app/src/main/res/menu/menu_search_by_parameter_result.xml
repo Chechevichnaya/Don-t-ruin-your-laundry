@@ -5,5 +5,5 @@
         android:id="@+id/condition"
         app:showAsAction="ifRoom"
         android:icon="@drawable/ic_question"
-        android:title= "@string/conditions" />
+        android:title= "@string/condition_of_searching" />
 </menu>

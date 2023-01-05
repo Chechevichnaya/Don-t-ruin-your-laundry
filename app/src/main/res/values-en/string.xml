@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Don\'t ruin your laundry</string>
+
+    <string name="symbol_guide">Laundry symbols guide</string>
+
+    <string name="ok_button">OK</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <string name="save">Save</string>
+
+    <string name="clothing">Clothes</string>
+    <string name="bed_sheets">Bed linen</string>
+    <string name="kitchen_stuf">Kitchen textiles</string>
+    <string name="bath_stuf">Bathroom textiles</string>
+    <string name="the_rest">The rest</string>
+
+    <string name="add_new_thing">Add new item</string>
+    <string name="name_of_cloth">Item\'s name</string>
+    <string name="choose_photo">Add photo</string>
+    <string name="add_more_symbols">Add laundry symbols</string>
+    <string name="add">Add new information</string>
+
+    <string name="ask_about_how_to_add_photo">Where do you want to take the photo?</string>
+    <string name="from_gallery">From  the Gallery</string>
+    <string name="from_camera">From the Camera</string>
+    <string name="permission_required">Camera access is required to display the camera preview.</string>
+    <string name="permission_granted">Permission is granted. You can use the camera now.</string>
+
+    <string name="delete_question">Are you sure you want to completely delete information about the item?</string>
+    <string name="delete_symbol">Do you want to delete the symbol?</string>
+    <string name="delete_card">Delete all information</string>
+    <string name="delete">Delete</string>
+
+    <string name="LookFor">Искать</string>
+    <string name="search_the_items">Find the item</string>
+    <string name="search_by_name">Search by name</string>
+    <string name="by_name">By name</string>
+    <string name="by_parameters">By parameters</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="edit_fragment">Edit the item</string>
+    <string name="add_card_fragment">Add new item</string>
+
+    <string name="wash">Wash the item in a standard wash cycle, with no water temperature restrictions</string>
+    <string name="wash_not_allowed">Do not wash the item by hand or in a machine. Look to the dry clean symbols on the tag for further care instructions</string>
+    <string name="wash_hand">Wash the item by hand, with detergent and warm water in a small tub or sink, and should not be washed in a machine</string>
+    <string name="wash_hand30">Wash the item by hand, with detergent and cold water (max 30°C or 60–80°F) in a small tub or sink, and should not be washed in a machine</string>
+    <string name="wash_hand40">Wash the item by hand, with detergent and warm water (max 40°C or 90–110°F) in a small tub or sink, and should not be washed in a machine</string>
+    <string name="wash30">Wash the item in cold water (max 30°C or 80°F)</string>
+    <string name="wash40">Wash the item in warm water (max 40°C or 110°F)</string>
+    <string name="wash50">Wash the item in hot water (max 50°C or 120°F)</string>
+    <string name="wash60">Wash the item in hot water (max 60°C or 140°F)</string>
+    <string name="wash70">Wash the item in hot water (max 70°C or 160°F)</string>
+    <string name="wash90">Wash the item in hot water (max 95°C or 200°F)</string>
+    <string name="wash30_care">Wash the item in a permanent press cycle and cold water (max 30°C or 80°F), intended to protect garments prone to wrinkling, color-fading, shrinking, and stretching</string>
+    <string name="wash30_extracare">Wash the item in a delicate cycle, which uses cold water (max 30°C or 80°F) and low agitation to be gentle on fabrics like silk, wool, and synthetic materials</string>
+    <string name="wash40_care">Wash the item in a permanent press cycle and warm water (max 40°C or 110°F), intended to protect garments prone to wrinkling, color-fading, shrinking, and stretching</string>
+    <string name="wash40_extracare">Wash the item in a delicate cycle, which uses cold water (max 40°C or 110°F) and low agitation to be gentle on fabrics like silk, wool, and synthetic materials</string>
+    <string name="wash50_care">Wash the item in a permanent press cycle and warm water (max 50°C or 120°F), intended to protect garments prone to wrinkling, color-fading, shrinking, and stretching</string>
+    <string name="wash60_care">Wash the item in a permanent press cycle and warm water (max 60°C or 140°F), intended to protect garments prone to wrinkling, color-fading, shrinking, and stretching</string>
+    <string name="wash90_care">Wash the item in a permanent press cycle and warm water (max 95°C or 200°F), intended to protect garments prone to wrinkling, color-fading, shrinking, and stretching</string>
+
+    <string name="bleach">Bleach can be used on the item</string>
+    <string name="bleach_non_chlor">Only use non-chlorine bleach, which uses hydrogen peroxide instead of sodium hypochlorite, on the item</string>
+    <string name="bleach_not_allowed">Do not use any kind of bleach on the item</string>
+
+    <string name="dry">Dry the item in a dryer in a standard setting. No temperature restrictions</string>
+    <string name="dry40">Dry the item in a dryer on low heat (max 40°C or 110°F)</string>
+    <string name="dry60">Dry the item in a dryer on medium heat (max 60°C or 140°F)</string>
+    <string name="dry80">Dry the item in a dryer on high heat (max 80°C or 170°F)</string>
+    <string name="dry_no_heat">Dry the item in a dryer with no heat. The setting on your machine may also be called "air fluff" or "air dry"</string>
+    <string name="dry40_care">Dry the item in a permanent press cycle and warm water (max 40°C or 110°F), intended to protect garments prone to wrinkling, color-fading, shrinking, and stretching</string>
+    <string name="dry40_extracare">Dry the item in a delicate cycle, which uses cold water (max 40°C or 110°F)</string>
+    <string name="dry60_care">Wash the item in a permanent press cycle and warm water (max 60°C or 140°F), intended to protect garments prone to wrinkling, color-fading, shrinking, and stretching</string>
+    <string name="dry_line">Hang the item on a line to air-dry</string>
+    <string name="dry_shade">Keep out of direct sunlight</string>
+    <string name="dry_line_shade">Hang the item on a line to air-dry, but keep out of direct sunlight</string>
+    <string name="dry_drip">Hang the item on a line to dry, without any smoothing and shaping. Items with this symbol on the tag are made of fabric that dries free of creases and wrinkles</string>
+    <string name="dry_drip_shade">Hang the item on a line to dry, without any smoothing and shaping, but keep out of direct sunlight</string>
+    <string name="dry_flat">Lay the item on a flat, horizontal surface to air-dry. This helps protect fabrics like wool or knitwear, from stretching out and getting misshapen when wet</string>
+    <string name="dry_flat_shade">Lay the item on a flat, horizontal surface to air-dry, but keep out of direct sunlight</string>
+    <string name="dry_not_alloder">Do not dry the item in the dryer. Look to the accompanying drying symbols on the tag for further care instructions</string>
+
+    <string name="iron">The item can be ironed at any temperature</string>
+    <string name="iron110">The item can be ironed at a low temperature (max 110°C or 230°F)</string>
+    <string name="iron150">The item can be ironed at a medium temperature (max 150°C or 300°F)</string>
+    <string name="iron200">The item can be ironed at a high temperature (max 200°C or 390°F)</string>
+    <string name="iron_not_allowed">Do not use an iron on the item</string>
+    <string name="iron_steam_not_allowed">The item should be ironed without the use of steam.</string>
+
+
+
+    <string name="dry_clean">Have the item professionally dry-cleaned. Do not wash or dry the item in a machine</string>
+    <string name="dry_cleana">Your dry cleaner can use any solvent to clean the material</string>
+    <string name="dry_cleanp">Your dry cleaner can use any solvent except anything specifically listed</string>
+    <string name="dry_cleanf">Your dry cleaner can use petroleum based solvents. This is usually needed for fine, delicate fabrics that can be damaged by solvents used in standard dry cleaning</string>
+    <string name="dry_clean_short">The item should be professionally dry-cleaned on a short cycle</string>
+    <string name="dry_clean_lowheat">The item should be professionally dry-cleaned on low heat</string>
+    <string name="dry_clean_low_water">The item should be professionally dry-cleaned on a reduced-moisture cycle</string>
+    <string name="dry_clean_no_steam">The item should not be steamed after the dry-cleaning process</string>
+    <string name="dry_clean_not_allowed">Do not professionally dry-clean the item. Look for other washing and drying symbols on the tag for further instruction</string>
+
+    <string name="allowed">Allowed</string>
+    <string name="not_allowed">Prohibited</string>
+
+    <string name="only_hand">Hand wash only</string>
+
+    <string name="thirty">30</string>
+    <string name="fourty">40</string>
+    <string name="fifty">50</string>
+    <string name="sixty">60</string>
+    <string name="seventy">70</string>
+    <string name="nintyfive">95</string>
+
+    <string name="washing_machine_allowed">Allowed in the washing machine</string>
+
+    <string name="title_washing">Washing</string>
+    <string name="title_drying">Tumble Drying</string>
+    <string name="title_wash_mode">Wash mode</string>
+    <string name="title_category">Categories</string>
+    <string name="title_ironing">Ironing</string>
+    <string name="title_bleaching">Bleaching</string>
+    <string name="title_drycleaning">Dry Cleaning</string>
+
+    <string name="symbol">Symbol</string>
+    <string name="condition_of_searching">Search term</string>
+
+    <string name="search_by_parametere_title">Search by parameters</string>
+    <string name="fill_name_and_symbols">Fill in the \"Item\'s name\" field and add laundry symbols</string>
+    <string name="fill_name">Fill in the \"Item\'s name\" field</string>
+    <string name="fill_symbols">Add laundry symbols</string>
+    <string name="need_acces_to_camera">The app needs access to the camera to take a photo</string>
+
+
+</resources>

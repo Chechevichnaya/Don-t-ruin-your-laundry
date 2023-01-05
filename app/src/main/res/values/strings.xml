@@ -1,26 +1,19 @@
 <resources>
     <string name="app_name">Don\'t ruin your laundry</string>
     <string name="symbol_guide">Гид по символам</string>
-    <string name="change_the_user">Change the user</string>
-    <string name="help_with_app">Как пользоваться приложением</string>
-    <string name="helper_text">Вот так и вот так!</string>
+
     <string name="ok_button">Все понятно</string>
-    <string name="select_type">Выбери вид вещи</string>
+
     <string name="clothing">Одежда</string>
     <string name="bed_sheets">Постельное белье</string>
     <string name="kitchen_stuf">Вещи из кухни</string>
     <string name="bath_stuf">Вещи из ванной</string>
     <string name="the_rest">Остальное</string>
     <string name="name_of_cloth">Название вещи</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="add_new_thing">Добавить новую вещь</string>
     <string name="delete">Удалить</string>
-    <string name="safe">Сохранить</string>
-    <string name="washing">Стирка</string>
-    <!--<string name="wash_hand">Стирать только руками при температуре воды до 40 °C. Не тереть, отжимать аккуратно, без перекручивания</string>-->
-    <string name="wash_normal">Машинная стирка, нормальный режим.</string>
-    <string name="wash_no">Стирка запрещена</string>
+
     <string name="save">Сохранить</string>
     <string name="delete_card">Удалить карточку</string>
     <string name="add">Добавить</string>
@@ -29,7 +22,7 @@
     <string name="from_gallery">Из галерии</string>
     <string name="from_camera">С помощью камеры</string>
     <string name="permission_required">Camera access is required to display the camera preview.</string>
-    <string name="ok">OK</string>
+
     <string name="permission_granted">Permission is granted. You can use the camera now.</string>
     <string name="delete_question">Вы уверены, что хотите полностью удалить карточку?</string>
     <string name="delete_symbol">Удалить символ?</string>
@@ -37,8 +30,7 @@
     <string name="no">Нет</string>
     <string name="search_by_name">Поиск по названию</string>
     <string name="LookFor">Искать</string>
-    <string name="cloth">Одежда</string>
-    <string name="category">Категории</string>
+
     <string name="edit_fragment">Редактирование карточки</string>
     <string name="add_card_fragment">Добавление новой карточки</string>
     <string name="add_more_symbols">Добавить символы для стирки</string>
@@ -60,19 +52,6 @@
     <string name="wash50_care">Деликатная ручная или машинная стирка при температуре до 50°C</string>
     <string name="wash60_care">Деликатная ручная или машинная стирка при температуре воды до 60 °C</string>
     <string name="wash90_care">Деликатная ручная или машинная стирка при температуре воды до 95 °C</string>
-    <string name="wash30_dot">Ручная или машинная стирка при температуре воды не выше 30°C. Не подвергать сильному отжиму</string>
-    <string name="wash40_dot">Ручная или машинная стирка при температуре воды не выше 40°C</string>
-    <string name="wash50_dot">Ручная или машинная стирка при температуре воды не выше 50°C</string>
-    <string name="wash60_dot">Ручная или машинная стирка при температуре воды не выше 60°C</string>
-    <string name="wash70_dot">Ручная или машинная стирка при температуре воды не выше 70°C</string>
-    <string name="wash90_dot">Ручная или машинная стирка при температуре воды не выше 95°C</string>
-    <string name="wash30_dotcare">Деликатная ручная или машинная стирка при температуре воды до 30°C. Не подвергать сильной механической обработке, отжим ослабленный</string>
-    <string name="wash30_dot_extracare">Особо деликатная стирка при температуре воды до 30°C. Не отжимать руками</string>
-    <string name="wash40_dotcare">Деликатная ручная или машинная стирка при температуре воды до 40 °C</string>
-    <string name="wash40_dot_extracare">Особо деликатная стирка при температуре воды до 40°C. Не отжимать руками</string>
-    <string name="wash50_dotcare">Деликатная ручная или машинная стирка при начальной температуре воды не выше 50°C</string>
-    <string name="wash60_dotcare">Деликатная ручная или машинная стирка при температуре воды не более 60°C</string>
-    <string name="wash90_dotcare">Деликатная ручная или машинная стирка при температуре воды не выше 95°C</string>
     <string name="bleach">Отбеливание разрешено любыми окисляющими средствами</string>
     <string name="bleach_non_chlor">Отбеливание разрешено только кислородсодержащими отбеливателями, в составе которых отсутствует хлор</string>
     <string name="bleach_not_allowed">Отбеливание запрещено. Стиральные порошки не должны содержать хлор</string>
@@ -98,25 +77,21 @@
     <string name="iron200">Разрешено гладить при максимальной температуре 200°C (соответствует символу в виде трёх точек на терморегуляторе утюга), допустимо для льна и хлопка; можно слегка увлажнить изделие</string>
     <string name="iron_not_allowed">Глажение с паром навредит одежде, рекомендовано регулярное глажение в указанном температурном режиме</string>
     <string name="iron_steam_not_allowed">Изделие не должно подвергаться глажению, пропаривание и обработку паром не применять</string>
-    <string name="dry_cleana">Сухая чистка с любым органическим растворителем</string>
-    <string name="dry_cleanp">Обычная сухая чистка с использованием тетрахлорэтилена и всех растворителей, перечисленных для символа «F»</string>
-    <string name="dry_cleanp2">Деликатная химчистка при ограниченном добавлении воды с осторожным применением растворителей, указанных для символа «P», а также контроле за механическим воздействием и температуре сушки, чистка-самообслуживание запрещена</string>
-    <string name="dry_cleanf">Обычная сухая чистка с использованием только углеводорода, бензина и трифтортрихорметана</string>
-    <string name="dry_cleanf2">Деликатная химчистка при ограниченном добавлении воды с осторожным применением растворителей, указанных для символа «F», а также контроле за механическим воздействием и температуре сушки, чистка-самообслуживание запрещена</string>
-    <string name="dry_cleanw">Обычный режим аквачистки и сушки в соответствии с IEC 456</string>
-    <string name="dry_cleanw2">Деликатный режим аквачистки с ограничениями по механическому режиму и режиму сушки с учётом особенностей изделия, относительная усадка — 50+5%</string>
-    <string name="dry_cleanw3">Очень деликатный режим аквачистки с ограничениями по механическому режиму и режиму сушки с учётом особенностей изделия, относительная усадка — 25+2,5%</string>
-    <string name="dry_clean_short">Одежда может быть очищена в сокращенном цикле. Символ может использоваться в сочетании с буквой</string>
-    <string name="dry_clean_lowheat">Одежда может быть очищена в умеренном температурном режиме. Символ может использоваться в сочетании с буквой</string>
-    <string name="dry_clean_low_water">При чистке допустима пониженная влажность. Символ может использоваться в сочетании с буквой</string>
-    <string name="dry_clean_no_steam">Запрещено использовать пар на завершающей стадии чистки. Символ может использоваться в сочетании с буквой</string>
-    <string name="dry_clean_not_allowed">Изделие не должно подвергаться химической чистке, удаление пятен растворителем запрещено</string>
-    <string name="dry_clean_wet_not_allowed">Мокрая чистка запрещена</string>
-    <string name="wringing">Нельзя выкручивать изделие при отжиме</string>
+    <string name="dry_clean">Только сухая чистка. Этoт символ предназначен для специалистов химчистки</string>
+    <string name="dry_cleana">Сухая чистка с любым органическим растворителем. Этoт символ предназначен для специалистов химчистки</string>
+    <string name="dry_cleanp">Обычная сухая чистка с использованием тетрахлорэтилена и всех растворителей, перечисленных для символа «F». Этoт символ предназначен для специалистов химчистки</string>
+    <string name="dry_cleanf">Обычная сухая чистка с использованием только углеводорода, бензина и трифтортрихорметана. Этoт символ предназначен для специалистов химчистки</string>
+    <string name="dry_clean_short">Одежда может быть очищена в сокращенном цикле. Символ может использоваться в сочетании с буквой. Этoт символ предназначен для специалистов химчистки</string>
+    <string name="dry_clean_lowheat">Одежда может быть очищена в умеренном температурном режиме. Символ может использоваться в сочетании с буквой. Этoт символ предназначен для специалистов химчистки</string>
+    <string name="dry_clean_low_water">При чистке допустима пониженная влажность. Символ может использоваться в сочетании с буквой. Этoт символ предназначен для специалистов химчистки</string>
+    <string name="dry_clean_no_steam">Запрещено использовать пар на завершающей стадии чистки. Символ может использоваться в сочетании с буквой. Этoт символ предназначен для специалистов химчистки</string>
+    <string name="dry_clean_not_allowed">Изделие не должно подвергаться химической чистке, удаление пятен растворителем запрещено. Этoт символ предназначен для специалистов химчистки</string>
+
+
     <string name="allowed">Разрешена</string>
-    <string name="allowed1">Разрешено</string>
+
     <string name="not_allowed">Запрещена</string>
-    <string name="not_allowed1">Запрещено</string>
+
     <string name="only_hand">Только ручная</string>
     <string name="thirty">30</string>
     <string name="fourty">40</string>
@@ -133,8 +108,21 @@
     <string name="title_bleaching">Отбеливание</string>
     <string name="title_drycleaning">Сухая чистка</string>
     <string name="symbol">Символ</string>
-    <string name="conditions">Условия поиска</string>
+
     <string name="condition_of_searching">Условия поиска</string>
+
+    <string name="search_the_items">Поиск вещицы</string>
+    <string name="by_name">По названию</string>
+    <string name="by_parameters">По параметрам</string>
+    <string name="cancel">Отмена</string>
+
+    <string name="search_by_parametere_title">Поиск по параметрам</string>
+    <string name="fill_name_and_symbols">Заполни поле \"Название вещи\" и добавь нужные символы для ухода за вещами</string>
+    <string name="fill_name">Заполни поле "Название вещи"</string>
+    <string name="fill_symbols">Добавь нужные символы для ухода за вещами</string>
+    <string name="need_acces_to_camera">Приложению требуется доступ к камере, чтобы сделать фото</string>
+
+
 
 
 </resources>

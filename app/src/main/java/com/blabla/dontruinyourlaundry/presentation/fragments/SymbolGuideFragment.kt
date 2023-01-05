@@ -49,7 +49,7 @@ class SymbolGuideFragment : Fragment() {
     }
 
     private fun setUpperMenu(view: View) {
-        binding.toolbarSymbolGuide.title = "Гид по символам"
+        binding.toolbarSymbolGuide.title = requireContext().getString(R.string.symbol_guide)
         binding.toolbarSymbolGuide.navigationIcon =
             view.context.getDrawable(R.drawable.ic_arrow_back)
         binding.toolbarSymbolGuide.setNavigationOnClickListener {

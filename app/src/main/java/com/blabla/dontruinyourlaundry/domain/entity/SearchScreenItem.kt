@@ -156,17 +156,17 @@ enum class SearchParameterEnum : Parcelable {
 
     fun getName(context: Context): String {
         return when (this) {
-            CLOTH -> context.getString(R.string.cloth)
+            CLOTH -> context.getString(R.string.clothing)
             BED_SHEET -> context.getString(R.string.bed_sheets)
             BATH -> context.getString(R.string.bath_stuf)
             KITCHEN -> context.getString(R.string.kitchen_stuf)
             REST -> context.getString(R.string.the_rest)
             WASH_NOT_ALLOWED, DRY_NOT_ALLOWED, IRON_NOT_ALLOWED, DRYCLEAN_NOT_ALLOWED ->
                 context.getString(R.string.not_allowed)
-            BLEACH_NOT_ALLOWED -> context.getString(R.string.not_allowed1)
+            BLEACH_NOT_ALLOWED -> context.getString(R.string.not_allowed)
             DRY_ALLOWED, IRON_ALLOWED, DRYCLEAN_ALLOWED ->
                 context.getString(R.string.allowed)
-            BLEACH_ALLOWED -> context.getString(R.string.allowed1)
+            BLEACH_ALLOWED -> context.getString(R.string.allowed)
             WASH_ALLOWED -> context.getString(R.string.washing_machine_allowed)
             WASH_HAND -> context.getString(R.string.only_hand)
             LAUNDRY_30 -> context.getString(R.string.thirty)
@@ -244,7 +244,7 @@ enum class SearchParameterEnum : Parcelable {
                 SymbolForWashingDBO.DRYDRIP,
                 SymbolForWashingDBO.DRYDRIPSHADE,
                 SymbolForWashingDBO.DRYFLAT,
-                SymbolForWashingDBO.DRYFLATSHADE
+                SymbolForWashingDBO.DRYFLASTHADE
             )
             DRY_NOT_ALLOWED -> mutableListOf(SymbolForWashingDBO.DRYNOTALLOWED)
             IRON_ALLOWED -> mutableListOf(

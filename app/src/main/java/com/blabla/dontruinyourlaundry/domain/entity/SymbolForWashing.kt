@@ -46,7 +46,6 @@ enum class SymbolForWashingDBO : Parcelable {
     BLEACH,
     BLEACHNONCHLORINE,
     BLEACHNOTALLOWED,
-
     DRY,
     DRY40,
     DRY60,
@@ -61,30 +60,23 @@ enum class SymbolForWashingDBO : Parcelable {
     DRYDRIP,
     DRYDRIPSHADE,
     DRYFLAT,
-    DRYFLATSHADE,
+    DRYFLASTHADE,
     DRYNOTALLOWED,
-
     IRON,
     IRON110,
     IRON150,
     IRON200,
     IRONNOTALLOWED,
     IRONSTEAMNOTALLOWED,
+    DRYCLEAN,
     DRYCLEANA,
     DRYCLEANP,
-    DRYCLEANP2,
     DRYCLEANF,
-    DRYCLEANF2,
-    DRYCLEANW,
-    DRYCLEANW2,
-    DRYCLEANW3,
     DRYCLEANSHORT,
     DRYCLEANLOWHEAT,
     DRYCLEANLOWMOISTURE,
     DRYCLEANNOSTEAM,
-    DRYCLEANNOTALLOWED,
-    DRYCLEANWETNOTALLOWED,
-    WRINGING;
+    DRYCLEANNOTALLOWED;
 
     fun getDescription(context: Context): String {
         return when (this) {
@@ -106,19 +98,19 @@ enum class SymbolForWashingDBO : Parcelable {
             WASH50CARE -> context.getString(R.string.wash50_care)
             WASH60CARE -> context.getString(R.string.wash60_care)
             WASH90CARE -> context.getString(R.string.wash90_care)
-            WASH30DOT -> context.getString(R.string.wash30_dot)
-            WASH40DOT -> context.getString(R.string.wash40_dot)
-            WASH50DOT -> context.getString(R.string.wash50_dot)
-            WASH60DOT -> context.getString(R.string.wash60_dot)
-            WASH70DOT -> context.getString(R.string.wash70_dot)
-            WASH90DOT -> context.getString(R.string.wash90_dot)
-            WASH30DOTCARE -> context.getString(R.string.wash30_dotcare)
-            WASH30DOTEXTRACARE -> context.getString(R.string.wash30_dot_extracare)
-            WASH40DOTCARE -> context.getString(R.string.wash40_dotcare)
-            WASH40DOTEXTRACARE -> context.getString(R.string.wash40_dot_extracare)
-            WASH50DOTCARE -> context.getString(R.string.wash50_dotcare)
-            WASH60DOTCARE -> context.getString(R.string.wash60_dotcare)
-            WASH90DOTCARE -> context.getString(R.string.wash90_dotcare)
+            WASH30DOT -> context.getString(R.string.wash30)
+            WASH40DOT -> context.getString(R.string.wash40)
+            WASH50DOT -> context.getString(R.string.wash50)
+            WASH60DOT -> context.getString(R.string.wash60)
+            WASH70DOT -> context.getString(R.string.wash70)
+            WASH90DOT -> context.getString(R.string.wash90)
+            WASH30DOTCARE -> context.getString(R.string.wash30_care)
+            WASH30DOTEXTRACARE -> context.getString(R.string.wash30_extracare)
+            WASH40DOTCARE -> context.getString(R.string.wash40_care)
+            WASH40DOTEXTRACARE -> context.getString(R.string.wash40_extracare)
+            WASH50DOTCARE -> context.getString(R.string.wash50_care)
+            WASH60DOTCARE -> context.getString(R.string.wash60_care)
+            WASH90DOTCARE -> context.getString(R.string.wash90_care)
             BLEACH -> context.getString(R.string.bleach)
             BLEACHNONCHLORINE -> context.getString(R.string.bleach_non_chlor)
             BLEACHNOTALLOWED -> context.getString(R.string.bleach_not_allowed)
@@ -136,7 +128,7 @@ enum class SymbolForWashingDBO : Parcelable {
             DRYDRIP -> context.getString(R.string.dry_drip)
             DRYDRIPSHADE -> context.getString(R.string.dry_drip_shade)
             DRYFLAT -> context.getString(R.string.dry_flat)
-            DRYFLATSHADE -> context.getString(R.string.dry_flat_shade)
+            DRYFLASTHADE -> context.getString(R.string.dry_flat_shade)
             DRYNOTALLOWED -> context.getString(R.string.dry_not_alloder)
             IRON -> context.getString(R.string.iron)
             IRON110 -> context.getString(R.string.iron110)
@@ -144,21 +136,15 @@ enum class SymbolForWashingDBO : Parcelable {
             IRON200 -> context.getString(R.string.iron200)
             IRONNOTALLOWED -> context.getString(R.string.iron_not_allowed)
             IRONSTEAMNOTALLOWED -> context.getString(R.string.iron_steam_not_allowed)
+            DRYCLEAN -> context.getString(R.string.dry_clean)
             DRYCLEANA -> context.getString(R.string.dry_cleana)
             DRYCLEANP -> context.getString(R.string.dry_cleanp)
-            DRYCLEANP2 -> context.getString(R.string.dry_cleanp2)
             DRYCLEANF -> context.getString(R.string.dry_cleanf)
-            DRYCLEANF2 -> context.getString(R.string.dry_cleanf2)
-            DRYCLEANW -> context.getString(R.string.dry_cleanw)
-            DRYCLEANW2 -> context.getString(R.string.dry_cleanw2)
-            DRYCLEANW3 -> context.getString(R.string.dry_cleanw3)
             DRYCLEANSHORT -> context.getString(R.string.dry_clean_short)
             DRYCLEANLOWHEAT -> context.getString(R.string.dry_clean_lowheat)
             DRYCLEANLOWMOISTURE -> context.getString(R.string.dry_clean_low_water)
             DRYCLEANNOSTEAM -> context.getString(R.string.dry_clean_no_steam)
             DRYCLEANNOTALLOWED -> context.getString(R.string.dry_clean_not_allowed)
-            DRYCLEANWETNOTALLOWED -> context.getString(R.string.dry_clean_wet_not_allowed)
-            WRINGING -> context.getString(R.string.wringing)
         }
     }
 
@@ -211,7 +197,7 @@ enum class SymbolForWashingDBO : Parcelable {
         DRYDRIP -> R.drawable.wh_drying_drip_dry
         DRYDRIPSHADE -> R.drawable.wh_drying_drip_dry_shade
         DRYFLAT -> R.drawable.wh_drying_flat_dry
-        DRYFLATSHADE -> R.drawable.wh_drying_flat_dry_shade
+        DRYFLASTHADE -> R.drawable.wh_drying_flat_dry_shade
         DRYNOTALLOWED -> R.drawable.wh_drying_tumble_not_allowed
         IRON -> R.drawable.wh_ironing
         IRON110 -> R.drawable.wh_ironing_low
@@ -219,21 +205,16 @@ enum class SymbolForWashingDBO : Parcelable {
         IRON200 -> R.drawable.wh_ironing_high
         IRONNOTALLOWED -> R.drawable.wh_ironing_not_allowed
         IRONSTEAMNOTALLOWED -> R.drawable.wh_ironing_steam_not_allowed
+        DRYCLEAN -> R.drawable.wh_drycleaning
         DRYCLEANA -> R.drawable.wh_drycleaning_a
         DRYCLEANP -> R.drawable.wh_drycleaning_p
-        DRYCLEANP2 -> R.drawable.wh_drycleaning_p_2
         DRYCLEANF -> R.drawable.wh_drycleaning_f
-        DRYCLEANF2 -> R.drawable.wh_drycleaning_f_2
-        DRYCLEANW -> R.drawable.wh_drycleaning_w
-        DRYCLEANW2 -> R.drawable.wh_drycleaning_w_2
-        DRYCLEANW3 -> R.drawable.wh_drycleaning_w_3
         DRYCLEANSHORT -> R.drawable.wh_drycleaning_short_cycle
         DRYCLEANLOWHEAT -> R.drawable.wh_drycleaning_low_heat
         DRYCLEANLOWMOISTURE -> R.drawable.wh_drycleaning_reduced_moisture
         DRYCLEANNOSTEAM -> R.drawable.wh_drycleaning_no_steam
-        DRYCLEANNOTALLOWED -> R.drawable.wh_washing_95deg_permanent_press_alt
-        DRYCLEANWETNOTALLOWED -> R.drawable.wh_drycleaning_wetclean_not_allowed
-        WRINGING -> R.drawable.wh_wringing_not_allowed
+        DRYCLEANNOTALLOWED -> R.drawable.wh_drycleaning_not_allowed
+
     }
 
     fun getTitle(): HeadNameSymbolGuide {
@@ -245,14 +226,13 @@ enum class SymbolForWashingDBO : Parcelable {
             WASH50DOTCARE, WASH60DOTCARE, WASH90DOTCARE -> HeadNameSymbolGuide.WASHING
             BLEACH, BLEACHNONCHLORINE, BLEACHNOTALLOWED -> HeadNameSymbolGuide.BLEACHING
             DRY, DRY40, DRY60, DRY80, DRYNOHEAT, DRY40CARE, DRY40EXTRACARE, DRY60CARE, DRYLINE,
-            DRYSHADE, DRYLINESHADE, DRYDRIP, DRYDRIPSHADE, DRYFLAT, DRYFLATSHADE,
+            DRYSHADE, DRYLINESHADE, DRYDRIP, DRYDRIPSHADE, DRYFLAT, DRYFLASTHADE,
             DRYNOTALLOWED -> HeadNameSymbolGuide.DRYING
             IRON, IRON110, IRON150, IRON200, IRONNOTALLOWED,
             IRONSTEAMNOTALLOWED -> HeadNameSymbolGuide.IRONING
-            DRYCLEANA, DRYCLEANP, DRYCLEANP2, DRYCLEANF, DRYCLEANF2, DRYCLEANW, DRYCLEANW2,
-            DRYCLEANW3, DRYCLEANSHORT, DRYCLEANLOWHEAT, DRYCLEANLOWMOISTURE, DRYCLEANNOSTEAM,
-            DRYCLEANNOTALLOWED, DRYCLEANWETNOTALLOWED -> HeadNameSymbolGuide.DRYCLEANING
-            WRINGING -> HeadNameSymbolGuide.WRINGLING
+            DRYCLEAN, DRYCLEANA, DRYCLEANP, DRYCLEANF,
+            DRYCLEANSHORT, DRYCLEANLOWHEAT, DRYCLEANLOWMOISTURE, DRYCLEANNOSTEAM,
+            DRYCLEANNOTALLOWED -> HeadNameSymbolGuide.DRYCLEANING
         }
     }
 

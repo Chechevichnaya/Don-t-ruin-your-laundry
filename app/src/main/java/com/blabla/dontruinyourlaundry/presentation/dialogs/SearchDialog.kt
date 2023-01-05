@@ -13,13 +13,13 @@ const val BY_PARAMETERS = 1
 class SearchDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val array = arrayOf("По названию", "По параметрам")
+        val array = arrayOf(requireContext().getString(R.string.by_name), requireContext().getString(R.string.by_parameters))
         var checkedItem = -1
         val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
-        builder.setTitle("Поиск вещицы")
+        builder.setTitle(requireContext().getString(R.string.search_the_items))
             .setSingleChoiceItems(array, checkedItem)
             { _, which -> checkedItem = which }
-            .setPositiveButton("Ok") { _, _ ->
+            .setPositiveButton(requireContext().getString(R.string.ok_button)) { _, _ ->
                 if (checkedItem != -1) {
                     when (checkedItem) {
                         BY_NAME -> {
@@ -31,7 +31,7 @@ class SearchDialog : DialogFragment() {
                     }
                 }
             }
-            .setNeutralButton("Отмена") { _, _ -> findNavController().popBackStack() }
+            .setNeutralButton(requireContext().getString(R.string.cancel)) { _, _ -> findNavController().popBackStack() }
         val dialog = builder.create()
         dialog.show()
 

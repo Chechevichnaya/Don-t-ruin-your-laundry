@@ -25,7 +25,7 @@ class AddDataToCardViewModel(
 
     private val symbolsAddNewSymbols = SymbolGuide.ButtonAddNewSymbol(
         R.drawable.ic_add,
-        "Добавить новые символы"
+        context.getString(R.string.add_more_symbols)
     )
 
 
@@ -115,7 +115,7 @@ class AddDataToCardViewModel(
     fun showDialog(symbol: SymbolGuide.SymbolForWashing, context: Context) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         val dialog: AlertDialog = builder.setTitle(context.getString(R.string.delete_symbol))
-            .setPositiveButton("Ok") { _, _ -> deleteSymbol(symbol) }
+            .setPositiveButton(context.getString(R.string.ok_button)) { _, _ -> deleteSymbol(symbol) }
             .setIcon(symbol.pictureId)
             .create()
 
