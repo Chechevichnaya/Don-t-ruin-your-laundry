@@ -13,12 +13,13 @@
         android:layout_height="500dp"
         android:layout_marginStart="56dp"
         android:layout_marginEnd="56dp"
-        tools:src="@drawable/pyjamas"
-        android:alpha="0.1"
+        android:alpha="0.5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/lilac_700"
+        tools:src="@drawable/pyjamas">
 
     </ImageView>
 

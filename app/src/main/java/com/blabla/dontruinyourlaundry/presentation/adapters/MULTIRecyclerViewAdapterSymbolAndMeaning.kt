@@ -19,7 +19,7 @@ private const val SYMBOL_AND_MEANING = 1
 
 class MULTIRecyclerViewAdapterSymbolAndMeaning(
     private val clickedDeleteItem: (SymbolGuide.SymbolForWashing) -> Unit,
-    private val clickedItemAddNewSymbol: () -> Unit,
+//    private val clickedItemAddNewSymbol: () -> Unit,
     private var typeFrom: TypeOfRecyclerView
 ) :
     ListAdapter<SymbolGuide, RecyclerView.ViewHolder>(diffCallback) {
@@ -58,51 +58,51 @@ class MULTIRecyclerViewAdapterSymbolAndMeaning(
         }
     }
 
-    inner class AddNewSymbolViewHolder(val binding: RecyclerViewAddNewCardItemAddSymbolBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        @SuppressLint("ResourceAsColor")
-        fun bind(button: SymbolGuide.ButtonAddNewSymbol) {
-            binding.apply {
-                addSymbolButton.setImageResource(button.icon)
-                symbolMeaning.text = button.text
-                addSymbolLayout.setOnClickListener {
-                    clickedItemAddNewSymbol()
-                }
-            }
-        }
-    }
+//    inner class AddNewSymbolViewHolder(val binding: RecyclerViewAddNewCardItemAddSymbolBinding) :
+//        RecyclerView.ViewHolder(binding.root) {
+//        @SuppressLint("ResourceAsColor")
+//        fun bind(button: SymbolGuide.ButtonAddNewSymbol) {
+//            binding.apply {
+//                addSymbolButton.setImageResource(button.icon)
+//                symbolMeaning.text = button.text
+//                addSymbolLayout.setOnClickListener {
+//                    clickedItemAddNewSymbol()
+//                }
+//            }
+//        }
+//    }
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
             is SymbolGuide.SymbolForWashing -> SYMBOL_AND_MEANING
-            is SymbolGuide.ButtonAddNewSymbol -> ADD_NEW_SYMBOL
+//            is SymbolGuide.ButtonAddNewSymbol -> ADD_NEW_SYMBOL
             else -> 0
         }
     }
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return if (viewType == SYMBOL_AND_MEANING) SymbolAndMeaningViewHolder(
+        return SymbolAndMeaningViewHolder(
             RecyclerViewSymbolMeaningBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
-        ) else AddNewSymbolViewHolder(
-            RecyclerViewAddNewCardItemAddSymbolBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+            ))
+//        ) else AddNewSymbolViewHolder(
+//            RecyclerViewAddNewCardItemAddSymbolBinding.inflate(
+//                LayoutInflater.from(parent.context),
+//                parent,
+//                false
+//            )
+//        )
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
         when {
-            holder is SymbolAndMeaningViewHolder && position == 0 -> holder.bindFirst(item as SymbolGuide.SymbolForWashing)
+            holder is MULTIRecyclerViewAdapterSymbolAndMeaning.SymbolAndMeaningViewHolder && position == 0 -> holder.bindFirst(item as SymbolGuide.SymbolForWashing)
             holder is SymbolAndMeaningViewHolder && position != 0 -> holder.bindNotFirst(item as SymbolGuide.SymbolForWashing)
-            holder is AddNewSymbolViewHolder -> holder.bind(item as SymbolGuide.ButtonAddNewSymbol)
+//            holder is AddNewSymbolViewHolder -> holder.bind(item as SymbolGuide.ButtonAddNewSymbol)
         }
     }
 

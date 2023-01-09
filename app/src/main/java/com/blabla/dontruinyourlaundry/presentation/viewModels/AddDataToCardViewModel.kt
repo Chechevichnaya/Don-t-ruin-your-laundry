@@ -23,10 +23,10 @@ class AddDataToCardViewModel(
     private val context: Context
 ) : ViewModel() {
 
-    private val symbolsAddNewSymbols = SymbolGuide.ButtonAddNewSymbol(
-        R.drawable.ic_add,
-        context.getString(R.string.add_more_symbols)
-    )
+//    private val symbolsAddNewSymbols = SymbolGuide.ButtonAddNewSymbol(
+//        R.drawable.ic_add,
+//        context.getString(R.string.add_more_symbols)
+//    )
 
 
     private val _listOfSymbols = MutableLiveData<List<SymbolGuide>>()
@@ -53,31 +53,31 @@ class AddDataToCardViewModel(
         }
     }
 
-    fun checkIfThereIsItemAddNewSymbol(items: List<SymbolGuide>): List<SymbolGuide> {
-        return if (items.isEmpty() || (items.last() is SymbolGuide.ButtonAddNewSymbol).not()) {
-            val itemsList = items.toMutableList()
-            itemsList.add(
-                symbolsAddNewSymbols
-            )
-            itemsList
-        } else items
-    }
+//    fun checkIfThereIsItemAddNewSymbol(items: List<SymbolGuide>): List<SymbolGuide> {
+//        return if (items.isEmpty() || (items.last() is SymbolGuide.ButtonAddNewSymbol).not()) {
+//            val itemsList = items.toMutableList()
+//            itemsList.add(
+//                symbolsAddNewSymbols
+//            )
+//            itemsList
+//        } else items
+//    }
 
-    fun removeSymbolsAddNewSymbols(): List<SymbolGuide> {
-        val list = _listOfSymbols.value.orEmpty().toMutableList()
-        if (list.contains(symbolsAddNewSymbols)) {
-            list.remove(symbolsAddNewSymbols)
-        }
-        return list
-    }
+//    fun removeSymbolsAddNewSymbols(): List<SymbolGuide> {
+//        val list = _listOfSymbols.value.orEmpty().toMutableList()
+//        if (list.contains(symbolsAddNewSymbols)) {
+//            list.remove(symbolsAddNewSymbols)
+//        }
+//        return list
+//    }
 
-    fun addItemAddNewSymbol() {
-        val listOfSymbols = _listOfSymbols.value.orEmpty().toMutableList()
-        listOfSymbols.add(
-            symbolsAddNewSymbols
-        )
-        _listOfSymbols.value = listOfSymbols
-    }
+//    fun addItemAddNewSymbol() {
+//        val listOfSymbols = _listOfSymbols.value.orEmpty().toMutableList()
+//        listOfSymbols.add(
+//            symbolsAddNewSymbols
+//        )
+//        _listOfSymbols.value = listOfSymbols
+//    }
 
     fun getListSymbolForWashing(): List<SymbolGuide.SymbolForWashing> {
         val list = _listOfSymbols.value.orEmpty().toMutableList()

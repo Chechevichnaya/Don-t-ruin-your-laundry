@@ -68,6 +68,8 @@ class AddDataToCardFragment : Fragment() {
         viewModel.addCardForEditing(args.itemId, requireContext())
         args.currentCategory?.let { viewModel.setCategory(it) }
 
+        binding.addSymbols.setOnClickListener { clickOnAddMoreSymbols() }
+
 //        clickOnAddMoreSymbols(view)
         setToolBar(view)
         getListOfSymbolsFromChosingFragmentAndAddToViewModel()
@@ -194,16 +196,13 @@ class AddDataToCardFragment : Fragment() {
                 clickedItem,
                 requireContext()
             )
-        }, {
-            clickOnAddMoreSymbols()
-
         }, TypeOfRecyclerView.ADD_SYMBOL_FRAGMENT)
         recyclerView.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
         recyclerView.adapter = adapter
-        viewModel.addItemAddNewSymbol()
+//        viewModel.addItemAddNewSymbol()
         viewModel.listOfSymbols.observe(viewLifecycleOwner) { items ->
-            val list = viewModel.checkIfThereIsItemAddNewSymbol(items)
-            adapter.submitList(list)
+//            val list = viewModel.checkIfThereIsItemAddNewSymbol(items)
+            adapter.submitList(items)
         }
     }
 
@@ -285,7 +284,7 @@ class AddDataToCardFragment : Fragment() {
     private fun dataForCardCorrect(): Boolean {
         var message = ""
         val checkIfNameEmpty = getNameOfCloth().isEmpty()
-        val checkIfSymbolsEmpty = viewModel.removeSymbolsAddNewSymbols().isEmpty()
+        val checkIfSymbolsEmpty = viewModel.listOfSymbols.value.orEmpty().isEmpty()
         if (checkIfNameEmpty && checkIfSymbolsEmpty) {
             message = requireContext().getString(R.string.fill_name_and_symbols)
         } else if (checkIfNameEmpty) {

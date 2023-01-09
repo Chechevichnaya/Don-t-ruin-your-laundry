@@ -100,7 +100,7 @@ class CardDetailFragment : Fragment() {
             nameOfCloth.text = card.name
             val recyclerView = binding.addedSymbolsRecyclerView
             val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning(
-                {}, {},
+                {},
                 TypeOfRecyclerView.CARD_DETAIL_FRAGMENT
             )
             recyclerView.layoutManager =

@@ -33,7 +33,7 @@
 
     <string name="edit_fragment">Редактирование карточки</string>
     <string name="add_card_fragment">Добавление новой карточки</string>
-    <string name="add_more_symbols">Добавить символы для стирки</string>
+    <string name="add_more_symbols">Добавить символы</string>
 
     <string name="wash">Стирайте вещь в стандартном режиме без ограничений по температуре воды</string>
     <string name="wash_not_allowed">Стирать вещь вручную или в машинке, к сожалению, нельзя. Дополнительные инструкции по уходу смотрите на символах сухой чистки</string>
