@@ -2,10 +2,8 @@ package com.blabla.dontruinyourlaundry.domain.useCases
 
 import android.util.Log
 import com.blabla.dontruinyourlaundry.data.Repository
-import com.blabla.dontruinyourlaundry.domain.entity.SearchParameterEnum
-import com.blabla.dontruinyourlaundry.domain.entity.SearchScreenItem
-import com.blabla.dontruinyourlaundry.domain.entity.SelectionType
-import com.blabla.dontruinyourlaundry.domain.entity.TitleSearchByParameterEnum
+import com.blabla.dontruinyourlaundry.data.dataBase.Card
+import com.blabla.dontruinyourlaundry.domain.entity.*
 
 class SearchByParameterUseCase(private val repo: Repository) {
 
@@ -86,6 +84,30 @@ class SearchByParameterUseCase(private val repo: Repository) {
             }
         }
         return listSelectedItemsNames
+    }
+
+    suspend fun getCardsSearchByParameter(listOfSelectedParameters: List<SearchParameterEnum>): List<Card> {
+        val listOfCategory = mutableListOf<CategoryEnum>()
+        val listOfAttachedSymbols = mutableListOf<SymbolForWashingDBO>()
+        listOfSelectedParameters.forEach { item ->
+            if (item.getCategory() != null) {
+                listOfCategory.add(item.getCategory()!!)
+            } else {
+                listOfAttachedSymbols.addAll(item.getAttachedSymbols())
+            }
+        }
+        val cards = getCardsSearchByCategory(listOfCategory) + getCardsSearchBySymbols(
+            listOfAttachedSymbols
+        )
+        return cards.toSet().toList()
+    }
+
+    private suspend fun getCardsSearchByCategory(listOfCategory: MutableList<CategoryEnum>): List<Card> {
+        return repo.getCardsSearchByPaCategory(listOfCategory)
+    }
+
+    private suspend fun getCardsSearchBySymbols(listOfAttachedSymbols: MutableList<SymbolForWashingDBO>): List<Card> {
+        return repo.getCardsSearchBySymbols(listOfAttachedSymbols)
     }
 
 }

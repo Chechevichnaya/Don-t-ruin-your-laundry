@@ -76,15 +76,31 @@ class SearchByParametersFragment : Fragment() {
 
     private fun navigateToSearchByParametersResultFragment() {
         val listOfParameters = viewModel.listOfSearchParametersEnum.value.orEmpty().toTypedArray()
-        val action =
-            SearchByParametersFragmentDirections.actionSearchByParametersFragmentToSearchByParametersResultFragment(
-                listOfParameters
-            )
-        findNavController().navigate(action)
+        viewModel.getListOfCards().observe(viewLifecycleOwner) { cards ->
+            if (cards.isEmpty()) {
+                val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
+                val dialog: AlertDialog =
+                    builder.setMessage(requireContext().getString(R.string.no_result))
+                        .setPositiveButton(requireContext().getString(R.string.ok_button)) { _, _ -> }
+                        .create()
+                dialog.show()
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
+            } else {
+                val action =
+                    SearchByParametersFragmentDirections.actionSearchByParametersFragmentToSearchByParametersResultFragment(
+                        listOfParameters
+                    )
+                findNavController().navigate(action)
+            }
+        }
+
+
     }
 
     private fun setToolBar(view: View) {
-        binding.toolbarSearch.title = "Поиск по параметрам"
+        binding.toolbarSearch.title =
+            requireContext().getString(R.string.search_by_parametere_title)
         binding.toolbarSearch.navigationIcon =
             view.context.getDrawable(R.drawable.ic_arrow_back)
 
@@ -96,9 +112,10 @@ class SearchByParametersFragment : Fragment() {
 
     private fun showDialogNothingSelected() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        val dialog: AlertDialog = builder.setMessage("Параметры для поиска не выбраны!")
-            .setPositiveButton("Ok") { _, _ -> }
-            .create()
+        val dialog: AlertDialog =
+            builder.setMessage(requireContext().getString(R.string.no_search_terms))
+                .setPositiveButton(requireContext().getString(R.string.ok_button)) { _, _ -> }
+                .create()
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
             .setTextColor(requireContext().resources.getColor(R.color.lilac_700))

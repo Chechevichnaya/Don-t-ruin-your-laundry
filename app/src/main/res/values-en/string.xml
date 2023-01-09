@@ -17,9 +17,9 @@
     <string name="the_rest">The rest</string>
 
     <string name="add_new_thing">Add new item</string>
-    <string name="name_of_cloth">Item\'s name</string>
-    <string name="choose_photo">Add photo</string>
-    <string name="add_more_symbols">Add laundry symbols</string>
+    <string name="name_of_cloth">Name</string>
+    <string name="choose_photo">Photo</string>
+    <string name="add_more_symbols">Laundry symbols</string>
     <string name="add">Add new information</string>
 
     <string name="ask_about_how_to_add_photo">Where do you want to take the photo?</string>
@@ -33,7 +33,7 @@
     <string name="delete_card">Delete all information</string>
     <string name="delete">Delete</string>
 
-    <string name="LookFor">Искать</string>
+    <string name="LookFor">Search</string>
     <string name="search_the_items">Find the item</string>
     <string name="search_by_name">Search by name</string>
     <string name="by_name">By name</string>
@@ -125,13 +125,19 @@
     <string name="title_drycleaning">Dry Cleaning</string>
 
     <string name="symbol">Symbol</string>
-    <string name="condition_of_searching">Search term</string>
+    <string name="condition_of_searching">Search terms</string>
 
     <string name="search_by_parametere_title">Search by parameters</string>
-    <string name="fill_name_and_symbols">Fill in the \"Item\'s name\" field and add laundry symbols</string>
-    <string name="fill_name">Fill in the \"Item\'s name\" field</string>
+    <string name="fill_name_and_symbols">Fill in the \"Name\" field and add laundry symbols</string>
+    <string name="fill_name">Fill in the \"Name\" field</string>
     <string name="fill_symbols">Add laundry symbols</string>
     <string name="need_acces_to_camera">The app needs access to the camera to take a photo</string>
+    <string name="search_result">Search results</string>
+    <string name="no_result">Nothing found!</string>
+    <string name="no_search_terms">Parameters for searching are not selected!</string>
+
+    <string name="nothing_selected">Laundry symbols are not selected!</string>
+    <string name="symbol_choosing">Choose symbols</string>
 
 
 </resources>

@@ -55,13 +55,6 @@ class SearchByParametersResultViewModel(
             )) || (it is SearchScreenItem.Title && listOfTitles.contains(it))
         }
         _listOfSearchItemsOnlyWithSelectedItems.value = listForRecyclerView
-//            listForRecyclerView.map { item ->
-//            if (item is SearchScreenItem.SearchParameter) {
-//                item.copy(selected = true)
-//            } else {
-//                item
-//            }
-//        }
         return _listOfSearchItemsOnlyWithSelectedItems
 
 

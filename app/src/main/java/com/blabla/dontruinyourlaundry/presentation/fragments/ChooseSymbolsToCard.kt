@@ -23,7 +23,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 class ChooseSymbolsToCard : Fragment() {
     private val TAG = this::class.java.simpleName
     private lateinit var binding: FragmentAddSymbolToCardBinding
-//    private val viewModel: ChooseSymbolsViewModel by viewModels()
+
     private val viewModel: ChooseSymbolsViewModel by viewModel()
     private val args: ChooseSymbolsToCardArgs by navArgs()
 
@@ -74,8 +74,8 @@ class ChooseSymbolsToCard : Fragment() {
 
     private fun showDialogNothingSelected() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
-        val dialog: AlertDialog = builder.setMessage("Ничего не выбрано!")
-            .setPositiveButton("Ok") { _, _ -> }
+        val dialog: AlertDialog = builder.setMessage(requireContext().getString(R.string.nothing_selected))
+            .setPositiveButton(requireContext().getString(R.string.ok_button)) { _, _ -> }
             .create()
 
         dialog.show()
@@ -101,7 +101,7 @@ class ChooseSymbolsToCard : Fragment() {
 
     private fun setUpperMenu() {
         //set navigation menu
-        binding.toolbarAddSymbolsToCard.title = "Выбери символы"
+        binding.toolbarAddSymbolsToCard.title = requireContext().getString(R.string.symbol_choosing)
         binding.toolbarAddSymbolsToCard.setNavigationIcon(R.drawable.ic_baseline_close_24)
 
         //go back without changing

@@ -61,8 +61,7 @@ class SearchByParametersResultFragment : Fragment() {
                 return when (menuItem.itemId) {
                     R.id.condition -> {
                         showDialog()
-//                        findNavController()
-//                            .navigate(R.id.action_searchByParametersResultFragment_to_knowAboutConditionOfSearching)
+//
                         true
                     }
                     else -> false
@@ -72,18 +71,6 @@ class SearchByParametersResultFragment : Fragment() {
 
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
-
-//    private fun setRecyclerViewTextParameters() {
-//        val recyclerView =
-//        val adapter = RecyclerViewAdapterSearchParameter {}
-//        recyclerView.layoutManager =
-//            FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
-//        recyclerView.adapter = adapter
-//        viewModel.getListSearchItemsWithSelectedItems().observe(viewLifecycleOwner) { items ->
-//            adapter.submitList(items)
-//        }
-//
-//    }
 
     private fun showDialog() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
@@ -96,7 +83,7 @@ class SearchByParametersResultFragment : Fragment() {
             adapter.submitList(items)
         }
         val dialog: AlertDialog = builder.setView(view)
-            .setPositiveButton("Ok") { _, _ ->  }
+            .setPositiveButton("Ok") { _, _ -> }
             .create()
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
@@ -120,7 +107,7 @@ class SearchByParametersResultFragment : Fragment() {
     }
 
     private fun setToolBar(view: View) {
-        binding.toolbarSearch.title = "Результат поиска"
+        binding.toolbarSearch.title = requireContext().getString(R.string.search_result)
         binding.toolbarSearch.navigationIcon =
             view.context.getDrawable(R.drawable.ic_arrow_back)
 
