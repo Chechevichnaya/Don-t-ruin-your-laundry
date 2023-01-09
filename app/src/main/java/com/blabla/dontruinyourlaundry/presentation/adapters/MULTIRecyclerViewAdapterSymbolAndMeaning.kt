@@ -47,6 +47,15 @@ class MULTIRecyclerViewAdapterSymbolAndMeaning(
             }
 
         }
+
+        fun bindFirst(symbol: SymbolGuide.SymbolForWashing) {
+            bind(symbol)
+            binding.divider.isVisible = false
+        }
+
+        fun bindNotFirst(symbol: SymbolGuide.SymbolForWashing) {
+            bind(symbol)
+        }
     }
 
     inner class AddNewSymbolViewHolder(val binding: RecyclerViewAddNewCardItemAddSymbolBinding) :
@@ -57,7 +66,8 @@ class MULTIRecyclerViewAdapterSymbolAndMeaning(
                 addSymbolButton.setImageResource(button.icon)
                 symbolMeaning.text = button.text
                 addSymbolLayout.setOnClickListener {
-                    clickedItemAddNewSymbol() }
+                    clickedItemAddNewSymbol()
+                }
             }
         }
     }
@@ -89,9 +99,10 @@ class MULTIRecyclerViewAdapterSymbolAndMeaning(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = getItem(position)
-        when (holder) {
-            is SymbolAndMeaningViewHolder -> holder.bind(item as SymbolGuide.SymbolForWashing)
-            is AddNewSymbolViewHolder -> holder.bind(item as SymbolGuide.ButtonAddNewSymbol)
+        when {
+            holder is SymbolAndMeaningViewHolder && position == 0 -> holder.bindFirst(item as SymbolGuide.SymbolForWashing)
+            holder is SymbolAndMeaningViewHolder && position != 0 -> holder.bindNotFirst(item as SymbolGuide.SymbolForWashing)
+            holder is AddNewSymbolViewHolder -> holder.bind(item as SymbolGuide.ButtonAddNewSymbol)
         }
     }
 
