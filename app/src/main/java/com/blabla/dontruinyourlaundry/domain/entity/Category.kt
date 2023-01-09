@@ -30,7 +30,7 @@ enum class CategoryEnum {
     fun getResIcon(): Int = when (this) {
         CLOTH -> R.drawable.pyjamas
         BAD_SHEETS -> R.drawable.single_bed
-        BATH -> R.drawable.kitchen
+        BATH -> R.drawable.bathroom
         KITCHEN -> R.drawable.kitchen
         REST -> R.drawable.blanket
     }
