@@ -15,6 +15,7 @@ import androidx.core.content.FileProvider
 import androidx.core.net.toUri
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
@@ -100,7 +101,7 @@ class AddDataToCardFragment : Fragment() {
 
     private fun observeName() {
         viewModel.nameOfCloth.observe(viewLifecycleOwner) { name ->
-            binding.nameOfCloth.setText(name)
+            binding.nameOfCloth.editText?.setText(name)
         }
     }
 
@@ -249,7 +250,7 @@ class AddDataToCardFragment : Fragment() {
     private fun observeUriToSetPhoto() {
         val uriObserver = Observer<Uri> { newUri ->
             if (viewModel.uri.value != null) {
-                binding.textOnImage.text = ""
+                binding.textOnImage.isVisible = false
             }
             Glide.with(binding.itemImage.context)
                 .load(newUri)
@@ -314,7 +315,7 @@ class AddDataToCardFragment : Fragment() {
     }
 
     private fun getNameOfCloth(): String {
-        return binding.nameOfCloth.text.toString().trim()
+        return binding.nameOfCloth.editText?.text.toString().trim()
             .replaceFirstChar { if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString() }
     }
 

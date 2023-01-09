@@ -8,51 +8,51 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/name_of_cloth"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="@string/name_of_cloth"
-            android:imeOptions="actionDone"
-            android:inputType="textCapSentences"
-            android:textAppearance="?attr/textAppearanceHeadline6"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toTopOf="@id/added_symbols_recycler_view"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/item_image"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_add_card"
-            tools:text="Название одежды" />
+            app:layout_constraintTop_toBottomOf="@id/item_image"
+            android:hint="@string/name_of_cloth"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name_of_clothField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
         <ImageView
             android:id="@+id/item_image"
-            android:layout_width="160dp"
-            android:layout_height="160dp"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:background="@color/lilac_200"
-            app:layout_constraintEnd_toStartOf="@id/name_of_cloth"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar_add_card">
 
         </ImageView>
 
 
-
-
-
-
-        <TextView
+        <ImageView
             android:id="@+id/text_on_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/choose_photo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/add_photo"
             app:layout_constraintBottom_toBottomOf="@id/item_image"
             app:layout_constraintEnd_toEndOf="@+id/item_image"
             app:layout_constraintStart_toStartOf="@id/item_image"
-            app:layout_constraintTop_toTopOf="@id/item_image">
+            app:layout_constraintTop_toTopOf="@id/item_image"
+            app:tint="@color/lilac_700">
 
-        </TextView>
+        </ImageView>
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_add_card"
@@ -73,24 +73,23 @@
             android:layout_height="0dp"
 
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/item_image"
-             app:layout_constraintBottom_toBottomOf="parent"
-            tools:itemCount="3"
-            />
+            app:layout_constraintTop_toBottomOf="@id/name_of_cloth"
+            tools:itemCount="3" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/add_symbols"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
             android:layout_gravity="bottom|right"
+            android:layout_margin="16dp"
             android:text="@string/add_more_symbols"
-            app:icon="@drawable/ic_add"
             app:backgroundTint="@color/lilac_500"
-            app:layout_constraintStart_toStartOf="parent"
+            app:icon="@drawable/ic_add"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
