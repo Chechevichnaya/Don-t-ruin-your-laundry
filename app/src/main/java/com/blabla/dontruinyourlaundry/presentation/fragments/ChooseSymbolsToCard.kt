@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.window.layout.WindowMetricsCalculator
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.presentation.adapters.MULTURecyclerViewAdapterAllSymbols
 import com.blabla.dontruinyourlaundry.databinding.FragmentAddSymbolToCardBinding
@@ -87,7 +88,8 @@ class ChooseSymbolsToCard : Fragment() {
     private fun attachAdapterToRecyclerView(selectedItems: List<SymbolGuide.SymbolForWashing>) {
         val recyclerViewSymbolsInAddingCad = binding.recyclerAddSymbolsToCard
         viewModel.setSelectedSymbols(selectedItems)
-        val adapter = MULTURecyclerViewAdapterAllSymbols { clickedItem ->
+
+        val adapter = MULTURecyclerViewAdapterAllSymbols(requireActivity()) { clickedItem ->
             viewModel.clickItem(clickedItem)
         }
         recyclerViewSymbolsInAddingCad.layoutManager =

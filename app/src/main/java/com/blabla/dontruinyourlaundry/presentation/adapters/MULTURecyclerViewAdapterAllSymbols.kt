@@ -1,11 +1,13 @@
 package com.blabla.dontruinyourlaundry.presentation.adapters
 
+import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import androidx.window.layout.WindowMetricsCalculator
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.databinding.SymbolGuideHeadnameBinding
 import com.blabla.dontruinyourlaundry.databinding.SymbolGuideSymbolsItemBinding
@@ -14,8 +16,20 @@ import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
 private const val HEAD = 1
 private const val SYMBOL_FOR_WASHING = 2
 
-class MULTURecyclerViewAdapterAllSymbols(val clickListener: (SymbolGuide.SymbolForWashing) -> Unit) :
+class MULTURecyclerViewAdapterAllSymbols(
+    activity: Activity,
+    val clickListener: (SymbolGuide.SymbolForWashing) -> Unit
+) :
     ListAdapter<SymbolGuide, RecyclerView.ViewHolder>(diffCallback) {
+
+    val width: Int
+
+    init {
+        val windowMetrics =
+            WindowMetricsCalculator.getOrCreate().computeCurrentWindowMetrics(activity)
+        val currentBounds = windowMetrics.bounds
+        width = currentBounds.width()
+    }
 
     companion object {
         private val diffCallback = object : DiffUtil.ItemCallback<SymbolGuide>() {
@@ -98,6 +112,8 @@ class MULTURecyclerViewAdapterAllSymbols(val clickListener: (SymbolGuide.SymbolF
                 R.color.lilac_200
             }
             val context = binding.symbolInGuide.context
+            binding.root.layoutParams.height = width / 5
+            binding.root.layoutParams.width = width / 5
             binding.symbolInGuide.apply {
                 setBackgroundColor(context.resources.getColor(bgColor))
                 setImageResource(symbol.pictureId)

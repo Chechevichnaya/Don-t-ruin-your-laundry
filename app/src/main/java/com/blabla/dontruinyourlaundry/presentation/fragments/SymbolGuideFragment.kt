@@ -1,12 +1,14 @@
 package com.blabla.dontruinyourlaundry.presentation.fragments
 
 import android.os.Bundle
+import android.util.DisplayMetrics
 import android.view.*
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.window.layout.WindowMetricsCalculator
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.presentation.adapters.MULTURecyclerViewAdapterAllSymbols
 import com.blabla.dontruinyourlaundry.databinding.FragmentSimbolGuideBinding
@@ -37,11 +39,19 @@ class SymbolGuideFragment : Fragment() {
 
     private fun attachAdapterToRecyclerView() {
         val recyclerViewSymbolGuide = binding.recyclerViewSymbolGuide
-        val adapter = MULTURecyclerViewAdapterAllSymbols { clickedItem ->
+
+        val adapter = MULTURecyclerViewAdapterAllSymbols(requireActivity()) { clickedItem ->
             viewModel.onClicked(clickedItem, requireContext())
         }
         recyclerViewSymbolGuide.layoutManager =
             FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
+
+
+
+
+
+
+
         recyclerViewSymbolGuide.adapter = adapter
         viewModel.symbolsInGuide.observe(viewLifecycleOwner) { items ->
             adapter.submitList(items)
