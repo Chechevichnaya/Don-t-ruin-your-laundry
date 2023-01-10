@@ -23,7 +23,7 @@
     <string name="add">Add new information</string>
 
     <string name="ask_about_how_to_add_photo">Where do you want to take the photo?</string>
-    <string name="from_gallery">From  the Gallery</string>
+    <string name="from_gallery">From  the gallery</string>
     <string name="from_camera">From the Camera</string>
     <string name="permission_required">Camera access is required to display the camera preview.</string>
     <string name="permission_granted">Permission is granted. You can use the camera now.</string>

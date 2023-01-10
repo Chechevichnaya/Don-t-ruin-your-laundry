@@ -26,9 +26,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
+        app:tabGravity="fill"
         android:layout_height="wrap_content"
         app:tabMode="scrollable"
-        app:tabContentStart="56dp"
+        app:tabContentStart="16dp"
         android:background="@color/lilac_500"
         app:tabInlineLabel="true"
         >
@@ -37,43 +38,26 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="true"
             android:text="@string/clothing"
             android:focusable="true">
-            <!--android:icon="@drawable/pyjamas"-->
-
         </com.google.android.material.tabs.TabItem>
-
         <com.google.android.material.tabs.TabItem
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="@string/bed_sheets" />
-        <!--android:icon="@drawable/single_bed"-->
-
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/kitchen_stuf" />
-        <!--android:icon="@drawable/kitchen"-->
-
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bath_stuf">
-            <!--android:icon="@drawable/bathroom"-->
-
         </com.google.android.material.tabs.TabItem>
-
         <com.google.android.material.tabs.TabItem
-
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
             android:text="@string/the_rest">
-            <!--android:icon="@drawable/blanket"-->
-
         </com.google.android.material.tabs.TabItem>
     </com.google.android.material.tabs.TabLayout>
 
