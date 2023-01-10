@@ -5,6 +5,7 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.12083333333333333" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2085" />
+        <entry key="app/src/main/res/drawable/color_for_alertdialog.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/fradient_background.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/gradient_black.xml" value="0.164" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.18" />

@@ -2,7 +2,9 @@ package com.blabla.dontruinyourlaundry.presentation.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
+import android.graphics.Typeface
 import android.os.Bundle
+import android.widget.TextView
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.blabla.dontruinyourlaundry.R
@@ -35,10 +37,11 @@ class SearchDialog : DialogFragment() {
         val dialog = builder.create()
         dialog.show()
 
-        //set color to buttons
-        val colorButton = resources.getColor(R.color.lilac_700)
+        val colorButton = resources.getColor(R.color.buttons_positive_negative)
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
         dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(colorButton)
+
+        dialog.window?.setBackgroundDrawable(requireContext().getDrawable(R.drawable.color_for_alertdialog))
 
         return dialog
 

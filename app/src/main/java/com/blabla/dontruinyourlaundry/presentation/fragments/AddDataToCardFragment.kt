@@ -6,7 +6,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -34,7 +33,6 @@ import com.blabla.dontruinyourlaundry.presentation.viewModels.AddDataToCardViewM
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -187,7 +185,7 @@ class AddDataToCardFragment : Fragment() {
         setTitleInToolBar()
         binding.toolbarAddCard.navigationIcon =
             view.context.getDrawable(R.drawable.ic_baseline_close_24)
-        //go back on the first fragment without adding info in database
+        binding.toolbarAddCard.navigationIcon?.setTint(requireContext().resources.getColor(R.color.icon_text))
         binding.toolbarAddCard.setNavigationOnClickListener {
             findNavController().navigate(R.id.action_addNewCard_to_kindsOfThingsForLaundry)
         }

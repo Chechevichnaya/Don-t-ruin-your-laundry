@@ -6,7 +6,8 @@
         android:id="@+id/save_button"
         android:title="@string/save"
         app:showAsAction="ifRoom"
-        android:icon="@drawable/ic_save"/>
+        android:icon="@drawable/ic_save"
+        app:iconTint= "@color/icon_text"/>
 
 
 

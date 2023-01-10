@@ -7,7 +7,7 @@
         <item name="colorPrimaryVariant">@color/lilac_700</item>
         <item name="colorOnPrimary">@color/lilac_200</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/lilac_200</item>
+        <item name="colorSecondary">@color/lilac_500</item>
         <item name="colorSecondaryVariant">@color/lilac_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->

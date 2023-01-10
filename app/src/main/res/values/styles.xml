@@ -2,7 +2,12 @@
 <resources>
     <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/lilac_700</item>
-        <item name="colorButtonNormal">@color/lilac_700</item>
+        <item name="textColorAlertDialogListItem">@color/icon_text</item>
+        <item name="android:textColor">@color/icon_text</item>
+        <item name="android:textColorAlertDialogListItem">@color/icon_text</item>
+        <item name="android:textColorSecondary">@color/icon_text</item>
+
+        <item name="colorSecondary">@color/icon_text</item>
     </style>
 
     <style name="Widget.App.ButtonStyle" parent="Widget.MaterialComponents.Button">

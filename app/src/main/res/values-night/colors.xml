@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FFFFFFFF</color>
+    <color name="white">#FF000000</color>
+    <color name="lilac_200">#6f79a8</color>
+    <color name="lilac_500">#FF000000</color>
+    <color name="lilac_700">#6f79a8</color>
+    <color name="lilac_dark">#49599a</color>
+    <color name="icon_text">#FFFFFFFF</color>
+    <color name="color_fab">#6f79a8</color>
+    <color name="color_fab_icon">#FFFFFFFF</color>
+    <color name="background">#454242</color>
+    <color name="buttons_positive_negative">#FFFFFFFF</color>
+
+
+</resources>
