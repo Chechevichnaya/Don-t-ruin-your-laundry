@@ -28,23 +28,24 @@
                 android:layout_height="150dp"
                 android:layout_margin="8dp"
                 android:scaleType="centerInside"
+                android:background="@drawable/rounded_corners"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@drawable/laundry" />
+                 />
 
             <TextView
                 android:id="@+id/item_name"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:textAppearance="?attr/textAppearanceHeadline6"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/item_image"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Название одежды" />
+                tools:text="Название одежды Название одежды Название одежды" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

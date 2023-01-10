@@ -11,6 +11,9 @@ import com.blabla.dontruinyourlaundry.databinding.CardItemBinding
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CenterInside
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
     ListAdapter<Card, CardsListAdapter.ItemViewHolder>(DiffCallback) {
@@ -44,6 +47,7 @@ class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
                     .load(card.picture.toUri())
                     .centerCrop()
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .transform(CenterCrop(), RoundedCorners(24))
                     .skipMemoryCache(true)
                     .into(binding.itemImage)
             }

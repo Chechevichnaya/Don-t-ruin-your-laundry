@@ -128,8 +128,8 @@
     <string name="condition_of_searching">Search terms</string>
 
     <string name="search_by_parametere_title">Search by parameters</string>
-    <string name="fill_name_and_symbols">Fill in the \"Name\" field and add laundry symbols</string>
-    <string name="fill_name">Fill in the \"Name\" field</string>
+    <string name="fill_name_and_symbols">Fill in the \"Item\'s name\" field and add laundry symbols</string>
+    <string name="fill_name">Fill in the \"Item\'s name\" field</string>
     <string name="fill_symbols">Add laundry symbols</string>
     <string name="need_acces_to_camera">The app needs access to the camera to take a photo</string>
     <string name="search_result">Search results</string>

@@ -2,6 +2,8 @@ package com.blabla.dontruinyourlaundry.presentation.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.style.UnderlineSpan
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.core.net.toUri
@@ -19,6 +21,8 @@ import com.blabla.dontruinyourlaundry.domain.entity.TypeOfRecyclerView
 import com.blabla.dontruinyourlaundry.presentation.viewModels.CardDetailViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -94,9 +98,13 @@ class CardDetailFragment : Fragment() {
                 .centerCrop()
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
+                .transform(CenterCrop(), RoundedCorners(24))
                 .into(binding.itemImage)
         }
         binding.apply {
+//            val spannableString = SpannableString(card.name)
+//            spannableString.setSpan(UnderlineSpan(), 0, spannableString.length, 0)
+
             nameOfCloth.text = card.name
             val recyclerView = binding.addedSymbolsRecyclerView
             val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning(

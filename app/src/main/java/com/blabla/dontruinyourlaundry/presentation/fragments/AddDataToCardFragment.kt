@@ -33,6 +33,9 @@ import com.blabla.dontruinyourlaundry.domain.entity.TypeOfRecyclerView
 import com.blabla.dontruinyourlaundry.presentation.viewModels.AddDataToCardViewModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
+import com.bumptech.glide.load.resource.bitmap.CenterInside
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
 import com.google.android.flexbox.FlexboxLayoutManager
@@ -257,6 +260,7 @@ class AddDataToCardFragment : Fragment() {
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .skipMemoryCache(true)
                 .centerCrop()
+                .transform(CenterCrop(), RoundedCorners(24))
                 .into(binding.itemImage)
         }
         viewModel.uri.observe(viewLifecycleOwner, uriObserver)
