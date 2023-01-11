@@ -58,16 +58,16 @@ class SymbolGuideFragment : Fragment() {
         }
     }
 
-    private fun setUpperMenu(view: View) {
-        binding.toolbarSymbolGuide.title = requireContext().getString(R.string.symbol_guide)
-        binding.toolbarSymbolGuide.navigationIcon =
+    private fun setUpperMenu(view: View) = binding.toolbarSymbolGuide.apply {
+        title = requireContext().getString(R.string.symbol_guide)
+        navigationIcon =
             view.context.getDrawable(R.drawable.ic_arrow_back)
-        binding.toolbarSymbolGuide.setNavigationOnClickListener {
+        navigationIcon?.setTint(requireContext().resources.getColor(R.color.icon_text))
+        setNavigationOnClickListener {
             findNavController().popBackStack()
         }
 
-        val menuHost: MenuHost = binding.toolbarSymbolGuide
-        menuHost.addMenuProvider(object : MenuProvider {
+        addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
                 menuInflater.inflate(R.menu.menu_symbol_guide, menu)
             }

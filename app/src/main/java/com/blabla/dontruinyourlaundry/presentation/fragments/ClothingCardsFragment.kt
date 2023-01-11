@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.presentation.adapters.CardsListAdapter
 import com.blabla.dontruinyourlaundry.databinding.FragmentClothingCardsBinding
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
@@ -57,7 +58,6 @@ class ClothingCardsFragment : Fragment() {
         viewModel.allCardsByCategory(category).observe(viewLifecycleOwner) { cards ->
             //check if table by certain category is empty
             if (cards.isEmpty()) {
-                //set full screen picture of cloth type
                 binding.imageTypeOfCloth.setImageResource(image)
             } else adapter.submitList(cards)
         }

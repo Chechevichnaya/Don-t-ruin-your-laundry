@@ -2,10 +2,12 @@ package com.blabla.dontruinyourlaundry.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.data.dataBase.Card
 import com.blabla.dontruinyourlaundry.databinding.CardItemBinding
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
@@ -42,6 +44,9 @@ class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
             binding.itemName.text = card.name
             if (card.picture == null) {
                 binding.itemImage.setImageResource(imageCategory)
+                binding.itemImage.setColorFilter(binding.itemImage.context.resources.getColor(
+                    R.color.icon_of_category_in_card))
+
             } else {
                 Glide.with(binding.itemImage.context)
                     .load(card.picture.toUri())

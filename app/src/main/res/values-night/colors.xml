@@ -11,6 +11,7 @@
     <color name="color_fab_icon">#FFFFFFFF</color>
     <color name="background">#454242</color>
     <color name="buttons_positive_negative">#FFFFFFFF</color>
+    <color name="icon_of_category_in_card">@color/lilac_700</color>
 
 
 </resources>
