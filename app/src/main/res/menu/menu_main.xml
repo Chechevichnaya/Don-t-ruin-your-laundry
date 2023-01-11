@@ -5,6 +5,7 @@
     <item
         android:id="@+id/simbol_guide"
         android:title="@string/symbol_guide"
+
         app:showAsAction="never" />
 
     <item

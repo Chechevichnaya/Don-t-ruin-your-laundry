@@ -17,5 +17,9 @@
     <style name="Lilac200Button">
         <item name="colorPrimary">@color/lilac_200</item>
     </style>
+
+    <style name="MyTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textColor">@color/icon_text</item>
+    </style>
 </resources>
 

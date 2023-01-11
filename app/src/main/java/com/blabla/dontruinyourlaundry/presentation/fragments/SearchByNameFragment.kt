@@ -45,6 +45,7 @@ private val viewModel: SearchByNameViewModel by viewModel()
         //set upper menu
         binding.toolbarSearch.navigationIcon =
             view.context.getDrawable(R.drawable.ic_arrow_back)
+        binding.toolbarSearch.navigationIcon?.setTint(requireContext().resources.getColor(R.color.icon_text))
 
         //go back on the first fragment without adding info in database
         binding.toolbarSearch.setNavigationOnClickListener {
