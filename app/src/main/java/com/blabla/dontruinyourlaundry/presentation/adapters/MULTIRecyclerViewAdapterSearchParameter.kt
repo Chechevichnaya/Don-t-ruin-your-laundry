@@ -82,9 +82,9 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
         RecyclerView.ViewHolder(binding.root) {
         fun bind(parameter: SearchScreenItem.SearchParameter) {
             val bgColor: Int = if (parameter.selected) {
-                R.color.search_selected
+                R.color.color_selected
             } else {
-                R.color.search_unselected
+                R.color.color_unselected
             }
             binding.buttonInSearchByParameters.apply {
                 setBackgroundColor(ResourcesCompat.getColor(context.resources,bgColor, null))

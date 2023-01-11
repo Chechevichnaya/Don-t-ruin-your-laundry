@@ -109,9 +109,9 @@ class MULTURecyclerViewAdapterAllSymbols(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(symbol: SymbolGuide.SymbolForWashing) {
             val bgColor: Int = if (symbol.selected) {
-                R.color.lilac_700
+                R.color.color_selected
             } else {
-                R.color.lilac200_light_lilac700_dark
+                R.color.color_unselected
             }
             val context = binding.symbolInGuide.context
             binding.root.layoutParams.height = width / 5

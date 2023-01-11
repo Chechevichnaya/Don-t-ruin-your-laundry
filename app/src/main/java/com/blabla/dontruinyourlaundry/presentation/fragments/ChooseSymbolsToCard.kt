@@ -104,8 +104,9 @@ class ChooseSymbolsToCard : Fragment() {
     private fun setUpperMenu() {
         //set navigation menu
         binding.toolbarAddSymbolsToCard.title = requireContext().getString(R.string.symbol_choosing)
-        binding.toolbarAddSymbolsToCard.setNavigationIcon(R.drawable.ic_baseline_close_24)
 
+        binding.toolbarAddSymbolsToCard.setNavigationIcon(R.drawable.ic_baseline_close_24)
+        binding.toolbarAddSymbolsToCard.navigationIcon?.setTint(requireContext().resources.getColor(R.color.icon_text))
         //go back without changing
         binding.toolbarAddSymbolsToCard.setNavigationOnClickListener {
             findNavController().popBackStack()

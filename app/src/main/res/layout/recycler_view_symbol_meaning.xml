@@ -26,9 +26,10 @@
         android:id="@+id/icon_button"
         android:layout_width="70dp"
         android:layout_height="70dp"
-        android:backgroundTint="@color/lilac_200"
+        android:backgroundTint="@color/lilac200_light_lilac700_dark"
         android:scaleType="centerInside"
         android:src="@drawable/plus"
+        app:tint = "@color/black_light_white_dark"
         android:paddingBottom="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginBottom="16dp"
@@ -46,7 +47,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="8dp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-        android:textColor="@color/black"
+        android:textColor="@color/icon_text"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/icon_button"
         app:layout_constraintEnd_toStartOf="@id/delete_button"
@@ -66,7 +67,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_baseline_close_24"
-        android:background="@color/white">
+        android:background="@color/transparent"
+        app:tint = "@color/black_light_white_dark">
 
     </ImageButton>
 

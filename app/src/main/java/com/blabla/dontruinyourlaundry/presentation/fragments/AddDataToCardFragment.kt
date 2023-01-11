@@ -201,9 +201,7 @@ class AddDataToCardFragment : Fragment() {
         }, TypeOfRecyclerView.ADD_SYMBOL_FRAGMENT)
         recyclerView.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
         recyclerView.adapter = adapter
-//        viewModel.addItemAddNewSymbol()
         viewModel.listOfSymbols.observe(viewLifecycleOwner) { items ->
-//            val list = viewModel.checkIfThereIsItemAddNewSymbol(items)
             adapter.submitList(items)
         }
     }
@@ -302,7 +300,7 @@ class AddDataToCardFragment : Fragment() {
                 .create()
             dialog.show()
             dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
+                .setTextColor(requireContext().resources.getColor(R.color.lilac700_light_white_dark))
             false
         } else true
 

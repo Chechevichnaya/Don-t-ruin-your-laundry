@@ -16,14 +16,13 @@ private const val SYMBOL_AND_MEANING = 1
 
 class MULTIRecyclerViewAdapterSymbolAndMeaning(
     private val clickedDeleteItem: (SymbolGuide.SymbolForWashing) -> Unit,
-//    private val clickedItemAddNewSymbol: () -> Unit,
     private var typeFrom: TypeOfRecyclerView
 ) :
     ListAdapter<SymbolGuide, RecyclerView.ViewHolder>(diffCallback) {
 
     inner class SymbolAndMeaningViewHolder(val binding: RecyclerViewSymbolMeaningBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(symbol: SymbolGuide.SymbolForWashing) {
+        private fun bind(symbol: SymbolGuide.SymbolForWashing) {
             val context = binding.iconButton.context
             binding.apply {
                 iconButton.setImageResource(symbol.pictureId)

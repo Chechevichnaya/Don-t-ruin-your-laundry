@@ -71,7 +71,6 @@
             android:id="@+id/added_symbols_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toTopOf="@id/add_symbols"
             android:layout_marginBottom="8dp"
@@ -86,7 +85,9 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
             android:text="@string/add_more_symbols"
-            app:backgroundTint="@color/lilac_500"
+            app:backgroundTint="@color/lilac500_light_lilac700_dark"
+            app:iconTint = "@color/icon_text"
+            android:textColor = "@color/icon_text"
             app:icon="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

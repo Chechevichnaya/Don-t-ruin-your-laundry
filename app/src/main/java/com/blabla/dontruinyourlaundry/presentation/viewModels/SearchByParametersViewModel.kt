@@ -19,8 +19,6 @@ class SearchByParametersViewModel(private val useCase: SearchByParameterUseCase)
 
     private val _selectedItems = MutableLiveData<List<SearchScreenItem>>()
 
-    private val _listOfCategories = MutableLiveData<List<CategoryEnum>>()
-
     private val _listOfSearchParametersEnum = MutableLiveData<List<SearchParameterEnum>>()
     val listOfSearchParametersEnum: LiveData<List<SearchParameterEnum>> =
         _listOfSearchParametersEnum

@@ -6,6 +6,7 @@
     <color name="white_light_black_dark">#FF000000</color>
     <color name="lilac200_light_lilac700_dark">#6f79a8</color>
     <color name="lilac700_light_white_dark">@color/white</color>
+    <color name="lilac500_light_lilac700_dark">@color/lilac_700</color>
     <color name="lilac_500">#FF000000</color>
     <color name="lilac_700">#6f79a8</color>
     <color name="lilac_dark">#49599a</color>
@@ -16,8 +17,8 @@
     <color name="buttons_positive_negative">#FFFFFFFF</color>
     <color name="icon_of_category_in_card">@color/lilac_700</color>
     <color name="lilac_200">#d1d9ff</color>
-    <color name="search_selected">@color/lilac_200</color>
-    <color name="search_unselected">@color/lilac_700</color>
+    <color name="color_selected">@color/lilac_200</color>
+    <color name="color_unselected">@color/lilac_700</color>
 
 
 </resources>

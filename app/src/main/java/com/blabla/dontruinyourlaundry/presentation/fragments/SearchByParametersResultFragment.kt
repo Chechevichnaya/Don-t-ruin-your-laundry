@@ -43,14 +43,12 @@ class SearchByParametersResultFragment : Fragment() {
 
         viewModel.setListOfSelectedParameters(args.listOfParameters.toMutableList())
         setAdapterToCards()
-        //setRecyclerViewTextParameters()
         setMenuItem()
 
 
     }
 
     private fun setMenuItem() {
-        //set menu item
         val menuHost: MenuHost = binding.toolbarSearch
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -73,7 +71,7 @@ class SearchByParametersResultFragment : Fragment() {
     }
 
     private fun showDialog() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
         val view = layoutInflater.inflate(R.layout.search_by_parameter_dialog, null)
         val adapter = RecyclerViewAdapterSearchParameter {}
         val recyclerView = view.findViewById<RecyclerView>(R.id.recycler_view_dialog)
@@ -83,11 +81,12 @@ class SearchByParametersResultFragment : Fragment() {
             adapter.submitList(items)
         }
         val dialog: AlertDialog = builder.setView(view)
-            .setPositiveButton("Ok") { _, _ -> }
+            .setPositiveButton(requireContext().getString(R.string.ok_button)) { _, _ -> }
             .create()
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
+            .setTextColor(requireContext().resources.getColor(R.color.buttons_positive_negative))
+        dialog.window?.setBackgroundDrawable(requireContext().getDrawable(R.drawable.color_for_alertdialog))
     }
 
     private fun setAdapterToCards() {
@@ -110,9 +109,6 @@ class SearchByParametersResultFragment : Fragment() {
         binding.toolbarSearch.title = requireContext().getString(R.string.search_result)
         binding.toolbarSearch.navigationIcon =
             view.context.getDrawable(R.drawable.ic_arrow_back)
-
-
-
         binding.toolbarSearch.setNavigationOnClickListener {
             findNavController().popBackStack()
             findNavController().popBackStack()

@@ -86,7 +86,7 @@ class SearchByParametersFragment : Fragment() {
                         .create()
                 dialog.show()
                 dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                    .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
+                    .setTextColor(requireContext().resources.getColor(R.color.buttons_positive_negative))
             } else {
                 val action =
                     SearchByParametersFragmentDirections.actionSearchByParametersFragmentToSearchByParametersResultFragment(
@@ -119,6 +119,6 @@ class SearchByParametersFragment : Fragment() {
                 .create()
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
+            .setTextColor(requireContext().resources.getColor(R.color.buttons_positive_negative))
     }
 }

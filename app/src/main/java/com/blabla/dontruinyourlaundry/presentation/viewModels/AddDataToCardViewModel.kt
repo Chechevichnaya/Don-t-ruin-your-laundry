@@ -4,6 +4,8 @@ import android.app.AlertDialog
 import android.content.Context
 import android.net.Uri
 import android.util.Log
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.net.toUri
 import androidx.lifecycle.*
 import com.blabla.dontruinyourlaundry.R
@@ -22,12 +24,6 @@ class AddDataToCardViewModel(
     private val updateCardUC: ChangeOldCardUseCase,
     private val context: Context
 ) : ViewModel() {
-
-//    private val symbolsAddNewSymbols = SymbolGuide.ButtonAddNewSymbol(
-//        R.drawable.ic_add,
-//        context.getString(R.string.add_more_symbols)
-//    )
-
 
     private val _listOfSymbols = MutableLiveData<List<SymbolGuide>>()
     val listOfSymbols: LiveData<List<SymbolGuide>> = _listOfSymbols
@@ -53,31 +49,6 @@ class AddDataToCardViewModel(
         }
     }
 
-//    fun checkIfThereIsItemAddNewSymbol(items: List<SymbolGuide>): List<SymbolGuide> {
-//        return if (items.isEmpty() || (items.last() is SymbolGuide.ButtonAddNewSymbol).not()) {
-//            val itemsList = items.toMutableList()
-//            itemsList.add(
-//                symbolsAddNewSymbols
-//            )
-//            itemsList
-//        } else items
-//    }
-
-//    fun removeSymbolsAddNewSymbols(): List<SymbolGuide> {
-//        val list = _listOfSymbols.value.orEmpty().toMutableList()
-//        if (list.contains(symbolsAddNewSymbols)) {
-//            list.remove(symbolsAddNewSymbols)
-//        }
-//        return list
-//    }
-
-//    fun addItemAddNewSymbol() {
-//        val listOfSymbols = _listOfSymbols.value.orEmpty().toMutableList()
-//        listOfSymbols.add(
-//            symbolsAddNewSymbols
-//        )
-//        _listOfSymbols.value = listOfSymbols
-//    }
 
     fun getListSymbolForWashing(): List<SymbolGuide.SymbolForWashing> {
         val list = _listOfSymbols.value.orEmpty().toMutableList()
@@ -114,9 +85,16 @@ class AddDataToCardViewModel(
 
     fun showDialog(symbol: SymbolGuide.SymbolForWashing, context: Context) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        val drawable = ResourcesCompat.getDrawable(context.resources, symbol.pictureId, null)
+        val wrappedDrawable = DrawableCompat.wrap(drawable!!)
+        DrawableCompat.setTint(
+            wrappedDrawable,
+            ResourcesCompat.getColor(context.resources, R.color.icon_text, null)
+        )
         val dialog: AlertDialog = builder.setTitle(context.getString(R.string.delete_symbol))
             .setPositiveButton(context.getString(R.string.ok_button)) { _, _ -> deleteSymbol(symbol) }
             .setIcon(symbol.pictureId)
+
             .create()
 
         dialog.show()
@@ -159,7 +137,6 @@ class AddDataToCardViewModel(
             updateCardUC.updateCard(card)
             updateCardUC.deleteOldSymbols(cardId)
             symbols.forEach { symbol ->
-                Log.d("SIMBOLI", "symbol for updating $symbol")
                 addNewCardUC.addPairCardAndSymbol(
                     CardsAndSymbols(
                         0,

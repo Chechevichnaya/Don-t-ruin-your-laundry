@@ -22,6 +22,8 @@
     <string name="add_more_symbols">Laundry symbols</string>
     <string name="add">Add new information</string>
 
+    <string name="title_fragment_card_detail">Item\'s detail</string>
+
     <string name="ask_about_how_to_add_photo">Where do you want to take the photo?</string>
     <string name="from_gallery">From  the gallery</string>
     <string name="from_camera">From the Camera</string>

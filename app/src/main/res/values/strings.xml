@@ -13,6 +13,8 @@
 
     <string name="add_new_thing">Добавить новую вещь</string>
     <string name="delete">Удалить</string>
+    <string name="title_fragment_card_detail">Подробнее о карточке</string>
+
 
     <string name="save">Сохранить</string>
     <string name="delete_card">Удалить карточку</string>

@@ -57,10 +57,10 @@ class CardDetailFragment : Fragment() {
 
 
         //set upper menu
-        binding.toolbarCardDetail.title = "Подробнее о карточке"
+        binding.toolbarCardDetail.title = getString(R.string.title_fragment_card_detail)
         binding.toolbarCardDetail.navigationIcon =
             view.context.getDrawable(R.drawable.ic_arrow_back)
-        //go back on the first fragment without adding info in database
+        binding.toolbarCardDetail.navigationIcon?.setTint(requireContext().resources.getColor(R.color.icon_text))
         binding.toolbarCardDetail.setNavigationOnClickListener {
             findNavController().popBackStack()
         }
@@ -91,6 +91,8 @@ class CardDetailFragment : Fragment() {
             val imageRes = CategoryEnum.values().find { it == card.category }?.getResIcon()
             if (imageRes != null) {
                 binding.itemImage.setImageResource(imageRes)
+                binding.itemImage.setColorFilter(binding.itemImage.context.resources.getColor(
+                    R.color.icon_of_category_in_card))
             }
         } else {
             Glide.with(binding.itemImage.context)
@@ -102,9 +104,6 @@ class CardDetailFragment : Fragment() {
                 .into(binding.itemImage)
         }
         binding.apply {
-//            val spannableString = SpannableString(card.name)
-//            spannableString.setSpan(UnderlineSpan(), 0, spannableString.length, 0)
-
             nameOfCloth.text = card.name
             val recyclerView = binding.addedSymbolsRecyclerView
             val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning(
@@ -133,7 +132,7 @@ class CardDetailFragment : Fragment() {
             }
             .create()
         dialog.show()
-        val colorButton = resources.getColor(R.color.lilac_700)
+        val colorButton = resources.getColor(R.color.buttons_positive_negative)
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(colorButton)
     }
