@@ -5,6 +5,7 @@
     <color name="black_light_white_dark">#FFFFFFFF</color>
     <color name="white_light_black_dark">#FF000000</color>
     <color name="lilac200_light_lilac700_dark">#6f79a8</color>
+    <color name="lilac700_light_white_dark">@color/white</color>
     <color name="lilac_500">#FF000000</color>
     <color name="lilac_700">#6f79a8</color>
     <color name="lilac_dark">#49599a</color>

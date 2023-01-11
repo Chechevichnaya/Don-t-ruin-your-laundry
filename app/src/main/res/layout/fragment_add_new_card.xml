@@ -50,7 +50,7 @@
             app:layout_constraintEnd_toEndOf="@+id/item_image"
             app:layout_constraintStart_toStartOf="@id/item_image"
             app:layout_constraintTop_toTopOf="@id/item_image"
-            app:tint="@color/lilac_700">
+            app:tint="@color/lilac700_light_white_dark">
 
         </ImageView>
 

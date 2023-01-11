@@ -3,7 +3,7 @@
     <style name="Theme.DontRuinYourLaundry" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/lilac200_light_lilac700_dark</item>
-        <item name="colorPrimaryVariant">@color/lilac_500</item>
+        <item name="colorPrimaryVariant">@color/black</item>
         <item name="colorOnPrimary">@color/lilac_dark</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/lilac_700</item>
