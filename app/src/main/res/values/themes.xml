@@ -2,14 +2,14 @@
     <!-- Base application theme. -->
     <style name="Theme.DontRuinYourLaundry" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimary">@color/black_light_white_dark</item>
         <item name="colorAccent">@color/lilac_700</item>
         <item name="colorPrimaryVariant">@color/lilac_700</item>
-        <item name="colorOnPrimary">@color/lilac_200</item>
+        <item name="colorOnPrimary">@color/lilac200_light_lilac700_dark</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/lilac_500</item>
         <item name="colorSecondaryVariant">@color/lilac_700</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/black_light_white_dark</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>

@@ -13,7 +13,7 @@
         android:layout_margin="8dp"
         android:textColor="@color/black"
         android:textAllCaps="false"
-        tools:backgroundTint="@color/lilac_200"
+        tools:backgroundTint="@color/search_unselected"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:cornerRadius="24dp"

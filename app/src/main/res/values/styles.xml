@@ -15,7 +15,7 @@
     </style>
 
     <style name="Lilac200Button">
-        <item name="colorPrimary">@color/lilac_200</item>
+        <item name="colorPrimary">@color/lilac200_light_lilac700_dark</item>
     </style>
 
     <style name="MyTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">

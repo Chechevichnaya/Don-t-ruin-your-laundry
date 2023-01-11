@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FFFFFFFF</color>
-    <color name="white">#FF000000</color>
-    <color name="lilac_200">#6f79a8</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="black_light_white_dark">#FFFFFFFF</color>
+    <color name="white_light_black_dark">#FF000000</color>
+    <color name="lilac200_light_lilac700_dark">#6f79a8</color>
     <color name="lilac_500">#FF000000</color>
     <color name="lilac_700">#6f79a8</color>
     <color name="lilac_dark">#49599a</color>
@@ -12,6 +14,9 @@
     <color name="background">#454242</color>
     <color name="buttons_positive_negative">#FFFFFFFF</color>
     <color name="icon_of_category_in_card">@color/lilac_700</color>
+    <color name="lilac_200">#d1d9ff</color>
+    <color name="search_selected">@color/lilac_200</color>
+    <color name="search_unselected">@color/lilac_700</color>
 
 
 </resources>

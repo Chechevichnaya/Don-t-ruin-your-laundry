@@ -3,6 +3,8 @@ package com.blabla.dontruinyourlaundry.presentation.adapters
 import android.app.Activity
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -109,11 +111,17 @@ class MULTURecyclerViewAdapterAllSymbols(
             val bgColor: Int = if (symbol.selected) {
                 R.color.lilac_700
             } else {
-                R.color.lilac_200
+                R.color.lilac200_light_lilac700_dark
             }
             val context = binding.symbolInGuide.context
             binding.root.layoutParams.height = width / 5
             binding.root.layoutParams.width = width / 5
+            val drawable = ResourcesCompat.getDrawable(context.resources, symbol.pictureId, null)
+            val wrappedDrawable = DrawableCompat.wrap(drawable!!)
+            DrawableCompat.setTint(
+                wrappedDrawable,
+                ResourcesCompat.getColor(context.resources, R.color.black, null)
+            )
             binding.symbolInGuide.apply {
                 setBackgroundColor(context.resources.getColor(bgColor))
                 setImageResource(symbol.pictureId)

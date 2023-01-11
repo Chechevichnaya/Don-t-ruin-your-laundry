@@ -2,6 +2,7 @@ package com.blabla.dontruinyourlaundry.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -64,6 +65,13 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
         fun bind(title: SearchScreenItem.Title) {
             binding.titleInSearchByParameters.apply {
                 text = title.name.getTitleName(context)
+                setTextColor(
+                    ResourcesCompat.getColor(
+                        binding.titleInSearchByParameters.context.resources,
+                        R.color.icon_text,
+                        null
+                    )
+                )
                 isEnabled = false
             }
         }
@@ -74,13 +82,12 @@ class RecyclerViewAdapterSearchParameter(val clickListener: (SearchScreenItem.Se
         RecyclerView.ViewHolder(binding.root) {
         fun bind(parameter: SearchScreenItem.SearchParameter) {
             val bgColor: Int = if (parameter.selected) {
-                R.color.lilac_700
+                R.color.search_selected
             } else {
-                R.color.lilac_200
+                R.color.search_unselected
             }
-//            val context = binding.buttonInSearchByParameters.context
             binding.buttonInSearchByParameters.apply {
-                setBackgroundColor(context.resources.getColor(bgColor))
+                setBackgroundColor(ResourcesCompat.getColor(context.resources,bgColor, null))
                 text = parameter.name.getName(context)
                 setOnClickListener { clickListener(parameter) }
             }

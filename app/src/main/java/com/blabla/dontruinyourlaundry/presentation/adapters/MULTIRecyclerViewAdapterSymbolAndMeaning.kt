@@ -1,7 +1,5 @@
 package com.blabla.dontruinyourlaundry.presentation.adapters
 
-import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -9,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.databinding.RecyclerViewAddNewCardItemAddSymbolBinding
 import com.blabla.dontruinyourlaundry.databinding.RecyclerViewSymbolMeaningBinding
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
 import com.blabla.dontruinyourlaundry.domain.entity.TypeOfRecyclerView
@@ -30,7 +27,7 @@ class MULTIRecyclerViewAdapterSymbolAndMeaning(
             val context = binding.iconButton.context
             binding.apply {
                 iconButton.setImageResource(symbol.pictureId)
-                iconButton.setBackgroundColor(context.resources.getColor(R.color.lilac_200))
+                iconButton.setBackgroundColor(context.resources.getColor(R.color.lilac200_light_lilac700_dark))
                 symbolMeaningInCard.text = symbol.meaningOfSymbol
                 when (typeFrom) {
                     TypeOfRecyclerView.ADD_SYMBOL_FRAGMENT ->

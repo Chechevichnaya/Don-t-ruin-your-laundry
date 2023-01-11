@@ -3,6 +3,7 @@ package com.blabla.dontruinyourlaundry.presentation.fragments
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -34,7 +35,7 @@ class SearchByParametersFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setToolBar(view)
+        setToolBar()
 
         //set menu item
         val menuHost: MenuHost = binding.toolbarSearch
@@ -98,13 +99,13 @@ class SearchByParametersFragment : Fragment() {
 
     }
 
-    private fun setToolBar(view: View) {
-        binding.toolbarSearch.title =
+    private fun setToolBar() = binding.toolbarSearch.apply {
+        title =
             requireContext().getString(R.string.search_by_parametere_title)
-        binding.toolbarSearch.navigationIcon =
-            view.context.getDrawable(R.drawable.ic_arrow_back)
-
-        binding.toolbarSearch.setNavigationOnClickListener {
+        navigationIcon =
+            ResourcesCompat.getDrawable(requireContext().resources, R.drawable.ic_arrow_back, null)
+        navigationIcon?.setTint(requireContext().resources.getColor(R.color.icon_text))
+        setNavigationOnClickListener {
             findNavController().popBackStack()
         }
     }
