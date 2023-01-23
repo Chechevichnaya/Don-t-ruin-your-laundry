@@ -45,7 +45,6 @@
         android:name="com.blabla.dontruinyourlaundry.presentation.fragments.ClothingCardsFragment"
         android:label="fragment_clothing_cards"
         tools:layout="@layout/fragment_clothing_cards">
-
     </fragment>
     <fragment
         android:id="@+id/addNewCard"
@@ -113,7 +112,9 @@
         <action
             android:id="@+id/action_searchByParametersFragment_to_searchByParametersResultFragment"
             app:destination="@id/searchByParametersResultFragment" />
+
     </fragment>
+
     <fragment
         android:id="@+id/searchByParametersResultFragment"
         android:name="com.blabla.dontruinyourlaundry.presentation.fragments.SearchByParametersResultFragment"
@@ -128,6 +129,9 @@
         <action
             android:id="@+id/action_searchByParametersResultFragment_to_knowAboutConditionOfSearching"
             app:destination="@id/knowAboutConditionOfSearching" />
+        <action
+            android:id="@+id/action_searchByParametersResultFragment_to_searchByParametersFragment"
+            app:destination="@id/searchByParametersFragment" />
     </fragment>
     <dialog
         android:id="@+id/knowAboutConditionOfSearching"

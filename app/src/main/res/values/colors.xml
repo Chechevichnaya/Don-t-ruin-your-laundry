@@ -18,7 +18,6 @@
     <color name="color_fab">@color/lilac_500</color>
 
 
-    <color name="color_fab_icon">@color/black_light_white_dark</color>
     <color name="background">@color/white_light_black_dark</color>
     <color name="buttons_positive_negative">@color/lilac_700</color>
     <color name="icon_of_category_in_card">@color/black_light_white_dark</color>

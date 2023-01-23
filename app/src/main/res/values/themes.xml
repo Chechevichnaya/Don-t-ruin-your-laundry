@@ -14,8 +14,4 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
     </style>
 
-    <style name="FullScreenDialogFragment" parent="Theme.AppCompat.DialogWhenLarge">
-        <item name="android:statusBarColor">@color/lilac_500</item>
-        <item name="windowNoTitle">true</item>
-    </style>
 </resources>

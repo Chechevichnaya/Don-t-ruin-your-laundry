@@ -1,7 +1,7 @@
 package com.blabla.dontruinyourlaundry.domain.entity
 
 import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
+import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ListOfSymbolsForDataBase(

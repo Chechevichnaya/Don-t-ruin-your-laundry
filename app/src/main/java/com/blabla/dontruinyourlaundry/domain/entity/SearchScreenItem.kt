@@ -257,13 +257,27 @@ enum class SearchParameterEnum : Parcelable {
                 SymbolForWashingDBO.IRONNOTALLOWED,
                 SymbolForWashingDBO.IRONSTEAMNOTALLOWED
             )
+            BLEACH_ALLOWED -> mutableListOf(
+                SymbolForWashingDBO.BLEACH,
+                SymbolForWashingDBO.BLEACHNONCHLORINE
+            )
+            BLEACH_NOT_ALLOWED -> mutableListOf(SymbolForWashingDBO.BLEACHNOTALLOWED)
+            DRYCLEAN_ALLOWED -> mutableListOf(
+                SymbolForWashingDBO.DRYCLEAN,
+                SymbolForWashingDBO.DRYCLEANA,
+                SymbolForWashingDBO.DRYCLEANF,
+                SymbolForWashingDBO.DRYCLEANLOWHEAT,
+                SymbolForWashingDBO.DRYCLEANLOWMOISTURE,
+                SymbolForWashingDBO.DRYCLEANSHORT,
+                SymbolForWashingDBO.DRYCLEANP,
+                SymbolForWashingDBO.DRYCLEANNOSTEAM
+            )
+            DRYCLEAN_NOT_ALLOWED -> mutableListOf(SymbolForWashingDBO.DRYCLEANNOTALLOWED)
             else -> {
                 emptyList()
             }
         }
     }
-
-
 }
 
 

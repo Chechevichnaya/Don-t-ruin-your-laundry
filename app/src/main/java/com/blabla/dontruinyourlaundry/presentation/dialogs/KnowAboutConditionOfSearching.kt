@@ -4,11 +4,9 @@ import android.app.AlertDialog
 import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.presentation.adapters.RecyclerViewAdapterSearchParameter
 
 class KnowAboutConditionOfSearching: DialogFragment() {
 
@@ -22,7 +20,11 @@ class KnowAboutConditionOfSearching: DialogFragment() {
             .setPositiveButton(getString(R.string.ok_button)) {_, _ ->}
             .create()
         dialog.show()
-        val colorButton = resources.getColor(R.color.lilac_700)
+        val colorButton = ResourcesCompat.getColor(
+            requireContext().resources,
+            R.color.lilac_700,
+            null
+        )
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
         dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(colorButton)
         return dialog

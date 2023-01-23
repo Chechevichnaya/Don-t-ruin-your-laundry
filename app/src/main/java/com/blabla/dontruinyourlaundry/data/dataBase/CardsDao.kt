@@ -1,7 +1,6 @@
 package com.blabla.dontruinyourlaundry.data.dataBase
 
 import androidx.room.*
-import com.blabla.dontruinyourlaundry.domain.entity.SymbolForWashingDBO
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
 import kotlinx.coroutines.flow.Flow
 

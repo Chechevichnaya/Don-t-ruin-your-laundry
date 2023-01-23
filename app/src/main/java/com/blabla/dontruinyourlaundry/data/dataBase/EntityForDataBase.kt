@@ -1,29 +1,27 @@
 package com.blabla.dontruinyourlaundry.data.dataBase
 
 import android.os.Parcelable
-import androidx.annotation.NonNull
-import androidx.room.*
-import com.blabla.dontruinyourlaundry.domain.entity.ListOfSymbolsForDataBase
-import com.blabla.dontruinyourlaundry.domain.entity.SymbolForWashingDBO
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
+import com.blabla.dontruinyourlaundry.domain.entity.SymbolForWashingDBO
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
 @Entity
 data class Card(
     @PrimaryKey (autoGenerate = true) val cardId: Long = 0L,
-    @NonNull val name: String,
+    val name: String,
     val picture: String?,
-//    @ColumnInfo(name = "list_of_symbols") val listOfSymbols: ListOfSymbolsForDataBase,
-    @NonNull val category: CategoryEnum
+    val category: CategoryEnum
 
 ): Parcelable
 
 @Entity
 data class CardsAndSymbols(
     @PrimaryKey(autoGenerate = true) val pairId:Long = 0L,
-    @NonNull val cardAndSymbolId: Long,
-    @NonNull val symbol: SymbolForWashingDBO
+    val cardAndSymbolId: Long,
+    val symbol: SymbolForWashingDBO
 )
 
 

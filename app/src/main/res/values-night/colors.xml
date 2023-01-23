@@ -12,7 +12,6 @@
     <color name="lilac_dark">#49599a</color>
     <color name="icon_text">#FFFFFFFF</color>
     <color name="color_fab">#6f79a8</color>
-    <color name="color_fab_icon">#FFFFFFFF</color>
     <color name="background">#454242</color>
     <color name="buttons_positive_negative">#FFFFFFFF</color>
     <color name="icon_of_category_in_card">@color/lilac_700</color>

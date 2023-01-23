@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
@@ -48,8 +49,6 @@ class AddDataToCardFragment : Fragment() {
 
     private val args: AddDataToCardFragmentArgs by navArgs()
 
-    //private val TAG = this::class.java.simpleName
-
     private var latestTmpUri: Uri? = null
     private var imageUri: String? = null
 
@@ -60,7 +59,7 @@ class AddDataToCardFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAddNewCardBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -72,19 +71,15 @@ class AddDataToCardFragment : Fragment() {
 
         binding.addSymbols.setOnClickListener { clickOnAddMoreSymbols() }
 
-//        clickOnAddMoreSymbols(view)
-        setToolBar(view)
-        getListOfSymbolsFromChosingFragmentAndAddToViewModel()
+        setToolBar()
+        getListOfSymbolsFromChoosingFragmentAndAddToViewModel()
 
-        //creating a new folder, if it is not created yet,
-        // where the last chosen photo will be kept for DB
         val folderForImagesInDB = createNewFolderInFiles()
 
         clickOnPhoto()
 
         observeCardInfo()
 
-        //set menu item
         menuItemSave(folderForImagesInDB)
     }
 
@@ -160,35 +155,54 @@ class AddDataToCardFragment : Fragment() {
         if (viewModel.uri.value != null) {
             copyImageToFileForDB(file)
         }
-        viewModel.addInfoOfNewCardToDataBase(
-            getNameOfCloth(),
-            imageUri,
-            getListOfSymbolForDB()!! as List<SymbolForWashingDBO>,
-            doOnComplete
-        )
+        if (getListOfSymbolForDB().isEmpty().not()) {
+            viewModel.addInfoOfNewCardToDataBase(
+                getNameOfCloth(),
+                imageUri,
+                getListOfSymbolForDB() as List<SymbolForWashingDBO>,
+                doOnComplete
+            )
+        }
+
     }
 
     private fun saveCardChanges(file: File?, doOnComplete: () -> Unit) {
         if (viewModel.uri.value != null) {
             copyImageToFileForDB(file)
         }
-        viewModel.saveCardChanges(
-            name = getNameOfCloth(),
-            picture = imageUri,
-            symbols = getListOfSymbolForDB()!! as List<SymbolForWashingDBO>,
-            doOnComplete
-        )
+        if (getListOfSymbolForDB().isEmpty().not()) {
+            viewModel.saveCardChanges(
+                name = getNameOfCloth(),
+                picture = imageUri,
+                symbols = getListOfSymbolForDB() as List<SymbolForWashingDBO>,
+                doOnComplete
+            )
+        }
     }
 
 
-    private fun setToolBar(view: View) {
+    private fun setToolBar() {
         setTitleInToolBar()
-        binding.toolbarAddCard.navigationIcon =
-            view.context.getDrawable(R.drawable.ic_baseline_close_24)
-        binding.toolbarAddCard.navigationIcon?.setTint(requireContext().resources.getColor(R.color.icon_text))
+        binding.toolbarAddCard.apply {
+            navigationIcon =
+                ResourcesCompat.getDrawable(
+                    requireContext().resources,
+                    R.drawable.ic_baseline_close_24,
+                    null
+                )
+            navigationIcon?.setTint(
+                ResourcesCompat.getColor(
+                    requireContext().resources,
+                    R.color.icon_text,
+                    null
+                )
+            )
+
+        }
         binding.toolbarAddCard.setNavigationOnClickListener {
             findNavController().navigate(R.id.action_addNewCard_to_kindsOfThingsForLaundry)
         }
+
     }
 
     private fun observeListOfSymbols() {
@@ -207,7 +221,10 @@ class AddDataToCardFragment : Fragment() {
     }
 
     private fun showDialog() {
-        val array = arrayOf(requireContext().getString(R.string.from_gallery), requireContext().getString(R.string.from_camera))
+        val array = arrayOf(
+            requireContext().getString(R.string.from_gallery),
+            requireContext().getString(R.string.from_camera)
+        )
         var checkedItem = -1
         val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
         builder.setTitle(getString(R.string.ask_about_how_to_add_photo))
@@ -230,7 +247,8 @@ class AddDataToCardFragment : Fragment() {
         val dialog = builder.create()
         dialog.show()
 
-        val colorButton = resources.getColor(R.color.lilac_700)
+        val colorButton =
+            ResourcesCompat.getColor(requireContext().resources, R.color.lilac_700, null)
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
         dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(colorButton)
     }
@@ -262,7 +280,7 @@ class AddDataToCardFragment : Fragment() {
         viewModel.uri.observe(viewLifecycleOwner, uriObserver)
     }
 
-    private fun createNewFolderInFiles(): File? {
+    private fun createNewFolderInFiles(): File {
         val folderForImagesInDB = context?.getDir("images_for_DB", Context.MODE_PRIVATE)
         if (!folderForImagesInDB?.exists()!!) {
             folderForImagesInDB.mkdirs()
@@ -300,13 +318,19 @@ class AddDataToCardFragment : Fragment() {
                 .create()
             dialog.show()
             dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-                .setTextColor(requireContext().resources.getColor(R.color.lilac700_light_white_dark))
+                .setTextColor(
+                    ResourcesCompat.getColor(
+                        requireContext().resources,
+                        R.color.lilac700_light_white_dark,
+                        null
+                    )
+                )
             false
         } else true
 
     }
 
-    private fun getListOfSymbolForDB(): List<SymbolForWashingDBO?>? {
+    private fun getListOfSymbolForDB(): List<SymbolForWashingDBO?> {
         val listOfSymbols = viewModel.getListSymbolForWashing().let { list ->
             val listDBO = list.map { item -> item.toSymbolForWashingDBO(context) }
             listDBO
@@ -329,7 +353,7 @@ class AddDataToCardFragment : Fragment() {
 
     private fun createFileWithUniqueName(file: File?): File? {
         val fileForImages =
-            File.createTempFile("photoforDB", ".jpg", file)
+            File.createTempFile("photo_for_DB", ".jpg", file)
                 .apply {
                     createNewFile()
                 }
@@ -430,7 +454,7 @@ class AddDataToCardFragment : Fragment() {
     }
 
 
-    private fun getListOfSymbolsFromChosingFragmentAndAddToViewModel() {
+    private fun getListOfSymbolsFromChoosingFragmentAndAddToViewModel() {
         val navController = findNavController()
         navController.currentBackStackEntry?.savedStateHandle?.getLiveData<List<SymbolGuide.SymbolForWashing>>(
             "key"

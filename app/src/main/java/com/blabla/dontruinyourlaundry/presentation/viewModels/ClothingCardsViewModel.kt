@@ -1,9 +1,10 @@
 package com.blabla.dontruinyourlaundry.presentation.viewModels
 
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import com.blabla.dontruinyourlaundry.data.Repository
 import com.blabla.dontruinyourlaundry.data.dataBase.Card
-import com.blabla.dontruinyourlaundry.data.dataBase.CardsDao
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
 
 class ClothingCardsViewModel(private val repo: Repository) : ViewModel() {

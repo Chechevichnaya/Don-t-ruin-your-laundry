@@ -12,9 +12,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.databinding.FragmentKindsOfThingsForLaundryBinding
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
-import com.blabla.dontruinyourlaundry.presentation.viewModels.ClothingCardsViewModel
 import com.google.android.material.tabs.TabLayoutMediator
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class KindsOfThingsForLaundry : Fragment() {
@@ -24,7 +22,7 @@ class KindsOfThingsForLaundry : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentKindsOfThingsForLaundryBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -32,8 +30,7 @@ class KindsOfThingsForLaundry : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //menu
-        binding.myToolbar.title = "Don't ruin your laundry"
+        binding.myToolbar.title = getString(R.string.app_name)
         val menuHost: MenuHost = binding.myToolbar
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -57,7 +54,6 @@ class KindsOfThingsForLaundry : Fragment() {
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
-        //Round button
         binding.fab.setOnClickListener {
             goToAddNewCardFragment(view)
         }

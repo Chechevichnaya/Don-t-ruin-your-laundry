@@ -67,15 +67,12 @@ class Repository(
 
      suspend fun getCardById(id: Long): Card = cardsDao.getOneCard(id)
 
-    suspend fun getCardsSearchByParameters(listSymbols: List<SymbolForWashingDBO>, listCategory:List<CategoryEnum>){
-
-    }
 
      suspend fun getCardsSearchByPaCategory(listOfCategory: MutableList<CategoryEnum>): List<Card> {
         return cardsDao.searchByParameterCategory(listOfCategory)
     }
 
-     suspend fun getCardsSearchBySymbols(listOfAttachedSymbols: MutableList<SymbolForWashingDBO>): List<Card> {
+    suspend fun getCardsSearchBySymbols(listOfAttachedSymbols: MutableList<SymbolForWashingDBO>): List<Card> {
         val cardId =  cardsAndSymbolsDao.getCardIdBySymbols(listOfAttachedSymbols)
         return cardsDao.getCardsByCardsId(cardId)
     }

@@ -1,20 +1,20 @@
 package com.blabla.dontruinyourlaundry.presentation.fragments
 
 import android.app.AlertDialog
-import android.app.Dialog
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.presentation.adapters.CardsListAdapter
 import com.blabla.dontruinyourlaundry.databinding.FragmentSearchByParametersResultBinding
+import com.blabla.dontruinyourlaundry.presentation.adapters.CardsListAdapter
 import com.blabla.dontruinyourlaundry.presentation.adapters.RecyclerViewAdapterSearchParameter
 import com.blabla.dontruinyourlaundry.presentation.viewModels.SearchByParametersResultViewModel
 import com.google.android.flexbox.FlexDirection
@@ -32,14 +32,14 @@ class SearchByParametersResultFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSearchByParametersResultBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setToolBar(view)
+        setToolBar()
 
         viewModel.setListOfSelectedParameters(args.listOfParameters.toMutableList())
         setAdapterToCards()
@@ -85,8 +85,8 @@ class SearchByParametersResultFragment : Fragment() {
             .create()
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(requireContext().resources.getColor(R.color.buttons_positive_negative))
-        dialog.window?.setBackgroundDrawable(requireContext().getDrawable(R.drawable.color_for_alertdialog))
+            .setTextColor(ResourcesCompat.getColor(requireContext().resources,R.color.buttons_positive_negative, null ))
+        dialog.window?.setBackgroundDrawable(ResourcesCompat.getDrawable(requireContext().resources,R.drawable.color_for_alertdialog, null ))
     }
 
     private fun setAdapterToCards() {
@@ -105,10 +105,10 @@ class SearchByParametersResultFragment : Fragment() {
         }
     }
 
-    private fun setToolBar(view: View) {
+    private fun setToolBar() {
         binding.toolbarSearch.title = requireContext().getString(R.string.search_result)
         binding.toolbarSearch.navigationIcon =
-            view.context.getDrawable(R.drawable.ic_arrow_back)
+            ResourcesCompat.getDrawable(requireContext().resources,R.drawable.ic_arrow_back, null )
         binding.toolbarSearch.setNavigationOnClickListener {
             findNavController().popBackStack()
             findNavController().popBackStack()

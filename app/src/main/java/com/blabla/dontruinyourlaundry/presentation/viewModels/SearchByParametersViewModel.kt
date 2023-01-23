@@ -1,33 +1,38 @@
 package com.blabla.dontruinyourlaundry.presentation.viewModels
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import android.app.AlertDialog
+import android.content.Context
+import android.util.Log
+import androidx.core.content.res.ResourcesCompat
+import androidx.lifecycle.*
+import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.data.dataBase.Card
-import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
 import com.blabla.dontruinyourlaundry.domain.entity.SearchParameterEnum
 import com.blabla.dontruinyourlaundry.domain.entity.SearchScreenItem
 import com.blabla.dontruinyourlaundry.domain.useCases.SearchByParameterUseCase
 import kotlinx.coroutines.launch
 
-class SearchByParametersViewModel(private val useCase: SearchByParameterUseCase) :
+class SearchByParametersViewModel(
+    private val useCase: SearchByParameterUseCase,
+    private val context: Context
+) :
     ViewModel() {
+
 
     private val _searchItems = MutableLiveData(useCase.getSearchItems())
     val searchItems: LiveData<List<SearchScreenItem>> = _searchItems
 
-    private val _selectedItems = MutableLiveData<List<SearchScreenItem>>()
+    private var selectedItems = listOf<SearchScreenItem>()
 
-    private val _listOfSearchParametersEnum = MutableLiveData<List<SearchParameterEnum>>()
-    val listOfSearchParametersEnum: LiveData<List<SearchParameterEnum>> =
-        _listOfSearchParametersEnum
 
-    private val _listOfCardsResult = MutableLiveData<List<Card>>()
+    var listOfSearchParametersEnum = listOf<SearchParameterEnum>()
+
+
+//    private val _listOfCardsResult = MutableLiveData<List<Card>>()
+    private var listOfCardsResult = listOf<Card>()
 
     private fun getSelectedItemsNames() {
-        val selectedItems = _selectedItems.value.orEmpty()
-        _listOfSearchParametersEnum.value = useCase.getSelectedItemsNames(selectedItems)
+        listOfSearchParametersEnum = useCase.getSelectedItemsNames(selectedItems)
     }
 
     fun onItemClicked(clickedItem: SearchScreenItem.SearchParameter) {
@@ -38,25 +43,53 @@ class SearchByParametersViewModel(private val useCase: SearchByParameterUseCase)
         getSelectedItemsNames()
     }
 
-
-
     private fun getSelectedItems() {
-        _selectedItems.value =
+        selectedItems =
             useCase.getSelectedItems(_searchItems.value.orEmpty().toMutableList())
     }
 
     fun checkIfItemsSelected(): Boolean {
         getSelectedItems()
-        return _selectedItems.value?.isNotEmpty() ?: return false
+        return selectedItems.isNotEmpty()
+    }
+//
+//    private fun getListOfCards() {
+////        val listOfSelectedParameters = _listOfSearchParametersEnum.value.orEmpty()
+//        viewModelScope.launch {
+//            _listOfCardsResult.value = useCase.getCardsSearchByParameter(listOfSearchParametersEnum)
+//        }
+//    }
+
+    private fun renewSearchItems() {
+        _searchItems.value = useCase.getSearchItems()
     }
 
-    fun getListOfCards(): LiveData<List<Card>> {
-        val listOfSelectedParameters = _listOfSearchParametersEnum.value.orEmpty()
+    fun resultNotNull(context: Context, doOnComplete: () -> Unit) {
+        getSelectedItemsNames()
         viewModelScope.launch {
-            _listOfCardsResult.value = useCase.getCardsSearchByParameter(listOfSelectedParameters)
+            listOfCardsResult = useCase.getCardsSearchByParameter(listOfSearchParametersEnum)
+            if (listOfCardsResult.isEmpty()) {
+                val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+                val dialog: AlertDialog =
+                    builder.setMessage(context.getString(R.string.no_result))
+                        .setPositiveButton(context.getString(R.string.ok_button)) { _, _ -> renewSearchItems() }
+                        .create()
+                dialog.show()
+                dialog.getButton(AlertDialog.BUTTON_POSITIVE)
+                    .setTextColor(
+                        ResourcesCompat.getColor(
+                            context.resources,
+                            R.color.buttons_positive_negative,
+                            null
+                        )
+                    )
+
+            } else {
+                doOnComplete.invoke()
+            }
         }
-        return _listOfCardsResult
+//        val listOfCardsResult = _listOfCardsResult.value.orEmpty()
+//        Log.d("GAGAGA", "getListOfCards() - ${listOfCardsResult}")
+
     }
-
-
 }

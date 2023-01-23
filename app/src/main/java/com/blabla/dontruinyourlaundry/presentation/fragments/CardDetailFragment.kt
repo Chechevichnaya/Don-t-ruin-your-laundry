@@ -2,9 +2,8 @@ package com.blabla.dontruinyourlaundry.presentation.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.style.UnderlineSpan
 import android.view.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.core.net.toUri
 import androidx.core.view.MenuHost
@@ -55,16 +54,7 @@ class CardDetailFragment : Fragment() {
             bind(card)
         }
 
-
-        //set upper menu
-        binding.toolbarCardDetail.title = getString(R.string.title_fragment_card_detail)
-        binding.toolbarCardDetail.navigationIcon =
-            view.context.getDrawable(R.drawable.ic_arrow_back)
-        binding.toolbarCardDetail.navigationIcon?.setTint(requireContext().resources.getColor(R.color.icon_text))
-        binding.toolbarCardDetail.setNavigationOnClickListener {
-            findNavController().popBackStack()
-        }
-
+        setToolBar()
 
         // set menu item
         val menuHost: MenuHost = binding.toolbarCardDetail
@@ -85,14 +75,43 @@ class CardDetailFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
+    private fun setToolBar() {
+        binding.toolbarCardDetail.apply {
+            title = getString(R.string.title_fragment_card_detail)
+            navigationIcon =
+                ResourcesCompat.getDrawable(
+                    requireContext().resources,
+                    R.drawable.ic_arrow_back,
+                    null
+                )
+            navigationIcon?.setTint(
+                ResourcesCompat.getColor(
+                    requireContext().resources,
+                    R.color.icon_text,
+                    null
+                )
+            )
+            setNavigationOnClickListener {
+                findNavController().popBackStack()
+            }
+        }
+    }
+
 
     private fun bind(card: Card) {
         if (card.picture == null) {
             val imageRes = CategoryEnum.values().find { it == card.category }?.getResIcon()
             if (imageRes != null) {
-                binding.itemImage.setImageResource(imageRes)
-                binding.itemImage.setColorFilter(binding.itemImage.context.resources.getColor(
-                    R.color.icon_of_category_in_card))
+                binding.itemImage.apply {
+                    setImageResource(imageRes)
+                    setColorFilter(
+                        ResourcesCompat.getColor(
+                            requireContext().resources,
+                            R.color.icon_of_category_in_card,
+                            null
+                        )
+                    )
+                }
             }
         } else {
             Glide.with(binding.itemImage.context)
@@ -116,7 +135,6 @@ class CardDetailFragment : Fragment() {
             viewModel.addListOfSymbolsToViewModel(card)
             viewModel.listOfSymbols.observe(viewLifecycleOwner)
             { items -> adapter.submitList(items) }
-
             editItem.setOnClickListener { editCard() }
         }
     }
@@ -132,11 +150,15 @@ class CardDetailFragment : Fragment() {
             }
             .create()
         dialog.show()
-        val colorButton = resources.getColor(R.color.buttons_positive_negative)
+        val colorButton = ResourcesCompat.getColor(
+            requireContext().resources,
+            R.color.buttons_positive_negative,
+            null
+        )
+
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(colorButton)
     }
-
 
 
     private fun editCard() {

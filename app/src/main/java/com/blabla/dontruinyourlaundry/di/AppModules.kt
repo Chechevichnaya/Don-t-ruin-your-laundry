@@ -19,8 +19,8 @@ val viewModelModule = module {
     viewModel { ChooseSymbolsViewModel(get()) }
     viewModel { ClothingCardsViewModel(get()) }
     viewModel { SearchByNameViewModel(get()) }
-    viewModel { SearchByParametersViewModel(get()) }
-    viewModel { SearchByParametersResultViewModel(get(), get()) }
+    viewModel { SearchByParametersViewModel(get(), get()) }
+    viewModel { SearchByParametersResultViewModel(get()) }
     viewModel { SymbolGuideViewModel(get()) }
 }
 

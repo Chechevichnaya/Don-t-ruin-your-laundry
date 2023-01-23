@@ -1,6 +1,5 @@
 package com.blabla.dontruinyourlaundry.domain.useCases
 
-import android.util.Log
 import com.blabla.dontruinyourlaundry.data.Repository
 import com.blabla.dontruinyourlaundry.data.dataBase.Card
 import com.blabla.dontruinyourlaundry.domain.entity.*

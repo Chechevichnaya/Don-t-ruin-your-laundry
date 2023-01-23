@@ -2,9 +2,8 @@ package com.blabla.dontruinyourlaundry.presentation.dialogs
 
 import android.app.AlertDialog
 import android.app.Dialog
-import android.graphics.Typeface
 import android.os.Bundle
-import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import com.blabla.dontruinyourlaundry.R
@@ -15,7 +14,10 @@ const val BY_PARAMETERS = 1
 class SearchDialog : DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val array = arrayOf(requireContext().getString(R.string.by_name), requireContext().getString(R.string.by_parameters))
+        val array = arrayOf(
+            requireContext().getString(R.string.by_name),
+            requireContext().getString(R.string.by_parameters)
+        )
         var checkedItem = -1
         val builder = AlertDialog.Builder(requireContext(), R.style.AlertDialogTheme)
         builder.setTitle(requireContext().getString(R.string.search_the_items))
@@ -37,14 +39,22 @@ class SearchDialog : DialogFragment() {
         val dialog = builder.create()
         dialog.show()
 
-        val colorButton = resources.getColor(R.color.buttons_positive_negative)
+        val colorButton = ResourcesCompat.getColor(
+            requireContext().resources,
+            R.color.buttons_positive_negative,
+            null
+        )
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
         dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(colorButton)
 
-        dialog.window?.setBackgroundDrawable(requireContext().getDrawable(R.drawable.color_for_alertdialog))
-
+        dialog.window?.setBackgroundDrawable(
+            ResourcesCompat.getDrawable(
+                requireContext().resources,
+                R.drawable.color_for_alertdialog,
+                null
+            )
+        )
         return dialog
-
     }
 
 }

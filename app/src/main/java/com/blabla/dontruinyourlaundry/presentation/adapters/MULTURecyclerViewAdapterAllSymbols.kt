@@ -69,7 +69,6 @@ class MULTURecyclerViewAdapterAllSymbols(
                 LayoutInflater.from(parent.context), parent, false
             )
         )
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -123,7 +122,13 @@ class MULTURecyclerViewAdapterAllSymbols(
                 ResourcesCompat.getColor(context.resources, R.color.black, null)
             )
             binding.symbolInGuide.apply {
-                setBackgroundColor(context.resources.getColor(bgColor))
+                setBackgroundColor(
+                    ResourcesCompat.getColor(
+                        context.resources,
+                        bgColor,
+                        null
+                    )
+                )
                 setImageResource(symbol.pictureId)
                 setOnClickListener { clickListener(symbol) }
             }

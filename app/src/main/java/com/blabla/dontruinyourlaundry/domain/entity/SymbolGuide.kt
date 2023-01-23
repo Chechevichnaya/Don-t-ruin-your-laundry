@@ -3,9 +3,7 @@ package com.blabla.dontruinyourlaundry.domain.entity
 import android.content.Context
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.blabla.dontruinyourlaundry.R
-
 import kotlinx.parcelize.Parcelize
 
 sealed class SymbolGuide {
@@ -26,7 +24,6 @@ sealed class SymbolGuide {
             }
         }
     }
-    data class ButtonAddNewSymbol(@DrawableRes val icon: Int,  val text: String): SymbolGuide()
 }
 
 enum class HeadNameSymbolGuide {

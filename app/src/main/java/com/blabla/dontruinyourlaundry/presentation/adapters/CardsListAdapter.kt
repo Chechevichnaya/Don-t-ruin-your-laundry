@@ -2,7 +2,7 @@ package com.blabla.dontruinyourlaundry.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -14,7 +14,6 @@ import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.CenterInside
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
@@ -43,9 +42,16 @@ class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
             }
             binding.itemName.text = card.name
             if (card.picture == null) {
+                val context = binding.itemImage.context
                 binding.itemImage.setImageResource(imageCategory)
-                binding.itemImage.setColorFilter(binding.itemImage.context.resources.getColor(
-                    R.color.icon_of_category_in_card))
+                binding.itemImage.setColorFilter(
+                    ResourcesCompat.getColor(
+                        context.resources,
+                        R.color.icon_of_category_in_card,
+                        null
+                    )
+                )
+
 
             } else {
                 Glide.with(binding.itemImage.context)
@@ -65,7 +71,13 @@ class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
     ): ItemViewHolder {
         // if there is a problem with recycler view's width is not match parent - PROBLEM SOLVED HERE
         // - pass as second parameter for method INFLATE - "parent"
-        return ItemViewHolder(CardItemBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return ItemViewHolder(
+            CardItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
 

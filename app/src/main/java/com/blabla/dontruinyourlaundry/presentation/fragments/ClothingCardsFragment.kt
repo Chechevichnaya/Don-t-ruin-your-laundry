@@ -8,11 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.presentation.adapters.CardsListAdapter
 import com.blabla.dontruinyourlaundry.databinding.FragmentClothingCardsBinding
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
-//import com.blabla.dontruinyourlaundry.presentation.viewModels.ClothingCardsFactory
 import com.blabla.dontruinyourlaundry.presentation.viewModels.ClothingCardsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -29,7 +27,7 @@ class ClothingCardsFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentClothingCardsBinding.inflate(inflater, container, false)
         return binding.root
 

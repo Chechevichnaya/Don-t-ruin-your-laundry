@@ -10,14 +10,6 @@
         <item name="colorSecondary">@color/icon_text</item>
     </style>
 
-    <style name="Widget.App.ButtonStyle" parent="Widget.MaterialComponents.Button">
-        <item name="materialThemeOverlay">@style/Lilac200Button</item>
-    </style>
-
-    <style name="Lilac200Button">
-        <item name="colorPrimary">@color/lilac200_light_lilac700_dark</item>
-    </style>
-
     <style name="MyTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textColor">@color/icon_text</item>
     </style>

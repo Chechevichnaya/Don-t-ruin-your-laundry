@@ -11,7 +11,7 @@ import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.data.Repository
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
 
-class SymbolGuideViewModel(private val repo: Repository) :
+class SymbolGuideViewModel(repo: Repository) :
     ViewModel() {
 
     private val _symbolsInGuide = MutableLiveData(repo.getSymbolGuideList())
@@ -33,7 +33,13 @@ class SymbolGuideViewModel(private val repo: Repository) :
             .create()
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(context.resources.getColor(R.color.buttons_positive_negative))
+            .setTextColor(
+                ResourcesCompat.getColor(
+                    context.resources,
+                    R.color.buttons_positive_negative,
+                    null
+                )
+            )
     }
 
 }

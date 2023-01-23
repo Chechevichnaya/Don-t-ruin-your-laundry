@@ -1,6 +1,5 @@
 package com.blabla.dontruinyourlaundry.domain.useCases
 
-import android.util.Log
 import com.blabla.dontruinyourlaundry.data.Repository
 import com.blabla.dontruinyourlaundry.data.dataBase.Card
 import com.blabla.dontruinyourlaundry.domain.entity.*
@@ -37,11 +36,9 @@ class SearchByParameterUseCase(private val repo: Repository) {
         val titleOfClickedItem = getTitle(clickedItem)
         return when (titleOfClickedItem.getSelectionType()) {
             SelectionType.SINGLE -> {
-                Log.d("PARAM", "i am single")
                 singleType(listOfSearchItems, clickedItem)
             }
             SelectionType.MULTI -> {
-                Log.d("PARAM", "i am multi")
                 multiType(listOfSearchItems, clickedItem)
             }
         }
@@ -70,13 +67,12 @@ class SearchByParameterUseCase(private val repo: Repository) {
     ): List<SearchScreenItem> {
         return listAllItems.map { itemInList ->
             if (itemInList is SearchScreenItem.SearchParameter && itemInList == clickedItem) {
-                Log.d("PARAM", "i am inside multi condition")
                 itemInList.copy(selected = !itemInList.selected)
             } else itemInList
         }
     }
 
-    fun getSelectedItemsNames(selectedItems: List<SearchScreenItem>): List<SearchParameterEnum>? {
+    fun getSelectedItemsNames(selectedItems: List<SearchScreenItem>): List<SearchParameterEnum>{
         val listSelectedItemsNames = mutableListOf<SearchParameterEnum>()
         selectedItems.forEach { selectedItem ->
             if (selectedItem is SearchScreenItem.SearchParameter) {
@@ -106,7 +102,7 @@ class SearchByParameterUseCase(private val repo: Repository) {
         return repo.getCardsSearchByPaCategory(listOfCategory)
     }
 
-    private suspend fun getCardsSearchBySymbols(listOfAttachedSymbols: MutableList<SymbolForWashingDBO>): List<Card> {
+    private suspend  fun getCardsSearchBySymbols(listOfAttachedSymbols: MutableList<SymbolForWashingDBO>): List<Card> {
         return repo.getCardsSearchBySymbols(listOfAttachedSymbols)
     }
 

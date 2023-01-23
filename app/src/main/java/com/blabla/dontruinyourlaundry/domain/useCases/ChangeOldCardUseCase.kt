@@ -15,20 +15,12 @@ class ChangeOldCardUseCase(private val repo: Repository) {
         return repo.getCardByIdFlow(id)
     }
 
-//    suspend fun updateCardAndSymbol(pair: CardsAndSymbols) {
-//        repo.updateCardAndSymbol(pair)
-//
-//    }
-
     fun getSymbolsByCardId(cardId: Long): Flow<List<SymbolForWashingDBO>> {
         return repo.getSymbolsByCardId(cardId)
-
     }
 
       suspend fun deleteOldSymbols(cardId: Long) {
         val list = repo.getPairByCardId(cardId)
         repo.deleteListOfCardsAndSymbols(list)
-
-
     }
 }

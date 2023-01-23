@@ -7,11 +7,6 @@ import kotlinx.coroutines.flow.Flow
 
 class ShowCardDetailUseCase(private val repo:Repository) {
 
-    suspend fun deleteCard(card: Card) {
-            repo.deleteCard(card)
-
-    }
-
      fun getCardByIdFlow(id: Long): Flow<Card> {
         return repo.getCardByIdFlow(id)
     }
@@ -23,7 +18,6 @@ class ShowCardDetailUseCase(private val repo:Repository) {
 
     fun getSymbolsByCardId(cardId: Long): Flow<List<SymbolForWashingDBO>> {
         return repo.getSymbolsByCardId(cardId)
-
     }
 
     suspend fun deleteCardAndSymbol(cardId: Long) {
@@ -40,6 +34,4 @@ class ShowCardDetailUseCase(private val repo:Repository) {
         val card = getCardById(cardId)
         repo.deleteCard(card)
     }
-
-
 }

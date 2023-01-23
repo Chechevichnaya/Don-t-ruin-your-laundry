@@ -43,14 +43,6 @@ enum class CategoryEnum {
         REST -> context.getString(R.string.the_rest)
     }
 
-//    fun getNameWithoutContext(): String = when (this) {
-//        CLOTH -> "Одежда"
-//        BAD_SHEETS -> "Постельное белье"
-//        BATH -> "Вещи из ванной"
-//        KITCHEN -> "Вещи из кухни"
-//        REST -> "Остальное"
-//    }
-
     fun toCategory(context: Context): Category {
         return Category(getResIcon(), getName(context))
     }

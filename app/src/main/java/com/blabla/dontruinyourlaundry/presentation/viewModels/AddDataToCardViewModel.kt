@@ -3,19 +3,21 @@ package com.blabla.dontruinyourlaundry.presentation.viewModels
 import android.app.AlertDialog
 import android.content.Context
 import android.net.Uri
-import android.util.Log
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.net.toUri
-import androidx.lifecycle.*
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.data.dataBase.Card
 import com.blabla.dontruinyourlaundry.data.dataBase.CardsAndSymbols
-import com.blabla.dontruinyourlaundry.domain.entity.SymbolForWashingDBO
 import com.blabla.dontruinyourlaundry.domain.entity.Category
+import com.blabla.dontruinyourlaundry.domain.entity.SymbolForWashingDBO
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
-import com.blabla.dontruinyourlaundry.domain.useCases.CreateNewCardUseCase
 import com.blabla.dontruinyourlaundry.domain.useCases.ChangeOldCardUseCase
+import com.blabla.dontruinyourlaundry.domain.useCases.CreateNewCardUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
@@ -94,12 +96,14 @@ class AddDataToCardViewModel(
         val dialog: AlertDialog = builder.setTitle(context.getString(R.string.delete_symbol))
             .setPositiveButton(context.getString(R.string.ok_button)) { _, _ -> deleteSymbol(symbol) }
             .setIcon(symbol.pictureId)
-
             .create()
-
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(context.resources.getColor(R.color.lilac_700))
+            .setTextColor(ResourcesCompat.getColor(
+                context.resources,
+                R.color.lilac_700,
+                null
+            ))
     }
 
 

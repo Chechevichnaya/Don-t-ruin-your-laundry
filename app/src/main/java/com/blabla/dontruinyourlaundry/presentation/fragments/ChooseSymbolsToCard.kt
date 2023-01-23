@@ -3,13 +3,13 @@ package com.blabla.dontruinyourlaundry.presentation.fragments
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.MenuHost
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.window.layout.WindowMetricsCalculator
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.presentation.adapters.MULTURecyclerViewAdapterAllSymbols
 import com.blabla.dontruinyourlaundry.databinding.FragmentAddSymbolToCardBinding
@@ -22,7 +22,6 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
 class ChooseSymbolsToCard : Fragment() {
-    private val TAG = this::class.java.simpleName
     private lateinit var binding: FragmentAddSymbolToCardBinding
 
     private val viewModel: ChooseSymbolsViewModel by viewModel()
@@ -32,7 +31,7 @@ class ChooseSymbolsToCard : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentAddSymbolToCardBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -81,7 +80,8 @@ class ChooseSymbolsToCard : Fragment() {
 
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(requireContext().resources.getColor(R.color.lilac_700))
+            .setTextColor(ResourcesCompat.getColor(requireContext().resources,R.color.lilac_700, null ))
+
     }
 
 
@@ -106,7 +106,7 @@ class ChooseSymbolsToCard : Fragment() {
         binding.toolbarAddSymbolsToCard.title = requireContext().getString(R.string.symbol_choosing)
 
         binding.toolbarAddSymbolsToCard.setNavigationIcon(R.drawable.ic_baseline_close_24)
-        binding.toolbarAddSymbolsToCard.navigationIcon?.setTint(requireContext().resources.getColor(R.color.icon_text))
+        binding.toolbarAddSymbolsToCard.navigationIcon?.setTint(ResourcesCompat.getColor(requireContext().resources,R.color.icon_text, null ))
         //go back without changing
         binding.toolbarAddSymbolsToCard.setNavigationOnClickListener {
             findNavController().popBackStack()

@@ -6,9 +6,7 @@ import com.blabla.dontruinyourlaundry.R
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ListOfSymbols(val list: List<SymbolGuide.SymbolForWashing>) : Parcelable {
-
-}
+data class ListOfSymbols(val list: List<SymbolGuide.SymbolForWashing>) : Parcelable
 
 @Parcelize
 enum class SymbolForWashingDBO : Parcelable {

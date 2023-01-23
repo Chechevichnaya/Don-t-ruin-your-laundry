@@ -1,17 +1,15 @@
 package com.blabla.dontruinyourlaundry.presentation.fragments
 
 import android.os.Bundle
-import android.util.DisplayMetrics
 import android.view.*
-import androidx.core.view.MenuHost
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.window.layout.WindowMetricsCalculator
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.presentation.adapters.MULTURecyclerViewAdapterAllSymbols
 import com.blabla.dontruinyourlaundry.databinding.FragmentSimbolGuideBinding
+import com.blabla.dontruinyourlaundry.presentation.adapters.MULTURecyclerViewAdapterAllSymbols
 import com.blabla.dontruinyourlaundry.presentation.viewModels.SymbolGuideViewModel
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -26,14 +24,14 @@ class SymbolGuideFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSimbolGuideBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpperMenu(view)
+        setUpperMenu()
         attachAdapterToRecyclerView()
     }
 
@@ -58,11 +56,17 @@ class SymbolGuideFragment : Fragment() {
         }
     }
 
-    private fun setUpperMenu(view: View) = binding.toolbarSymbolGuide.apply {
+    private fun setUpperMenu() = binding.toolbarSymbolGuide.apply {
         title = requireContext().getString(R.string.symbol_guide)
         navigationIcon =
-            view.context.getDrawable(R.drawable.ic_arrow_back)
-        navigationIcon?.setTint(requireContext().resources.getColor(R.color.icon_text))
+            ResourcesCompat.getDrawable(requireContext().resources, R.drawable.ic_arrow_back, null)
+        navigationIcon?.setTint(
+            ResourcesCompat.getColor(
+                requireContext().resources,
+                R.color.icon_text,
+                null
+            )
+        )
         setNavigationOnClickListener {
             findNavController().popBackStack()
         }
