@@ -1,0 +1,138 @@
+<resources>
+    <string name="app_name">Don\'t ruin your laundry</string>
+    <string name="symbol_guide">Гид по символам</string>
+
+    <string name="ok_button">Ок</string>
+
+    <string name="clothing">Одежда</string>
+    <string name="bed_sheets">Постельное белье</string>
+    <string name="kitchen_stuf">Вещи из кухни</string>
+    <string name="bath_stuf">Вещи из ванной</string>
+    <string name="the_rest">Остальное</string>
+    <string name="name_of_cloth">Название вещи</string>
+
+    <string name="delete">Удалить</string>
+    <string name="title_fragment_card_detail">Подробности</string>
+
+
+    <string name="save">Сохранить</string>
+    <string name="add">Добавить</string>
+    <string name="ask_about_how_to_add_photo">Откуда берем фото?</string>
+    <string name="from_gallery">Из галерии</string>
+    <string name="from_camera">С помощью камеры</string>
+
+    <string name="delete_question">Вы уверены, что хотите полностью удалить карточку?</string>
+    <string name="delete_symbol">Удалить символ?</string>
+    <string name="yes">Да</string>
+    <string name="no">Нет</string>
+    <string name="search_by_name">Поиск по названию</string>
+    <string name="LookFor">Искать</string>
+
+    <string name="edit_fragment">Редактировать </string>
+    <string name="add_card_fragment">Добавить </string>
+    <string name="add_more_symbols">Добавить символы</string>
+
+    <string name="wash">Стирайте вещь в стандартном режиме без ограничений по температуре воды</string>
+    <string name="wash_not_allowed">Стирать вещь вручную или в машинке, к сожалению, нельзя. Дополнительные инструкции по уходу смотрите на символах сухой чистки</string>
+    <string name="wash_hand">Стирайте вещь вручную с моющим средством в теплой воде в небольшой ванне или раковине. Не стирайте в машинке</string>
+    <string name="wash_hand30">Стирайте вещь вручную с моющим средством в прохладной воде (не выше 30 °C) в небольшой ванне или раковине. Не стирайте в машинке</string>
+    <string name="wash_hand40">Стирайте вещь вручную с моющим средством в теплой воде (не выше 40 °C) в небольшой ванне или раковине. Не стирайте в машинке</string>
+    <string name="wash30">Стирайте вещь вручную или в машинке в прохладной воде (не выше 30 °C)</string>
+    <string name="wash40">Стирайте вещь вручную или в машинке в теплой воде (не выше 40 °C)</string>
+    <string name="wash50">Стирайте вещь вручную или в машинке в горячей воде (не выше 50 °C)</string>
+    <string name="wash60">Стирайте вещь вручную или в машинке в горячей воде (не выше 60 °C)</string>
+    <string name="wash70">Стирайте вещь вручную или в машинке в горячей воде (не выше 70 °C)</string>
+    <string name="wash90">Стирайте вещь вручную или в машинке в горячей воде (не выше 95 °C)</string>
+    <string name="wash30_care">Стирайте вещь вручную или в машинке в режиме деликатной стирки в холодной воде (не выше 30°C), для защиты одежды, склонной к образованию складок, выцветанию, усадке и растяжению. Можно полоскать, отжимать на малых оборотах</string>
+    <string name="wash30_extracare">Стирайте вещь вручную или в машинке в режиме особо деликатной стирки, в котором используется холодная вода (не выше 30°C), чтобы бережно относиться к таким тканям, как шелк, шерсть и синтетические материалы. Старайтесь минимизировать механическое воздействие, используйте много воды</string>
+    <string name="wash40_care">Стирайте вещь вручную или в машинке в режиме деликатной стирки в теплой воде (не выше 40°C), для защиты одежды, склонной к образованию складок, выцветанию, усадке и растяжению. Можно полоскать, отжимать на малых оборотах</string>
+    <string name="wash40_extracare">Стирайте вещь вручную или в машинке в режиме особо деликатной стирки, в котором используется теплая вода (не выше 40°C), чтобы бережно относиться к таким тканям, как шелк, шерсть и синтетические материалы. Старайтесь минимизировать механическое воздействие, используйте много воды</string>
+    <string name="wash50_care">Стирайте вещь вручную или в машинке в режиме деликатной стирки в горячей воде (не выше 50°C), для защиты одежды, склонной к образованию складок, выцветанию, усадке и растяжению</string>
+    <string name="wash60_care">Стирайте вещь вручную или в машинке в режиме деликатной стирки в горячей воде (не выше 60°C), для защиты одежды, склонной к образованию складок, выцветанию, усадке и растяжению</string>
+    <string name="wash90_care">Стирайте вещь вручную или в машинке в режиме деликатной стирки в горячей воде (не выше 95°C), для защиты одежды, склонной к образованию складок, выцветанию, усадке и растяжению</string>
+
+    <string name="bleach">Отбеливайте любыми окисляющими средствами</string>
+    <string name="bleach_non_chlor">Отбеливайте только кислородсодержащими отбеливателями, в составе которых нет хлора</string>
+    <string name="bleach_not_allowed">Отбеливать вещи, к сожалению, нельзя</string>
+
+    <string name="dry">Вещь можно отжимать и сушить в стиральной машине или в сушилке</string>
+    <string name="dry40">Сушите при низкой температуре не выше 40°C</string>
+    <string name="dry60">Сушите при средней температуре не выше 60°C</string>
+    <string name="dry80">Сушите при высокой температуре не выше 80°C</string>
+    <string name="dry_no_heat">Сушите вещь в сушилке без нагрева воздуха</string>
+    <string name="dry40_care">Сушите, используя деликатный режим, при температуре не выше 40°C</string>
+    <string name="dry40_extracare">Сушите, используя особо деликатный режим, при температуре не выше 40°C</string>
+    <string name="dry60_care">Сушите, используя деликатный режим при температуре не выше 60°C</string>
+    <string name="dry_line">Повесьте вещь на веревке, чтобы она высохла на воздухе</string>
+    <string name="dry_shade">Сушите в тени, вдали от прямых солнечных лучей</string>
+    <string name="dry_line_shade">Повесьте вещь на веревке, чтобы она высохла на воздухе, но вдали от прямых солнечных лучей</string>
+    <string name="dry_drip">Повесьте вещь на веревке, не разглаживая и не придавая ей форму</string>
+    <string name="dry_drip_shade">Повесьте вещь на веревке, не разглаживая и не придавая ей форму, вдали от прямых солнечных лучей</string>
+    <string name="dry_flat">Положите вещь на плоскую горизонтальную поверхность, чтобы она высохла на воздухе. Это помогает защитить такие ткань от растяжения и деформирования</string>
+    <string name="dry_flat_shade">Положите вещь на плоскую горизонтальную поверхность, чтобы она высохла на воздухе, но вдали от прямых солнечных лучей. Это помогает защитить такие ткань от растяжения и деформирования</string>
+    <string name="dry_not_alloder">Сушить вещь в сушилке, к сожалению, нельзя</string>
+
+    <string name="iron">Гладьте при любой температуре, с паром или без</string>
+    <string name="iron110">Гладьте при температуре не выше 110°C</string>
+    <string name="iron150">Гладьте при температуре не выше 150°C</string>
+    <string name="iron200">Гладьте при температуре не выше 200°C</string>
+    <string name="iron_steam_not_allowed">Не используйте пар при глажке</string>
+    <string name="iron_not_allowed">Гладить вещи утюгом, к сожалению, нельзя</string>
+
+    <string name="dry_clean">Отдайте вещь в профессиональную химчистку. Не стирайте и не сушите вещь в машине</string>
+    <string name="dry_cleana">Этoт символ предназначен для специалистов химчистки. Сухая чистка с любым органическим растворителем</string>
+    <string name="dry_cleanp">Этoт символ предназначен для специалистов химчистки. Обычная сухая чистка с использованием тетрахлорэтилена и всех растворителей, перечисленных для символа «F»</string>
+    <string name="dry_cleanf">Этoт символ предназначен для специалистов химчистки. Обычная сухая чистка с использованием только углеводорода, бензина и трифтортрихорметана</string>
+    <string name="dry_clean_short">Этoт символ предназначен для специалистов химчистки. Одежда может быть очищена в сокращенном цикле. Символ может использоваться в сочетании с буквой</string>
+    <string name="dry_clean_lowheat">Этoт символ предназначен для специалистов химчистки. Одежда может быть очищена в умеренном температурном режиме. Символ может использоваться в сочетании с буквой</string>
+    <string name="dry_clean_low_water">Этoт символ предназначен для специалистов химчистки. При чистке допустима пониженная влажность. Символ может использоваться в сочетании с буквой</string>
+    <string name="dry_clean_no_steam">Этoт символ предназначен для специалистов химчистки. Запрещено использовать пар на завершающей стадии чистки. Символ может использоваться в сочетании с буквой</string>
+    <string name="dry_clean_not_allowed">Сухая химическая чистка, а также удаление пятен растворителем, к сожалению, запрещены</string>
+
+
+    <string name="allowed">Разрешена</string>
+
+    <string name="not_allowed">Запрещена</string>
+
+    <string name="only_hand">Только ручная</string>
+    <string name="thirty">30</string>
+    <string name="fourty">40</string>
+    <string name="fifty">50</string>
+    <string name="sixty">60</string>
+    <string name="seventy">70</string>
+    <string name="nintyfive">95</string>
+    <string name="washing_machine_allowed">Разрешена в стиральной машине</string>
+    <string name="title_washing">Стирка</string>
+    <string name="title_drying">Сушка в сушильной машине</string>
+    <string name="title_wash_mode">Режим стирки</string>
+    <string name="title_category">Категории</string>
+    <string name="title_ironing">Глажка</string>
+    <string name="title_bleaching">Отбеливание</string>
+    <string name="title_drycleaning">Сухая чистка</string>
+    <string name="symbol">Символ</string>
+
+    <string name="condition_of_searching">Условия поиска</string>
+
+    <string name="search_the_items">Поиск вещицы</string>
+    <string name="by_name">По названию</string>
+    <string name="by_parameters">По параметрам</string>
+    <string name="cancel">Отмена</string>
+
+    <string name="search_by_parametere_title">Поиск по параметрам</string>
+    <string name="fill_name_and_symbols">Заполни поле \"Название вещи\" и добавь нужные символы для ухода за вещами</string>
+    <string name="fill_name">Заполни поле "Название вещи"</string>
+    <string name="fill_symbols">Добавь нужные символы для ухода за вещами</string>
+    <string name="need_acces_to_camera">Приложению требуется доступ к камере, чтобы сделать фото</string>
+    <string name="search_result">Результат поиска</string>
+    <string name="no_result">Ничего не найдено!</string>
+    <string name="no_search_terms">Параметры для поиска не выбраны!</string>
+
+    <string name="nothing_selected">Ничего не выбрано!</string>
+    <string name="symbol_choosing">Выбор символов</string>
+
+
+
+
+
+
+</resources>
