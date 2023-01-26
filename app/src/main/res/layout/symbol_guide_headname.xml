@@ -8,18 +8,29 @@
 
     <TextView
         android:id="@+id/head_cloth"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        tools:text="@string/washing"
+        tools:text="Cухая чистка"
         android:textSize="20sp"
         android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </TextView>
+
+    <ImageView
+        android:id="@+id/question_mark"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="8dp"
+        app:layout_constraintStart_toEndOf="@id/head_cloth"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/head_cloth"
+        android:src="@drawable/question">
+
+    </ImageView>
 
     <View
         android:id="@+id/divider"

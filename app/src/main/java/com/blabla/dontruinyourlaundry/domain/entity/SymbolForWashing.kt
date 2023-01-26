@@ -44,6 +44,7 @@ enum class SymbolForWashingDBO : Parcelable {
     BLEACH,
     BLEACHNONCHLORINE,
     BLEACHNOTALLOWED,
+    BLEACH_NOT_ALLOWED_OLD,
     DRY,
     DRY40,
     DRY60,
@@ -53,6 +54,7 @@ enum class SymbolForWashingDBO : Parcelable {
     DRY40EXTRACARE,
     DRY60CARE,
     DRYLINE,
+    DRY_VERTICAL_LINE,
     DRYSHADE,
     DRYLINESHADE,
     DRYDRIP,
@@ -69,12 +71,19 @@ enum class SymbolForWashingDBO : Parcelable {
     DRYCLEAN,
     DRYCLEANA,
     DRYCLEANP,
+    DRY_CLEAN_P2,
     DRYCLEANF,
+    DRY_CLEAN_F2,
+    DRY_CLEAN_W,
+    DRY_CLEAN_W2,
+    DRY_CLEAN_W2LINE,
     DRYCLEANSHORT,
     DRYCLEANLOWHEAT,
     DRYCLEANLOWMOISTURE,
     DRYCLEANNOSTEAM,
-    DRYCLEANNOTALLOWED;
+    DRYCLEANNOTALLOWED,
+    DRY_WET_CLEAM_NOT_ALLOWED,
+    WRINGING;
 
     fun getDescription(context: Context): String {
         return when (this) {
@@ -112,6 +121,7 @@ enum class SymbolForWashingDBO : Parcelable {
             BLEACH -> context.getString(R.string.bleach)
             BLEACHNONCHLORINE -> context.getString(R.string.bleach_non_chlor)
             BLEACHNOTALLOWED -> context.getString(R.string.bleach_not_allowed)
+            BLEACH_NOT_ALLOWED_OLD -> context.getString(R.string.bleach_not_allowed)
             DRY -> context.getString(R.string.dry)
             DRY40 -> context.getString(R.string.dry40)
             DRY60 -> context.getString(R.string.dry60)
@@ -127,6 +137,7 @@ enum class SymbolForWashingDBO : Parcelable {
             DRYDRIPSHADE -> context.getString(R.string.dry_drip_shade)
             DRYFLAT -> context.getString(R.string.dry_flat)
             DRYFLASTHADE -> context.getString(R.string.dry_flat_shade)
+            DRY_VERTICAL_LINE -> context.getString(R.string.dry_vertical_line)
             DRYNOTALLOWED -> context.getString(R.string.dry_not_alloder)
             IRON -> context.getString(R.string.iron)
             IRON110 -> context.getString(R.string.iron110)
@@ -137,12 +148,19 @@ enum class SymbolForWashingDBO : Parcelable {
             DRYCLEAN -> context.getString(R.string.dry_clean)
             DRYCLEANA -> context.getString(R.string.dry_cleana)
             DRYCLEANP -> context.getString(R.string.dry_cleanp)
+            DRY_CLEAN_P2 -> context.getString(R.string.dry_cleanp2)
             DRYCLEANF -> context.getString(R.string.dry_cleanf)
+            DRY_CLEAN_F2 -> context.getString(R.string.dry_cleanf2)
+            DRY_CLEAN_W -> context.getString(R.string.dry_cleanw)
+            DRY_CLEAN_W2 -> context.getString(R.string.dry_cleanw2)
+            DRY_CLEAN_W2LINE -> context.getString(R.string.dry_cleanw3)
+            DRY_WET_CLEAM_NOT_ALLOWED -> context.getString(R.string.dry_cleanwet_not_allowed)
             DRYCLEANSHORT -> context.getString(R.string.dry_clean_short)
             DRYCLEANLOWHEAT -> context.getString(R.string.dry_clean_lowheat)
             DRYCLEANLOWMOISTURE -> context.getString(R.string.dry_clean_low_water)
             DRYCLEANNOSTEAM -> context.getString(R.string.dry_clean_no_steam)
             DRYCLEANNOTALLOWED -> context.getString(R.string.dry_clean_not_allowed)
+            WRINGING -> context.getString(R.string.wringing_text)
         }
     }
 
@@ -180,7 +198,8 @@ enum class SymbolForWashingDBO : Parcelable {
         WASH90DOTCARE -> R.drawable.wh_washing_95deg_permanent_press_alt
         BLEACH -> R.drawable.wh_bleaching
         BLEACHNONCHLORINE -> R.drawable.wh_bleaching_non_chlorine
-        BLEACHNOTALLOWED -> R.drawable.wh_bleaching_not_allowed
+        BLEACHNOTALLOWED -> R.drawable.wh_bleaching_not_allowed_white
+        BLEACH_NOT_ALLOWED_OLD -> R.drawable.wh_bleaching_not_allowed
         DRY -> R.drawable.wh_drying_tumble
         DRY40 -> R.drawable.wh_drying_tumble_low_heat
         DRY60 -> R.drawable.wh_drying_tumble_medium_heat
@@ -196,6 +215,7 @@ enum class SymbolForWashingDBO : Parcelable {
         DRYDRIPSHADE -> R.drawable.wh_drying_drip_dry_shade
         DRYFLAT -> R.drawable.wh_drying_flat_dry
         DRYFLASTHADE -> R.drawable.wh_drying_flat_dry_shade
+        DRY_VERTICAL_LINE -> R.drawable.wh_drying_flat_dry2
         DRYNOTALLOWED -> R.drawable.wh_drying_tumble_not_allowed
         IRON -> R.drawable.wh_ironing
         IRON110 -> R.drawable.wh_ironing_low
@@ -206,12 +226,19 @@ enum class SymbolForWashingDBO : Parcelable {
         DRYCLEAN -> R.drawable.wh_drycleaning
         DRYCLEANA -> R.drawable.wh_drycleaning_a
         DRYCLEANP -> R.drawable.wh_drycleaning_p
+        DRY_CLEAN_P2 -> R.drawable.wh_drycleaning_p_2
         DRYCLEANF -> R.drawable.wh_drycleaning_f
+        DRY_CLEAN_F2 -> R.drawable.wh_drycleaning_f_2
+        DRY_CLEAN_W -> R.drawable.wh_drycleaning_w
+        DRY_CLEAN_W2 -> R.drawable.wh_drycleaning_w_2
+        DRY_CLEAN_W2LINE -> R.drawable.wh_drycleaning_w_3
         DRYCLEANSHORT -> R.drawable.wh_drycleaning_short_cycle
         DRYCLEANLOWHEAT -> R.drawable.wh_drycleaning_low_heat
         DRYCLEANLOWMOISTURE -> R.drawable.wh_drycleaning_reduced_moisture
         DRYCLEANNOSTEAM -> R.drawable.wh_drycleaning_no_steam
         DRYCLEANNOTALLOWED -> R.drawable.wh_drycleaning_not_allowed
+        DRY_WET_CLEAM_NOT_ALLOWED -> R.drawable.wh_drycleaning_wetclean_not_allowed
+        WRINGING -> R.drawable.wh_wringing_not_allowed
 
     }
 
@@ -222,15 +249,17 @@ enum class SymbolForWashingDBO : Parcelable {
             WASH60CARE, WASH90CARE, WASH30DOT, WASH40DOT, WASH50DOT, WASH60DOT, WASH70DOT,
             WASH90DOT, WASH30DOTCARE, WASH30DOTEXTRACARE, WASH40DOTCARE, WASH40DOTEXTRACARE,
             WASH50DOTCARE, WASH60DOTCARE, WASH90DOTCARE -> HeadNameSymbolGuide.WASHING
-            BLEACH, BLEACHNONCHLORINE, BLEACHNOTALLOWED -> HeadNameSymbolGuide.BLEACHING
-            DRY, DRY40, DRY60, DRY80, DRYNOHEAT, DRY40CARE, DRY40EXTRACARE, DRY60CARE, DRYLINE,
-            DRYSHADE, DRYLINESHADE, DRYDRIP, DRYDRIPSHADE, DRYFLAT, DRYFLASTHADE,
+            BLEACH, BLEACHNONCHLORINE, BLEACHNOTALLOWED, BLEACH_NOT_ALLOWED_OLD -> HeadNameSymbolGuide.BLEACHING
+            DRY, DRY40, DRY60, DRY80, DRYNOHEAT, DRY40CARE, DRY40EXTRACARE, DRY60CARE,
             DRYNOTALLOWED -> HeadNameSymbolGuide.DRYING
+            DRYLINE, DRYSHADE, DRYLINESHADE, DRYDRIP, DRYDRIPSHADE, DRYFLAT, DRYFLASTHADE, DRY_VERTICAL_LINE -> HeadNameSymbolGuide.TUMBLE_DRYING
             IRON, IRON110, IRON150, IRON200, IRONNOTALLOWED,
             IRONSTEAMNOTALLOWED -> HeadNameSymbolGuide.IRONING
-            DRYCLEAN, DRYCLEANA, DRYCLEANP, DRYCLEANF,
+            DRYCLEAN, DRYCLEANA, DRYCLEANP, DRY_CLEAN_P2, DRYCLEANF, DRY_CLEAN_F2,
             DRYCLEANSHORT, DRYCLEANLOWHEAT, DRYCLEANLOWMOISTURE, DRYCLEANNOSTEAM,
             DRYCLEANNOTALLOWED -> HeadNameSymbolGuide.DRYCLEANING
+            DRY_CLEAN_W, DRY_CLEAN_W2, DRY_CLEAN_W2LINE, DRY_WET_CLEAM_NOT_ALLOWED -> HeadNameSymbolGuide.WETCLEANING
+            WRINGING -> HeadNameSymbolGuide.WRINGING
         }
     }
 

@@ -79,6 +79,7 @@
     <string name="dry_flat">Lay the item on a flat, horizontal surface to air-dry. This helps protect fabrics like wool or knitwear, from stretching out and getting misshapen when wet</string>
     <string name="dry_flat_shade">Lay the item on a flat, horizontal surface to air-dry, but keep out of direct sunlight</string>
     <string name="dry_not_alloder">Do not dry the item in the dryer. Look to the accompanying drying symbols on the tag for further care instructions</string>
+    <string name="dry_vertical_line">Hang the item on a line to air-dry</string>
 
     <string name="iron">The item can be ironed at any temperature</string>
     <string name="iron110">The item can be ironed at a low temperature (max 110°C or 230°F)</string>
@@ -91,8 +92,8 @@
 
     <string name="dry_clean">Have the item professionally dry-cleaned. Do not wash or dry the item in a machine</string>
     <string name="dry_cleana">Your dry cleaner can use any solvent to clean the material</string>
-    <string name="dry_cleanp">Your dry cleaner can use any solvent except anything specifically listed</string>
-    <string name="dry_cleanf">Your dry cleaner can use petroleum based solvents. This is usually needed for fine, delicate fabrics that can be damaged by solvents used in standard dry cleaning</string>
+    <string name="dry_cleanp">Your dry cleaner can use any solvent except  tetrachloroethylene</string>
+    <string name="dry_cleanf">Your dry cleaner can use only hydrocarbon solvents</string>
     <string name="dry_clean_short">The item should be professionally dry-cleaned on a short cycle</string>
     <string name="dry_clean_lowheat">The item should be professionally dry-cleaned on low heat</string>
     <string name="dry_clean_low_water">The item should be professionally dry-cleaned on a reduced-moisture cycle</string>
@@ -114,12 +115,13 @@
     <string name="washing_machine_allowed">Allowed in the washing machine</string>
 
     <string name="title_washing">Washing</string>
-    <string name="title_drying">Tumble Drying</string>
+
+    <string name="title_drying">Drying</string>
     <string name="title_wash_mode">Wash mode</string>
     <string name="title_category">Categories</string>
     <string name="title_ironing">Ironing</string>
     <string name="title_bleaching">Bleaching</string>
-    <string name="title_drycleaning">Dry Cleaning</string>
+    <string name="title_drycleaning">Dry cleaning</string>
 
     <string name="symbol">Symbol</string>
     <string name="condition_of_searching">Search terms</string>
@@ -135,6 +137,18 @@
 
     <string name="nothing_selected">Laundry symbols are not selected!</string>
     <string name="symbol_choosing">Choose symbols</string>
+    <string name="title_tumble_drying">Tumble drying</string>
+    <string name="title_wetcleaning">Wet cleaning</string>
+    <string name="wringing">Wringing</string>
+    <string name="wringing_text">Don\'t wring the item</string>
+
+    <string name="dry_cleanp2">The item needs gentle dry-cleaning with tetrachlo-roethylene</string>
+    <string name="dry_cleanf2">The item needs gentle dry-cleaning with hydrocarbon solvents</string>
+
+    <string name="dry_cleanw">The item should be professionally wet cleaned</string>
+    <string name="dry_cleanw2">The item needs gentle wet cleaning</string>
+    <string name="dry_cleanw3">The item needs very gentle wet cleaning </string>
+    <string name="dry_cleanwet_not_allowed">Don\'t wet clean</string>
 
 
 </resources>

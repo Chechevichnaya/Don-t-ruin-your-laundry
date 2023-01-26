@@ -248,9 +248,17 @@ class AddDataToCardFragment : Fragment() {
         dialog.show()
 
         val colorButton =
-            ResourcesCompat.getColor(requireContext().resources, R.color.lilac_700, null)
+            ResourcesCompat.getColor(requireContext().resources, R.color.buttons_positive_negative, null)
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
         dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(colorButton)
+
+        dialog.window?.setBackgroundDrawable(
+            ResourcesCompat.getDrawable(
+                requireContext().resources,
+                R.drawable.color_for_alertdialog,
+                null
+            )
+        )
     }
 
 
