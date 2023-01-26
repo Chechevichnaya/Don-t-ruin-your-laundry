@@ -17,7 +17,7 @@
     <string name="the_rest">The rest</string>
 
     <string name="name_of_cloth">Item\'s name</string>
-    <string name="add_more_symbols">Laundry symbols</string>
+    <string name="add_laundry_info">Laundry information</string>
     <string name="add">Add new information</string>
 
     <string name="title_fragment_card_detail">Item\'s detail</string>
@@ -39,6 +39,7 @@
 
     <string name="edit_fragment">Edit the item</string>
     <string name="add_card_fragment">Add new item</string>
+    <string name="add_more_symbols">Laundry symbols</string>
 
     <string name="wash">Wash the item in a standard wash cycle, with no water temperature restrictions</string>
     <string name="wash_not_allowed">Do not wash the item by hand or in a machine. Look to the dry clean symbols on the tag for further care instructions</string>
@@ -148,7 +149,17 @@
     <string name="dry_cleanw">The item should be professionally wet cleaned</string>
     <string name="dry_cleanw2">The item needs gentle wet cleaning</string>
     <string name="dry_cleanw3">The item needs very gentle wet cleaning </string>
+
+
     <string name="dry_cleanwet_not_allowed">Don\'t wet clean</string>
+
+    <string name="fabric_cotton">Cotton</string>
+    <string name="fabric_cotton_recomendation">Wash the white item in warm water (at least 60°C/140°F) and the colored item in cold water (at least 30°C/86°F). However, to prevent the spread of bacteria, you should wash underwear, towels and household linen at 60°C.\n\n
+Use a regular, normal, or cotton setting on the washing machine.\n\n
+You should have laundry tag on the cloth to be sure it is dryer-safe. It\'s recommended to dry cotton on a clothes line or drying rack to prevent shrinking. Hang it away from direct sunlight to prevent fading. .</string>
+
+    <string name="cloth_tag_qustion">Do you have information about laundry symbols from the cloth tag?</string>
+
 
 
 </resources>

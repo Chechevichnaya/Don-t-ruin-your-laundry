@@ -69,7 +69,7 @@ class AddDataToCardFragment : Fragment() {
         viewModel.addCardForEditing(args.itemId, requireContext())
         args.currentCategory?.let { viewModel.setCategory(it) }
 
-        binding.addSymbols.setOnClickListener { clickOnAddMoreSymbols() }
+        addInfoButton()
 
         setToolBar()
         getListOfSymbolsFromChoosingFragmentAndAddToViewModel()
@@ -81,6 +81,35 @@ class AddDataToCardFragment : Fragment() {
         observeCardInfo()
 
         menuItemSave(folderForImagesInDB)
+    }
+
+    private fun addInfoButton() {
+        binding.addInfo.setOnClickListener {
+            when (binding.addInfo.text) {
+                requireContext().getString(R.string.add_more_symbols) -> clickOnAddMoreSymbols()
+                requireContext().getString(R.string.add_laundry_info) -> showDialogAboutClothTag()
+            }
+        }
+    }
+
+
+    private fun showDialogAboutClothTag() {
+        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
+        val dialog: AlertDialog = builder
+            .setMessage(R.string.cloth_tag_qustion)
+            .setPositiveButton(requireContext().getString(R.string.yes)) { _, _ ->
+                clickOnAddMoreSymbols()
+            }
+            .setNegativeButton(requireContext().getString(R.string.no)) { _, _ -> }
+            .create()
+        dialog.show()
+        val color = ResourcesCompat.getColor(
+            requireContext().resources,
+            R.color.buttons_positive_negative,
+            null
+        )
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(color)
+        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(color)
     }
 
     override fun onPause() {
@@ -216,6 +245,7 @@ class AddDataToCardFragment : Fragment() {
         recyclerView.layoutManager = FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
         recyclerView.adapter = adapter
         viewModel.listOfSymbols.observe(viewLifecycleOwner) { items ->
+            binding.addInfo.text = requireContext().getString(R.string.add_more_symbols)
             adapter.submitList(items)
         }
     }
@@ -248,7 +278,11 @@ class AddDataToCardFragment : Fragment() {
         dialog.show()
 
         val colorButton =
-            ResourcesCompat.getColor(requireContext().resources, R.color.buttons_positive_negative, null)
+            ResourcesCompat.getColor(
+                requireContext().resources,
+                R.color.buttons_positive_negative,
+                null
+            )
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(colorButton)
         dialog.getButton(AlertDialog.BUTTON_NEUTRAL).setTextColor(colorButton)
 

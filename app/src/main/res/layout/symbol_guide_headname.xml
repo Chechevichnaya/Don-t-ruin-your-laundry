@@ -28,7 +28,8 @@
         app:layout_constraintStart_toEndOf="@id/head_cloth"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/head_cloth"
-        android:src="@drawable/question">
+        android:src="@drawable/question"
+        android:visibility="gone">
 
     </ImageView>
 

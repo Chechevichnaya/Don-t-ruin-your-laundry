@@ -66,6 +66,18 @@
             app:layout_constraintTop_toTopOf="parent"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/fabric_recomendation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/name_of_cloth"
+            tools:text="@string/fabric_cotton_recomendation"
+            android:visibility="gone"
+            >
+
+        </com.google.android.material.textfield.TextInputEditText>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/added_symbols_recycler_view"
@@ -82,12 +94,12 @@
             tools:itemCount="10" />
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/add_symbols"
+            android:id="@+id/add_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="16dp"
-            android:text="@string/add_more_symbols"
+            android:text="@string/add_laundry_info"
             app:backgroundTint="@color/lilac500_light_lilac700_dark"
             app:iconTint = "@color/icon_text"
             android:textColor = "@color/icon_text"
@@ -95,6 +107,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

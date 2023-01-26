@@ -30,7 +30,9 @@
 
     <string name="edit_fragment">Редактировать </string>
     <string name="add_card_fragment">Добавить </string>
-    <string name="add_more_symbols">Добавить символы</string>
+    <string name="add_laundry_info">Информация по уходу</string>
+    <string name="add_more_symbols">Символы</string>
+
 
     <string name="wash">Стирайте вещь в стандартном режиме без ограничений по температуре воды</string>
     <string name="wash_not_allowed">Стирать вещь вручную или в машинке, к сожалению, нельзя. Дополнительные инструкции по уходу смотрите на символах сухой чистки</string>
@@ -145,8 +147,13 @@
 
 
 
+    <string name="cloth_tag_qustion">У вас есть информация о символах об уходе за вещами с бирки?</string>
 
 
+    <string name="fabric_cotton">Этoт символ предназначен для специалистов химчистки. Мокрая чистка запрещена</string>
 
-
+    <string name="fabric_cotton_recomendation">Separate white cotton (this could include patterned white fabric, muted pastel colors, or light grays) from colored cotton. This prevents colors from bleeding into the white fabric.\n
+Set your washing machine temperature at least 60 °C (140 °F) for white fabric and at least 30 °C (86 °F) for colored cotton. However, to prevent the spread of bacteria, it is advisable to wash underwear, towels and household linen at 60°C.\n
+Use a regular, normal, or cotton setting on the washing machine, that is usually created with cotton in mind.\n
+Dry cotton on a clothes line or drying rack to prevent shrinking. Hang it away from direct sunlight to prevent fading. You should have laundry tag on the cloth to be sure it is dryer-safe.</string>
 </resources>
