@@ -81,35 +81,16 @@ class AddDataToCardFragment : Fragment() {
         observeCardInfo()
 
         menuItemSave(folderForImagesInDB)
+
     }
 
     private fun addInfoButton() {
         binding.addInfo.setOnClickListener {
             when (binding.addInfo.text) {
                 requireContext().getString(R.string.add_more_symbols) -> clickOnAddMoreSymbols()
-                requireContext().getString(R.string.add_laundry_info) -> showDialogAboutClothTag()
+                requireContext().getString(R.string.add_laundry_info) -> clickOnAddMoreSymbols()
             }
         }
-    }
-
-
-    private fun showDialogAboutClothTag() {
-        val builder: AlertDialog.Builder = AlertDialog.Builder(context)
-        val dialog: AlertDialog = builder
-            .setMessage(R.string.cloth_tag_qustion)
-            .setPositiveButton(requireContext().getString(R.string.yes)) { _, _ ->
-                clickOnAddMoreSymbols()
-            }
-            .setNegativeButton(requireContext().getString(R.string.no)) { _, _ -> }
-            .create()
-        dialog.show()
-        val color = ResourcesCompat.getColor(
-            requireContext().resources,
-            R.color.buttons_positive_negative,
-            null
-        )
-        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setTextColor(color)
-        dialog.getButton(AlertDialog.BUTTON_POSITIVE).setTextColor(color)
     }
 
     override fun onPause() {

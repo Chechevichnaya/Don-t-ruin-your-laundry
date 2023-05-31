@@ -19,8 +19,5 @@ class AppApplication : Application() {
             modules(useCasesModule)
         }
     }
-
-
-//    val dataBase: CardsDataBase by lazy { CardsDataBase.getDatabase(this) }
 }
 
