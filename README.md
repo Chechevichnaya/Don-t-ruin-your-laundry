@@ -9,7 +9,6 @@ The application is developed using Kotlin, with the Android SDK and MVVM archite
 # Getting Started
 To clone this repository, you will need Git installed on your computer. From your command line:
 ```bash
-# Clone this repository
 $ git clone https://github.com/yourusername/Dont-Ruin-Your-Laundry
 ```
 # License
