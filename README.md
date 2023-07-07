@@ -11,5 +11,3 @@ To clone this repository, you will need Git installed on your computer. From you
 ```bash
 $ git clone https://github.com/yourusername/Dont-Ruin-Your-Laundry
 ```
-# License
-This project is MIT licensed.
