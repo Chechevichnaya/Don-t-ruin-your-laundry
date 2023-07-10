@@ -36,14 +36,13 @@ class ClothingCardsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //get enum Category from Bundle
         val category = (requireArguments().getSerializable(CATEGORY_NAME)) as CategoryEnum
         val image = category.getResIcon()
 
 
         val adapter = CardsListAdapter { card ->
             val action =
-                KindsOfThingsForLaundryDirections.actionKindsOfThingsForLaundryToCardDetailFragment(
+                TypeOfLaundryItemsFragmentDirections.actionKindsOfThingsForLaundryToCardDetailFragment(
                     card.cardId
                 )
             this.findNavController().navigate(action)
@@ -54,7 +53,6 @@ class ClothingCardsFragment : Fragment() {
         binding.recyclerViewAddedCards.adapter = adapter
 
         viewModel.allCardsByCategory(category).observe(viewLifecycleOwner) { cards ->
-            //check if table by certain category is empty
             if (cards.isEmpty()) {
                 binding.imageTypeOfCloth.setImageResource(image)
             } else adapter.submitList(cards)

@@ -1,7 +1,7 @@
 package com.blabla.dontruinyourlaundry.di
 
 import com.blabla.dontruinyourlaundry.data.Repository
-import com.blabla.dontruinyourlaundry.data.dataBase.CardsDataBase
+import com.blabla.dontruinyourlaundry.data.database.CardsDataBase
 import com.blabla.dontruinyourlaundry.domain.useCases.*
 import com.blabla.dontruinyourlaundry.presentation.viewModels.*
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -19,7 +19,7 @@ val viewModelModule = module {
     viewModel { ChooseSymbolsViewModel(get()) }
     viewModel { ClothingCardsViewModel(get()) }
     viewModel { SearchByNameViewModel(get()) }
-    viewModel { SearchByParametersViewModel(get(), get()) }
+    viewModel { SearchByParametersViewModel(get()) }
     viewModel { SearchByParametersResultViewModel(get()) }
     viewModel { SymbolGuideViewModel(get()) }
 }
@@ -29,12 +29,12 @@ val repoModule = module {
 }
 
 val useCasesModule = module {
-    factory { ChooseSymbolsToCardUseCase(get()) }
+    factory { AddSymbolsToCardUseCase(get()) }
     factory { ShowCardDetailUseCase(get()) }
     factory { SearchByNameUseCase(get()) }
     factory { SearchByParameterUseCase(get()) }
-    factory { ChangeOldCardUseCase(get()) }
+    factory { EditCardUseCase(get()) }
     factory { CreateNewCardUseCase(get()) }
-    factory { SearchByParameterGetResultUseCase(get()) }
+    factory { SearchByParameterResultUseCase(get()) }
 }
 

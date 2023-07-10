@@ -35,11 +35,9 @@ class SearchByNameFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("ResourceType")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //set upper menu
         binding.toolbarSearch.navigationIcon =
             ResourcesCompat.getDrawable(requireContext().resources, R.drawable.ic_arrow_back, null)
         binding.toolbarSearch.navigationIcon?.setTint(ResourcesCompat.getColor(requireContext().resources,R.color.icon_text, null ))
@@ -61,7 +59,7 @@ class SearchByNameFragment : Fragment() {
         binding.recyclerViewAddedCards.adapter = adapter
         viewModel.getAllNames().observe(viewLifecycleOwner) { names ->
             val popUpMenuAdapter =
-                ArrayAdapter(requireContext(), R.layout.array_adapter_item, names.toTypedArray())
+                ArrayAdapter(requireContext(), R.layout.array_adapter_item_for_search_by_name, names.toTypedArray())
             binding.whatToSearch.setAdapter(popUpMenuAdapter)
             binding.whatToSearch.dropDownVerticalOffset = 0
             binding.whatToSearch.setOnItemClickListener { _, _, _, _ ->
@@ -89,7 +87,7 @@ class SearchByNameFragment : Fragment() {
             } else {
                 Toast.makeText(
                     requireContext(),
-                    "Ничего не найдено",
+                    getString(R.string.no_result),
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -102,6 +100,4 @@ class SearchByNameFragment : Fragment() {
                 as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
-
-
 }

@@ -31,7 +31,7 @@
     <string name="delete">Delete</string>
 
     <string name="LookFor">Search</string>
-    <string name="search_the_items">Find the item</string>
+    <string name="search_the_items">Find the items</string>
     <string name="search_by_name">Search by name</string>
     <string name="by_name">By name</string>
     <string name="by_parameters">By parameters</string>
@@ -107,11 +107,11 @@
     <string name="only_hand">Hand wash only</string>
 
     <string name="thirty">30</string>
-    <string name="fourty">40</string>
+    <string name="forty">40</string>
     <string name="fifty">50</string>
     <string name="sixty">60</string>
     <string name="seventy">70</string>
-    <string name="nintyfive">95</string>
+    <string name="ninety_five">95</string>
 
     <string name="washing_machine_allowed">Allowed in the washing machine</string>
 
@@ -122,16 +122,16 @@
     <string name="title_category">Categories</string>
     <string name="title_ironing">Ironing</string>
     <string name="title_bleaching">Bleaching</string>
-    <string name="title_drycleaning">Dry cleaning</string>
+    <string name="title_dry_cleaning">Dry cleaning</string>
 
     <string name="symbol">Symbol</string>
     <string name="condition_of_searching">Search terms</string>
 
-    <string name="search_by_parametere_title">Search by parameters</string>
+    <string name="search_by_parameters_title">Search by parameters</string>
     <string name="fill_name_and_symbols">Fill in the \"Item\'s name\" field and add laundry symbols</string>
     <string name="fill_name">Fill in the \"Item\'s name\" field</string>
     <string name="fill_symbols">Add laundry symbols</string>
-    <string name="need_acces_to_camera">The app needs access to the camera to take a photo</string>
+    <string name="need_access_to_camera">The app needs access to the camera to take a photo</string>
     <string name="search_result">Search results</string>
     <string name="no_result">Nothing found!</string>
     <string name="no_search_terms">Parameters for searching are not selected!</string>
@@ -139,27 +139,30 @@
     <string name="nothing_selected">Laundry symbols are not selected!</string>
     <string name="symbol_choosing">Choose symbols</string>
     <string name="title_tumble_drying">Tumble drying</string>
-    <string name="title_wetcleaning">Wet cleaning</string>
+    <string name="title_wet_cleaning">Wet cleaning</string>
     <string name="wringing">Wringing</string>
     <string name="wringing_text">Don\'t wring the item</string>
 
-    <string name="dry_cleanp2">The item needs gentle dry-cleaning with tetrachlo-roethylene</string>
-    <string name="dry_cleanf2">The item needs gentle dry-cleaning with hydrocarbon solvents</string>
+    <string name="dry_clean_p2">The item needs gentle dry-cleaning with tetrachlo-roethylene</string>
+    <string name="dry_clean_f2">The item needs gentle dry-cleaning with hydrocarbon solvents</string>
 
-    <string name="dry_cleanw">The item should be professionally wet cleaned</string>
-    <string name="dry_cleanw2">The item needs gentle wet cleaning</string>
-    <string name="dry_cleanw3">The item needs very gentle wet cleaning </string>
+    <string name="dry_clean_w">The item should be professionally wet cleaned</string>
+    <string name="dry_clean_w2">The item needs gentle wet cleaning</string>
+    <string name="dry_clean_w3">The item needs very gentle wet cleaning </string>
 
 
-    <string name="dry_cleanwet_not_allowed">Don\'t wet clean</string>
+    <string name="dry_clean_wet_not_allowed">Don\'t wet clean</string>
 
-    <string name="fabric_cotton">Cotton</string>
     <string name="fabric_cotton_recomendation">Wash the white item in warm water (at least 60°C/140°F) and the colored item in cold water (at least 30°C/86°F). However, to prevent the spread of bacteria, you should wash underwear, towels and household linen at 60°C.\n\n
 Use a regular, normal, or cotton setting on the washing machine.\n\n
 You should have laundry tag on the cloth to be sure it is dryer-safe. It\'s recommended to dry cotton on a clothes line or drying rack to prevent shrinking. Hang it away from direct sunlight to prevent fading. .</string>
-
-    <string name="cloth_tag_qustion">Do you have information about laundry symbols from the cloth tag?</string>
-
-
+    <string name="tempPhotos">TemporaryPhotos.jpg</string>
+    <string name="photoForDB">photo_for_DB</string>
+    <string name="jpg">.jpg</string>
+    <string name="dummyText">Bla bla la Bla bla la Bla bla la Bla bla la Bla bla la Bla bla la</string>
+    <string name="photo_of_the_item">Item\'s photo</string>
+    <string name="add_photo">Add photo</string>
+    <string name="photo">Item\'s photo</string>
+    <string name="image_of_laundry_symbol">Image of laundry symbol</string>
 
 </resources>

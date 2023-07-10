@@ -1,14 +1,14 @@
 package com.blabla.dontruinyourlaundry.data
 
 import android.content.Context
-import com.blabla.dontruinyourlaundry.data.dataBase.Card
-import com.blabla.dontruinyourlaundry.data.dataBase.CardsAndSymbolsDao
-import com.blabla.dontruinyourlaundry.data.dataBase.CardsDao
-import com.blabla.dontruinyourlaundry.data.dataBase.CardsAndSymbols
+import com.blabla.dontruinyourlaundry.data.database.Card
+import com.blabla.dontruinyourlaundry.data.database.CardsAndSymbolsDao
+import com.blabla.dontruinyourlaundry.data.database.CardsDao
+import com.blabla.dontruinyourlaundry.data.database.CardsAndSymbols
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
-import com.blabla.dontruinyourlaundry.domain.entity.ListOfCards
+import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuideItemProvider
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolForWashingDBO
-import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
+import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuideItem
 import kotlinx.coroutines.flow.Flow
 
 class Repository(
@@ -17,7 +17,7 @@ class Repository(
     private val context: Context
 ) {
 
-    fun getSymbolGuideList(): List<SymbolGuide> = ListOfCards.loadListOfSymbolGuide(context)
+    fun getSymbolGuideList(): List<SymbolGuideItem> = SymbolGuideItemProvider.getSymbolGuideItems(context)
 
 
     fun allCardsByCategory(category: CategoryEnum): Flow<List<Card>> =
@@ -76,6 +76,4 @@ class Repository(
         val cardId =  cardsAndSymbolsDao.getCardIdBySymbols(listOfAttachedSymbols)
         return cardsDao.getCardsByCardsId(cardId)
     }
-
-
 }

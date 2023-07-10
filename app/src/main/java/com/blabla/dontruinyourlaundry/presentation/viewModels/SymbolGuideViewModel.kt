@@ -9,15 +9,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.data.Repository
-import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
+import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuideItem
 
-class SymbolGuideViewModel(repo: Repository) :
-    ViewModel() {
+class SymbolGuideViewModel(repo: Repository) : ViewModel() {
 
     private val _symbolsInGuide = MutableLiveData(repo.getSymbolGuideList())
-    val symbolsInGuide: LiveData<List<SymbolGuide>> = _symbolsInGuide
+    val symbolsInGuide: LiveData<List<SymbolGuideItem>> = _symbolsInGuide
 
-    fun onClicked(clickedItem: SymbolGuide.SymbolForWashing, context: Context) {
+    fun onClicked(clickedItem: SymbolGuideItem.SymbolForWashing, context: Context) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         val drawable = ResourcesCompat.getDrawable(context.resources, clickedItem.pictureId, null)
         val wrappedDrawable = DrawableCompat.wrap(drawable!!)
@@ -41,5 +40,4 @@ class SymbolGuideViewModel(repo: Repository) :
                 )
             )
     }
-
 }

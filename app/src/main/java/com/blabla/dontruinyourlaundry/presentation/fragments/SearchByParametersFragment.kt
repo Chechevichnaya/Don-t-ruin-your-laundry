@@ -41,7 +41,6 @@ class SearchByParametersFragment : Fragment() {
 
         setToolBar()
 
-        //set menu item
         val menuHost: MenuHost = binding.toolbarSearch
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -52,7 +51,9 @@ class SearchByParametersFragment : Fragment() {
                 return when (menuItem.itemId) {
                     R.id.add_button -> {
                         if (viewModel.checkIfItemsSelected()) {
-                           viewModel.resultNotNull(requireContext()) { navigateToSearchByParametersResultFragment() }
+                           viewModel.handleSelectedParameters(requireContext()) {
+                               navigateToSearchByParametersResultFragment()
+                           }
                         } else {
                             showDialogNothingSelected()
                         }
@@ -62,7 +63,6 @@ class SearchByParametersFragment : Fragment() {
                 }
             }
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
-
 
         val recyclerView = binding.recyclerSearchByParameters
         val adapter = RecyclerViewAdapterSearchParameter { clickedItem ->
@@ -75,8 +75,6 @@ class SearchByParametersFragment : Fragment() {
             adapter.submitList(items)
         }
         viewModel.searchItems.observe(viewLifecycleOwner, observerForRecyclerView)
-
-
     }
 
     private fun navigateToSearchByParametersResultFragment() {
@@ -85,7 +83,6 @@ class SearchByParametersFragment : Fragment() {
                 SearchByParametersFragmentDirections.actionSearchByParametersFragmentToSearchByParametersResultFragment(
                     listOfParameters
                 )
-//                findNavController().navigate(action)
             navigate(action)
     }
 
@@ -101,7 +98,7 @@ class SearchByParametersFragment : Fragment() {
 
     private fun setToolBar() = binding.toolbarSearch.apply {
         title =
-            requireContext().getString(R.string.search_by_parametere_title)
+            requireContext().getString(R.string.search_by_parameters_title)
         navigationIcon =
             ResourcesCompat.getDrawable(requireContext().resources, R.drawable.ic_arrow_back, null)
         navigationIcon?.setTint(
@@ -115,8 +112,6 @@ class SearchByParametersFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
-
-
     private fun showDialogNothingSelected() {
         val builder: AlertDialog.Builder = AlertDialog.Builder(requireContext())
         val dialog: AlertDialog =

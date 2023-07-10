@@ -1,14 +1,14 @@
 package com.blabla.dontruinyourlaundry.domain.useCases
 
 import com.blabla.dontruinyourlaundry.data.Repository
-import com.blabla.dontruinyourlaundry.data.dataBase.Card
+import com.blabla.dontruinyourlaundry.data.database.Card
 import com.blabla.dontruinyourlaundry.domain.entity.*
 
 class SearchByParameterUseCase(private val repo: Repository) {
 
-    fun getSelectedItems(itemsSearchByPameter: List<SearchScreenItem>):
+    fun getSelectedItems(itemsSearchByParameter: List<SearchScreenItem>):
             List<SearchScreenItem> {
-        return itemsSearchByPameter.filter { it is SearchScreenItem.SearchParameter && it.selected }
+        return itemsSearchByParameter.filter { it is SearchScreenItem.SearchParameter && it.selected }
     }
 
     private fun getTitle(item: SearchScreenItem.SearchParameter): TitleSearchByParameterEnum {
@@ -32,43 +32,42 @@ class SearchByParameterUseCase(private val repo: Repository) {
         return listSearchItems
     }
 
-    fun onItemClicked(clickedItem: SearchScreenItem.SearchParameter, listOfSearchItems: List<SearchScreenItem>): List<SearchScreenItem> {
+    fun getSelectedSearchItems(
+        clickedItem: SearchScreenItem.SearchParameter,
+        listOfSearchItems: List<SearchScreenItem>
+    ): List<SearchScreenItem> {
         val titleOfClickedItem = getTitle(clickedItem)
         return when (titleOfClickedItem.getSelectionType()) {
-            SelectionType.SINGLE -> {
-                singleType(listOfSearchItems, clickedItem)
-            }
-            SelectionType.MULTI -> {
-                multiType(listOfSearchItems, clickedItem)
-            }
+            SelectionType.SINGLE -> getSingleTypeItems(listOfSearchItems, clickedItem)
+            SelectionType.MULTI -> getMultiTypeItems(listOfSearchItems, clickedItem)
         }
     }
 
-    private fun singleType(
-        listAllItems: List<SearchScreenItem>,
+    private fun getSingleTypeItems(
+        items: List<SearchScreenItem>,
         clickedItem: SearchScreenItem.SearchParameter
     ): List<SearchScreenItem> {
-        return listAllItems.map { itemInList ->
-            if (itemInList is SearchScreenItem.SearchParameter &&
-                getTitle(itemInList) == getTitle(clickedItem)
+        return items.map { item ->
+            if (item is SearchScreenItem.SearchParameter &&
+                getTitle(item) == getTitle(clickedItem)
             ) {
                 if (clickedItem.selected) {
-                    itemInList.copy(selected = false)
+                    item.copy(selected = false)
                 } else {
-                    itemInList.copy(selected = itemInList == clickedItem)
+                    item.copy(selected = item == clickedItem)
                 }
-            } else itemInList
+            } else item
         }
     }
 
-    private fun multiType(
-        listAllItems: List<SearchScreenItem>,
+    private fun getMultiTypeItems(
+        items: List<SearchScreenItem>,
         clickedItem: SearchScreenItem.SearchParameter
     ): List<SearchScreenItem> {
-        return listAllItems.map { itemInList ->
-            if (itemInList is SearchScreenItem.SearchParameter && itemInList == clickedItem) {
-                itemInList.copy(selected = !itemInList.selected)
-            } else itemInList
+        return items.map { item ->
+            if (item is SearchScreenItem.SearchParameter && item == clickedItem) {
+                item.copy(selected = !item.selected)
+            } else item
         }
     }
 

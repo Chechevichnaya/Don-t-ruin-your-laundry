@@ -34,7 +34,7 @@ enum class TitleSearchByParameterEnum {
             DRYING -> context.getString(R.string.title_drying)
             IRONING -> context.getString(R.string.title_ironing)
             BLEACHING -> context.getString(R.string.title_bleaching)
-            DRYCLEANING -> context.getString(R.string.title_drycleaning)
+            DRYCLEANING -> context.getString(R.string.title_dry_cleaning)
         }
     }
 
@@ -170,11 +170,11 @@ enum class SearchParameterEnum : Parcelable {
             WASH_ALLOWED -> context.getString(R.string.washing_machine_allowed)
             WASH_HAND -> context.getString(R.string.only_hand)
             LAUNDRY_30 -> context.getString(R.string.thirty)
-            LAUNDRY_40 -> context.getString(R.string.fourty)
+            LAUNDRY_40 -> context.getString(R.string.forty)
             LAUNDRY_50 -> context.getString(R.string.fifty)
             LAUNDRY_60 -> context.getString(R.string.sixty)
             LAUNDRY_70 -> context.getString(R.string.seventy)
-            LAUNDRY_95 -> context.getString(R.string.nintyfive)
+            LAUNDRY_95 -> context.getString(R.string.ninety_five)
         }
     }
 
@@ -189,93 +189,91 @@ enum class SearchParameterEnum : Parcelable {
                     LAUNDRY_70.getAttachedSymbols() +
                     LAUNDRY_95.getAttachedSymbols()
             WASH_HAND -> mutableListOf(
-                SymbolForWashingDBO.WASHHAND,
-                SymbolForWashingDBO.WASHHAND30,
-                SymbolForWashingDBO.WASHHAND40
+                SymbolForWashingDBO.WASH_HAND,
+                SymbolForWashingDBO.WASH_HAND_30,
+                SymbolForWashingDBO.WASH_HAND_40
             )
-            WASH_NOT_ALLOWED -> mutableListOf(SymbolForWashingDBO.WASHNOTALLOWED)
+            WASH_NOT_ALLOWED -> mutableListOf(SymbolForWashingDBO.WASH_NOT_ALLOWED)
             LAUNDRY_30 -> mutableListOf(
-                SymbolForWashingDBO.WASH30,
-                SymbolForWashingDBO.WASH30DOT,
-                SymbolForWashingDBO.WASH30DOTCARE,
-                SymbolForWashingDBO.WASH30CARE,
-                SymbolForWashingDBO.WASH30DOTEXTRACARE,
-                SymbolForWashingDBO.WASH30EXTRACARE
+                SymbolForWashingDBO.WASH_30,
+                SymbolForWashingDBO.WASH_30_DOT,
+                SymbolForWashingDBO.WASH_30_DOT_CARE,
+                SymbolForWashingDBO.WASH_30_CARE,
+                SymbolForWashingDBO.WASH_30_DOT_EXTRA_CARE,
+                SymbolForWashingDBO.WASH_30_EXTRA_CARE
             )
             LAUNDRY_40 -> mutableListOf(
-                SymbolForWashingDBO.WASH40,
-                SymbolForWashingDBO.WASH40DOT,
-                SymbolForWashingDBO.WASH40CARE,
-                SymbolForWashingDBO.WASH40DOTCARE,
-                SymbolForWashingDBO.WASH40DOTEXTRACARE,
-                SymbolForWashingDBO.WASH40EXTRACARE
+                SymbolForWashingDBO.WASH_40,
+                SymbolForWashingDBO.WASH_40_DOT,
+                SymbolForWashingDBO.WASH_40_CARE,
+                SymbolForWashingDBO.WASH_40_DOT_CARE,
+                SymbolForWashingDBO.WASH_40DOT_EXTRA_CARE,
+                SymbolForWashingDBO.WASH_40_EXTRA_CARE
             )
             LAUNDRY_50 -> mutableListOf(
-                SymbolForWashingDBO.WASH50,
-                SymbolForWashingDBO.WASH50DOT,
-                SymbolForWashingDBO.WASH50CARE,
-                SymbolForWashingDBO.WASH50DOTCARE
+                SymbolForWashingDBO.WASH_50,
+                SymbolForWashingDBO.WASH_50_DOT,
+                SymbolForWashingDBO.WASH_50_CARE,
+                SymbolForWashingDBO.WASH_50_DOT_CARE
             )
             LAUNDRY_60 -> mutableListOf(
-                SymbolForWashingDBO.WASH60,
-                SymbolForWashingDBO.WASH60DOT,
-                SymbolForWashingDBO.WASH60CARE,
-                SymbolForWashingDBO.WASH60DOTCARE
+                SymbolForWashingDBO.WASH_60,
+                SymbolForWashingDBO.WASH_60_DOT,
+                SymbolForWashingDBO.WASH_60_CARE,
+                SymbolForWashingDBO.WASH_60_DOT_CARE
             )
-            LAUNDRY_70 -> mutableListOf(SymbolForWashingDBO.WASH70, SymbolForWashingDBO.WASH70DOT)
+            LAUNDRY_70 -> mutableListOf(SymbolForWashingDBO.WASH_70, SymbolForWashingDBO.WASH_70_DOT)
             LAUNDRY_95 -> mutableListOf(
-                SymbolForWashingDBO.WASH90,
-                SymbolForWashingDBO.WASH90DOT,
-                SymbolForWashingDBO.WASH90CARE,
-                SymbolForWashingDBO.WASH90DOTCARE
+                SymbolForWashingDBO.WASH_90,
+                SymbolForWashingDBO.WASH_90_DOT,
+                SymbolForWashingDBO.WASH_90_CARE,
+                SymbolForWashingDBO.WASH_90_DOT_CARE
             )
             DRY_ALLOWED -> mutableListOf(
                 SymbolForWashingDBO.DRY,
-                SymbolForWashingDBO.DRY40,
-                SymbolForWashingDBO.DRY60,
-                SymbolForWashingDBO.DRY80,
-                SymbolForWashingDBO.DRY40CARE,
-                SymbolForWashingDBO.DRY40EXTRACARE,
-                SymbolForWashingDBO.DRY60CARE,
-                SymbolForWashingDBO.DRYNOHEAT,
-                SymbolForWashingDBO.DRYLINE,
-                SymbolForWashingDBO.DRYSHADE,
-                SymbolForWashingDBO.DRYLINESHADE,
-                SymbolForWashingDBO.DRYDRIP,
-                SymbolForWashingDBO.DRYDRIPSHADE,
-                SymbolForWashingDBO.DRYFLAT,
-                SymbolForWashingDBO.DRYFLASTHADE
+                SymbolForWashingDBO.DRY_40,
+                SymbolForWashingDBO.DRY_60,
+                SymbolForWashingDBO.DRY_80,
+                SymbolForWashingDBO.DRY_40_CARE,
+                SymbolForWashingDBO.DRY_40_EXTRA_CARE,
+                SymbolForWashingDBO.DRY_60_CARE,
+                SymbolForWashingDBO.DRY_NO_HEAT,
+                SymbolForWashingDBO.DRY_LINE,
+                SymbolForWashingDBO.DRY_SHADE,
+                SymbolForWashingDBO.DRY_LINE_SHADE,
+                SymbolForWashingDBO.DRY_DRIP,
+                SymbolForWashingDBO.DRY_DRIP_SHADE,
+                SymbolForWashingDBO.DRY_FLAT,
+                SymbolForWashingDBO.DRY_FLAT_SHADE
             )
-            DRY_NOT_ALLOWED -> mutableListOf(SymbolForWashingDBO.DRYNOTALLOWED)
+            DRY_NOT_ALLOWED -> mutableListOf(SymbolForWashingDBO.DRY_NOT_ALLOWED)
             IRON_ALLOWED -> mutableListOf(
                 SymbolForWashingDBO.IRON,
-                SymbolForWashingDBO.IRON110,
-                SymbolForWashingDBO.IRON150,
-                SymbolForWashingDBO.IRON200
+                SymbolForWashingDBO.IRON_110,
+                SymbolForWashingDBO.IRON_150,
+                SymbolForWashingDBO.IRON_200
             )
             IRON_NOT_ALLOWED -> mutableListOf(
-                SymbolForWashingDBO.IRONNOTALLOWED,
-                SymbolForWashingDBO.IRONSTEAMNOTALLOWED
+                SymbolForWashingDBO.IRON_NOT_ALLOWED,
+                SymbolForWashingDBO.IRON_STEAM_NOT_ALLOWED
             )
             BLEACH_ALLOWED -> mutableListOf(
                 SymbolForWashingDBO.BLEACH,
-                SymbolForWashingDBO.BLEACHNONCHLORINE
+                SymbolForWashingDBO.BLEACH_NON_CHLORINE
             )
-            BLEACH_NOT_ALLOWED -> mutableListOf(SymbolForWashingDBO.BLEACHNOTALLOWED)
+            BLEACH_NOT_ALLOWED -> mutableListOf(SymbolForWashingDBO.BLEACH_NOT_ALLOWED)
             DRYCLEAN_ALLOWED -> mutableListOf(
-                SymbolForWashingDBO.DRYCLEAN,
-                SymbolForWashingDBO.DRYCLEANA,
-                SymbolForWashingDBO.DRYCLEANF,
-                SymbolForWashingDBO.DRYCLEANLOWHEAT,
-                SymbolForWashingDBO.DRYCLEANLOWMOISTURE,
-                SymbolForWashingDBO.DRYCLEANSHORT,
-                SymbolForWashingDBO.DRYCLEANP,
-                SymbolForWashingDBO.DRYCLEANNOSTEAM
+                SymbolForWashingDBO.DRY_CLEAN,
+                SymbolForWashingDBO.DRY_CLEAN_A,
+                SymbolForWashingDBO.DRY_CLEAN_F,
+                SymbolForWashingDBO.DRY_CLEAN_LOW_HEAT,
+                SymbolForWashingDBO.DRY_CLEAN_LOW_MOISTURE,
+                SymbolForWashingDBO.DRY_CLEAN_SHORT,
+                SymbolForWashingDBO.DRY_CLEAN_P,
+                SymbolForWashingDBO.DRY_CLEAN_NO_STEAM
             )
-            DRYCLEAN_NOT_ALLOWED -> mutableListOf(SymbolForWashingDBO.DRYCLEANNOTALLOWED)
-            else -> {
-                emptyList()
-            }
+            DRYCLEAN_NOT_ALLOWED -> mutableListOf(SymbolForWashingDBO.DRY_CLEAN_NOT_ALLOWED)
+            else -> emptyList()
         }
     }
 }

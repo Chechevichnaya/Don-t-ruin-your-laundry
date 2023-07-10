@@ -19,8 +19,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/wh_washing_hand">
-
+        tools:src="@drawable/wh_washing_hand"
+        android:contentDescription="@string/image_of_laundry_symbol">
     </ImageButton>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,42 +8,25 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.data.dataBase.Card
-import com.blabla.dontruinyourlaundry.databinding.CardItemBinding
-import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
+import com.blabla.dontruinyourlaundry.data.database.Card
+import com.blabla.dontruinyourlaundry.databinding.CardItemWithPhotoAndNameBinding
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 
 class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
-    ListAdapter<Card, CardsListAdapter.ItemViewHolder>(DiffCallback) {
+    ListAdapter<Card, CardsListAdapter.ItemViewHolder>(diffCallback) {
 
-    class ItemViewHolder(private var binding: CardItemBinding) :
+    class ItemViewHolder(private var binding: CardItemWithPhotoAndNameBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(card: Card) {
-            val imageCategory = when (card.category) {
-                CategoryEnum.CLOTH -> {
-                    CategoryEnum.CLOTH.getResIcon()
-                }
-                CategoryEnum.BAD_SHEETS -> {
-                    CategoryEnum.BAD_SHEETS.getResIcon()
-                }
-                CategoryEnum.BATH -> {
-                    CategoryEnum.BATH.getResIcon()
-                }
-                CategoryEnum.KITCHEN -> {
-                    CategoryEnum.KITCHEN.getResIcon()
-                }
-                CategoryEnum.REST -> {
-                    CategoryEnum.REST.getResIcon()
-                }
-            }
+            card.category.getResIcon()
             binding.itemName.text = card.name
             if (card.picture == null) {
                 val context = binding.itemImage.context
-                binding.itemImage.setImageResource(imageCategory)
+                binding.itemImage.setImageResource(card.category.getResIcon())
                 binding.itemImage.setColorFilter(
                     ResourcesCompat.getColor(
                         context.resources,
@@ -51,8 +34,6 @@ class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
                         null
                     )
                 )
-
-
             } else {
                 Glide.with(binding.itemImage.context)
                     .load(card.picture.toUri())
@@ -69,17 +50,14 @@ class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
         parent: ViewGroup,
         viewType: Int
     ): ItemViewHolder {
-        // if there is a problem with recycler view's width is not match parent - PROBLEM SOLVED HERE
-        // - pass as second parameter for method INFLATE - "parent"
         return ItemViewHolder(
-            CardItemBinding.inflate(
+            CardItemWithPhotoAndNameBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
         )
     }
-
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         val currentCard = getItem(position)
@@ -88,7 +66,7 @@ class CardsListAdapter(private val onCardClicked: (Card) -> Unit) :
     }
 
     companion object {
-        private val DiffCallback = object : DiffUtil.ItemCallback<Card>() {
+        private val diffCallback = object : DiffUtil.ItemCallback<Card>() {
             override fun areItemsTheSame(oldItem: Card, newItem: Card): Boolean {
                 return oldItem === newItem
             }

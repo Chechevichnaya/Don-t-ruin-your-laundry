@@ -39,13 +39,11 @@ class SearchByParametersResultFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setToolBar()
+        setToolbar()
 
         viewModel.setListOfSelectedParameters(args.listOfParameters.toMutableList())
         setAdapterToCards()
         setMenuItem()
-
-
     }
 
     private fun setMenuItem() {
@@ -59,14 +57,11 @@ class SearchByParametersResultFragment : Fragment() {
                 return when (menuItem.itemId) {
                     R.id.condition -> {
                         showDialog()
-//
                         true
                     }
                     else -> false
                 }
             }
-
-
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
@@ -105,7 +100,7 @@ class SearchByParametersResultFragment : Fragment() {
         }
     }
 
-    private fun setToolBar() {
+    private fun setToolbar() {
         binding.toolbarSearch.title = requireContext().getString(R.string.search_result)
         binding.toolbarSearch.navigationIcon =
             ResourcesCompat.getDrawable(requireContext().resources,R.drawable.ic_arrow_back, null )
@@ -114,6 +109,4 @@ class SearchByParametersResultFragment : Fragment() {
             findNavController().popBackStack()
         }
     }
-
-
 }

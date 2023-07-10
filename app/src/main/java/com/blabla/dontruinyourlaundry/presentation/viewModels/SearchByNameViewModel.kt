@@ -3,7 +3,7 @@ package com.blabla.dontruinyourlaundry.presentation.viewModels
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
-import com.blabla.dontruinyourlaundry.data.dataBase.Card
+import com.blabla.dontruinyourlaundry.data.database.Card
 import com.blabla.dontruinyourlaundry.domain.useCases.SearchByNameUseCase
 
 class SearchByNameViewModel(private val searchByNameUC: SearchByNameUseCase): ViewModel() {

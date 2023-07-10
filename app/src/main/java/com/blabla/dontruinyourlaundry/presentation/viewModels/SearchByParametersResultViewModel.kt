@@ -1,21 +1,18 @@
 package com.blabla.dontruinyourlaundry.presentation.viewModels
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.blabla.dontruinyourlaundry.data.dataBase.Card
+import com.blabla.dontruinyourlaundry.data.database.Card
 import com.blabla.dontruinyourlaundry.domain.entity.SearchParameterEnum
 import com.blabla.dontruinyourlaundry.domain.entity.SearchScreenItem
-import com.blabla.dontruinyourlaundry.domain.useCases.SearchByParameterGetResultUseCase
+import com.blabla.dontruinyourlaundry.domain.useCases.SearchByParameterResultUseCase
 import kotlinx.coroutines.launch
 
 class SearchByParametersResultViewModel(
-    private val useCase: SearchByParameterGetResultUseCase
-) :
-    ViewModel() {
-
+    private val useCase: SearchByParameterResultUseCase
+) : ViewModel() {
 
     private val _searchItems = MutableLiveData(useCase.getSearchItems())
 
@@ -24,7 +21,6 @@ class SearchByParametersResultViewModel(
     private val _listOfSearchItemsOnlyWithSelectedItems = MutableLiveData<List<SearchScreenItem>>()
 
     private val _listOfCardsResult = MutableLiveData<List<Card>>()
-
 
     fun setListOfSelectedParameters(list: List<SearchParameterEnum>) {
         _listOfSelectedParameters.value = list
@@ -52,5 +48,4 @@ class SearchByParametersResultViewModel(
         _listOfSearchItemsOnlyWithSelectedItems.value = listForRecyclerView
         return _listOfSearchItemsOnlyWithSelectedItems
     }
-
 }

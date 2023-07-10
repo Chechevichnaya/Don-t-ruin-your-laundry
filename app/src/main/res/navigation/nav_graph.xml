@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
     app:startDestination="@id/kindsOfThingsForLaundry">
 
     <dialog
@@ -19,9 +18,9 @@
     </dialog>
     <fragment
         android:id="@+id/kindsOfThingsForLaundry"
-        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.KindsOfThingsForLaundry"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.TypeOfLaundryItemsFragment"
         android:label="@string/app_name"
-        tools:layout="@layout/fragment_kinds_of_things_for_laundry">
+        tools:layout="@layout/fragment_type_of_laundry_items">
         <action
             android:id="@+id/action_kindsOfThingsForLaundry_to_simbolGuide"
             app:destination="@id/simbol_guide" />
@@ -76,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/addSymbolToCard"
-        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.ChooseSymbolsToCard"
+        android:name="com.blabla.dontruinyourlaundry.presentation.fragments.ChooseSymbolsToCardFragment"
         android:label="fragment_add_symbol_to_card"
         tools:layout="@layout/fragment_add_symbol_to_card" >
         <argument
@@ -127,15 +126,8 @@
             android:name="listOfParameters"
             app:argType="com.blabla.dontruinyourlaundry.domain.entity.SearchParameterEnum[]" />
         <action
-            android:id="@+id/action_searchByParametersResultFragment_to_knowAboutConditionOfSearching"
-            app:destination="@id/knowAboutConditionOfSearching" />
-        <action
             android:id="@+id/action_searchByParametersResultFragment_to_searchByParametersFragment"
             app:destination="@id/searchByParametersFragment" />
     </fragment>
-    <dialog
-        android:id="@+id/knowAboutConditionOfSearching"
-        android:name="com.blabla.dontruinyourlaundry.presentation.dialogs.KnowAboutConditionOfSearching"
-        android:label="KnowAboutConditionOfSearching" />
 
 </navigation>

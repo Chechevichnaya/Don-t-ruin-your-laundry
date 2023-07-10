@@ -56,5 +56,4 @@ class SearchDialog : DialogFragment() {
         )
         return dialog
     }
-
 }

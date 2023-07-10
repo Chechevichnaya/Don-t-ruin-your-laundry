@@ -12,8 +12,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.presentation.adapters.MULTIRecyclerViewAdapterSymbolAndMeaning
-import com.blabla.dontruinyourlaundry.data.dataBase.Card
+import com.blabla.dontruinyourlaundry.presentation.adapters.RecyclerViewAdapterSymbolWithMeaning
+import com.blabla.dontruinyourlaundry.data.database.Card
 import com.blabla.dontruinyourlaundry.databinding.FragmentCardDetailBinding
 import com.blabla.dontruinyourlaundry.domain.entity.CategoryEnum
 import com.blabla.dontruinyourlaundry.domain.entity.TypeOfRecyclerView
@@ -54,9 +54,8 @@ class CardDetailFragment : Fragment() {
             bind(card)
         }
 
-        setToolBar()
+        setToolbar()
 
-        // set menu item
         val menuHost: MenuHost = binding.toolbarCardDetail
         menuHost.addMenuProvider(object : MenuProvider {
             override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
@@ -75,7 +74,7 @@ class CardDetailFragment : Fragment() {
         }, viewLifecycleOwner, Lifecycle.State.RESUMED)
     }
 
-    private fun setToolBar() {
+    private fun setToolbar() {
         binding.toolbarCardDetail.apply {
             title = getString(R.string.title_fragment_card_detail)
             navigationIcon =
@@ -96,8 +95,6 @@ class CardDetailFragment : Fragment() {
             }
         }
     }
-
-
     private fun bind(card: Card) {
         if (card.picture == null) {
             val imageRes = CategoryEnum.values().find { it == card.category }?.getResIcon()
@@ -125,7 +122,7 @@ class CardDetailFragment : Fragment() {
         binding.apply {
             nameOfCloth.text = card.name
             val recyclerView = binding.addedSymbolsRecyclerView
-            val adapter = MULTIRecyclerViewAdapterSymbolAndMeaning(
+            val adapter = RecyclerViewAdapterSymbolWithMeaning(
                 {},
                 TypeOfRecyclerView.CARD_DETAIL_FRAGMENT
             )

@@ -11,24 +11,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.blabla.dontruinyourlaundry.R
-import com.blabla.dontruinyourlaundry.data.dataBase.Card
-import com.blabla.dontruinyourlaundry.data.dataBase.CardsAndSymbols
+import com.blabla.dontruinyourlaundry.data.database.Card
+import com.blabla.dontruinyourlaundry.data.database.CardsAndSymbols
 import com.blabla.dontruinyourlaundry.domain.entity.Category
 import com.blabla.dontruinyourlaundry.domain.entity.SymbolForWashingDBO
-import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuide
-import com.blabla.dontruinyourlaundry.domain.useCases.ChangeOldCardUseCase
+import com.blabla.dontruinyourlaundry.domain.entity.SymbolGuideItem
+import com.blabla.dontruinyourlaundry.domain.useCases.EditCardUseCase
 import com.blabla.dontruinyourlaundry.domain.useCases.CreateNewCardUseCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
 class AddDataToCardViewModel(
     private val addNewCardUC: CreateNewCardUseCase,
-    private val updateCardUC: ChangeOldCardUseCase,
+    private val updateCardUC: EditCardUseCase,
     private val context: Context
 ) : ViewModel() {
 
-    private val _listOfSymbols = MutableLiveData<List<SymbolGuide>>()
-    val listOfSymbols: LiveData<List<SymbolGuide>> = _listOfSymbols
+    private val _listOfSymbols = MutableLiveData<List<SymbolGuideItem>>()
+    val listOfSymbols: LiveData<List<SymbolGuideItem>> = _listOfSymbols
 
     private val _nameOfCloth = MutableLiveData<String>()
     val nameOfCloth: LiveData<String> = _nameOfCloth
@@ -51,10 +51,9 @@ class AddDataToCardViewModel(
         }
     }
 
-
-    fun getListSymbolForWashing(): List<SymbolGuide.SymbolForWashing> {
+    fun getListSymbolForWashing(): List<SymbolGuideItem.SymbolForWashing> {
         val list = _listOfSymbols.value.orEmpty().toMutableList()
-        return list.filterIsInstance<SymbolGuide.SymbolForWashing>()
+        return list.filterIsInstance<SymbolGuideItem.SymbolForWashing>()
     }
 
     private fun addCardToViewModel(context: Context) {
@@ -85,7 +84,7 @@ class AddDataToCardViewModel(
         }
     }
 
-    fun showDialog(symbol: SymbolGuide.SymbolForWashing, context: Context) {
+    fun showDialog(symbol: SymbolGuideItem.SymbolForWashing, context: Context) {
         val builder: AlertDialog.Builder = AlertDialog.Builder(context)
         val drawable = ResourcesCompat.getDrawable(context.resources, symbol.pictureId, null)
         val wrappedDrawable = DrawableCompat.wrap(drawable!!)
@@ -99,15 +98,17 @@ class AddDataToCardViewModel(
             .create()
         dialog.show()
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
-            .setTextColor(ResourcesCompat.getColor(
-                context.resources,
-                R.color.lilac_700,
-                null
-            ))
+            .setTextColor(
+                ResourcesCompat.getColor(
+                    context.resources,
+                    R.color.lilac_700,
+                    null
+                )
+            )
     }
 
 
-    private fun deleteSymbol(symbol: SymbolGuide.SymbolForWashing) {
+    private fun deleteSymbol(symbol: SymbolGuideItem.SymbolForWashing) {
         val list = _listOfSymbols.value.orEmpty().toMutableList()
         list.remove(symbol)
         _listOfSymbols.value = list
@@ -117,10 +118,8 @@ class AddDataToCardViewModel(
         _uri.value = newUri
     }
 
-
-    fun addSelectedSymbols(list: List<SymbolGuide.SymbolForWashing>) {
+    fun addSelectedSymbols(list: List<SymbolGuideItem.SymbolForWashing>) {
         _listOfSymbols.value = list
-
     }
 
     fun saveCardChanges(
@@ -182,8 +181,6 @@ class AddDataToCardViewModel(
             _card.value = Card(0, nameOfCloth, imageUri, category)
         }
     }
-
-
 }
 
 

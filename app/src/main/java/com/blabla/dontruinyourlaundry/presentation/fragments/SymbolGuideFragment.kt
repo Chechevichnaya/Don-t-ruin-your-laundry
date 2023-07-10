@@ -9,7 +9,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.navigation.fragment.findNavController
 import com.blabla.dontruinyourlaundry.R
 import com.blabla.dontruinyourlaundry.databinding.FragmentSimbolGuideBinding
-import com.blabla.dontruinyourlaundry.presentation.adapters.MULTURecyclerViewAdapterAllSymbols
+import com.blabla.dontruinyourlaundry.presentation.adapters.RecyclerViewAdapterAllSymbols
 import com.blabla.dontruinyourlaundry.presentation.viewModels.SymbolGuideViewModel
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexWrap
@@ -31,32 +31,25 @@ class SymbolGuideFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setUpperMenu()
+        setTopMenu()
         attachAdapterToRecyclerView()
     }
 
     private fun attachAdapterToRecyclerView() {
         val recyclerViewSymbolGuide = binding.recyclerViewSymbolGuide
 
-        val adapter = MULTURecyclerViewAdapterAllSymbols(requireActivity()) { clickedItem ->
+        val adapter = RecyclerViewAdapterAllSymbols(requireActivity()) { clickedItem ->
             viewModel.onClicked(clickedItem, requireContext())
         }
         recyclerViewSymbolGuide.layoutManager =
             FlexboxLayoutManager(context, FlexDirection.ROW, FlexWrap.WRAP)
-
-
-
-
-
-
-
         recyclerViewSymbolGuide.adapter = adapter
         viewModel.symbolsInGuide.observe(viewLifecycleOwner) { items ->
             adapter.submitList(items)
         }
     }
 
-    private fun setUpperMenu() = binding.toolbarSymbolGuide.apply {
+    private fun setTopMenu() = binding.toolbarSymbolGuide.apply {
         title = requireContext().getString(R.string.symbol_guide)
         navigationIcon =
             ResourcesCompat.getDrawable(requireContext().resources, R.drawable.ic_arrow_back, null)

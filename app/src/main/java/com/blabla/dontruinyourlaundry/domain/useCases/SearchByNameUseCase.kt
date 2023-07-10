@@ -1,7 +1,7 @@
 package com.blabla.dontruinyourlaundry.domain.useCases
 
 import com.blabla.dontruinyourlaundry.data.Repository
-import com.blabla.dontruinyourlaundry.data.dataBase.Card
+import com.blabla.dontruinyourlaundry.data.database.Card
 import kotlinx.coroutines.flow.Flow
 
 class SearchByNameUseCase(private val repo: Repository) {
