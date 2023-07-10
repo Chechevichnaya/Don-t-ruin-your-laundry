@@ -7,9 +7,15 @@
 # Tech Stack
 The application is developed using Kotlin, with the Android SDK and MVVM architecture for efficient app development. SQLite is used for data persistence.
 # Screenshots
-<img src="https://i.imgur.com/ooC1Ish.jpg" width="300">
-<img src="https://i.imgur.com/cTW8QHD.jpg" width="300">
-<img src="https://i.imgur.com/UQU6Jhr.jpg" width="300">
-<img src="https://i.imgur.com/JRl9Pfs.jpg" width="300">
-<img src="https://i.imgur.com/i7q9eCQ.jpg" width="300">
-<img src="https://i.imgur.com/lxk5QQj.jpg" width="300">
+<table>
+  <tr>
+    <td> <img src="https://i.imgur.com/ooC1Ish.jpg" width="300"> </td>
+    <td> <img src="https://i.imgur.com/cTW8QHD.jpg" width="300"> </td>
+    <td> <img src="https://i.imgur.com/UQU6Jhr.jpg" width="300"> </td>
+  </tr>
+  <tr>
+    <td> <img src="https://i.imgur.com/JRl9Pfs.jpg" width="300"> </td>
+    <td> <img src="https://i.imgur.com/i7q9eCQ.jpg" width="300"> </td>
+    <td> <img src="https://i.imgur.com/lxk5QQj.jpg" width="300"> </td>
+  </tr>
+</table>
